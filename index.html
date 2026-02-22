@@ -33,9 +33,7 @@
         .main-content { padding-bottom: calc(100px + var(--safe-area-inset-bottom)); }
         @media (min-width: 768px) { .main-content { padding-bottom: 2rem; } }
 
-        /* ======================================================== */
-        /* PADRÃO DE PATINHAS NAS CAIXAS (Iguais as do Banner)      */
-        /* ======================================================== */
+        /* PADRÃO DE PATINHAS NAS CAIXAS */
         .cute-card, .class-card, .glass, .glass-emerald, .glass-rose {
             position: relative;
         }
@@ -49,30 +47,20 @@
             border-radius: inherit;
             z-index: 0;
         }
-        .cute-card > *, .class-card > *, .glass > *, .glass-emerald > *, .glass-rose > * {
-            position: relative;
-            z-index: 10;
-        }
-
+        .cute-card > *, .class-card > *, .glass > *, .glass-emerald > *, .glass-rose > * { position: relative; z-index: 10; }
         .cute-card { transition: all 0.3s ease; border-radius: 1.5rem; border: 2px solid #ffe4e6; background: white; box-shadow: 0 4px 10px -2px rgba(255, 105, 180, 0.08); }
         .cute-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -3px rgba(255, 105, 180, 0.15); border-color: #fbcfe8; }
-        
         .class-card { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 1.5rem; }
         .class-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(255, 105, 180, 0.15); }
-        
         .task-checkbox:checked + div, .reading-checkbox:checked + div { text-decoration: line-through; color: #fda4af; opacity: 0.7; }
-        
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-thumb { background: #fda4af; border-radius: 10px; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
-        
         .animate-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes pop { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        
         .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 2px solid rgba(255, 255, 255, 0.7); }
         .glass-emerald { background: rgba(236, 253, 245, 0.85); backdrop-filter: blur(12px); border: 2px solid rgba(167, 243, 208, 0.5); }
         .glass-rose { background: rgba(255, 241, 242, 0.85); backdrop-filter: blur(12px); border: 2px solid rgba(254, 205, 211, 0.5); }
-        
         .cal-day:hover .cal-tooltip { display: block; }
         .modal-body { max-height: calc(85vh - 140px); overflow-y: auto; }
         .animate-float { animation: float 3s ease-in-out infinite; }
@@ -81,14 +69,18 @@
 </head>
 <body class="antialiased relative min-h-screen">
 
+    <!-- Tela de Carregamento da Nuvem ☁️ -->
+    <div id="cloud-loading" class="fixed inset-0 bg-pink-50/95 backdrop-blur-md z-[999] flex flex-col items-center justify-center transition-opacity duration-500">
+        <i data-lucide="cloud-download" class="w-16 h-16 text-pink-500 animate-bounce mb-4"></i>
+        <h2 class="text-2xl md:text-3xl font-cute text-pink-800 font-bold mb-2">Conectando à Nuvem...</h2>
+        <p class="text-sm md:text-base font-bold text-pink-500 text-center px-6">Sincronizando seus dispositivos para deixar tudo perfeito! 🎀</p>
+    </div>
+
     <!-- Header com Patinhas Flutuantes Fofas -->
     <header class="bg-gradient-to-br from-pink-400 via-rose-400 to-red-400 text-white pt-8 pb-10 md:pt-10 md:pb-16 px-4 md:px-12 rounded-b-[3rem] md:rounded-b-[4rem] shadow-lg border-b-4 border-white/50 mb-6 relative overflow-hidden">
-        <!-- Ícones Originais -->
         <i data-lucide="heart" class="absolute top-4 left-6 w-12 h-12 text-white/20 rotate-12 fill-white/20 animate-float"></i>
         <i data-lucide="palette" class="absolute bottom-2 right-12 w-10 h-10 text-yellow-300/40 fill-yellow-300/40 -rotate-12 animate-float" style="animation-delay: 1s;"></i>
         <i data-lucide="sparkles" class="absolute top-8 right-1/4 w-8 h-8 text-white/30 animate-pulse"></i>
-        
-        <!-- Patinhas Fofas 🐾 -->
         <i data-lucide="paw-print" class="absolute top-10 left-1/3 w-8 h-8 text-white/20 fill-white/20 rotate-12 animate-float" style="animation-delay: 0.5s;"></i>
         <i data-lucide="paw-print" class="absolute bottom-4 left-[20%] w-6 h-6 text-pink-100/40 fill-pink-100/40 -rotate-45 animate-pulse" style="animation-delay: 1.5s;"></i>
         <i data-lucide="paw-print" class="absolute top-4 right-[40%] w-10 h-10 text-white/10 fill-white/10 rotate-45 animate-float" style="animation-delay: 2s;"></i>
@@ -100,8 +92,8 @@
                 <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Geografia • Ateliê • Tattoo • Social</p>
             </div>
             <div class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center">
-                <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5">Status</p>
-                <p class="text-sm md:text-lg font-cute font-bold drop-shadow-sm">Super Criativa! 🎨</p>
+                <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5">Status da Nuvem</p>
+                <p class="text-sm md:text-lg font-cute font-bold drop-shadow-sm flex items-center gap-1"><i data-lucide="cloud-snow" class="w-5 h-5"></i> Sincronizado</p>
             </div>
         </div>
     </header>
@@ -118,16 +110,12 @@
             <button onclick="switchTab('financas')" id="desk-btn-financas" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="wallet" class="w-4 h-4"></i> Finanças</button>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 1: RESUMO (CALENDÁRIO & EVENTOS)       -->
-        <!-- ========================================== -->
+        <!-- ABA 1: RESUMO (CALENDÁRIO & EVENTOS) -->
         <div id="tab-resumo" class="tab-content animate-pop block">
             <div class="cute-card p-6 md:p-10 relative overflow-hidden bg-white mb-8">
-                <!-- Enfeites de fundo 🎀 -->
                 <i data-lucide="star" class="absolute top-16 right-12 w-24 h-24 text-pink-300/20 fill-pink-300/20 animate-float z-0" style="animation-delay: 1s;"></i>
                 <i data-lucide="heart" class="absolute bottom-10 left-10 w-20 h-20 text-rose-300/20 fill-rose-300/20 -rotate-12 animate-pulse z-0"></i>
                 <i data-lucide="sparkles" class="absolute top-1/2 left-4 w-12 h-12 text-yellow-300/20 fill-yellow-300/20 animate-float z-0"></i>
-
                 <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-pink-300 to-purple-300"></div>
                 <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4 mt-2 relative z-10">
                     <h2 class="text-2xl md:text-3xl font-cute font-bold text-rose-700 flex items-center gap-2"><i data-lucide="calendar-heart" class="text-pink-400 w-8 h-8"></i> Calendário Mestre 🎀</h2>
@@ -150,27 +138,20 @@
                 </div>
                 <div id="calendar-days" class="grid grid-cols-7 gap-1 md:gap-2 mt-2 relative z-10"></div>
 
-                <!-- Resumo dos Eventos do Mês -->
                 <div class="mt-10 border-t-2 border-pink-50 pt-6 relative z-10">
                     <h3 class="font-cute font-bold text-rose-700 text-lg mb-4 flex items-center gap-2">
                         <i data-lucide="list-heart" class="w-5 h-5 text-pink-400"></i> Eventos e Prazos Deste Mês
                     </h3>
-                    <div id="monthly-summary-list" class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
-                        <!-- Injetado via JS -->
-                    </div>
+                    <div id="monthly-summary-list" class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2"></div>
                 </div>
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 2: ROTINA                              -->
-        <!-- ========================================== -->
+        <!-- ABA 2: ROTINA -->
         <div id="tab-rotina" class="tab-content hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <div class="cute-card p-6 relative flex flex-col overflow-hidden">
-                    <!-- Enfeites -->
                     <i data-lucide="sparkles" class="absolute top-1/3 right-4 w-20 h-20 text-rose-300/20 fill-rose-300/20 animate-float z-0"></i>
-
                     <div class="absolute top-0 left-0 w-full h-2 bg-rose-300"></div>
                     <h3 class="font-cute text-rose-800 text-xl flex items-center gap-2 mb-4 relative z-10"><i data-lucide="list-todo" class="text-rose-400"></i> Tarefas de Hoje</h3>
                     <div class="flex flex-col gap-3 mb-4 bg-rose-50 p-4 rounded-2xl border border-rose-100 relative z-10">
@@ -179,7 +160,6 @@
                             <button onclick="addTask()" class="bg-rose-400 text-white px-5 rounded-xl shadow-md hover:bg-rose-500 transition-colors"><i data-lucide="plus"></i></button>
                         </div>
                         <div class="flex flex-wrap gap-1.5 mt-1">
-                            <!-- Os 13 Botões -->
                             <button onclick="addQuickTask('🏋️‍♀️ Academia', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Academia</button>
                             <button onclick="addQuickTask('🚶‍♀️ Caminhada', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Caminhada</button>
                             <button onclick="addQuickTask('🛒 Mercado', 'casa')" class="text-[10px] font-bold bg-white border border-amber-200 text-amber-600 px-3 py-1.5 rounded-lg hover:bg-amber-50 transition">Mercado</button>
@@ -200,9 +180,7 @@
                 
                 <div class="flex flex-col gap-6">
                     <div class="cute-card p-6 flex flex-col items-center bg-white relative overflow-hidden">
-                        <!-- Enfeites -->
                         <i data-lucide="star" class="absolute top-4 right-6 w-14 h-14 text-yellow-300/30 fill-yellow-300/30 animate-pulse z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
                         <h3 class="font-cute text-rose-800 text-lg mb-3 flex items-center gap-2 relative z-10"><i data-lucide="timer" class="text-red-400"></i> Foco Pomodoro</h3>
                         <div class="text-5xl font-cute text-rose-500 mb-5 relative z-10" id="timer-display">25:00</div>
@@ -218,7 +196,6 @@
                     
                     <div class="cute-card p-4 relative flex-1 flex flex-col min-h-[140px] overflow-hidden">
                         <i data-lucide="music" class="absolute bottom-4 right-4 w-16 h-16 text-yellow-400/20 fill-yellow-400/20 animate-float z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-yellow-200"></div>
                         <h3 class="font-cute text-rose-800 text-base mb-3 flex items-center gap-1 relative z-10"><i data-lucide="music" class="w-4 h-4 text-yellow-500"></i> Vibes 🎧</h3>
                         <div class="flex-1 w-full bg-pink-50 rounded-xl overflow-hidden border border-pink-100 h-full relative z-10">
@@ -230,7 +207,6 @@
             
             <div class="cute-card p-6 md:p-8 bg-white mb-8 relative overflow-hidden">
                 <i data-lucide="heart" class="absolute top-10 right-10 w-24 h-24 text-purple-300/20 fill-purple-300/20 rotate-12 animate-float z-0"></i>
-
                 <div class="absolute top-0 left-0 w-full h-2 bg-purple-300"></div>
                 <h3 class="font-cute text-purple-800 text-xl flex items-center gap-2 mb-6 relative z-10"><i data-lucide="bar-chart-2" class="text-purple-400"></i> Resumo do Mês 🌸</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
@@ -240,13 +216,10 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 3: ESTUDOS (COM LEMBRETES DE PROVA)    -->
-        <!-- ========================================== -->
+        <!-- ABA 3: ESTUDOS -->
         <div id="tab-estudos" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] p-6 border-2 border-pink-100 shadow-lg mb-6 relative overflow-hidden cute-card">
                 <i data-lucide="book-heart" class="absolute top-6 right-[20%] w-32 h-32 text-pink-300/10 fill-pink-300/10 -rotate-12 animate-float z-0"></i>
-
                 <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-10">
                     <h2 class="text-2xl md:text-3xl font-cute text-rose-800 flex items-center gap-2"><i data-lucide="book-heart" class="text-red-400 w-7 h-7"></i> Minhas Disciplinas</h2>
@@ -258,7 +231,6 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
-                    <!-- CARDS DE DISCIPLINAS -->
                     <div data-class-name="Constituição e Tendências em Ed. Ciências" onclick="openNoteModal('Constituição e Tendências em Ed. Ciências')" class="class-card cursor-pointer bg-red-50 border-2 border-l-8 border-red-200 border-l-red-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
                         <span class="text-[9px] font-bold text-red-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-red-100 uppercase tracking-widest relative z-10">SEG • 14H - 17H</span>
                         <h4 class="font-bold text-red-900 text-sm md:text-base leading-snug relative z-10">Constituição e Tendências em Ed. Ciências</h4>
@@ -301,7 +273,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Leituras com Opções -->
+                <!-- Leituras -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
                     <i data-lucide="star" class="absolute bottom-4 right-4 w-16 h-16 text-pink-400/10 fill-pink-400/10 animate-pulse z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-pink-400"></div>
@@ -320,7 +292,7 @@
                     <div id="reading-list-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
                 </div>
                 
-                <!-- Aulas Extras Completas -->
+                <!-- Aulas Extras -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
                     <i data-lucide="sparkles" class="absolute top-4 right-4 w-16 h-16 text-blue-400/10 fill-blue-400/10 animate-float z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-blue-400"></div>
@@ -341,9 +313,7 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 4: ATELIÊ VENDAS INTELIGENTES          -->
-        <!-- ========================================== -->
+        <!-- ABA 4: ATELIÊ VENDAS INTELIGENTES -->
         <div id="tab-loja" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] border-2 border-emerald-100 shadow-lg p-6 md:p-8 mb-6 relative overflow-hidden cute-card">
                 <i data-lucide="palette" class="absolute top-1/2 right-10 w-32 h-32 text-emerald-400/10 fill-emerald-400/10 rotate-12 animate-float z-0"></i>
@@ -398,9 +368,7 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 5: TATTOO STUDIO PRO                   -->
-        <!-- ========================================== -->
+        <!-- ABA 5: TATTOO STUDIO PRO -->
         <div id="tab-tattoo" class="tab-content hidden">
             <h2 class="text-2xl md:text-3xl font-cute text-purple-900 mb-6 flex items-center gap-2"><i data-lucide="pen-tool" class="text-purple-400"></i> Tattoo Studio Pro 🖤</h2>
             
@@ -408,7 +376,6 @@
                 <!-- Agenda -->
                 <div class="bg-white rounded-[2rem] border-2 border-purple-100 shadow-lg p-6 flex flex-col cute-card overflow-hidden">
                     <i data-lucide="heart" class="absolute bottom-10 right-10 w-28 h-28 text-purple-300/20 fill-purple-300/20 -rotate-12 animate-float z-0"></i>
-
                     <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10">Agenda Oficial 📅</h3>
                     <div class="bg-purple-50 p-5 rounded-3xl mb-4 border border-purple-100 z-20">
                         <div class="flex flex-col gap-3 mb-3">
@@ -441,7 +408,6 @@
                     <!-- CRM Clientes -->
                     <div class="cute-card p-6 border-pink-100 bg-white relative overflow-hidden">
                         <i data-lucide="sparkles" class="absolute top-4 right-4 w-12 h-12 text-pink-300/20 fill-pink-300/20 animate-pulse z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-pink-300"></div>
                         <h3 class="font-cute text-rose-800 text-lg mb-4 flex items-center gap-2 relative z-20"><i data-lucide="users" class="text-pink-400"></i> Meus Clientes (CRM) 🫂</h3>
                         <div class="bg-pink-50 p-4 rounded-2xl mb-4 border border-pink-100 z-20 relative">
@@ -481,9 +447,7 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 6: INSTAGRAM & SOCIAL                  -->
-        <!-- ========================================== -->
+        <!-- ABA 6: INSTAGRAM & SOCIAL -->
         <div id="tab-instagram" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] border-2 border-fuchsia-100 shadow-lg p-6 md:p-8 mb-8 relative overflow-hidden cute-card">
                 <i data-lucide="star" class="absolute bottom-10 left-10 w-24 h-24 text-fuchsia-400/10 fill-fuchsia-400/10 rotate-45 animate-float z-0"></i>
@@ -527,9 +491,7 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA 7: FINANÇAS DASHBOARD                  -->
-        <!-- ========================================== -->
+        <!-- ABA 7: FINANÇAS DASHBOARD -->
         <div id="tab-financas" class="tab-content hidden space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-center bg-white/80 glass rounded-[2.5rem] p-6 shadow-sm gap-4">
                 <div>
@@ -580,7 +542,7 @@
         </div>
     </main>
 
-    <!-- NAVEGAÇÃO MOBILE (BOTTOM BAR) -->
+    <!-- NAVEGAÇÃO MOBILE -->
     <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t-2 border-pink-100 z-[90] pb-[var(--safe-area-inset-bottom)] flex overflow-x-auto hide-scrollbar md:hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-3xl pt-2 px-1">
         <button onclick="switchTab('resumo')" id="mob-btn-resumo" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="calendar-days"></i><span class="text-[9px] font-bold">Resumo</span></button>
         <button onclick="switchTab('rotina')" id="mob-btn-rotina" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="coffee"></i><span class="text-[9px] font-bold">Rotina</span></button>
@@ -591,8 +553,7 @@
         <button onclick="switchTab('financas')" id="mob-btn-financas" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="wallet"></i><span class="text-[9px] font-bold">Finanças</span></button>
     </nav>
 
-    <!-- MODAIS ESPECÍFICOS -->
-    
+    <!-- MODAIS -->
     <!-- Modal Estudos Popup -->
     <div id="note-modal" onclick="closeNoteModal(event)" class="fixed inset-0 bg-pink-900/40 backdrop-blur-sm z-[150] hidden flex items-center justify-center p-4">
         <div onclick="event.stopPropagation()" class="bg-white rounded-[2rem] w-full max-w-md flex flex-col overflow-hidden border-2 border-pink-100 shadow-2xl max-h-[90vh]">
@@ -663,33 +624,136 @@
         </div>
     </div>
 
-    <!-- SCRIPTS GERAIS -->
+    <!-- SCRIPTS DA NUVEM (NOVO SISTEMA) -->
+    <script type="module">
+        // Importando as ferramentas do banco de dados na nuvem
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variáveis de controle
+        let db, auth, userId, appId;
+        let isInitialized = false;
+
+        // O seu Estado Global (Isso substitui o "localStorage" antigo)
+        window.appState = {
+            personalTasks: [], taskLog: [], disciplineEvents: {}, extraStudies: [],
+            productions: [], tattoos: [], instaPosts: [], readingList: [],
+            clients: [], promos: [], tattooInventory: [], finances: [],
+            notes: {} 
+        };
+
+        // Funções para ler e salvar no novo sistema
+        window.lsGet = (k, d = []) => window.appState[k] !== undefined ? window.appState[k] : d;
+        window.lsSet = (k, v) => {
+            window.appState[k] = v;
+            if (window.saveToCloud) window.saveToCloud();
+        };
+
+        // ==========================================
+        // CONFIGURAÇÃO DO COFRE DE NUVEM
+        // ==========================================
+        let firebaseConfig = null;
+
+        // Verificando se estamos no ambiente especial (Canvas) que injeta a chave
+        if (typeof __firebase_config !== 'undefined') {
+            firebaseConfig = JSON.parse(__firebase_config);
+        } else {
+            // ATENÇÃO: Se for jogar isso para o Vercel, você vai colar a sua chave aqui dentro!
+            // Exemplo: firebaseConfig = { apiKey: "...", authDomain: "...", projectId: "..." };
+        }
+
+        // Se a chave for encontrada, liga os motores!
+        if (firebaseConfig) {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            appId = typeof __app_id !== 'undefined' ? __app_id : 'meu-planner-nuvem';
+
+            const initAuth = async () => {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            };
+            
+            initAuth();
+
+            // Quando o sistema reconhecer quem é você, ele começa a puxar os dados
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
+                    listenToCloud();
+                }
+            });
+
+        } else {
+            // Se você rodar no Vercel sem colar a chave do banco, ele vai liberar o uso (mas não salva na nuvem ainda)
+            console.warn("Nuvem não configurada. Mostrando o app limpo.");
+            document.getElementById('cloud-loading').style.opacity = '0';
+            setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
+            if(window.renderAllApp) window.renderAllApp();
+        }
+
+        // Função que fica "escutando" as mudanças na nuvem
+        function listenToCloud() {
+            if (!userId || !db) return;
+            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data'); // FIX: Added 'data' segment to make it even
+
+            onSnapshot(docRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    window.appState = { ...window.appState, ...snapshot.data() };
+                }
+                
+                // Se for a primeira vez que carregou
+                if (!isInitialized) {
+                    isInitialized = true;
+                    // Esconde a tela de loading bonitinha
+                    document.getElementById('cloud-loading').style.opacity = '0';
+                    setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
+                    if(window.renderAllApp) window.renderAllApp();
+                } else {
+                    // Se foi uma atualização no fundo (ex: você mudou no pc, e o celular viu)
+                    if(window.renderAllApp) window.renderAllApp();
+                }
+            }, (error) => {
+                console.error("Erro de sincronização:", error);
+            });
+        }
+
+        // Função que empurra suas anotações para a nuvem
+        window.saveToCloud = function() {
+            if (!userId || !db) return;
+            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data'); // FIX: Added 'data' segment to make it even
+            setDoc(docRef, window.appState).catch(e => console.error("Erro ao salvar:", e));
+        };
+    </script>
+
+    <!-- SCRIPTS GERAIS DO SEU PLANNER -->
     <script>
-        // Utilities globais
-        const lsGet = (k,d=[]) => JSON.parse(localStorage.getItem(k))||d;
-        const lsSet = (k,v) => localStorage.setItem(k, JSON.stringify(v));
         function formatCurrency(v) { return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v||0); }
 
-        let fMo = new Date(); // Variavel global do mes financeiro
-        let currMo = new Date(); // Variavel global do calendario mestre
+        let fMo = new Date(); 
+        let currMo = new Date(); 
 
-        function switchTab(t) {
+        window.switchTab = function(t) {
             ['resumo','rotina','estudos','loja','tattoo','instagram','financas'].forEach(x => {
                 const e=document.getElementById('tab-'+x), d=document.getElementById('desk-btn-'+x), m=document.getElementById('mob-btn-'+x);
                 if(e) e.classList.toggle('hidden', x!==t);
                 if(d) d.className = (x===t) ? "nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white" : "nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200";
                 if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-rose-600 w-16 transition-all transform -translate-y-2 bg-pink-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-pink-300 w-16 transition-all";
             });
-            if(t==='resumo') renderMasterCalendar(); if(t==='rotina') renderRoutineChart(); if(t==='financas') renderFinances();
-            if(t==='tattoo') { renderTattoos(); renderClients(); renderPromos(); renderInventory(); } 
-            if(t==='instagram') renderInstaPosts(); if(t==='loja') renderProductions();
-            lucide.createIcons();
+            if(t==='resumo') window.renderMasterCalendar(); if(t==='rotina') window.renderRoutineChart(); if(t==='financas') window.renderFinances();
+            if(t==='tattoo') { window.renderTattoos(); window.renderClients(); window.renderPromos(); window.renderInventory(); } 
+            if(t==='instagram') window.renderInstaPosts(); if(t==='loja') window.renderProductions();
+            if(window.lucide) lucide.createIcons();
         }
 
         // ==========================================
-        // CALENDÁRIO MESTRE E RESUMO MENSAL
+        // CALENDÁRIO MESTRE
         // ==========================================
-        function renderMasterCalendar() {
+        window.renderMasterCalendar = function() {
             document.getElementById('calendar-month-year').innerText = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][currMo.getMonth()] + " " + currMo.getFullYear();
             let evs = {}; const addEv = (d,t,y) => { if(d){evs[d]=evs[d]||[]; evs[d].push({title:t,type:y});} };
             
@@ -731,35 +795,36 @@
                 });
             }
         }
-        function prevMonth(){ currMo.setMonth(currMo.getMonth()-1); renderMasterCalendar(); }
-        function nextMonth(){ currMo.setMonth(currMo.getMonth()+1); renderMasterCalendar(); }
+        window.prevMonth = function(){ currMo.setMonth(currMo.getMonth()-1); window.renderMasterCalendar(); }
+        window.nextMonth = function(){ currMo.setMonth(currMo.getMonth()+1); window.renderMasterCalendar(); }
 
         // ==========================================
         // ROTINA E HÁBITOS
         // ==========================================
-        function renderTasks() {
+        window.renderTasks = function() {
             let pts = lsGet('personalTasks'); const l = document.getElementById('task-list'); l.innerHTML='';
             if(!pts.length) { l.innerHTML='<p class="text-xs text-pink-400 font-bold text-center py-4">Nenhuma tarefa 🌸</p>'; return; }
             pts.sort((a,b)=>a.done-b.done).forEach(t => {
                 let c=t.type==='saude'?'bg-emerald-50 border-emerald-100 text-emerald-800':t.type==='trabalho'?'bg-blue-50 border-blue-100 text-blue-800':t.type==='casa'?'bg-amber-50 border-amber-100 text-amber-800':t.type==='estudos'?'bg-red-50 border-red-100 text-red-800':t.type==='criacao'?'bg-fuchsia-50 border-fuchsia-100 text-fuchsia-800':t.type==='lazer'?'bg-purple-50 border-purple-100 text-purple-800':'bg-white border-pink-100 text-rose-800';
                 l.innerHTML+=`<div class="flex items-center justify-between p-3 ${c} border rounded-2xl shadow-sm z-20 relative"><label class="flex items-center gap-3 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${t.id})" class="task-checkbox w-4 h-4 rounded text-rose-400 focus:ring-rose-400"><div class="text-sm font-bold truncate">${t.text}</div></label><div class="flex gap-1 ml-2"><button onclick="editTask(${t.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTask(${t.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
-            }); lucide.createIcons({root: l});
+            }); 
+            if(window.lucide) lucide.createIcons({root: l});
         }
-        function addTask() { let i=document.getElementById('new-task-input'); if(i.value.trim()){ addQuickTask(i.value.trim(),'geral'); i.value=''; } }
-        function addQuickTask(txt, typ) { let pt=lsGet('personalTasks'); pt.push({id:Date.now(), text:txt, type:typ, done:false}); lsSet('personalTasks',pt); renderTasks(); }
-        function editTask(id) { let pt=lsGet('personalTasks'); let x=pt.find(t=>t.id===id); if(x){let n=prompt("Editar tarefa 🎀:",x.text); if(n){x.text=n; lsSet('personalTasks',pt); renderTasks();}} }
-        function deleteTask(id) { lsSet('personalTasks', lsGet('personalTasks').filter(t=>t.id!==id)); renderTasks(); }
-        function toggleTask(id) {
+        window.addTask = function() { let i=document.getElementById('new-task-input'); if(i.value.trim()){ window.addQuickTask(i.value.trim(),'geral'); i.value=''; } }
+        window.addQuickTask = function(txt, typ) { let pt=lsGet('personalTasks'); pt.push({id:Date.now(), text:txt, type:typ, done:false}); lsSet('personalTasks',pt); window.renderTasks(); }
+        window.editTask = function(id) { let pt=lsGet('personalTasks'); let x=pt.find(t=>t.id===id); if(x){let n=prompt("Editar tarefa 🎀:",x.text); if(n){x.text=n; lsSet('personalTasks',pt); window.renderTasks();}} }
+        window.deleteTask = function(id) { lsSet('personalTasks', lsGet('personalTasks').filter(t=>t.id!==id)); window.renderTasks(); }
+        window.toggleTask = function(id) {
             let pt=lsGet('personalTasks'), log=lsGet('taskLog'); let x=pt.find(t=>t.id===id);
             if(x){ x.done=!x.done; let d=new Date().toISOString().split('T')[0];
                 if(x.done) log.push({id:Date.now(), taskId:x.id, text:x.text, date:d});
                 else {let idx=log.findIndex(l=>l.taskId===x.id&&l.date===d); if(idx>-1) log.splice(idx,1);}
-                lsSet('taskLog',log); lsSet('personalTasks',pt); renderTasks(); renderRoutineChart();
+                lsSet('taskLog',log); lsSet('personalTasks',pt); window.renderTasks(); window.renderRoutineChart();
             }
         }
         
         let rcInst = null;
-        function renderRoutineChart() {
+        window.renderRoutineChart = function() {
             let log=lsGet('taskLog'), pfx=new Date().toISOString().slice(0,7), cnts={};
             log.filter(l=>l.date&&l.date.startsWith(pfx)).forEach(l=>{cnts[l.text]=(cnts[l.text]||0)+1;});
             let txt = document.getElementById('routine-summary-text');
@@ -770,43 +835,52 @@
         }
 
         let tmr, tL=25*60, iR=false, iW=true;
-        function updateTimerDisplay() { let t=document.getElementById('timer-display'); if(t) t.innerText=`${Math.floor(tL/60).toString().padStart(2,'0')}:${(tL%60).toString().padStart(2,'0')}`; }
-        function toggleTimer() {
+        window.updateTimerDisplay = function() { let t=document.getElementById('timer-display'); if(t) t.innerText=`${Math.floor(tL/60).toString().padStart(2,'0')}:${(tL%60).toString().padStart(2,'0')}`; }
+        window.toggleTimer = function() {
             let ic=document.getElementById('icon-toggle');
             if(iR){ clearInterval(tmr); iR=false; ic.setAttribute('data-lucide','play'); }
-            else { tmr=setInterval(()=>{tL--;updateTimerDisplay();if(tL<=0){clearInterval(tmr);iR=false;alert(iW?"🍎 Foco!":"🎀 Pausa!");setTimerMode(iW?'break':'work');}},1000); iR=true; ic.setAttribute('data-lucide','pause'); }
-            lucide.createIcons();
+            else { tmr=setInterval(()=>{tL--;window.updateTimerDisplay();if(tL<=0){clearInterval(tmr);iR=false;alert(iW?"🍎 Foco!":"🎀 Pausa!");window.setTimerMode(iW?'break':'work');}},1000); iR=true; ic.setAttribute('data-lucide','pause'); }
+            if(window.lucide) lucide.createIcons();
         }
-        function resetTimer() { clearInterval(tmr); iR=false; tL=iW?25*60:5*60; updateTimerDisplay(); document.getElementById('icon-toggle').setAttribute('data-lucide','play'); lucide.createIcons(); }
-        function setTimerMode(m) { iW=m==='work'; document.getElementById('btn-work').className=iW?"px-5 py-2 rounded-full text-sm font-bold bg-rose-100 text-rose-700 transition":"px-5 py-2 rounded-full text-sm font-bold bg-slate-50 text-slate-500 transition"; document.getElementById('btn-break').className=!iW?"px-5 py-2 rounded-full text-sm font-bold bg-rose-100 text-rose-700 transition":"px-5 py-2 rounded-full text-sm font-bold bg-slate-50 text-slate-500 transition"; resetTimer(); }
+        window.resetTimer = function() { clearInterval(tmr); iR=false; tL=iW?25*60:5*60; window.updateTimerDisplay(); document.getElementById('icon-toggle').setAttribute('data-lucide','play'); if(window.lucide) lucide.createIcons(); }
+        window.setTimerMode = function(m) { iW=m==='work'; document.getElementById('btn-work').className=iW?"px-5 py-2 rounded-full text-xs font-bold bg-rose-100 text-rose-700 transition":"px-5 py-2 rounded-full text-xs font-bold bg-slate-50 text-slate-500 transition"; document.getElementById('btn-break').className=!iW?"px-5 py-2 rounded-full text-xs font-bold bg-rose-100 text-rose-700 transition":"px-5 py-2 rounded-full text-xs font-bold bg-slate-50 text-slate-500 transition"; window.resetTimer(); }
 
         // ==========================================
-        // ESTUDOS MODAL E EXTRAS (COM ESTRELAS E REPETIÇÃO)
+        // ESTUDOS
         // ==========================================
         let cec = '';
-        function openNoteModal(c) {
+        window.openNoteModal = function(c) {
             cec = c; document.getElementById('modal-class-title').innerText = c;
             let sg=document.getElementById('modal-schedule-grid'); sg.innerHTML='';
             let sch = {'Constituição e Tendências em Ed. Ciências':[{d:'02/03',t:'Presencial'},{d:'16/03',t:'Online'},{d:'30/03',t:'Online'},{d:'13/04',t:'Online'},{d:'27/04',t:'Online'},{d:'11/05',t:'Online'},{d:'25/05',t:'Online'},{d:'15/06',t:'Presencial'},{d:'29/06',t:'Presencial'}],'Conceitos Foucaultianos':[{d:'24/03',t:'Online'},{d:'31/03',t:'Online'},{d:'07/04',t:'Online'},{d:'14/04',t:'Online'},{d:'21/04',t:'Online'},{d:'28/04',t:'Online'},{d:'05/05',t:'Online'},{d:'12/05',t:'Online'},{d:'19/05',t:'Online'},{d:'26/05',t:'Online'},{d:'02/06',t:'Online'},{d:'23/06',t:'Online'}],'Conceitos Foucaultianos (Presencial)':[{d:'21/03',t:'Presencial'},{d:'20/06',t:'Presencial'}]};
             if(sch[c]) { document.getElementById('modal-schedule-container').classList.remove('hidden'); sch[c].forEach(i=>{ sg.innerHTML+=`<div class="flex justify-between items-center p-2.5 rounded-xl border shadow-sm ${i.t.toLowerCase()==='online'?'bg-blue-50 text-blue-700 border-blue-200':'bg-rose-50 text-rose-700 border-rose-200'} text-xs font-extrabold"><span>${i.d}</span><span class="flex items-center gap-1 uppercase text-[9px]"><i data-lucide="${i.t.toLowerCase()==='online'?'laptop':'map-pin'}" class="w-3 h-3"></i> ${i.t}</span></div>`;}); }
             else document.getElementById('modal-schedule-container').classList.add('hidden');
-            document.getElementById('modal-link-moodle').value=localStorage.getItem('moodle_'+c)||''; document.getElementById('modal-link-aula').value=localStorage.getItem('classlink_'+c)||''; document.getElementById('modal-textarea').value=localStorage.getItem('note_'+c)||'';
-            renderDisciplineEvents(); document.getElementById('note-modal').classList.remove('hidden'); lucide.createIcons();
+            
+            let notes = lsGet('notes', {});
+            document.getElementById('modal-link-moodle').value = notes['moodle_'+c] || ''; 
+            document.getElementById('modal-link-aula').value = notes['classlink_'+c] || ''; 
+            document.getElementById('modal-textarea').value = notes['note_'+c] || '';
+            
+            window.renderDisciplineEvents(); document.getElementById('note-modal').classList.remove('hidden'); if(window.lucide) lucide.createIcons();
         }
-        function closeNoteModal(e) { if(e&&e.target!==e.currentTarget)return; document.getElementById('note-modal').classList.add('hidden'); }
-        function openModalLink(t) { let l=document.getElementById(t==='moodle'?'modal-link-moodle':'modal-link-aula').value; if(l) window.open(l.startsWith('http')?l:'https://'+l,'_blank'); }
-        function renderDisciplineEvents() {
+        window.closeNoteModal = function(e) { if(e&&e.target!==e.currentTarget)return; document.getElementById('note-modal').classList.add('hidden'); }
+        window.openModalLink = function(t) { let l=document.getElementById(t==='moodle'?'modal-link-moodle':'modal-link-aula').value; if(l) window.open(l.startsWith('http')?l:'https://'+l,'_blank'); }
+        window.renderDisciplineEvents = function() {
             let evs=lsGet('disciplineEvents',{}); let l=document.getElementById('modal-events-list'); l.innerHTML='';
-            (evs[cec]||[]).sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(e=>{ l.innerHTML+=`<div class="flex justify-between items-center bg-white p-3 rounded-xl border border-rose-100 shadow-sm"><div class="overflow-hidden"><span class="text-[9px] font-black bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded uppercase tracking-widest">${e.date?new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR'):'-'}</span><h4 class="font-black text-rose-900 text-xs mt-1 truncate">${e.name}</h4></div><button type="button" onclick="deleteDisciplineEvent(${e.id})" class="text-rose-300 hover:text-red-500 p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; }); lucide.createIcons({root:l});
+            (evs[cec]||[]).sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(e=>{ l.innerHTML+=`<div class="flex justify-between items-center bg-white p-3 rounded-xl border border-rose-100 shadow-sm"><div class="overflow-hidden"><span class="text-[9px] font-black bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded uppercase tracking-widest">${e.date?new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR'):'-'}</span><h4 class="font-black text-rose-900 text-xs mt-1 truncate">${e.name}</h4></div><button type="button" onclick="deleteDisciplineEvent(${e.id})" class="text-rose-300 hover:text-red-500 p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; }); if(window.lucide) lucide.createIcons({root:l});
         }
-        function addDisciplineEvent() { let n=document.getElementById('modal-event-name').value.trim(), d=document.getElementById('modal-event-date').value; if(!n||!d)return; let evs=lsGet('disciplineEvents',{}); evs[cec]=evs[cec]||[]; evs[cec].push({id:Date.now(),name:n,date:d}); lsSet('disciplineEvents',evs); document.getElementById('modal-event-name').value=''; document.getElementById('modal-event-date').value=''; renderDisciplineEvents(); renderMasterCalendar(); updateClassCards(); }
-        function deleteDisciplineEvent(id) { let evs=lsGet('disciplineEvents',{}); evs[cec]=evs[cec].filter(e=>e.id!==id); lsSet('disciplineEvents',evs); renderDisciplineEvents(); renderMasterCalendar(); updateClassCards(); }
-        function saveNote() {
+        window.addDisciplineEvent = function() { let n=document.getElementById('modal-event-name').value.trim(), d=document.getElementById('modal-event-date').value; if(!n||!d)return; let evs=lsGet('disciplineEvents',{}); evs[cec]=evs[cec]||[]; evs[cec].push({id:Date.now(),name:n,date:d}); lsSet('disciplineEvents',evs); document.getElementById('modal-event-name').value=''; document.getElementById('modal-event-date').value=''; window.renderDisciplineEvents(); window.renderMasterCalendar(); window.updateClassCards(); }
+        window.deleteDisciplineEvent = function(id) { let evs=lsGet('disciplineEvents',{}); evs[cec]=evs[cec].filter(e=>e.id!==id); lsSet('disciplineEvents',evs); window.renderDisciplineEvents(); window.renderMasterCalendar(); window.updateClassCards(); }
+        window.saveNote = function() {
             let n=document.getElementById('modal-textarea').value.trim(), m=document.getElementById('modal-link-moodle').value.trim(), a=document.getElementById('modal-link-aula').value.trim();
-            n?localStorage.setItem('note_'+cec,n):localStorage.removeItem('note_'+cec); m?localStorage.setItem('moodle_'+cec,m):localStorage.removeItem('moodle_'+cec); a?localStorage.setItem('classlink_'+cec,a):localStorage.removeItem('classlink_'+cec);
-            closeNoteModal(); renderMasterCalendar();
+            let notes = lsGet('notes', {});
+            if(n) notes['note_'+cec]=n; else delete notes['note_'+cec];
+            if(m) notes['moodle_'+cec]=m; else delete notes['moodle_'+cec];
+            if(a) notes['classlink_'+cec]=a; else delete notes['classlink_'+cec];
+            lsSet('notes', notes);
+            window.closeNoteModal(); window.renderMasterCalendar();
         }
-        function updateClassCards() {
+        window.updateClassCards = function() {
             let evs = lsGet('disciplineEvents', {});
             document.querySelectorAll('.class-card').forEach(card => {
                 let cName = card.getAttribute('data-class-name');
@@ -827,38 +901,38 @@
             });
         }
 
-        function renderReadingList() {
+        window.renderReadingList = function() {
             let r=lsGet('readingList'); let c=document.getElementById('reading-list-container'); c.innerHTML='';
             if(!r.length) { c.innerHTML='<p class="text-xs text-pink-400 font-bold z-20 relative">Nenhuma leitura 🎀</p>'; return; }
-            r.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleReadingDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-rose-900">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); lucide.createIcons({root: c});
+            r.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleReadingDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-rose-900">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); if(window.lucide) lucide.createIcons({root: c});
         }
-        function addReading() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,done:false}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; renderReadingList(); } }
-        function toggleReadingDone(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('readingList',r);renderReadingList();}}
-        function deleteReading(id){lsSet('readingList',lsGet('readingList').filter(x=>x.id!==id));renderReadingList();}
-        function editReading(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Leitura:",i.title);if(n){i.title=n;lsSet('readingList',r);renderReadingList();}}}
+        window.addReading = function() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,done:false}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; window.renderReadingList(); } }
+        window.toggleReadingDone = function(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('readingList',r);window.renderReadingList();}}
+        window.deleteReading = function(id){lsSet('readingList',lsGet('readingList').filter(x=>x.id!==id));window.renderReadingList();}
+        window.editReading = function(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Leitura:",i.title);if(n){i.title=n;lsSet('readingList',r);window.renderReadingList();}}}
         
-        function renderExtraStudies() {
+        window.renderExtraStudies = function() {
             let e=lsGet('extraStudies'); let c=document.getElementById('extra-study-grid'); c.innerHTML='';
             if(!e.length) { c.innerHTML='<p class="text-xs text-blue-400 font-bold z-20 relative">Nenhum extra 🎀</p>'; return; }
             e.forEach(a=>{ 
                 let dStr = a.date ? new Date(a.date+'T00:00:00').toLocaleDateString('pt-BR').substring(0,5) : ''; let tStr = a.time ? a.time : ''; let dt = dStr && tStr ? `${dStr} às ${tStr}` : (dStr || tStr || '');
                 c.innerHTML+=`<div class="bg-white border border-blue-100 border-l-4 border-l-blue-400 p-3 rounded-xl flex justify-between items-center shadow-sm overflow-hidden z-20 relative"><div class="overflow-hidden">${dt ? `<span class="text-[9px] font-black text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded block w-max mb-1">${dt}</span>` : ''}<h4 class="font-black text-blue-900 text-xs truncate">${a.title}</h4>${a.repeat ? `<p class="text-[9px] font-bold text-slate-500 mt-0.5 truncate"><i data-lucide="repeat" class="w-2.5 h-2.5 inline"></i> ${a.repeat}</p>` : ''}</div><div class="flex gap-1 ml-2"><button onclick="editExtraStudy(${a.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteExtraStudy(${a.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; 
-            }); lucide.createIcons({root: c});
+            }); if(window.lucide) lucide.createIcons({root: c});
         }
-        function addExtraStudy() { 
+        window.addExtraStudy = function() { 
             let t=document.getElementById('new-study-title').value.trim(); if(!t) return;
             let d=document.getElementById('new-study-date').value, h=document.getElementById('new-study-time').value, r=document.getElementById('new-study-repeat').value.trim();
             let e=lsGet('extraStudies'); e.push({id:Date.now(),title:t,date:d,time:h,repeat:r}); lsSet('extraStudies',e); 
             document.getElementById('new-study-title').value=''; document.getElementById('new-study-date').value=''; document.getElementById('new-study-time').value=''; document.getElementById('new-study-repeat').value='';
-            renderExtraStudies(); renderMasterCalendar();
+            window.renderExtraStudies(); window.renderMasterCalendar();
         }
-        function deleteExtraStudy(id){lsSet('extraStudies',lsGet('extraStudies').filter(x=>x.id!==id));renderExtraStudies();renderMasterCalendar();}
-        function editExtraStudy(id){let e=lsGet('extraStudies'); let i=e.find(x=>x.id===id); if(i){let n=prompt("Nome do Extra:",i.title);if(n){i.title=n;lsSet('extraStudies',e);renderExtraStudies();renderMasterCalendar();}}}
+        window.deleteExtraStudy = function(id){lsSet('extraStudies',lsGet('extraStudies').filter(x=>x.id!==id));window.renderExtraStudies();window.renderMasterCalendar();}
+        window.editExtraStudy = function(id){let e=lsGet('extraStudies'); let i=e.find(x=>x.id===id); if(i){let n=prompt("Nome do Extra:",i.title);if(n){i.title=n;lsSet('extraStudies',e);window.renderExtraStudies();window.renderMasterCalendar();}}}
 
         // ==========================================
         // ATELIÊ & VENDAS ONLINE/FÍSICA
         // ==========================================
-        function renderProductions() {
+        window.renderProductions = function() {
             let p=lsGet('productions'); ['todo','doing','done'].forEach(s=>document.getElementById(`prod-col-${s}`).innerHTML='');
             p.forEach(x => { 
                 let b = `<span class="text-[8px] font-black px-2 py-0.5 rounded uppercase ${x.type==='colecao'?'bg-purple-100 text-purple-700':'bg-blue-100 text-blue-700'}">${x.type==='colecao'?'Coleção':'Encomenda'}</span>`;
@@ -875,78 +949,78 @@
                     </div>
                     ${act}
                 </div>`; 
-            }); lucide.createIcons();
+            }); if(window.lucide) lucide.createIcons();
         }
-        function addProduction() { let n=document.getElementById('prod-name').value.trim(); if(n){ let p=lsGet('productions'); p.push({id:Date.now(),name:n,type:document.getElementById('prod-type').value,date:document.getElementById('prod-date').value,status:'todo'}); lsSet('productions',p); document.getElementById('prod-name').value=''; document.getElementById('prod-date').value=''; renderProductions(); renderMasterCalendar(); } }
-        function changeProdStatus(id,s){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('productions',p); renderProductions();}
-        function deleteProd(id){lsSet('productions',lsGet('productions').filter(x=>x.id!==id));renderProductions();renderMasterCalendar();}
-        function editProd(id){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x){let n=prompt("Nome da Peça:",x.name);if(n){x.name=n;lsSet('productions',p);renderProductions();renderMasterCalendar();}}}
+        window.addProduction = function() { let n=document.getElementById('prod-name').value.trim(); if(n){ let p=lsGet('productions'); p.push({id:Date.now(),name:n,type:document.getElementById('prod-type').value,date:document.getElementById('prod-date').value,status:'todo'}); lsSet('productions',p); document.getElementById('prod-name').value=''; document.getElementById('prod-date').value=''; window.renderProductions(); window.renderMasterCalendar(); } }
+        window.changeProdStatus = function(id,s){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('productions',p); window.renderProductions();}
+        window.deleteProd = function(id){lsSet('productions',lsGet('productions').filter(x=>x.id!==id));window.renderProductions();window.renderMasterCalendar();}
+        window.editProd = function(id){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x){let n=prompt("Nome da Peça:",x.name);if(n){x.name=n;lsSet('productions',p);window.renderProductions();window.renderMasterCalendar();}}}
         
         let curSellId=null;
-        function openSellModal(id){ curSellId=id; document.getElementById('sell-piece-name').innerText=lsGet('productions').find(p=>p.id===id).name; document.getElementById('sell-modal').classList.remove('hidden'); toggleSellOptions(); }
-        function closeSellModal(){ document.getElementById('sell-modal').classList.add('hidden'); }
-        function toggleSellOptions(){ let t=document.getElementById('sell-type').value; document.getElementById('sell-opt-fisica').classList.toggle('hidden',t!=='fisica'); document.getElementById('sell-opt-online').classList.toggle('hidden',t!=='online'); if(t==='online') document.getElementById('sell-opt-online').classList.add('flex'); }
-        function confirmSale(){ 
+        window.openSellModal = function(id){ curSellId=id; document.getElementById('sell-piece-name').innerText=lsGet('productions').find(p=>p.id===id).name; document.getElementById('sell-modal').classList.remove('hidden'); window.toggleSellOptions(); }
+        window.closeSellModal = function(){ document.getElementById('sell-modal').classList.add('hidden'); }
+        window.toggleSellOptions = function(){ let t=document.getElementById('sell-type').value; document.getElementById('sell-opt-fisica').classList.toggle('hidden',t!=='fisica'); document.getElementById('sell-opt-online').classList.toggle('hidden',t!=='online'); if(t==='online') document.getElementById('sell-opt-online').classList.add('flex'); }
+        window.confirmSale = function(){ 
             let v=parseFloat(document.getElementById('sell-value').value), t=document.getElementById('sell-type').value; 
             if(isNaN(v)) return alert("Preencha o valor da peça!"); 
             let pkg=parseFloat(t==='fisica'?document.getElementById('sell-pkg-fisica').value:document.getElementById('sell-pkg-online').value); 
             let fr=t==='online'?parseFloat(document.getElementById('sell-freight').value||0):0; 
             let f=lsGet('finances'); let pieceName = document.getElementById('sell-piece-name').innerText;
             f.push({id:Date.now(),type:'income',method:'pix',category:'Loja',description:`Venda ${t==='online'?'Online':'Física'}: ${pieceName}`,amount:(v+pkg+fr),date:new Date().toISOString().split('T')[0]}); 
-            lsSet('finances',f); deleteProd(curSellId); closeSellModal(); alert("Venda registrada e valor enviado para as Finanças! 💸"); 
+            lsSet('finances',f); window.deleteProd(curSellId); window.closeSellModal(); alert("Venda registrada e valor enviado para as Finanças! 💸"); 
             document.getElementById('sell-value').value=''; document.getElementById('sell-freight').value='';
-            renderFinances(); switchTab('financas');
+            window.renderFinances(); window.switchTab('financas');
         }
 
         // ==========================================
         // TATTOO CRM PRO & PROMOS
         // ==========================================
-        function renderTattoos() {
+        window.renderTattoos = function() {
             let t=lsGet('tattoos'); let l=document.getElementById('tattoo-list'); l.innerHTML='';
             if(!t.length) { l.innerHTML='<div class="bg-purple-50 border border-purple-100 p-4 rounded-xl text-center z-20 relative"><p class="text-xs font-bold text-purple-400">Nenhum agendamento 🖤</p></div>'; return; }
-            t.sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(x=>{ l.innerHTML+=`<div class="flex items-center justify-between p-3 bg-white border border-purple-100 rounded-xl shadow-sm mb-2 z-20 relative"><div class="overflow-hidden"><span class="text-[9px] font-black bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded tracking-widest uppercase">${x.date?new Date(x.date+'T00:00:00').toLocaleDateString('pt-BR'):'S/ Data'}</span><h4 class="font-black text-sm text-purple-900 mt-1 truncate">${x.name}</h4><p class="text-[10px] font-bold text-emerald-600 mt-0.5">R$ ${parseFloat(x.value||0).toFixed(2)}</p>${x.materialName?`<p class="text-[9px] text-slate-400 bg-slate-50 border inline-block px-1 rounded mt-1 truncate">- ${x.materialQty}x ${x.materialName}</p>`:''}</div><div class="flex gap-1 ml-2"><button onclick="deleteTattoo(${x.id})" class="text-slate-300 hover:text-red-500 p-1.5 bg-slate-50 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`; }); lucide.createIcons({root:l});
+            t.sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(x=>{ l.innerHTML+=`<div class="flex items-center justify-between p-3 bg-white border border-purple-100 rounded-xl shadow-sm mb-2 z-20 relative"><div class="overflow-hidden"><span class="text-[9px] font-black bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded tracking-widest uppercase">${x.date?new Date(x.date+'T00:00:00').toLocaleDateString('pt-BR'):'S/ Data'}</span><h4 class="font-black text-sm text-purple-900 mt-1 truncate">${x.name}</h4><p class="text-[10px] font-bold text-emerald-600 mt-0.5">R$ ${parseFloat(x.value||0).toFixed(2)}</p>${x.materialName?`<p class="text-[9px] text-slate-400 bg-slate-50 border inline-block px-1 rounded mt-1 truncate">- ${x.materialQty}x ${x.materialName}</p>`:''}</div><div class="flex gap-1 ml-2"><button onclick="deleteTattoo(${x.id})" class="text-slate-300 hover:text-red-500 p-1.5 bg-slate-50 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`; }); if(window.lucide) lucide.createIcons({root:l});
         }
-        function addTattoo(){ 
+        window.addTattoo = function(){ 
             let n=document.getElementById('tattoo-name').value.trim(),v=document.getElementById('tattoo-value').value,d=document.getElementById('tattoo-date').value; 
             if(!n||!d) return; let t=lsGet('tattoos'), inv=lsGet('tattooInventory'); 
             let mid=document.getElementById('tattoo-material-select').value, mq=parseInt(document.getElementById('tattoo-material-qty').value), mn=null; 
-            if(mid&&mq>0){let i=inv.find(x=>x.id==mid); if(i){if(i.qty<mq) return alert("Estoque insuficiente!"); i.qty-=mq; mn=i.name; lsSet('tattooInventory',inv); renderInventory();}} 
+            if(mid&&mq>0){let i=inv.find(x=>x.id==mid); if(i){if(i.qty<mq) return alert("Estoque insuficiente!"); i.qty-=mq; mn=i.name; lsSet('tattooInventory',inv); window.renderInventory();}} 
             t.push({id:Date.now(),name:n,value:v||0,date:d,materialName:mn,materialQty:mn?mq:null}); lsSet('tattoos',t); 
-            document.getElementById('tattoo-name').value=''; document.getElementById('tattoo-date').value=''; document.getElementById('tattoo-value').value=''; renderTattoos(); renderMasterCalendar();
+            document.getElementById('tattoo-name').value=''; document.getElementById('tattoo-date').value=''; document.getElementById('tattoo-value').value=''; window.renderTattoos(); window.renderMasterCalendar();
         }
-        function deleteTattoo(id){lsSet('tattoos',lsGet('tattoos').filter(x=>x.id!==id));renderTattoos();renderMasterCalendar();}
+        window.deleteTattoo = function(id){lsSet('tattoos',lsGet('tattoos').filter(x=>x.id!==id));window.renderTattoos();window.renderMasterCalendar();}
         
-        function renderClients(){ 
+        window.renderClients = function(){ 
             let c=lsGet('clients'); let l=document.getElementById('crm-list'), dl=document.getElementById('client-list-data'); l.innerHTML=''; dl.innerHTML=''; 
             if(!c.length) l.innerHTML='<p class="text-xs text-rose-400 font-bold z-20 relative">Nenhum cliente cadastrado.</p>';
-            c.forEach(x=>{ l.innerHTML+=`<div class="bg-white p-2.5 rounded-xl border border-pink-100 flex justify-between items-center shadow-sm z-20 relative"><div class="overflow-hidden"><h4 class="font-black text-rose-900 text-xs truncate">${x.name}</h4>${x.ig?`<p class="text-[9px] font-bold text-rose-500 mt-0.5 truncate"><i data-lucide="instagram" class="w-2.5 h-2.5 inline"></i> ${x.ig}</p>`:''}${x.notes?`<p class="text-[9px] text-slate-500 mt-0.5 truncate">${x.notes}</p>`:''}</div><button onclick="deleteClient(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; dl.innerHTML+=`<option value="${x.name}"></option>`;}); lucide.createIcons({root:l});
+            c.forEach(x=>{ l.innerHTML+=`<div class="bg-white p-2.5 rounded-xl border border-pink-100 flex justify-between items-center shadow-sm z-20 relative"><div class="overflow-hidden"><h4 class="font-black text-rose-900 text-xs truncate">${x.name}</h4>${x.ig?`<p class="text-[9px] font-bold text-rose-500 mt-0.5 truncate"><i data-lucide="instagram" class="w-2.5 h-2.5 inline"></i> ${x.ig}</p>`:''}${x.notes?`<p class="text-[9px] text-slate-500 mt-0.5 truncate">${x.notes}</p>`:''}</div><button onclick="deleteClient(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; dl.innerHTML+=`<option value="${x.name}"></option>`;}); if(window.lucide) lucide.createIcons({root:l});
         }
-        function addClient(){ let n=document.getElementById('crm-name').value.trim(),i=document.getElementById('crm-ig').value.trim(), no=document.getElementById('crm-notes').value.trim(); if(n){let c=lsGet('clients'); c.push({id:Date.now(),name:n,ig:i,notes:no}); lsSet('clients',c); document.getElementById('crm-name').value='';document.getElementById('crm-ig').value='';document.getElementById('crm-notes').value=''; renderClients();}}
-        function deleteClient(id){lsSet('clients',lsGet('clients').filter(x=>x.id!==id));renderClients();}
+        window.addClient = function(){ let n=document.getElementById('crm-name').value.trim(),i=document.getElementById('crm-ig').value.trim(), no=document.getElementById('crm-notes').value.trim(); if(n){let c=lsGet('clients'); c.push({id:Date.now(),name:n,ig:i,notes:no}); lsSet('clients',c); document.getElementById('crm-name').value='';document.getElementById('crm-ig').value='';document.getElementById('crm-notes').value=''; window.renderClients();}}
+        window.deleteClient = function(id){lsSet('clients',lsGet('clients').filter(x=>x.id!==id));window.renderClients();}
         
-        function renderPromos(){ 
+        window.renderPromos = function(){ 
             let p=lsGet('promos'); let l=document.getElementById('promo-list'); l.innerHTML=''; 
             if(!p.length) l.innerHTML='<p class="text-xs text-amber-500 font-bold z-20 relative">Nenhuma promoção.</p>';
-            p.forEach(x=>l.innerHTML+=`<div class="flex justify-between items-center bg-white p-2 rounded-lg border border-amber-100 shadow-sm z-20 relative"><span class="text-[10px] font-black text-amber-800 truncate">${x.name}</span><button onclick="deletePromo(${x.id})" class="text-amber-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div>`); lucide.createIcons({root:l});
+            p.forEach(x=>l.innerHTML+=`<div class="flex justify-between items-center bg-white p-2 rounded-lg border border-amber-100 shadow-sm z-20 relative"><span class="text-[10px] font-black text-amber-800 truncate">${x.name}</span><button onclick="deletePromo(${x.id})" class="text-amber-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div>`); if(window.lucide) lucide.createIcons({root:l});
         }
-        function addPromo(){ let n=document.getElementById('promo-name').value.trim(); if(n){let p=lsGet('promos'); p.push({id:Date.now(),name:n}); lsSet('promos',p); document.getElementById('promo-name').value=''; renderPromos();}}
-        function deletePromo(id) { lsSet('promos',lsGet('promos').filter(x=>x.id!==id)); renderPromos(); }
+        window.addPromo = function(){ let n=document.getElementById('promo-name').value.trim(); if(n){let p=lsGet('promos'); p.push({id:Date.now(),name:n}); lsSet('promos',p); document.getElementById('promo-name').value=''; window.renderPromos();}}
+        window.deletePromo = function(id) { lsSet('promos',lsGet('promos').filter(x=>x.id!==id)); window.renderPromos(); }
         
-        function renderInventory(){ 
+        window.renderInventory = function(){ 
             let i=lsGet('tattooInventory'); let l=document.getElementById('inventory-list'), s=document.getElementById('tattoo-material-select'); l.innerHTML=''; s.innerHTML='<option value="">Não descontar estoque</option>';
             if(!i.length) l.innerHTML='<p class="text-xs text-slate-400 font-bold z-20 relative">Estoque vazio.</p>';
             i.forEach(x=>{
                 l.innerHTML+=`<div class="flex justify-between items-center bg-white p-2 rounded-lg border border-slate-100 shadow-sm mb-1 z-20 relative"><span class="text-xs font-bold text-slate-700 truncate">${x.name}</span><div class="flex items-center gap-2"><span class="text-[10px] font-black ${x.qty<=2?'text-red-500 bg-red-50':'text-slate-600 bg-slate-50'} px-1.5 py-0.5 rounded">${x.qty}</span><button onclick="deleteInv(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; 
                 if(x.qty>0) s.innerHTML+=`<option value="${x.id}">${x.name} (${x.qty})</option>`;
-            }); lucide.createIcons({root:l}); 
+            }); if(window.lucide) lucide.createIcons({root:l}); 
         }
-        function addInventoryItem(){ let n=document.getElementById('inv-name').value.trim(), q=parseInt(document.getElementById('inv-qty').value); if(n&&q){let i=lsGet('tattooInventory'); let ex=i.find(x=>x.name.toLowerCase()===n.toLowerCase()); if(ex)ex.qty+=q; else i.push({id:Date.now(),name:n,qty:q}); lsSet('tattooInventory',i); document.getElementById('inv-name').value=''; document.getElementById('inv-qty').value=''; renderInventory();}}
-        function deleteInv(id){lsSet('tattooInventory',lsGet('tattooInventory').filter(x=>x.id!==id));renderInventory();}
+        window.addInventoryItem = function(){ let n=document.getElementById('inv-name').value.trim(), q=parseInt(document.getElementById('inv-qty').value); if(n&&q){let i=lsGet('tattooInventory'); let ex=i.find(x=>x.name.toLowerCase()===n.toLowerCase()); if(ex)ex.qty+=q; else i.push({id:Date.now(),name:n,qty:q}); lsSet('tattooInventory',i); document.getElementById('inv-name').value=''; document.getElementById('inv-qty').value=''; window.renderInventory();}}
+        window.deleteInv = function(id){lsSet('tattooInventory',lsGet('tattooInventory').filter(x=>x.id!==id));window.renderInventory();}
 
         // ==========================================
         // INSTAGRAM SOCIAL
         // ==========================================
-        function renderInstaPosts(){ 
+        window.renderInstaPosts = function(){ 
             let p=lsGet('instaPosts'); ['ideia','gravando','editando','publicado'].forEach(s=>document.getElementById(`insta-col-${s}`).innerHTML=''); 
             p.forEach(x=>{
                 let dt = x.date ? `<span class="text-[8px] font-black bg-white px-1.5 py-0.5 rounded border inline-flex items-center gap-0.5"><i data-lucide="calendar" class="w-2 h-2 text-fuchsia-400"></i> ${new Date(x.date+'T00:00:00').toLocaleDateString('pt-BR')}</span>` : '';
@@ -959,26 +1033,27 @@
                         <button onclick="deleteInstaPost(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
                     </div>
                 </div>`; 
-            }); lucide.createIcons();
+            }); if(window.lucide) lucide.createIcons();
         }
-        function addInstaPost() { let n=document.getElementById('insta-name').value.trim(); if(n){ let p=lsGet('instaPosts'); p.push({id:Date.now(),name:n,type:document.getElementById('insta-type').value,date:document.getElementById('insta-date').value,status:'ideia'}); lsSet('instaPosts',p); document.getElementById('insta-name').value=''; document.getElementById('insta-date').value=''; renderInstaPosts(); renderMasterCalendar(); } }
-        function changeInstaStatus(id,s){let p=lsGet('instaPosts'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('instaPosts',p); renderInstaPosts();}
-        function deleteInstaPost(id){lsSet('instaPosts',lsGet('instaPosts').filter(x=>x.id!==id));renderInstaPosts();renderMasterCalendar();}
-        function loadStoreNotes() { document.getElementById('store-notes').value = localStorage.getItem('storeNotes')||''; }
-        function saveStoreNotes() { localStorage.setItem('storeNotes', document.getElementById('store-notes').value); }
-        function loadInstaNotes() { document.getElementById('insta-notes').value = localStorage.getItem('instaNotes')||''; }
-        function saveInstaNotes() { localStorage.setItem('instaNotes', document.getElementById('insta-notes').value); }
+        window.addInstaPost = function() { let n=document.getElementById('insta-name').value.trim(); if(n){ let p=lsGet('instaPosts'); p.push({id:Date.now(),name:n,type:document.getElementById('insta-type').value,date:document.getElementById('insta-date').value,status:'ideia'}); lsSet('instaPosts',p); document.getElementById('insta-name').value=''; document.getElementById('insta-date').value=''; window.renderInstaPosts(); window.renderMasterCalendar(); } }
+        window.changeInstaStatus = function(id,s){let p=lsGet('instaPosts'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('instaPosts',p); window.renderInstaPosts();}
+        window.deleteInstaPost = function(id){lsSet('instaPosts',lsGet('instaPosts').filter(x=>x.id!==id));window.renderInstaPosts();window.renderMasterCalendar();}
+        
+        window.loadStoreNotes = function() { let n = lsGet('notes',{}); document.getElementById('store-notes').value = n['storeNotes']||''; }
+        window.saveStoreNotes = function() { let n = lsGet('notes',{}); n['storeNotes'] = document.getElementById('store-notes').value; lsSet('notes', n); }
+        window.loadInstaNotes = function() { let n = lsGet('notes',{}); document.getElementById('insta-notes').value = n['instaNotes']||''; }
+        window.saveInstaNotes = function() { let n = lsGet('notes',{}); n['instaNotes'] = document.getElementById('insta-notes').value; lsSet('notes', n); }
 
         // ==========================================
         // FINANÇAS DASHBOARD E CARTÃO
         // ==========================================
-        function updateFinanceCategories() {
+        window.updateFinanceCategories = function() {
             let t=document.getElementById('new-fin-type').value, l=document.getElementById('fin-categories'); l.innerHTML='';
             (t==='income'?['Bolsa','Auxílio','Trabalho Edição','Tattoo','Loja','Outros']:['Materiais/Arte','Alimentação','Transporte','Lazer','Assinaturas','Pagamento Fatura','Outros']).forEach(c=>l.innerHTML+=`<option value="${c}"></option>`);
             document.getElementById('new-fin-cat').value='';
         }
-        function changeFinMonth(d){ fMo.setMonth(fMo.getMonth()+d); renderFinances(); }
-        function renderFinances() {
+        window.changeFinMonth = function(d){ fMo.setMonth(fMo.getMonth()+d); window.renderFinances(); }
+        window.renderFinances = function() {
             let f = lsGet('finances').map(t=>{if(t.type==='in')t.type='income';if(t.type==='out')t.type='expense';if(!t.category)t.category=t.method==='cc'?'Cartão':'Outros';return t;});
             document.getElementById('fin-month-display').innerText = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][fMo.getMonth()] + " " + fMo.getFullYear();
             
@@ -999,42 +1074,45 @@
             
             if(!Object.keys(catT).length) catCont.innerHTML='<div class="p-4 text-center text-emerald-600/50 font-bold italic z-20 relative">Sem despesas 🎀</div>';
             else { let cIdx=0, cols=['bg-pink-400','bg-blue-400','bg-emerald-400','bg-amber-400','bg-purple-400']; Object.entries(catT).sort((a,b)=>b[1]-a[1]).forEach(([c,v])=>{ let p=outT>0?(v/outT)*100:0; catCont.innerHTML+=`<div class="flex flex-col gap-1.5 z-20 relative"><div class="flex justify-between items-end text-sm font-bold"><span class="text-emerald-900">${c}</span><div class="flex items-center gap-2"><span class="text-emerald-700">${formatCurrency(v)}</span><span class="text-[10px] bg-white px-1.5 py-0.5 rounded-md shadow-sm border">${p.toFixed(0)}%</span></div></div><div class="w-full h-2.5 bg-emerald-50 rounded-full overflow-hidden shadow-inner"><div class="h-full ${cols[cIdx++%cols.length]} rounded-full" style="width:${p}%"></div></div></div>`; }); }
-            lucide.createIcons({root:l});
+            if(window.lucide) lucide.createIcons({root:l});
         }
-        function openFinanceModal(){ document.getElementById('finance-modal').classList.remove('hidden'); updateFinanceCategories(); togglePaymentMethod(); }
-        function closeFinanceModal(e){ if(e&&e.target!==e.currentTarget)return; document.getElementById('finance-modal').classList.add('hidden'); }
-        function togglePaymentMethod(){ document.getElementById('div-fin-payment-details').classList.toggle('hidden', document.getElementById('new-fin-type').value==='income'); toggleInstallments(); }
-        function toggleInstallments(){ document.getElementById('div-fin-installments').classList.toggle('hidden', document.getElementById('new-fin-method').value!=='cc'); }
-        function addTransaction(){ 
+        window.openFinanceModal = function(){ document.getElementById('finance-modal').classList.remove('hidden'); window.updateFinanceCategories(); window.togglePaymentMethod(); }
+        window.closeFinanceModal = function(e){ if(e&&e.target!==e.currentTarget)return; document.getElementById('finance-modal').classList.add('hidden'); }
+        window.togglePaymentMethod = function(){ document.getElementById('div-fin-payment-details').classList.toggle('hidden', document.getElementById('new-fin-type').value==='income'); window.toggleInstallments(); }
+        window.toggleInstallments = function(){ document.getElementById('div-fin-installments').classList.toggle('hidden', document.getElementById('new-fin-method').value!=='cc'); }
+        window.addTransaction = function(){ 
             let f=lsGet('finances'); let desc=document.getElementById('new-fin-desc').value.trim(), amt=parseFloat(document.getElementById('new-fin-amount').value), type=document.getElementById('new-fin-type').value, date=document.getElementById('new-fin-date').value||new Date().toISOString().split('T')[0], cat=document.getElementById('new-fin-cat').value||'Outros', meth=document.getElementById('new-fin-method').value;
             if(!desc||isNaN(amt))return;
             if(type==='income'||meth==='pix') f.push({id:Date.now(),type,method:'pix',category:cat,description:desc,amount:amt,date});
             else { let inst=parseInt(document.getElementById('new-fin-installments').value); let perI=amt/inst; let d=new Date(date+'T12:00:00'); for(let i=1;i<=inst;i++){ let nD=new Date(d.getFullYear(),d.getMonth()+(i-1),d.getDate()); f.push({id:Date.now()+i,type:'expense',method:'cc',category:cat,description:inst>1?`${desc} (${i}/${inst})`:desc,amount:perI,date:nD.toISOString().split('T')[0]}); } }
-            lsSet('finances',f); document.getElementById('new-fin-desc').value=''; document.getElementById('new-fin-amount').value=''; document.getElementById('new-fin-cat').value=''; document.getElementById('new-fin-installments').value='1'; closeFinanceModal(); renderFinances();
+            lsSet('finances',f); document.getElementById('new-fin-desc').value=''; document.getElementById('new-fin-amount').value=''; document.getElementById('new-fin-cat').value=''; document.getElementById('new-fin-installments').value='1'; window.closeFinanceModal(); window.renderFinances();
         }
-        function deleteFinance(id){ lsSet('finances',lsGet('finances').filter(x=>x.id!==id)); renderFinances(); }
+        window.deleteFinance = function(id){ lsSet('finances',lsGet('finances').filter(x=>x.id!==id)); window.renderFinances(); }
 
-        // INIT GERAL
-        window.onload = () => {
-            lucide.createIcons(); 
-            renderMasterCalendar(); 
-            updateTimerDisplay(); 
-            renderTasks(); 
-            renderProductions(); 
-            renderReadingList(); 
-            renderExtraStudies();
-            renderClients(); 
-            renderPromos(); 
-            renderInventory(); 
-            renderTattoos(); 
-            updateFinanceCategories(); 
-            renderFinances(); 
-            renderRoutineChart(); 
-            renderInstaPosts();
-            updateClassCards(); 
-            loadStoreNotes();
-            loadInstaNotes();
+        // INIT GERAL UNIFICADO (CHAMADO PELA NUVEM OU LOCALMENTE)
+        window.renderAllApp = function() {
+            if(window.lucide) lucide.createIcons(); 
+            window.renderMasterCalendar(); 
+            window.updateTimerDisplay(); 
+            window.renderTasks(); 
+            window.renderProductions(); 
+            window.renderReadingList(); 
+            window.renderExtraStudies();
+            window.renderClients(); 
+            window.renderPromos(); 
+            window.renderInventory(); 
+            window.renderTattoos(); 
+            window.updateFinanceCategories(); 
+            window.renderFinances(); 
+            window.renderRoutineChart(); 
+            window.renderInstaPosts();
+            window.updateClassCards(); 
+            window.loadStoreNotes();
+            window.loadInstaNotes();
         };
+
+        // Prepara ícones base logo de cara
+        if(window.lucide) lucide.createIcons();
     </script>
 </body>
 </html>
