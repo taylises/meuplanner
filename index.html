@@ -73,7 +73,7 @@
     <div id="cloud-loading" class="fixed inset-0 bg-pink-50/95 backdrop-blur-md z-[999] flex flex-col items-center justify-center transition-opacity duration-500">
         <i data-lucide="cloud-download" class="w-16 h-16 text-pink-500 animate-bounce mb-4"></i>
         <h2 class="text-2xl md:text-3xl font-cute text-pink-800 font-bold mb-2">Conectando à Nuvem...</h2>
-        <p class="text-sm md:text-base font-bold text-pink-500 text-center px-6">Sincronizando seus dispositivos para deixar tudo perfeito! 🎀</p>
+        <p class="text-sm md:text-base font-bold text-pink-500 text-center px-6" id="cloud-loading-text">Sincronizando seus dispositivos para deixar tudo perfeito! 🎀</p>
     </div>
 
     <!-- Header com Patinhas Flutuantes Fofas -->
@@ -93,7 +93,6 @@
             </div>
             <div id="cloud-status-indicator" class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center transition-all">
                 <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5">Status da Nuvem</p>
-                <!-- O Javascript vai mudar este texto automaticamente se não houver chave -->
                 <p id="cloud-status-text" class="text-sm md:text-lg font-cute font-bold drop-shadow-sm flex items-center gap-1"><i data-lucide="cloud-snow" class="w-5 h-5"></i> A verificar...</p>
             </div>
         </div>
@@ -625,7 +624,7 @@
         </div>
     </div>
 
-    <!-- SCRIPTS DA NUVEM (NOVO SISTEMA) -->
+    <!-- SCRIPTS DA NUVEM (NOVO SISTEMA ROBUSTO) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -647,29 +646,7 @@
             if (window.saveToCloud) window.saveToCloud();
         };
 
-        // ==========================================
-        // CONFIGURAÇÃO DO COFRE DE NUVEM
-        // ==========================================
-        let firebaseConfig = null;
-
-        // SE NÃO ESTIVER NO CANVAS, ELE VAI PROCURAR A SUA CHAVE AQUI:
-        if (typeof __firebase_config !== 'undefined') {
-            firebaseConfig = JSON.parse(__firebase_config);
-        } else {
-            // ========================================================
-            // 🛑 FIREBASE
-            // 
-           firebaseConfig = {
-          apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
-          authDomain: "meu-planner-bf562.firebaseapp.com",
-          projectId: "meu-planner-bf562",
-          storageBucket: "meu-planner-bf562.firebasestorage.app",
-          messagingSenderId: "778926180756",
-          appId: "1:778926180756:web:901c4e77278c09d004a781",
-          measurementId: "G-Y97D6CJREP"
-        };
-
-        function updateCloudStatusUI(isWorking) {
+        function updateCloudStatusUI(isWorking, message) {
             const ind = document.getElementById('cloud-status-indicator');
             const txt = document.getElementById('cloud-status-text');
             if(isWorking) {
@@ -677,52 +654,75 @@
                 txt.innerHTML = '<i data-lucide="cloud-snow" class="w-5 h-5 text-emerald-200"></i> <span class="text-emerald-100">Sincronizado</span>';
             } else {
                 ind.className = "bg-rose-500/80 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-rose-300 shadow-inner flex flex-col justify-center items-center transition-all";
-                txt.innerHTML = '<i data-lucide="cloud-off" class="w-5 h-5 text-white"></i> <span class="text-white">Nuvem Desligada</span>';
+                txt.innerHTML = `<i data-lucide="cloud-off" class="w-5 h-5 text-white"></i> <span class="text-white">${message || 'Nuvem Desligada'}</span>`;
             }
             if(window.lucide) lucide.createIcons();
         }
 
-        if (firebaseConfig) {
-            const app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            appId = typeof __app_id !== 'undefined' ? __app_id : 'meu-planner-nuvem';
-
-            const initAuth = async () => {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            };
+        // Função para libertar o ecrã se algo correr mal
+        function fallbackToLocalMode(errorMessage) {
+            console.error("Modo Local Ativado:", errorMessage);
+            updateCloudStatusUI(false, "Modo Local");
             
-            initAuth();
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    userId = user.uid;
-                    listenToCloud();
-                    updateCloudStatusUI(true);
-                }
-            });
-
-        } else {
-            console.warn("Nuvem não configurada. A funcionar apenas em modo local temporário.");
-            updateCloudStatusUI(false);
-            
-            // Oculta o ecrã de carregamento imediatamente pois não há banco de dados
+            // Tira a tela de carregamento imediatamente
             document.getElementById('cloud-loading').style.opacity = '0';
             setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
             
-            // Tenta puxar do armazenamento antigo do navegador caso a pessoa tenha dados
+            // Puxa do localStorage antigo se tiver
             let localSave = localStorage.getItem('backupPlannerNuvem');
             if(localSave) window.appState = JSON.parse(localSave);
 
-            // Permite usar o planner mas guarda na memória do telemóvel temporariamente
+            // Passa a salvar localmente para não perder nada
             window.saveToCloud = function() {
                  localStorage.setItem('backupPlannerNuvem', JSON.stringify(window.appState));
             }
-            if(window.renderAllApp) window.renderAllApp();
+            if (!isInitialized) {
+                isInitialized = true;
+                if(window.renderAllApp) window.renderAllApp();
+            }
+        }
+
+        // Já coloquei a sua chave certa aqui!
+        let firebaseConfig = {
+            apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
+            authDomain: "meu-planner-bf562.firebaseapp.com",
+            projectId: "meu-planner-bf562",
+            storageBucket: "meu-planner-bf562.firebasestorage.app",
+            messagingSenderId: "778926180756",
+            appId: "1:778926180756:web:901c4e77278c09d004a781",
+            measurementId: "G-Y97D6CJREP"
+        };
+
+        if (firebaseConfig) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'meu-planner-nuvem';
+
+                const initAuth = async () => {
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (err) {
+                        fallbackToLocalMode("Erro no Login. Ative o 'Anonymous' no Firebase.");
+                    }
+                };
+                
+                initAuth();
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        listenToCloud();
+                    }
+                });
+            } catch(e) {
+                fallbackToLocalMode("Erro geral no Firebase.");
+            }
         }
 
         function listenToCloud() {
@@ -738,13 +738,13 @@
                     isInitialized = true;
                     document.getElementById('cloud-loading').style.opacity = '0';
                     setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
+                    updateCloudStatusUI(true);
                     if(window.renderAllApp) window.renderAllApp();
                 } else {
                     if(window.renderAllApp) window.renderAllApp();
                 }
             }, (error) => {
-                console.error("Erro de sincronização:", error);
-                updateCloudStatusUI(false);
+                fallbackToLocalMode("Erro no Banco de Dados. Regras bloqueadas?");
             });
         }
 
@@ -752,8 +752,7 @@
             if (!userId || !db) return;
             const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data');
             setDoc(docRef, window.appState).catch(e => {
-                console.error("Erro ao salvar:", e);
-                updateCloudStatusUI(false);
+                updateCloudStatusUI(false, "Falha ao Salvar");
             });
         };
     </script>
