@@ -682,16 +682,22 @@
             }
         }
 
-        // Já coloquei a sua chave certa aqui!
-        let firebaseConfig = {
-            apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
-            authDomain: "meu-planner-bf562.firebaseapp.com",
-            projectId: "meu-planner-bf562",
-            storageBucket: "meu-planner-bf562.firebasestorage.app",
-            messagingSenderId: "778926180756",
-            appId: "1:778926180756:web:901c4e77278c09d004a781",
-            measurementId: "G-Y97D6CJREP"
-        };
+        // Verifica se estamos no ambiente do Canvas ou fora dele
+        let firebaseConfig = null;
+        if (typeof __firebase_config !== 'undefined') {
+            firebaseConfig = JSON.parse(__firebase_config);
+        } else {
+            // Usa a sua chave apenas se não estiver no Canvas
+            firebaseConfig = {
+                apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
+                authDomain: "meu-planner-bf562.firebaseapp.com",
+                projectId: "meu-planner-bf562",
+                storageBucket: "meu-planner-bf562.firebasestorage.app",
+                messagingSenderId: "778926180756",
+                appId: "1:778926180756:web:901c4e77278c09d004a781",
+                measurementId: "G-Y97D6CJREP"
+            };
+        }
 
         if (firebaseConfig) {
             try {
@@ -708,6 +714,7 @@
                             await signInAnonymously(auth);
                         }
                     } catch (err) {
+                        console.error("Erro de Autenticação:", err);
                         fallbackToLocalMode("Erro no Login. Ative o 'Anonymous' no Firebase.");
                     }
                 };
