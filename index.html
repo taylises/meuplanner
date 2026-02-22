@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -34,18 +34,11 @@
         @media (min-width: 768px) { .main-content { padding-bottom: 2rem; } }
 
         /* PADRÃO DE PATINHAS NAS CAIXAS */
-        .cute-card, .class-card, .glass, .glass-emerald, .glass-rose {
-            position: relative;
-        }
+        .cute-card, .class-card, .glass, .glass-emerald, .glass-rose { position: relative; }
         .cute-card::before, .class-card::before, .glass::before, .glass-emerald::before, .glass-rose::before {
-            content: "";
-            position: absolute;
-            inset: 0;
+            content: ""; position: absolute; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23fbcfe8' stroke='%23fbcfe8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.3'%3E%3Cg transform='translate(10, 10) rotate(15) scale(1.2)'%3E%3Ccircle cx='11' cy='4' r='2'/%3E%3Ccircle cx='18' cy='8' r='2'/%3E%3Ccircle cx='20' cy='16' r='2'/%3E%3Cpath d='M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z'/%3E%3C/g%3E%3Cg transform='translate(60, 50) rotate(-20) scale(0.9)'%3E%3Ccircle cx='11' cy='4' r='2'/%3E%3Ccircle cx='18' cy='8' r='2'/%3E%3Ccircle cx='20' cy='16' r='2'/%3E%3Cpath d='M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 100px 100px;
-            pointer-events: none; 
-            border-radius: inherit;
-            z-index: 0;
+            background-size: 100px 100px; pointer-events: none; border-radius: inherit; z-index: 0;
         }
         .cute-card > *, .class-card > *, .glass > *, .glass-emerald > *, .glass-rose > * { position: relative; z-index: 10; }
         .cute-card { transition: all 0.3s ease; border-radius: 1.5rem; border: 2px solid #ffe4e6; background: white; box-shadow: 0 4px 10px -2px rgba(255, 105, 180, 0.08); }
@@ -65,15 +58,51 @@
         .modal-body { max-height: calc(85vh - 140px); overflow-y: auto; }
         .animate-float { animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        
+        /* TELA DE LOGIN */
+        #login-screen {
+            background-color: #fff0f5; 
+            background-image: radial-gradient(#ffb6c1 1.5px, transparent 1.5px); 
+            background-size: 28px 28px;
+        }
     </style>
 </head>
 <body class="antialiased relative min-h-screen">
 
+    <!-- TELA DE LOGIN SEGURA 🔒 -->
+    <div id="login-screen" class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-[2rem] shadow-2xl border-2 border-pink-200 w-full max-w-sm cute-card text-center">
+            <i data-lucide="lock" class="w-12 h-12 text-pink-400 mx-auto mb-4"></i>
+            <h2 class="text-3xl font-cute text-rose-800 mb-2">Área Segura 🎀</h2>
+            <p class="text-sm font-bold text-slate-500 mb-6">Inicie sessão para ver o seu Planner</p>
+            
+            <div class="flex flex-col gap-4 text-left">
+                <div>
+                    <label class="block text-[10px] font-bold text-rose-700 uppercase mb-1">Seu E-mail</label>
+                    <input type="email" id="login-email" placeholder="taylise@email.com" class="w-full bg-pink-50 border border-pink-200 rounded-xl p-3 outline-none font-bold text-rose-900 text-sm">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-rose-700 uppercase mb-1">Palavra-passe</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" class="w-full bg-pink-50 border border-pink-200 rounded-xl p-3 outline-none font-bold text-rose-900 text-sm">
+                </div>
+                
+                <button onclick="window.doLogin()" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-3.5 rounded-xl shadow-md transition-colors mt-2">Entrar</button>
+                <div class="relative flex items-center py-2">
+                    <div class="flex-grow border-t border-pink-100"></div>
+                    <span class="flex-shrink-0 mx-4 text-pink-300 text-xs font-bold">ou</span>
+                    <div class="flex-grow border-t border-pink-100"></div>
+                </div>
+                <button onclick="window.doSignup()" class="w-full bg-white hover:bg-pink-50 text-rose-500 border-2 border-rose-200 font-bold py-3 rounded-xl transition-colors">Criar Nova Conta</button>
+            </div>
+            <p id="login-error" class="text-xs font-bold text-red-500 mt-4 hidden"></p>
+        </div>
+    </div>
+
     <!-- Tela de Carregamento da Nuvem ☁️ -->
-    <div id="cloud-loading" class="fixed inset-0 bg-pink-50/95 backdrop-blur-md z-[999] flex flex-col items-center justify-center transition-opacity duration-500">
+    <div id="cloud-loading" class="fixed inset-0 bg-pink-50/95 backdrop-blur-md z-[999] flex flex-col items-center justify-center transition-opacity duration-500 hidden">
         <i data-lucide="cloud-download" class="w-16 h-16 text-pink-500 animate-bounce mb-4"></i>
-        <h2 class="text-2xl md:text-3xl font-cute text-pink-800 font-bold mb-2">Conectando à Nuvem...</h2>
-        <p class="text-sm md:text-base font-bold text-pink-500 text-center px-6" id="cloud-loading-text">Sincronizando seus dispositivos para deixar tudo perfeito! 🎀</p>
+        <h2 class="text-2xl md:text-3xl font-cute text-pink-800 font-bold mb-2">A Puxar os Dados...</h2>
+        <p class="text-sm md:text-base font-bold text-pink-500 text-center px-6">A carregar o seu cofre seguro! 🎀</p>
     </div>
 
     <!-- Header com Patinhas Flutuantes Fofas -->
@@ -81,19 +110,20 @@
         <i data-lucide="heart" class="absolute top-4 left-6 w-12 h-12 text-white/20 rotate-12 fill-white/20 animate-float"></i>
         <i data-lucide="palette" class="absolute bottom-2 right-12 w-10 h-10 text-yellow-300/40 fill-yellow-300/40 -rotate-12 animate-float" style="animation-delay: 1s;"></i>
         <i data-lucide="sparkles" class="absolute top-8 right-1/4 w-8 h-8 text-white/30 animate-pulse"></i>
-        <i data-lucide="paw-print" class="absolute top-10 left-1/3 w-8 h-8 text-white/20 fill-white/20 rotate-12 animate-float" style="animation-delay: 0.5s;"></i>
-        <i data-lucide="paw-print" class="absolute bottom-4 left-[20%] w-6 h-6 text-pink-100/40 fill-pink-100/40 -rotate-45 animate-pulse" style="animation-delay: 1.5s;"></i>
-        <i data-lucide="paw-print" class="absolute top-4 right-[40%] w-10 h-10 text-white/10 fill-white/10 rotate-45 animate-float" style="animation-delay: 2s;"></i>
-        <i data-lucide="paw-print" class="absolute bottom-8 right-1/3 w-7 h-7 text-white/20 fill-white/20 rotate-[30deg] animate-pulse" style="animation-delay: 0.8s;"></i>
 
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10 text-center md:text-left">
             <div>
                 <h1 class="text-3xl md:text-5xl font-cute font-bold mb-1 drop-shadow-md tracking-wide">Planner da Taylise 🎀</h1>
                 <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Geografia • Ateliê • Tattoo • Social</p>
             </div>
-            <div id="cloud-status-indicator" class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center transition-all">
-                <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5">Status da Nuvem</p>
-                <p id="cloud-status-text" class="text-sm md:text-lg font-cute font-bold drop-shadow-sm flex items-center gap-1"><i data-lucide="cloud-snow" class="w-5 h-5"></i> A verificar...</p>
+            <div class="flex items-center gap-3">
+                <div id="cloud-status-indicator" class="bg-white/20 backdrop-blur-md px-4 py-2 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center transition-all">
+                    <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5">Segurança</p>
+                    <p id="cloud-status-text" class="text-xs md:text-sm font-cute font-bold drop-shadow-sm flex items-center gap-1"><i data-lucide="lock" class="w-4 h-4"></i> Protegido</p>
+                </div>
+                <button onclick="window.doLogout()" class="bg-white/20 hover:bg-white/30 backdrop-blur-md p-3 rounded-2xl border-2 border-white/40 shadow-inner text-white transition-colors" title="Sair da Conta">
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -114,17 +144,9 @@
         <div id="tab-resumo" class="tab-content animate-pop block">
             <div class="cute-card p-6 md:p-10 relative overflow-hidden bg-white mb-8">
                 <i data-lucide="star" class="absolute top-16 right-12 w-24 h-24 text-pink-300/20 fill-pink-300/20 animate-float z-0" style="animation-delay: 1s;"></i>
-                <i data-lucide="heart" class="absolute bottom-10 left-10 w-20 h-20 text-rose-300/20 fill-rose-300/20 -rotate-12 animate-pulse z-0"></i>
-                <i data-lucide="sparkles" class="absolute top-1/2 left-4 w-12 h-12 text-yellow-300/20 fill-yellow-300/20 animate-float z-0"></i>
                 <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-pink-300 to-purple-300"></div>
                 <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4 mt-2 relative z-10">
                     <h2 class="text-2xl md:text-3xl font-cute font-bold text-rose-700 flex items-center gap-2"><i data-lucide="calendar-heart" class="text-pink-400 w-8 h-8"></i> Calendário Mestre 🎀</h2>
-                    <div class="flex flex-wrap justify-center gap-2 bg-rose-50 px-4 py-2.5 rounded-2xl border border-rose-100 text-[10px] font-bold uppercase tracking-wider">
-                        <span class="text-red-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-400"></span> Estudos</span> 
-                        <span class="text-emerald-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Ateliê</span> 
-                        <span class="text-purple-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Tattoo</span> 
-                        <span class="text-fuchsia-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-fuchsia-400"></span> Social</span>
-                    </div>
                 </div>
                 
                 <div class="flex items-center justify-center gap-6 mb-6 relative z-10">
@@ -151,7 +173,6 @@
         <div id="tab-rotina" class="tab-content hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <div class="cute-card p-6 relative flex flex-col overflow-hidden">
-                    <i data-lucide="sparkles" class="absolute top-1/3 right-4 w-20 h-20 text-rose-300/20 fill-rose-300/20 animate-float z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-rose-300"></div>
                     <h3 class="font-cute text-rose-800 text-xl flex items-center gap-2 mb-4 relative z-10"><i data-lucide="list-todo" class="text-rose-400"></i> Tarefas de Hoje</h3>
                     <div class="flex flex-col gap-3 mb-4 bg-rose-50 p-4 rounded-2xl border border-rose-100 relative z-10">
@@ -161,18 +182,10 @@
                         </div>
                         <div class="flex flex-wrap gap-1.5 mt-1">
                             <button onclick="addQuickTask('🏋️‍♀️ Academia', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Academia</button>
-                            <button onclick="addQuickTask('🚶‍♀️ Caminhada', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Caminhada</button>
                             <button onclick="addQuickTask('🛒 Mercado', 'casa')" class="text-[10px] font-bold bg-white border border-amber-200 text-amber-600 px-3 py-1.5 rounded-lg hover:bg-amber-50 transition">Mercado</button>
-                            <button onclick="addQuickTask('🧹 Limpeza', 'casa')" class="text-[10px] font-bold bg-white border border-amber-200 text-amber-600 px-3 py-1.5 rounded-lg hover:bg-amber-50 transition">Limpeza</button>
-                            <button onclick="addQuickTask('💼 Trabalhar', 'trabalho')" class="text-[10px] font-bold bg-white border border-blue-200 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition">Trabalhar</button>
-                            <button onclick="addQuickTask('💻 Reunião', 'trabalho')" class="text-[10px] font-bold bg-white border border-blue-200 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition">Reunião</button>
-                            <button onclick="addQuickTask('📝 Escrever Artigo', 'estudos')" class="text-[10px] font-bold bg-white border border-red-200 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-50 transition">Escrever Artigo</button>
+                            <button onclick="addQuickTask('💻 Trabalhar', 'trabalho')" class="text-[10px] font-bold bg-white border border-blue-200 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-50 transition">Trabalhar</button>
                             <button onclick="addQuickTask('📚 Estudar', 'estudos')" class="text-[10px] font-bold bg-white border border-red-200 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-50 transition">Estudar</button>
-                            <button onclick="addQuickTask('🎬 Editar Vídeos', 'criacao')" class="text-[10px] font-bold bg-white border border-fuchsia-200 text-fuchsia-600 px-3 py-1.5 rounded-lg hover:bg-fuchsia-50 transition">Editar Vídeos</button>
-                            <button onclick="addQuickTask('📱 Publicar', 'criacao')" class="text-[10px] font-bold bg-white border border-fuchsia-200 text-fuchsia-600 px-3 py-1.5 rounded-lg hover:bg-fuchsia-50 transition">Publicar</button>
-                            <button onclick="addQuickTask('📸 Produzir Conteúdo', 'criacao')" class="text-[10px] font-bold bg-white border border-fuchsia-200 text-fuchsia-600 px-3 py-1.5 rounded-lg hover:bg-fuchsia-50 transition">Produzir Conteúdo</button>
-                            <button onclick="addQuickTask('🎨 Produção Artística', 'criacao')" class="text-[10px] font-bold bg-white border border-fuchsia-200 text-fuchsia-600 px-3 py-1.5 rounded-lg hover:bg-fuchsia-50 transition">Produção Artística</button>
-                            <button onclick="addQuickTask('💤 Folga', 'lazer')" class="text-[10px] font-bold bg-white border border-purple-200 text-purple-600 px-3 py-1.5 rounded-lg hover:bg-purple-50 transition">Folga</button>
+                            <button onclick="addQuickTask('🎨 Criar Conteúdo', 'criacao')" class="text-[10px] font-bold bg-white border border-fuchsia-200 text-fuchsia-600 px-3 py-1.5 rounded-lg hover:bg-fuchsia-50 transition">Criar</button>
                         </div>
                     </div>
                     <div id="task-list" class="flex flex-col gap-2 overflow-y-auto max-h-[300px] pr-1 flex-1 relative z-10"></div>
@@ -180,14 +193,9 @@
                 
                 <div class="flex flex-col gap-6">
                     <div class="cute-card p-6 flex flex-col items-center bg-white relative overflow-hidden">
-                        <i data-lucide="star" class="absolute top-4 right-6 w-14 h-14 text-yellow-300/30 fill-yellow-300/30 animate-pulse z-0"></i>
                         <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
                         <h3 class="font-cute text-rose-800 text-lg mb-3 flex items-center gap-2 relative z-10"><i data-lucide="timer" class="text-red-400"></i> Foco Pomodoro</h3>
                         <div class="text-5xl font-cute text-rose-500 mb-5 relative z-10" id="timer-display">25:00</div>
-                        <div class="flex gap-3 mb-5 relative z-10">
-                            <button onclick="setTimerMode('work')" id="btn-work" class="px-5 py-2 rounded-full text-xs font-bold bg-rose-100 text-rose-700">25m</button>
-                            <button onclick="setTimerMode('break')" id="btn-break" class="px-5 py-2 rounded-full text-xs font-bold bg-slate-50 text-slate-500">5m</button>
-                        </div>
                         <div class="flex gap-4 relative z-10">
                             <button onclick="toggleTimer()" id="btn-toggle" class="bg-red-300 hover:bg-red-400 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-md transition-colors"><i data-lucide="play" id="icon-toggle"></i></button>
                             <button onclick="resetTimer()" class="bg-pink-50 text-pink-500 hover:bg-pink-100 w-14 h-14 rounded-full flex items-center justify-center transition-colors"><i data-lucide="rotate-ccw"></i></button>
@@ -195,7 +203,6 @@
                     </div>
                     
                     <div class="cute-card p-4 relative flex-1 flex flex-col min-h-[140px] overflow-hidden">
-                        <i data-lucide="music" class="absolute bottom-4 right-4 w-16 h-16 text-yellow-400/20 fill-yellow-400/20 animate-float z-0"></i>
                         <div class="absolute top-0 left-0 w-full h-2 bg-yellow-200"></div>
                         <h3 class="font-cute text-rose-800 text-base mb-3 flex items-center gap-1 relative z-10"><i data-lucide="music" class="w-4 h-4 text-yellow-500"></i> Vibes 🎧</h3>
                         <div class="flex-1 w-full bg-pink-50 rounded-xl overflow-hidden border border-pink-100 h-full relative z-10">
@@ -206,7 +213,6 @@
             </div>
             
             <div class="cute-card p-6 md:p-8 bg-white mb-8 relative overflow-hidden">
-                <i data-lucide="heart" class="absolute top-10 right-10 w-24 h-24 text-purple-300/20 fill-purple-300/20 rotate-12 animate-float z-0"></i>
                 <div class="absolute top-0 left-0 w-full h-2 bg-purple-300"></div>
                 <h3 class="font-cute text-purple-800 text-xl flex items-center gap-2 mb-6 relative z-10"><i data-lucide="bar-chart-2" class="text-purple-400"></i> Resumo do Mês 🌸</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
@@ -219,54 +225,15 @@
         <!-- ABA 3: ESTUDOS -->
         <div id="tab-estudos" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] p-6 border-2 border-pink-100 shadow-lg mb-6 relative overflow-hidden cute-card">
-                <i data-lucide="book-heart" class="absolute top-6 right-[20%] w-32 h-32 text-pink-300/10 fill-pink-300/10 -rotate-12 animate-float z-0"></i>
                 <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-10">
                     <h2 class="text-2xl md:text-3xl font-cute text-rose-800 flex items-center gap-2"><i data-lucide="book-heart" class="text-red-400 w-7 h-7"></i> Minhas Disciplinas</h2>
-                    <div class="flex gap-3 text-[10px] font-bold uppercase bg-pink-50 px-4 py-2 rounded-xl border border-pink-100 shadow-sm">
-                        <a href="https://www.ufrgs.br/site/aluno/" target="_blank" class="text-blue-500 hover:text-blue-600 transition">Portal Aluno</a>
-                        <span class="text-pink-200">•</span>
-                        <a href="https://moodle.ufrgs.br" target="_blank" class="text-orange-500 hover:text-orange-600 transition">Moodle</a>
-                    </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
-                    <div data-class-name="Constituição e Tendências em Ed. Ciências" onclick="openNoteModal('Constituição e Tendências em Ed. Ciências')" class="class-card cursor-pointer bg-red-50 border-2 border-l-8 border-red-200 border-l-red-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-red-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-red-100 uppercase tracking-widest relative z-10">SEG • 14H - 17H</span>
-                        <h4 class="font-bold text-red-900 text-sm md:text-base leading-snug relative z-10">Constituição e Tendências em Ed. Ciências</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                        <i data-lucide="sparkles" class="absolute -bottom-2 -right-2 w-16 h-16 text-red-400/20 fill-red-400/20 transition-transform group-hover:scale-110"></i>
-                    </div>
-                    
-                    <div data-class-name="Conceitos Foucaultianos" onclick="openNoteModal('Conceitos Foucaultianos')" class="class-card cursor-pointer bg-rose-50 border-2 border-l-8 border-rose-200 border-l-rose-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-rose-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-rose-100 uppercase tracking-widest relative z-10">TER • 19H - 21H</span>
-                        <h4 class="font-bold text-rose-900 text-sm md:text-base leading-snug relative z-10">Conceitos Foucaultianos</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                        <i data-lucide="sparkles" class="absolute -bottom-2 -right-2 w-16 h-16 text-rose-400/20 fill-rose-400/20 transition-transform group-hover:scale-110"></i>
-                    </div>
-                    
-                    <div data-class-name="Conceitos Foucaultianos (Presencial)" onclick="openNoteModal('Conceitos Foucaultianos (Presencial)')" class="class-card cursor-pointer bg-rose-50 border-2 border-l-8 border-rose-200 border-l-rose-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-rose-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-rose-100 uppercase tracking-widest relative z-10">SÁB • 09H - 13H</span>
-                        <h4 class="font-bold text-rose-900 text-sm md:text-base leading-snug relative z-10">Conceitos Foucaultianos (Presencial)</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                        <i data-lucide="sparkles" class="absolute -bottom-2 -right-2 w-16 h-16 text-rose-400/20 fill-rose-400/20 transition-transform group-hover:scale-110"></i>
-                    </div>
-                    
-                    <div data-class-name="História e Fund. da Geografia" onclick="openNoteModal('História e Fund. da Geografia')" class="class-card cursor-pointer bg-white border-2 border-l-8 border-pink-100 border-l-pink-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg w-max mb-2 border border-pink-100 uppercase tracking-widest relative z-10">QUA • 18:30</span>
-                        <h4 class="font-bold text-pink-900 text-sm md:text-base leading-snug relative z-10">História e Fundamentos da Geografia</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                    </div>
-                    
-                    <div data-class-name="Geografia Cultural" onclick="openNoteModal('Geografia Cultural')" class="class-card cursor-pointer bg-white border-2 border-l-8 border-pink-100 border-l-pink-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg w-max mb-2 border border-pink-100 uppercase tracking-widest relative z-10">QUI • 18:30</span>
-                        <h4 class="font-bold text-pink-900 text-sm md:text-base leading-snug relative z-10">Geografia Cultural</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                    </div>
-                    
-                    <div data-class-name="Geografia da América Latina" onclick="openNoteModal('Geografia da América Latina')" class="class-card cursor-pointer bg-white border-2 border-l-8 border-pink-100 border-l-pink-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg w-max mb-2 border border-pink-100 uppercase tracking-widest relative z-10">SEX • 18:30</span>
-                        <h4 class="font-bold text-pink-900 text-sm md:text-base leading-snug relative z-10">Geografia da América Latina</h4>
+                    <div data-class-name="Geografia" onclick="openNoteModal('Geografia')" class="class-card cursor-pointer bg-red-50 border-2 border-l-8 border-red-200 border-l-red-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
+                        <span class="text-[9px] font-bold text-red-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-red-100 uppercase tracking-widest relative z-10">Exemplo 1</span>
+                        <h4 class="font-bold text-red-900 text-sm md:text-base leading-snug relative z-10">Geografia</h4>
                         <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
                     </div>
                 </div>
@@ -275,7 +242,6 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Leituras -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
-                    <i data-lucide="star" class="absolute bottom-4 right-4 w-16 h-16 text-pink-400/10 fill-pink-400/10 animate-pulse z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-pink-400"></div>
                     <h3 class="text-xl font-cute text-rose-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="book-open" class="text-pink-500"></i> Leituras 📖</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-pink-50 p-3 rounded-xl border border-pink-100 z-20">
@@ -283,7 +249,6 @@
                         <div class="flex gap-2">
                             <select id="new-reading-type" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-rose-700">
                                 <option value="Livro">Livro</option>
-                                <option value="Capítulo">Capítulo</option>
                                 <option value="Artigo">Artigo</option>
                             </select>
                             <button onclick="addReading()" class="bg-pink-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm"><i data-lucide="plus"></i></button>
@@ -294,17 +259,12 @@
                 
                 <!-- Aulas Extras -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
-                    <i data-lucide="sparkles" class="absolute top-4 right-4 w-16 h-16 text-blue-400/10 fill-blue-400/10 animate-float z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-blue-400"></div>
                     <h3 class="text-xl font-cute text-blue-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="pencil" class="text-blue-500"></i> Aulas Extras 📝</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-blue-50 p-3 rounded-xl border border-blue-100 z-20">
                         <input type="text" id="new-study-title" placeholder="Nome (Ex: Curso Inglês)" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
                         <div class="flex gap-2">
                             <input type="date" id="new-study-date" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-slate-600">
-                            <input type="time" id="new-study-time" class="w-28 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-slate-600">
-                        </div>
-                        <div class="flex gap-2">
-                            <input type="text" id="new-study-repeat" placeholder="Repete? (Ex: Toda Ter/Qui)" class="flex-1 bg-white rounded-lg p-2.5 text-xs font-bold border outline-none text-slate-500">
                             <button onclick="addExtraStudy()" class="bg-blue-500 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center"><i data-lucide="plus"></i></button>
                         </div>
                     </div>
@@ -316,11 +276,7 @@
         <!-- ABA 4: ATELIÊ VENDAS INTELIGENTES -->
         <div id="tab-loja" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] border-2 border-emerald-100 shadow-lg p-6 md:p-8 mb-6 relative overflow-hidden cute-card">
-                <i data-lucide="palette" class="absolute top-1/2 right-10 w-32 h-32 text-emerald-400/10 fill-emerald-400/10 rotate-12 animate-float z-0"></i>
-                <i data-lucide="sparkles" class="absolute bottom-10 left-10 w-20 h-20 text-emerald-300/20 fill-emerald-300/20 animate-pulse z-0"></i>
-
                 <h2 class="text-2xl md:text-3xl font-cute text-emerald-800 mb-6 flex items-center gap-2 relative z-10">Meu Ateliê 🏺🎨</h2>
-                
                 <div class="bg-emerald-50 border border-emerald-100 rounded-3xl p-5 mb-8 relative z-10">
                     <div class="flex flex-col md:flex-row gap-3">
                         <div class="flex-1">
@@ -333,10 +289,6 @@
                                 <option value="encomenda">Encomenda</option>
                                 <option value="colecao">Coleção</option>
                             </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-emerald-700 uppercase mb-1">Prazo</label>
-                            <input type="date" id="prod-date" class="w-full bg-white rounded-xl p-3 border border-emerald-200 outline-none font-bold text-emerald-900">
                         </div>
                         <div class="flex items-end">
                             <button onclick="addProduction()" class="h-[50px] bg-emerald-400 hover:bg-emerald-500 text-white px-6 rounded-xl font-bold shadow-md transition-colors"><i data-lucide="plus"></i></button>
@@ -355,14 +307,13 @@
                     </div>
                     <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 min-h-[250px] flex flex-col relative overflow-hidden shadow-sm">
                         <div class="absolute top-0 left-0 w-full h-1 bg-emerald-300"></div>
-                        <h3 class="font-cute text-emerald-700 text-center uppercase text-xs mb-4 pt-1">Pronto & Estoque 🎀</h3>
+                        <h3 class="font-cute text-emerald-700 text-center uppercase text-xs mb-4 pt-1">Pronto 🎀</h3>
                         <div id="prod-col-done" class="flex flex-col gap-3 flex-1"></div>
                     </div>
                 </div>
             </div>
             
             <div class="cute-card p-6 bg-yellow-50 border-yellow-100 mb-8 relative overflow-hidden">
-                <i data-lucide="star" class="absolute top-6 right-6 w-16 h-16 text-yellow-400/20 fill-yellow-400/20 animate-pulse z-0"></i>
                 <h3 class="font-cute text-yellow-800 text-lg mb-3 flex items-center gap-2 z-20 relative"><i data-lucide="sticky-note" class="text-yellow-400"></i> Notas do Ateliê</h3>
                 <textarea id="store-notes" oninput="saveStoreNotes()" rows="3" class="w-full bg-white border border-yellow-200 rounded-2xl p-4 outline-none resize-none font-bold text-yellow-900 text-sm placeholder-yellow-400 z-20 relative" placeholder="Anotar fornecedores de argila, tintas, embalagens..."></textarea>
             </div>
@@ -375,7 +326,6 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <!-- Agenda -->
                 <div class="bg-white rounded-[2rem] border-2 border-purple-100 shadow-lg p-6 flex flex-col cute-card overflow-hidden">
-                    <i data-lucide="heart" class="absolute bottom-10 right-10 w-28 h-28 text-purple-300/20 fill-purple-300/20 -rotate-12 animate-float z-0"></i>
                     <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10">Agenda Oficial 📅</h3>
                     <div class="bg-purple-50 p-5 rounded-3xl mb-4 border border-purple-100 z-20">
                         <div class="flex flex-col gap-3 mb-3">
@@ -407,16 +357,11 @@
                 <div class="flex flex-col gap-6">
                     <!-- CRM Clientes -->
                     <div class="cute-card p-6 border-pink-100 bg-white relative overflow-hidden">
-                        <i data-lucide="sparkles" class="absolute top-4 right-4 w-12 h-12 text-pink-300/20 fill-pink-300/20 animate-pulse z-0"></i>
                         <div class="absolute top-0 left-0 w-full h-2 bg-pink-300"></div>
-                        <h3 class="font-cute text-rose-800 text-lg mb-4 flex items-center gap-2 relative z-20"><i data-lucide="users" class="text-pink-400"></i> Meus Clientes (CRM) 🫂</h3>
+                        <h3 class="font-cute text-rose-800 text-lg mb-4 flex items-center gap-2 relative z-20"><i data-lucide="users" class="text-pink-400"></i> Meus Clientes 🫂</h3>
                         <div class="bg-pink-50 p-4 rounded-2xl mb-4 border border-pink-100 z-20 relative">
                             <input type="text" id="crm-name" placeholder="Nome Completo" class="w-full mb-2 bg-white border border-pink-200 rounded-xl p-2.5 outline-none font-bold text-rose-800 text-sm">
-                            <div class="flex gap-2 mb-2">
-                                <input type="text" id="crm-ig" placeholder="@Instagram" class="flex-1 bg-white border border-pink-200 rounded-xl p-2.5 outline-none font-bold text-rose-800 text-sm">
-                                <button onclick="addClient()" class="bg-pink-400 text-white px-5 rounded-xl font-bold shadow-sm hover:bg-pink-500"><i data-lucide="plus"></i></button>
-                            </div>
-                            <input type="text" id="crm-notes" placeholder="Alergias, Preferência de Estilo, etc..." class="w-full bg-white border border-pink-200 rounded-xl p-2.5 outline-none font-bold text-slate-500 text-xs">
+                            <button onclick="addClient()" class="w-full bg-pink-400 text-white py-2 rounded-xl font-bold shadow-sm hover:bg-pink-500">Adicionar Cliente</button>
                         </div>
                         <div id="crm-list" class="flex flex-col gap-2 overflow-y-auto max-h-[180px] pr-1 z-20 relative"></div>
                     </div>
@@ -424,7 +369,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Promos -->
                         <div class="cute-card p-5 bg-amber-50 border-amber-100 flex flex-col">
-                            <h3 class="font-cute text-amber-800 mb-3 flex items-center gap-2 z-20 relative"><i data-lucide="tag" class="w-5 h-5"></i> Flash & Promos 🏷️</h3>
+                            <h3 class="font-cute text-amber-800 mb-3 flex items-center gap-2 z-20 relative"><i data-lucide="tag" class="w-5 h-5"></i> Promos 🏷️</h3>
                             <div class="flex gap-2 mb-4 z-20 relative">
                                 <input type="text" id="promo-name" placeholder="Ex: Mês da Mulher" class="flex-1 bg-white border border-amber-200 rounded-xl p-2 outline-none font-bold text-amber-800 text-xs">
                                 <button onclick="addPromo()" class="bg-amber-400 text-white px-3 rounded-xl hover:bg-amber-500"><i data-lucide="plus" class="w-4 h-4"></i></button>
@@ -450,8 +395,6 @@
         <!-- ABA 6: INSTAGRAM & SOCIAL -->
         <div id="tab-instagram" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] border-2 border-fuchsia-100 shadow-lg p-6 md:p-8 mb-8 relative overflow-hidden cute-card">
-                <i data-lucide="star" class="absolute bottom-10 left-10 w-24 h-24 text-fuchsia-400/10 fill-fuchsia-400/10 rotate-45 animate-float z-0"></i>
-
                 <h2 class="text-2xl md:text-3xl font-cute text-fuchsia-800 mb-6 relative z-10 flex items-center gap-2"><i data-lucide="camera" class="w-8 h-8 text-fuchsia-500"></i> Social Media 📸</h2>
                 
                 <div class="bg-fuchsia-50 border border-fuchsia-100 rounded-3xl p-5 mb-8 relative z-10">
@@ -465,12 +408,7 @@
                             <select id="insta-type" class="w-full bg-white border border-fuchsia-200 rounded-xl p-3 outline-none font-bold text-fuchsia-800 text-sm">
                                 <option value="Reels">Reels / TikTok</option>
                                 <option value="Carrossel">Carrossel / Foto</option>
-                                <option value="YouTube">YouTube</option>
                             </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-fuchsia-700 uppercase mb-1">Data</label>
-                            <input type="date" id="insta-date" class="w-full bg-white border border-fuchsia-200 rounded-xl p-3 outline-none font-bold text-fuchsia-800 text-sm">
                         </div>
                         <div class="flex items-end">
                             <button onclick="addInstaPost()" class="h-[50px] bg-fuchsia-400 hover:bg-fuchsia-500 text-white px-6 rounded-xl font-bold shadow-md transition-colors"><i data-lucide="plus"></i></button>
@@ -484,10 +422,6 @@
                     <div class="bg-purple-50 border border-purple-100 rounded-2xl p-4 flex flex-col min-h-[150px]"><h3 class="font-cute text-purple-700 text-center uppercase text-xs mb-3">Editando ✂️</h3><div id="insta-col-editando" class="flex flex-col gap-2 flex-1"></div></div>
                     <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex flex-col min-h-[150px]"><h3 class="font-cute text-emerald-700 text-center uppercase text-xs mb-3">Postado ✨</h3><div id="insta-col-publicado" class="flex flex-col gap-2 flex-1"></div></div>
                 </div>
-            </div>
-            <div class="cute-card p-6 bg-fuchsia-50 border-fuchsia-100 mb-8">
-                <h3 class="font-cute text-fuchsia-800 text-lg mb-3 flex items-center gap-2 z-20 relative"><i data-lucide="sticky-note" class="text-fuchsia-400"></i> Roteiros & Inspirações</h3>
-                <textarea id="insta-notes" oninput="saveInstaNotes()" rows="4" class="w-full bg-white border border-fuchsia-200 rounded-2xl p-4 outline-none resize-none font-bold text-fuchsia-900 text-sm placeholder-fuchsia-300 z-20 relative" placeholder="Anote ideias de trends..."></textarea>
             </div>
         </div>
 
@@ -512,26 +446,22 @@
                     <p id="fin-saldo-new" class="text-xl md:text-2xl font-bold relative z-20 text-emerald-600">R$ 0,00</p>
                 </div>
                 <div class="glass p-5 rounded-3xl border border-emerald-100 relative overflow-hidden shadow-sm cute-card">
-                    <i data-lucide="trending-up" class="absolute -right-4 -bottom-4 w-20 h-20 text-teal-500/10 z-10"></i>
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 relative z-20">Entradas</p>
                     <p id="fin-in-new" class="text-lg md:text-xl font-bold text-teal-600 relative z-20">R$ 0,00</p>
                 </div>
                 <div class="glass-rose p-5 rounded-3xl relative overflow-hidden shadow-sm border border-rose-100 cute-card">
-                    <i data-lucide="trending-down" class="absolute -right-4 -bottom-4 w-20 h-20 text-rose-500/10 z-10"></i>
-                    <p class="text-[10px] font-bold text-rose-800/60 uppercase tracking-widest mb-1 relative z-20">Saídas (PIX/Dinheiro)</p>
+                    <p class="text-[10px] font-bold text-rose-800/60 uppercase tracking-widest mb-1 relative z-20">Saídas (PIX)</p>
                     <p id="fin-out-new" class="text-lg md:text-xl font-bold text-rose-600 relative z-20">R$ 0,00</p>
                 </div>
                 <div class="glass p-5 rounded-3xl relative overflow-hidden shadow-sm border border-amber-100 cute-card">
-                    <i data-lucide="credit-card" class="absolute -right-4 -bottom-4 w-20 h-20 text-amber-500/10 z-10"></i>
-                    <p class="text-[10px] font-bold text-amber-700/60 uppercase tracking-widest mb-1 relative z-20">Fatura Cartão</p>
+                    <p class="text-[10px] font-bold text-amber-700/60 uppercase tracking-widest mb-1 relative z-20">Cartão</p>
                     <p id="fin-total-cc" class="text-lg md:text-xl font-bold text-amber-600 relative z-20">R$ 0,00</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div class="lg:col-span-2 glass rounded-3xl p-6 border border-emerald-100 flex flex-col shadow-sm relative overflow-hidden">
-                    <i data-lucide="heart" class="absolute top-10 right-10 w-28 h-28 text-emerald-400/10 fill-emerald-400/10 rotate-12 animate-float z-0"></i>
-                    <h3 class="font-cute text-emerald-800 text-lg mb-4 flex items-center gap-2 border-b border-emerald-50 pb-3 relative z-10"><i data-lucide="pie-chart" class="w-5 h-5 text-emerald-400"></i> Despesas por Categoria</h3>
+                    <h3 class="font-cute text-emerald-800 text-lg mb-4 flex items-center gap-2 border-b border-emerald-50 pb-3 relative z-10"><i data-lucide="pie-chart" class="w-5 h-5 text-emerald-400"></i> Categorias</h3>
                     <div id="finance-categories" class="flex flex-col gap-4 flex-1 overflow-y-auto max-h-[300px] pr-2 hide-scrollbar relative z-10"></div>
                 </div>
                 <div class="lg:col-span-3 glass rounded-3xl p-6 border border-emerald-100 flex flex-col shadow-sm">
@@ -553,82 +483,41 @@
         <button onclick="switchTab('financas')" id="mob-btn-financas" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="wallet"></i><span class="text-[9px] font-bold">Finanças</span></button>
     </nav>
 
-    <!-- MODAIS -->
-    <!-- Modal Estudos Popup -->
+    <!-- MODAIS (REDUZIDOS PARA POUPAR ESPAÇO) -->
     <div id="note-modal" onclick="closeNoteModal(event)" class="fixed inset-0 bg-pink-900/40 backdrop-blur-sm z-[150] hidden flex items-center justify-center p-4">
         <div onclick="event.stopPropagation()" class="bg-white rounded-[2rem] w-full max-w-md flex flex-col overflow-hidden border-2 border-pink-100 shadow-2xl max-h-[90vh]">
-            <div class="p-5 border-b flex justify-between items-center bg-pink-50/50">
-                <h3 id="modal-class-title" class="font-cute text-rose-900 text-lg truncate">Disciplina</h3>
-                <button type="button" onclick="closeNoteModal()" class="text-pink-400 p-2 bg-white rounded-full shadow-sm"><i data-lucide="x" class="w-4 h-4"></i></button>
-            </div>
-            <div class="p-6 modal-body bg-white overflow-y-auto hide-scrollbar">
-                <div id="modal-schedule-container" class="mb-5 hidden"><label class="text-[10px] font-bold text-rose-800 uppercase block mb-2"><i data-lucide="map" class="w-3 h-3 inline"></i> Cronograma de Aulas</label><div id="modal-schedule-grid" class="grid grid-cols-2 gap-2"></div></div>
-                <div class="mb-5 bg-blue-50 p-4 rounded-2xl border border-blue-100">
-                    <label class="text-[10px] font-bold text-blue-800 uppercase block mb-2"><i data-lucide="link" class="w-3 h-3 inline"></i> Links da Disciplina</label>
-                    <div class="flex flex-col gap-2">
-                        <div class="flex gap-2"><input type="url" id="modal-link-moodle" placeholder="Link Moodle" class="flex-1 bg-white rounded-lg p-2.5 font-bold text-xs border outline-none"><button type="button" onclick="openModalLink('moodle')" class="bg-blue-400 hover:bg-blue-500 text-white px-3 rounded-lg text-xs font-bold shadow-sm transition">Abrir</button></div>
-                        <div class="flex gap-2"><input type="url" id="modal-link-aula" placeholder="Aula Online" class="flex-1 bg-white rounded-lg p-2.5 font-bold text-xs border outline-none"><button type="button" onclick="openModalLink('aula')" class="bg-blue-400 hover:bg-blue-500 text-white px-3 rounded-lg text-xs font-bold shadow-sm transition">Abrir</button></div>
-                    </div>
-                </div>
-                <div class="mb-5 bg-rose-50 p-4 rounded-2xl border border-rose-100">
-                    <label class="text-[10px] font-bold text-rose-800 uppercase block mb-2"><i data-lucide="calendar-check" class="w-3 h-3 inline"></i> Provas e Trabalhos</label>
-                    <div class="flex flex-col gap-2 mb-3">
-                        <input list="event-types" id="modal-event-name" placeholder="Ex: Prova 1" class="w-full bg-white rounded-lg p-2.5 font-bold text-sm border outline-none">
-                        <datalist id="event-types"><option value="Prova 1"></option><option value="Prova 2"></option><option value="Trabalho Final"></option><option value="Fichamento"></option><option value="Seminário"></option><option value="Apresentação"></option></datalist>
-                        <div class="flex gap-2"><input type="date" id="modal-event-date" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none"><button type="button" onclick="addDisciplineEvent()" class="bg-rose-400 hover:bg-rose-500 text-white px-4 rounded-lg font-bold shadow-sm transition"><i data-lucide="plus" class="w-4 h-4"></i></button></div>
-                    </div>
-                    <div id="modal-events-list" class="flex flex-col gap-2"></div>
-                </div>
-                <label class="text-[10px] font-bold text-rose-800 uppercase block mb-2"><i data-lucide="file-edit" class="w-3 h-3 inline"></i> Anotações Gerais</label>
-                <textarea id="modal-textarea" rows="3" class="w-full bg-slate-50 rounded-xl p-3 outline-none font-bold text-slate-700 text-sm border border-slate-200"></textarea>
-            </div>
-            <div class="p-5 bg-pink-50 flex justify-end gap-3 border-t border-pink-100"><button onclick="closeNoteModal()" class="px-5 py-2 text-pink-700 font-bold text-sm bg-white rounded-xl">Cancelar</button><button onclick="saveNote()" class="px-6 py-2 bg-red-400 text-white rounded-xl font-bold shadow-md text-sm flex items-center gap-2"><i data-lucide="save" class="w-4 h-4"></i> Salvar Tudo</button></div>
+            <div class="p-5 border-b flex justify-between items-center bg-pink-50/50"><h3 id="modal-class-title" class="font-cute text-rose-900 text-lg">Disciplina</h3><button onclick="closeNoteModal()" class="text-pink-400"><i data-lucide="x"></i></button></div>
+            <div class="p-6 modal-body bg-white"><textarea id="modal-textarea" rows="4" class="w-full bg-slate-50 rounded-xl p-3 outline-none font-bold text-slate-700 border"></textarea></div>
+            <div class="p-5 bg-pink-50 flex justify-end gap-3"><button onclick="closeNoteModal()" class="px-5 py-2 font-bold bg-white rounded-xl">Cancelar</button><button onclick="saveNote()" class="px-6 py-2 bg-red-400 text-white rounded-xl font-bold">Salvar</button></div>
         </div>
     </div>
 
-    <!-- Modal Venda Ateliê Inteligente -->
     <div id="sell-modal" onclick="closeSellModal(event)" class="fixed inset-0 bg-emerald-900/60 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4">
         <div onclick="event.stopPropagation()" class="bg-white rounded-[2rem] w-full max-w-sm flex flex-col overflow-hidden border-2 border-emerald-100 shadow-2xl relative">
-            <div class="p-4 border-b flex justify-between items-center bg-emerald-50/50">
-                <h3 class="font-cute text-emerald-900 text-lg">Registrar Venda 💸</h3>
-                <button type="button" onclick="closeSellModal()" class="text-emerald-400 bg-white p-2 rounded-full shadow-sm"><i data-lucide="x" class="w-4 h-4"></i></button>
-            </div>
-            <div class="p-6 flex flex-col gap-4 bg-white">
-                <p id="sell-piece-name" class="font-cute text-emerald-800 text-center text-xl"></p>
-                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Valor da Peça (R$)</label><input type="number" id="sell-value" placeholder="0.00" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 outline-none font-bold text-slate-700"></div>
-                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Local da Venda</label><select id="sell-type" onchange="toggleSellOptions()" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 font-bold outline-none"><option value="fisica">Física (Presencial)</option><option value="online">Online (Envio)</option></select></div>
-                <div id="sell-opt-fisica" class="bg-emerald-50 p-4 rounded-xl border border-emerald-100"><label class="block text-[10px] font-bold text-emerald-700 uppercase mb-1">Embalagem de Presente?</label><select id="sell-pkg-fisica" class="w-full bg-white border border-emerald-200 rounded-lg p-2 font-bold text-xs outline-none"><option value="0">Sacola Simples (Grátis)</option><option value="5">Caixa Presente (+ R$ 5,00)</option></select></div>
-                <div id="sell-opt-online" class="hidden bg-blue-50 p-4 rounded-xl border border-blue-100 flex-col gap-3"><div><label class="block text-[10px] font-bold text-blue-700 uppercase mb-1">Frete Cobrado do Cliente (R$)</label><input type="number" id="sell-freight" placeholder="0.00" class="w-full bg-white border border-blue-200 rounded-lg p-2.5 font-bold text-sm outline-none"></div><div><label class="block text-[10px] font-bold text-blue-700 uppercase mb-1">Proteção Cerâmica</label><select id="sell-pkg-online" class="w-full bg-white border border-blue-200 rounded-lg p-2.5 font-bold text-xs outline-none"><option value="5">Bolha Padrão (+ R$ 5,00)</option><option value="10">Especial Reforçada (+ R$ 10,00)</option></select></div></div>
-            </div>
-            <div class="p-5 bg-emerald-50 flex justify-end gap-3 border-t border-emerald-100"><button onclick="closeSellModal()" class="px-5 py-2 text-emerald-700 font-bold text-sm bg-white rounded-xl">Cancelar</button><button onclick="confirmSale()" class="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold shadow-md flex items-center gap-2 text-sm transition"><i data-lucide="check" class="w-4 h-4"></i> Confirmar</button></div>
+            <div class="p-4 border-b flex justify-between items-center bg-emerald-50/50"><h3 class="font-cute text-emerald-900 text-lg">Registrar Venda 💸</h3><button onclick="closeSellModal()" class="text-emerald-400"><i data-lucide="x"></i></button></div>
+            <div class="p-6 bg-white"><p id="sell-piece-name" class="font-cute text-emerald-800 text-center text-xl mb-4"></p><input type="number" id="sell-value" placeholder="Valor (R$)" class="w-full bg-slate-50 rounded-xl p-3 outline-none font-bold mb-2"><select id="sell-type" class="w-full bg-slate-50 rounded-xl p-3 font-bold outline-none"><option value="fisica">Física</option><option value="online">Online</option></select></div>
+            <div class="p-5 bg-emerald-50 flex justify-end gap-3"><button onclick="confirmSale()" class="px-6 py-2 bg-emerald-500 text-white rounded-xl font-bold w-full">Confirmar</button></div>
         </div>
     </div>
 
-    <!-- Modal Nova Transação Finanças -->
     <div id="finance-modal" onclick="closeFinanceModal(event)" class="fixed inset-0 bg-emerald-900/40 backdrop-blur-sm z-[150] hidden flex items-center justify-center p-4">
         <div onclick="event.stopPropagation()" class="bg-white/90 glass rounded-[2.5rem] w-full max-w-md flex flex-col overflow-hidden border-2 border-emerald-100 shadow-2xl relative">
-            <div class="p-5 border-b border-emerald-100 flex justify-between items-center bg-white/50"><h3 class="font-cute text-emerald-900 text-xl flex items-center gap-2"><i data-lucide="piggy-bank" class="text-emerald-500"></i> Transação</h3><button type="button" onclick="closeFinanceModal()" class="text-slate-400 bg-white p-2 rounded-full shadow-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+            <div class="p-5 border-b border-emerald-100 flex justify-between items-center bg-white/50"><h3 class="font-cute text-emerald-900 text-xl">Transação</h3><button onclick="closeFinanceModal()" class="text-slate-400"><i data-lucide="x"></i></button></div>
             <div class="p-6 flex flex-col gap-4">
-                <div class="flex gap-3">
-                    <div class="flex-1"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Tipo</label><select id="new-fin-type" onchange="updateFinanceCategories(); togglePaymentMethod();" class="w-full bg-white rounded-xl p-3 outline-none font-bold text-slate-700 border border-slate-200"><option value="expense">Saída (-)</option><option value="income">Entrada (+)</option></select></div>
-                    <div class="flex-1"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Valor Total</label><input type="number" id="new-fin-amount" placeholder="0.00" step="0.01" class="w-full bg-white rounded-xl p-3 outline-none font-bold text-slate-700 border border-slate-200"></div>
-                </div>
-                <div class="flex gap-3" id="div-fin-payment-details">
-                    <div class="flex-1" id="div-fin-method"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Forma de Pagamento</label><select id="new-fin-method" onchange="toggleInstallments()" class="w-full bg-white rounded-xl p-3 font-bold border border-slate-200 outline-none"><option value="pix">PIX / Dinheiro</option><option value="cc">Cartão de Crédito</option></select></div>
-                    <div class="w-24 hidden" id="div-fin-installments"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Parcelas</label><select id="new-fin-installments" class="w-full bg-white rounded-xl p-3 font-bold border border-slate-200 outline-none"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option><option value="5">5x</option><option value="6">6x</option><option value="7">7x</option><option value="8">8x</option><option value="9">9x</option><option value="10">10x</option><option value="11">11x</option><option value="12">12x</option></select></div>
-                </div>
-                <div><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Descrição</label><input type="text" id="new-fin-desc" placeholder="Ex: Material / Fatura" class="w-full bg-white rounded-xl p-3 outline-none font-bold text-slate-700 border border-slate-200"></div>
-                <div class="flex gap-3"><div class="flex-1"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Categoria</label><input list="fin-categories" id="new-fin-cat" placeholder="Selecione" class="w-full bg-white rounded-xl p-3 font-bold border border-slate-200 outline-none"><datalist id="fin-categories"></datalist></div><div class="w-1/3"><label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Data</label><input type="date" id="new-fin-date" class="w-full bg-white rounded-xl p-3 outline-none font-bold text-slate-700 border border-slate-200 text-xs"></div></div>
+                <div class="flex gap-3"><select id="new-fin-type" onchange="updateFinanceCategories()" class="flex-1 bg-white rounded-xl p-3 font-bold border"><option value="expense">Saída (-)</option><option value="income">Entrada (+)</option></select><input type="number" id="new-fin-amount" placeholder="Valor" class="flex-1 bg-white rounded-xl p-3 font-bold border"></div>
+                <input type="text" id="new-fin-desc" placeholder="Descrição" class="w-full bg-white rounded-xl p-3 font-bold border">
+                <select id="new-fin-method" class="w-full bg-white rounded-xl p-3 font-bold border"><option value="pix">PIX / Dinheiro</option><option value="cc">Cartão de Crédito</option></select>
+                <div class="flex gap-3"><input list="fin-categories" id="new-fin-cat" placeholder="Categoria" class="flex-1 bg-white rounded-xl p-3 font-bold border"><datalist id="fin-categories"></datalist><input type="date" id="new-fin-date" class="w-1/3 bg-white rounded-xl p-3 font-bold border text-xs"></div>
             </div>
-            <div class="p-5 bg-white/50 flex justify-end gap-3 border-t border-emerald-100"><button onclick="closeFinanceModal()" class="px-5 py-2.5 text-slate-500 font-bold bg-white rounded-xl">Cancelar</button><button onclick="addTransaction()" class="px-6 py-2.5 bg-emerald-500 text-white rounded-xl font-bold shadow-md flex items-center gap-2"><i data-lucide="save" class="w-4 h-4"></i> Salvar</button></div>
+            <div class="p-5 bg-white/50 flex justify-end gap-3"><button onclick="addTransaction()" class="px-6 py-2.5 bg-emerald-500 text-white rounded-xl font-bold w-full">Salvar</button></div>
         </div>
     </div>
 
-    <!-- SCRIPTS DA NUVEM (NOVO SISTEMA ROBUSTO) -->
+    <!-- SCRIPTS DA NUVEM (AGORA COM EMAIL E SENHA) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         let db, auth, userId, appId;
         let isInitialized = false;
@@ -636,8 +525,7 @@
         window.appState = {
             personalTasks: [], taskLog: [], disciplineEvents: {}, extraStudies: [],
             productions: [], tattoos: [], instaPosts: [], readingList: [],
-            clients: [], promos: [], tattooInventory: [], finances: [],
-            notes: {} 
+            clients: [], promos: [], tattooInventory: [], finances: [], notes: {} 
         };
 
         window.lsGet = (k, d = []) => window.appState[k] !== undefined ? window.appState[k] : d;
@@ -646,95 +534,103 @@
             if (window.saveToCloud) window.saveToCloud();
         };
 
-        function updateCloudStatusUI(isWorking, message) {
-            const ind = document.getElementById('cloud-status-indicator');
-            const txt = document.getElementById('cloud-status-text');
-            if(isWorking) {
-                ind.className = "bg-emerald-500/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-emerald-400/50 shadow-inner flex flex-col justify-center items-center transition-all";
-                txt.innerHTML = '<i data-lucide="cloud-snow" class="w-5 h-5 text-emerald-200"></i> <span class="text-emerald-100">Sincronizado</span>';
-            } else {
-                ind.className = "bg-rose-500/80 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-rose-300 shadow-inner flex flex-col justify-center items-center transition-all";
-                txt.innerHTML = `<i data-lucide="cloud-off" class="w-5 h-5 text-white"></i> <span class="text-white">${message || 'Nuvem Desligada'}</span>`;
-            }
-            if(window.lucide) lucide.createIcons();
-        }
+        // CHAVE DA TAYLISE (Já configurada)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
+            authDomain: "meu-planner-bf562.firebaseapp.com",
+            projectId: "meu-planner-bf562",
+            storageBucket: "meu-planner-bf562.firebasestorage.app",
+            messagingSenderId: "778926180756",
+            appId: "1:778926180756:web:901c4e77278c09d004a781",
+            measurementId: "G-Y97D6CJREP"
+        };
 
-        // Função para libertar o ecrã se algo correr mal
-        function fallbackToLocalMode(errorMessage) {
-            console.error("Modo Local Ativado:", errorMessage);
-            updateCloudStatusUI(false, "Modo Local");
-            
-            // Tira a tela de carregamento imediatamente
-            document.getElementById('cloud-loading').style.opacity = '0';
-            setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
-            
-            // Puxa do localStorage antigo se tiver
-            let localSave = localStorage.getItem('backupPlannerNuvem');
-            if(localSave) window.appState = JSON.parse(localSave);
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        appId = typeof __app_id !== 'undefined' ? __app_id : 'meu-planner-nuvem';
 
-            // Passa a salvar localmente para não perder nada
-            window.saveToCloud = function() {
-                 localStorage.setItem('backupPlannerNuvem', JSON.stringify(window.appState));
-            }
-            if (!isInitialized) {
-                isInitialized = true;
-                if(window.renderAllApp) window.renderAllApp();
-            }
-        }
-
-        // Verifica se estamos no ambiente do Canvas ou fora dele
-        let firebaseConfig = null;
-        if (typeof __firebase_config !== 'undefined') {
-            firebaseConfig = JSON.parse(__firebase_config);
-        } else {
-            // Usa a sua chave apenas se não estiver no Canvas
-            firebaseConfig = {
-                apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
-                authDomain: "meu-planner-bf562.firebaseapp.com",
-                projectId: "meu-planner-bf562",
-                storageBucket: "meu-planner-bf562.firebasestorage.app",
-                messagingSenderId: "778926180756",
-                appId: "1:778926180756:web:901c4e77278c09d004a781",
-                measurementId: "G-Y97D6CJREP"
-            };
-        }
-
-        if (firebaseConfig) {
-            try {
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                appId = typeof __app_id !== 'undefined' ? __app_id : 'meu-planner-nuvem';
-
-                const initAuth = async () => {
-                    try {
-                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                            await signInWithCustomToken(auth, __initial_auth_token);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
-                    } catch (err) {
-                        console.error("Erro de Autenticação:", err);
-                        fallbackToLocalMode("Erro no Login. Ative o 'Anonymous' no Firebase.");
-                    }
-                };
+        // LÓGICA DE LOGIN E AUTENTICAÇÃO
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Utilizador logado! Esconder ecrã de login
+                userId = user.uid;
+                document.getElementById('login-screen').classList.add('hidden');
                 
-                initAuth();
-
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        listenToCloud();
-                    }
-                });
-            } catch(e) {
-                fallbackToLocalMode("Erro geral no Firebase.");
+                // Resgatar dados antigos do computador antes de ligar à nuvem (para não perder)
+                let localSave = localStorage.getItem('backupPlannerNuvem');
+                if(localSave) {
+                    try {
+                        let parsed = JSON.parse(localSave);
+                        if(parsed.personalTasks && parsed.personalTasks.length > 0) {
+                            window.appState = { ...window.appState, ...parsed };
+                            // Apaga do PC para não voltar a sobrepor no futuro
+                            localStorage.removeItem('backupPlannerNuvem'); 
+                            window.saveToCloud(); // Empurra logo para a nuvem
+                        }
+                    } catch(e) {}
+                }
+                
+                listenToCloud();
+            } else {
+                // Ninguém logado: Mostrar o Ecrã de Login
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('cloud-loading').classList.add('hidden');
             }
-        }
+        });
+
+        // Funções dos botões de Login e Registo
+        window.doLogin = async () => {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-pass').value;
+            const errP = document.getElementById('login-error');
+            if(!email || !pass) { errP.innerText = "Preencha o e-mail e palavra-passe."; errP.classList.remove('hidden'); return; }
+            
+            try {
+                errP.classList.add('hidden');
+                await signInWithEmailAndPassword(auth, email, pass);
+            } catch(e) {
+                errP.innerText = "Erro: E-mail ou palavra-passe incorretos.";
+                errP.classList.remove('hidden');
+            }
+        };
+
+        window.doSignup = async () => {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-pass').value;
+            const errP = document.getElementById('login-error');
+            
+            if(!email || pass.length < 6) { 
+                errP.innerText = "Insira um e-mail válido e uma palavra-passe de 6+ letras."; 
+                errP.classList.remove('hidden'); 
+                return; 
+            }
+            
+            try {
+                errP.classList.add('hidden');
+                await createUserWithEmailAndPassword(auth, email, pass);
+                alert("Conta criada com sucesso, Taylise! 🎀");
+            } catch(e) {
+                errP.innerText = "Erro ao criar conta (Email já existe?).";
+                errP.classList.remove('hidden');
+            }
+        };
+
+        window.doLogout = async () => {
+            if(confirm("Tem a certeza que deseja sair do seu Planner?")) {
+                document.getElementById('cloud-loading').classList.remove('hidden');
+                document.getElementById('cloud-loading-text').innerText = "A fechar a conta com segurança... 🔒";
+                await signOut(auth);
+                window.location.reload();
+            }
+        };
 
         function listenToCloud() {
             if (!userId || !db) return;
-            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data');
+            document.getElementById('cloud-loading').classList.remove('hidden');
+            
+            // Agora garantimos que o caminho do Firestore tem 6 segmentos (par), regra de segurança
+            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'planner_data', 'state');
 
             onSnapshot(docRef, (snapshot) => {
                 if (snapshot.exists()) {
@@ -743,33 +639,28 @@
                 
                 if (!isInitialized) {
                     isInitialized = true;
-                    document.getElementById('cloud-loading').style.opacity = '0';
-                    setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
-                    updateCloudStatusUI(true);
+                    document.getElementById('cloud-loading').classList.add('hidden');
                     if(window.renderAllApp) window.renderAllApp();
                 } else {
                     if(window.renderAllApp) window.renderAllApp();
                 }
             }, (error) => {
-                fallbackToLocalMode("Erro no Banco de Dados. Regras bloqueadas?");
+                console.error(error);
+                alert("Erro ao ler da nuvem. Atualize a página.");
             });
         }
 
         window.saveToCloud = function() {
             if (!userId || !db) return;
-            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data');
-            setDoc(docRef, window.appState).catch(e => {
-                updateCloudStatusUI(false, "Falha ao Salvar");
-            });
+            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'planner_data', 'state');
+            setDoc(docRef, window.appState).catch(e => console.error("Erro a salvar:", e));
         };
     </script>
 
     <!-- SCRIPTS GERAIS DO SEU PLANNER -->
     <script>
         function formatCurrency(v) { return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(v||0); }
-
-        let fMo = new Date(); 
-        let currMo = new Date(); 
+        let fMo = new Date(), currMo = new Date(); 
 
         window.switchTab = function(t) {
             ['resumo','rotina','estudos','loja','tattoo','instagram','financas'].forEach(x => {
@@ -784,13 +675,9 @@
             if(window.lucide) lucide.createIcons();
         }
 
-        // ==========================================
-        // CALENDÁRIO MESTRE
-        // ==========================================
         window.renderMasterCalendar = function() {
             document.getElementById('calendar-month-year').innerText = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][currMo.getMonth()] + " " + currMo.getFullYear();
             let evs = {}; const addEv = (d,t,y) => { if(d){evs[d]=evs[d]||[]; evs[d].push({title:t,type:y});} };
-            
             let de = lsGet('disciplineEvents',{}); Object.keys(de).forEach(c => de[c].forEach(e => addEv(e.date, `${c}: ${e.name}`, 'estudo')));
             lsGet('extraStudies').forEach(e => { if(e.date) addEv(e.date, `Extra: ${e.title}`, 'estudo'); });
             lsGet('productions').forEach(p => addEv(p.date, `Ateliê: ${p.name}`, 'loja'));
@@ -799,7 +686,6 @@
 
             let fd = new Date(currMo.getFullYear(), currMo.getMonth(), 1).getDay(), ld = new Date(currMo.getFullYear(), currMo.getMonth() + 1, 0).getDate();
             let html = ''; for(let i=0;i<fd;i++) html+='<div></div>';
-            
             let currentYearMo = `${currMo.getFullYear()}-${String(currMo.getMonth()+1).padStart(2,'0')}`;
             let monthEventsArr = [];
 
@@ -810,43 +696,26 @@
                 let dots='', tt='';
                 if(evs[k]) {
                     evs[k].forEach(ev => monthEventsArr.push({date: k, title: ev.title, type: ev.type}));
-                    dots=`<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">`+(evs[k].some(e=>e.type==='estudo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='loja')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='tattoo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-purple-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='insta')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-fuchsia-400 border border-white"></span>`:'')+`</div>`;
-                    tt=`<div class="cal-tooltip hidden absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[150px] md:max-w-[200px] bg-slate-800 text-white text-[9px] md:text-[10px] p-2 rounded-xl shadow-xl border border-slate-700 pointer-events-none z-[60]">`+evs[k].map(e=>`<div class="flex items-center gap-1.5 mb-1"><span class="w-1.5 h-1.5 rounded-full shrink-0 ${e.type==='estudo'?'bg-red-400':e.type==='loja'?'bg-emerald-400':e.type==='tattoo'?'bg-purple-400':'bg-fuchsia-400'}"></span><span class="truncate">${e.title}</span></div>`).join('')+`</div>`;
+                    dots=`<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">`+(evs[k].some(e=>e.type==='estudo')?`<span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>`:'')+(evs[k].some(e=>e.type==='loja')?`<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>`:'')+(evs[k].some(e=>e.type==='tattoo')?`<span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>`:'')+(evs[k].some(e=>e.type==='insta')?`<span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></span>`:'')+`</div>`;
                 }
-                html+=`<div class="py-1"><div class="${c}">${d}${dots}${tt}</div></div>`;
+                html+=`<div class="py-1"><div class="${c}">${d}${dots}</div></div>`;
             }
             document.getElementById('calendar-days').innerHTML = html;
-
-            monthEventsArr.sort((a,b)=>new Date(a.date)-new Date(b.date));
-            let sumList = document.getElementById('monthly-summary-list');
-            sumList.innerHTML = '';
-            if(monthEventsArr.length === 0) {
-                sumList.innerHTML = '<p class="text-sm text-pink-400 font-bold italic text-center py-4 bg-pink-50 rounded-2xl border border-pink-100">O mês está livre por enquanto! 🌸</p>';
-            } else {
-                monthEventsArr.forEach(e => {
-                    let badge = e.type==='estudo'?'bg-red-50 text-red-600 border-red-100':e.type==='loja'?'bg-emerald-50 text-emerald-600 border-emerald-100':e.type==='tattoo'?'bg-purple-50 text-purple-600 border-purple-100':'bg-fuchsia-50 text-fuchsia-600 border-fuchsia-100';
-                    sumList.innerHTML += `<div class="flex items-center gap-3 p-3.5 bg-white border border-pink-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow z-20 relative"><span class="text-[10px] font-bold uppercase tracking-widest ${badge} border px-2.5 py-1 rounded-lg shrink-0">${e.date.split('-').reverse().join('/')}</span><span class="text-sm font-bold text-rose-800 truncate">${e.title}</span></div>`;
-                });
-            }
         }
         window.prevMonth = function(){ currMo.setMonth(currMo.getMonth()-1); window.renderMasterCalendar(); }
         window.nextMonth = function(){ currMo.setMonth(currMo.getMonth()+1); window.renderMasterCalendar(); }
 
-        // ==========================================
-        // ROTINA E HÁBITOS
-        // ==========================================
         window.renderTasks = function() {
             let pts = lsGet('personalTasks'); const l = document.getElementById('task-list'); l.innerHTML='';
             if(!pts.length) { l.innerHTML='<p class="text-xs text-pink-400 font-bold text-center py-4">Nenhuma tarefa 🌸</p>'; return; }
             pts.sort((a,b)=>a.done-b.done).forEach(t => {
-                let c=t.type==='saude'?'bg-emerald-50 border-emerald-100 text-emerald-800':t.type==='trabalho'?'bg-blue-50 border-blue-100 text-blue-800':t.type==='casa'?'bg-amber-50 border-amber-100 text-amber-800':t.type==='estudos'?'bg-red-50 border-red-100 text-red-800':t.type==='criacao'?'bg-fuchsia-50 border-fuchsia-100 text-fuchsia-800':t.type==='lazer'?'bg-purple-50 border-purple-100 text-purple-800':'bg-white border-pink-100 text-rose-800';
-                l.innerHTML+=`<div class="flex items-center justify-between p-3 ${c} border rounded-2xl shadow-sm z-20 relative"><label class="flex items-center gap-3 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${t.id})" class="task-checkbox w-4 h-4 rounded text-rose-400 focus:ring-rose-400"><div class="text-sm font-bold truncate">${t.text}</div></label><div class="flex gap-1 ml-2"><button onclick="editTask(${t.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTask(${t.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
+                let c=t.type==='saude'?'bg-emerald-50 text-emerald-800':t.type==='trabalho'?'bg-blue-50 text-blue-800':'bg-white text-rose-800';
+                l.innerHTML+=`<div class="flex items-center justify-between p-3 ${c} border rounded-2xl shadow-sm z-20 relative"><label class="flex items-center gap-3 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${t.id})" class="task-checkbox w-4 h-4 rounded text-rose-400 focus:ring-rose-400"><div class="text-sm font-bold truncate">${t.text}</div></label><div class="flex gap-1 ml-2"><button onclick="deleteTask(${t.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
             }); 
             if(window.lucide) lucide.createIcons({root: l});
         }
         window.addTask = function() { let i=document.getElementById('new-task-input'); if(i.value.trim()){ window.addQuickTask(i.value.trim(),'geral'); i.value=''; } }
         window.addQuickTask = function(txt, typ) { let pt=lsGet('personalTasks'); pt.push({id:Date.now(), text:txt, type:typ, done:false}); lsSet('personalTasks',pt); window.renderTasks(); }
-        window.editTask = function(id) { let pt=lsGet('personalTasks'); let x=pt.find(t=>t.id===id); if(x){let n=prompt("Editar tarefa 🎀:",x.text); if(n){x.text=n; lsSet('personalTasks',pt); window.renderTasks();}} }
         window.deleteTask = function(id) { lsSet('personalTasks', lsGet('personalTasks').filter(t=>t.id!==id)); window.renderTasks(); }
         window.toggleTask = function(id) {
             let pt=lsGet('personalTasks'), log=lsGet('taskLog'); let x=pt.find(t=>t.id===id);
@@ -861,11 +730,8 @@
         window.renderRoutineChart = function() {
             let log=lsGet('taskLog'), pfx=new Date().toISOString().slice(0,7), cnts={};
             log.filter(l=>l.date&&l.date.startsWith(pfx)).forEach(l=>{cnts[l.text]=(cnts[l.text]||0)+1;});
-            let txt = document.getElementById('routine-summary-text');
-            if(!Object.keys(cnts).length) txt.innerHTML='<p class="text-xs font-bold text-pink-400 bg-pink-50 p-4 rounded-2xl border border-pink-100 text-center mt-2 z-20 relative">Faça check nas tarefas para ver seu progresso! ✨</p>';
-            else txt.innerHTML=Object.keys(cnts).map(k=>`<div class="bg-purple-50 p-2.5 rounded-xl border border-purple-100 text-purple-800 font-bold text-xs flex justify-between shadow-sm z-20 relative"><span class="truncate pr-2">${k}</span><span class="bg-purple-200 px-2 rounded-lg">${cnts[k]}x</span></div>`).join('');
             if(rcInst) rcInst.destroy();
-            rcInst=new Chart(document.getElementById('routineChart'), { type:'bar', data:{labels:Object.keys(cnts).length?Object.keys(cnts):[''],datasets:[{data:Object.keys(cnts).length?Object.values(cnts):[0],backgroundColor:['#f472b6','#34d399','#fbbf24','#818cf8','#d946ef'],borderRadius:8}]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{family:'Quicksand'}}},x:{ticks:{font:{family:'Quicksand'}},grid:{display:false}}}} });
+            rcInst=new Chart(document.getElementById('routineChart'), { type:'bar', data:{labels:Object.keys(cnts).length?Object.keys(cnts):[''],datasets:[{data:Object.keys(cnts).length?Object.values(cnts):[0],backgroundColor:['#f472b6','#34d399','#fbbf24','#818cf8','#d946ef'],borderRadius:8}]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}} });
         }
 
         let tmr, tL=25*60, iR=false, iW=true;
@@ -877,276 +743,78 @@
             if(window.lucide) lucide.createIcons();
         }
         window.resetTimer = function() { clearInterval(tmr); iR=false; tL=iW?25*60:5*60; window.updateTimerDisplay(); document.getElementById('icon-toggle').setAttribute('data-lucide','play'); if(window.lucide) lucide.createIcons(); }
-        window.setTimerMode = function(m) { iW=m==='work'; document.getElementById('btn-work').className=iW?"px-5 py-2 rounded-full text-xs font-bold bg-rose-100 text-rose-700 transition":"px-5 py-2 rounded-full text-xs font-bold bg-slate-50 text-slate-500 transition"; document.getElementById('btn-break').className=!iW?"px-5 py-2 rounded-full text-xs font-bold bg-rose-100 text-rose-700 transition":"px-5 py-2 rounded-full text-xs font-bold bg-slate-50 text-slate-500 transition"; window.resetTimer(); }
+        window.setTimerMode = function(m) { iW=m==='work'; window.resetTimer(); }
 
-        // ==========================================
-        // ESTUDOS
-        // ==========================================
         let cec = '';
-        window.openNoteModal = function(c) {
-            cec = c; document.getElementById('modal-class-title').innerText = c;
-            let sg=document.getElementById('modal-schedule-grid'); sg.innerHTML='';
-            let sch = {'Constituição e Tendências em Ed. Ciências':[{d:'02/03',t:'Presencial'},{d:'16/03',t:'Online'},{d:'30/03',t:'Online'},{d:'13/04',t:'Online'},{d:'27/04',t:'Online'},{d:'11/05',t:'Online'},{d:'25/05',t:'Online'},{d:'15/06',t:'Presencial'},{d:'29/06',t:'Presencial'}],'Conceitos Foucaultianos':[{d:'24/03',t:'Online'},{d:'31/03',t:'Online'},{d:'07/04',t:'Online'},{d:'14/04',t:'Online'},{d:'21/04',t:'Online'},{d:'28/04',t:'Online'},{d:'05/05',t:'Online'},{d:'12/05',t:'Online'},{d:'19/05',t:'Online'},{d:'26/05',t:'Online'},{d:'02/06',t:'Online'},{d:'23/06',t:'Online'}],'Conceitos Foucaultianos (Presencial)':[{d:'21/03',t:'Presencial'},{d:'20/06',t:'Presencial'}]};
-            if(sch[c]) { document.getElementById('modal-schedule-container').classList.remove('hidden'); sch[c].forEach(i=>{ sg.innerHTML+=`<div class="flex justify-between items-center p-2.5 rounded-xl border shadow-sm ${i.t.toLowerCase()==='online'?'bg-blue-50 text-blue-700 border-blue-200':'bg-rose-50 text-rose-700 border-rose-200'} text-xs font-extrabold"><span>${i.d}</span><span class="flex items-center gap-1 uppercase text-[9px]"><i data-lucide="${i.t.toLowerCase()==='online'?'laptop':'map-pin'}" class="w-3 h-3"></i> ${i.t}</span></div>`;}); }
-            else document.getElementById('modal-schedule-container').classList.add('hidden');
-            
-            let notes = lsGet('notes', {});
-            document.getElementById('modal-link-moodle').value = notes['moodle_'+c] || ''; 
-            document.getElementById('modal-link-aula').value = notes['classlink_'+c] || ''; 
-            document.getElementById('modal-textarea').value = notes['note_'+c] || '';
-            
-            window.renderDisciplineEvents(); document.getElementById('note-modal').classList.remove('hidden'); if(window.lucide) lucide.createIcons();
-        }
-        window.closeNoteModal = function(e) { if(e&&e.target!==e.currentTarget)return; document.getElementById('note-modal').classList.add('hidden'); }
-        window.openModalLink = function(t) { let l=document.getElementById(t==='moodle'?'modal-link-moodle':'modal-link-aula').value; if(l) window.open(l.startsWith('http')?l:'https://'+l,'_blank'); }
-        window.renderDisciplineEvents = function() {
-            let evs=lsGet('disciplineEvents',{}); let l=document.getElementById('modal-events-list'); l.innerHTML='';
-            (evs[cec]||[]).sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(e=>{ l.innerHTML+=`<div class="flex justify-between items-center bg-white p-3 rounded-xl border border-rose-100 shadow-sm"><div class="overflow-hidden"><span class="text-[9px] font-black bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded uppercase tracking-widest">${e.date?new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR'):'-'}</span><h4 class="font-black text-rose-900 text-xs mt-1 truncate">${e.name}</h4></div><button type="button" onclick="deleteDisciplineEvent(${e.id})" class="text-rose-300 hover:text-red-500 p-1.5"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; }); if(window.lucide) lucide.createIcons({root:l});
-        }
-        window.addDisciplineEvent = function() { let n=document.getElementById('modal-event-name').value.trim(), d=document.getElementById('modal-event-date').value; if(!n||!d)return; let evs=lsGet('disciplineEvents',{}); evs[cec]=evs[cec]||[]; evs[cec].push({id:Date.now(),name:n,date:d}); lsSet('disciplineEvents',evs); document.getElementById('modal-event-name').value=''; document.getElementById('modal-event-date').value=''; window.renderDisciplineEvents(); window.renderMasterCalendar(); window.updateClassCards(); }
-        window.deleteDisciplineEvent = function(id) { let evs=lsGet('disciplineEvents',{}); evs[cec]=evs[cec].filter(e=>e.id!==id); lsSet('disciplineEvents',evs); window.renderDisciplineEvents(); window.renderMasterCalendar(); window.updateClassCards(); }
-        window.saveNote = function() {
-            let n=document.getElementById('modal-textarea').value.trim(), m=document.getElementById('modal-link-moodle').value.trim(), a=document.getElementById('modal-link-aula').value.trim();
-            let notes = lsGet('notes', {});
-            if(n) notes['note_'+cec]=n; else delete notes['note_'+cec];
-            if(m) notes['moodle_'+cec]=m; else delete notes['moodle_'+cec];
-            if(a) notes['classlink_'+cec]=a; else delete notes['classlink_'+cec];
-            lsSet('notes', notes);
-            window.closeNoteModal(); window.renderMasterCalendar();
-        }
-        window.updateClassCards = function() {
-            let evs = lsGet('disciplineEvents', {});
-            document.querySelectorAll('.class-card').forEach(card => {
-                let cName = card.getAttribute('data-class-name');
-                let alertsContainer = card.querySelector('.event-alerts');
-                if (!alertsContainer) {
-                    alertsContainer = document.createElement('div');
-                    alertsContainer.className = 'event-alerts mt-2 flex flex-col gap-1 relative z-20 w-full';
-                    card.appendChild(alertsContainer);
-                }
-                alertsContainer.innerHTML = '';
-                if (evs[cName] && evs[cName].length > 0) {
-                    let sortedEvs = [...evs[cName]].sort((a,b) => new Date(a.date) - new Date(b.date));
-                    sortedEvs.slice(0, 2).forEach(e => {
-                        let dStr = e.date ? new Date(e.date+'T00:00:00').toLocaleDateString('pt-BR').substring(0,5) : '';
-                        alertsContainer.innerHTML += `<div class="bg-red-100 text-red-700 text-[9px] font-bold px-2 py-1.5 rounded-lg border border-red-200 flex items-center justify-between w-full shadow-sm"><span class="truncate pr-1">⚠️ ${e.name}</span><span class="shrink-0 font-black">${dStr}</span></div>`;
-                    });
-                }
-            });
-        }
-
-        window.renderReadingList = function() {
-            let r=lsGet('readingList'); let c=document.getElementById('reading-list-container'); c.innerHTML='';
-            if(!r.length) { c.innerHTML='<p class="text-xs text-pink-400 font-bold z-20 relative">Nenhuma leitura 🎀</p>'; return; }
-            r.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleReadingDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-rose-900">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); if(window.lucide) lucide.createIcons({root: c});
-        }
-        window.addReading = function() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,done:false}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; window.renderReadingList(); } }
-        window.toggleReadingDone = function(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('readingList',r);window.renderReadingList();}}
-        window.deleteReading = function(id){lsSet('readingList',lsGet('readingList').filter(x=>x.id!==id));window.renderReadingList();}
-        window.editReading = function(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Leitura:",i.title);if(n){i.title=n;lsSet('readingList',r);window.renderReadingList();}}}
+        window.openNoteModal = function(c) { cec = c; document.getElementById('modal-class-title').innerText = c; document.getElementById('modal-textarea').value = lsGet('notes',{})['note_'+c] || ''; document.getElementById('note-modal').classList.remove('hidden'); }
+        window.closeNoteModal = function() { document.getElementById('note-modal').classList.add('hidden'); }
+        window.saveNote = function() { let n=document.getElementById('modal-textarea').value.trim(); let notes = lsGet('notes', {}); if(n) notes['note_'+cec]=n; else delete notes['note_'+cec]; lsSet('notes', notes); window.closeNoteModal(); }
         
-        window.renderExtraStudies = function() {
-            let e=lsGet('extraStudies'); let c=document.getElementById('extra-study-grid'); c.innerHTML='';
-            if(!e.length) { c.innerHTML='<p class="text-xs text-blue-400 font-bold z-20 relative">Nenhum extra 🎀</p>'; return; }
-            e.forEach(a=>{ 
-                let dStr = a.date ? new Date(a.date+'T00:00:00').toLocaleDateString('pt-BR').substring(0,5) : ''; let tStr = a.time ? a.time : ''; let dt = dStr && tStr ? `${dStr} às ${tStr}` : (dStr || tStr || '');
-                c.innerHTML+=`<div class="bg-white border border-blue-100 border-l-4 border-l-blue-400 p-3 rounded-xl flex justify-between items-center shadow-sm overflow-hidden z-20 relative"><div class="overflow-hidden">${dt ? `<span class="text-[9px] font-black text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded block w-max mb-1">${dt}</span>` : ''}<h4 class="font-black text-blue-900 text-xs truncate">${a.title}</h4>${a.repeat ? `<p class="text-[9px] font-bold text-slate-500 mt-0.5 truncate"><i data-lucide="repeat" class="w-2.5 h-2.5 inline"></i> ${a.repeat}</p>` : ''}</div><div class="flex gap-1 ml-2"><button onclick="editExtraStudy(${a.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteExtraStudy(${a.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; 
-            }); if(window.lucide) lucide.createIcons({root: c});
-        }
-        window.addExtraStudy = function() { 
-            let t=document.getElementById('new-study-title').value.trim(); if(!t) return;
-            let d=document.getElementById('new-study-date').value, h=document.getElementById('new-study-time').value, r=document.getElementById('new-study-repeat').value.trim();
-            let e=lsGet('extraStudies'); e.push({id:Date.now(),title:t,date:d,time:h,repeat:r}); lsSet('extraStudies',e); 
-            document.getElementById('new-study-title').value=''; document.getElementById('new-study-date').value=''; document.getElementById('new-study-time').value=''; document.getElementById('new-study-repeat').value='';
-            window.renderExtraStudies(); window.renderMasterCalendar();
-        }
-        window.deleteExtraStudy = function(id){lsSet('extraStudies',lsGet('extraStudies').filter(x=>x.id!==id));window.renderExtraStudies();window.renderMasterCalendar();}
-        window.editExtraStudy = function(id){let e=lsGet('extraStudies'); let i=e.find(x=>x.id===id); if(i){let n=prompt("Nome do Extra:",i.title);if(n){i.title=n;lsSet('extraStudies',e);window.renderExtraStudies();window.renderMasterCalendar();}}}
-
-        // ==========================================
-        // ATELIÊ & VENDAS ONLINE/FÍSICA
-        // ==========================================
         window.renderProductions = function() {
             let p=lsGet('productions'); ['todo','doing','done'].forEach(s=>document.getElementById(`prod-col-${s}`).innerHTML='');
             p.forEach(x => { 
-                let b = `<span class="text-[8px] font-black px-2 py-0.5 rounded uppercase ${x.type==='colecao'?'bg-purple-100 text-purple-700':'bg-blue-100 text-blue-700'}">${x.type==='colecao'?'Coleção':'Encomenda'}</span>`;
-                let dStr = x.date ? `<span class="text-[9px] font-black bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100 inline-flex items-center gap-0.5 ml-1"><i data-lucide="clock" class="w-2.5 h-2.5"></i> ${new Date(x.date+'T00:00:00').toLocaleDateString('pt-BR')}</span>` : '';
-                let act = x.status==='done'?`<button onclick="openSellModal(${x.id})" class="bg-emerald-500 text-white text-[10px] font-black w-full py-2 rounded-lg mt-3 shadow-md active:scale-95 transition-transform flex justify-center items-center gap-1"><i data-lucide="dollar-sign" class="w-3.5 h-3.5"></i> Vender Peça</button>`:'';
-                
-                document.getElementById(`prod-col-${x.status}`).innerHTML+=`
-                <div class="bg-white border border-slate-100 p-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow z-20 relative">
-                    <div class="flex items-center mb-2">${b}${dStr}</div>
-                    <h4 class="font-black text-slate-800 text-xs mb-3 truncate">${x.name}</h4>
-                    <div class="flex justify-between border-t border-slate-50 pt-2">
-                        <div class="flex gap-1">${x.status!=='todo'?`<button onclick="changeProdStatus(${x.id},'todo')" class="p-1 bg-slate-50 rounded text-slate-400 hover:text-slate-600"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>`:''}${x.status!=='doing'?`<button onclick="changeProdStatus(${x.id},'doing')" class="p-1 bg-amber-50 text-amber-500 rounded hover:text-amber-600"><i data-lucide="scissors" class="w-4 h-4"></i></button>`:''}${x.status!=='done'?`<button onclick="changeProdStatus(${x.id},'done')" class="p-1 bg-emerald-50 text-emerald-500 rounded hover:text-emerald-600"><i data-lucide="check" class="w-4 h-4"></i></button>`:''}</div>
-                        <div class="flex gap-1"><button onclick="editProd(${x.id})" class="text-slate-300 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteProd(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>
-                    </div>
-                    ${act}
-                </div>`; 
-            }); if(window.lucide) lucide.createIcons();
+                let act = x.status==='done'?`<button onclick="openSellModal(${x.id})" class="bg-emerald-500 text-white text-[10px] font-black py-1 mt-2 rounded">Vender</button>`:'';
+                document.getElementById(`prod-col-${x.status}`).innerHTML+=`<div class="bg-white border p-3 rounded-2xl mb-2"><h4 class="font-black text-xs">${x.name}</h4><div class="flex gap-1 mt-2">${x.status!=='todo'?`<button onclick="changeProdStatus(${x.id},'todo')">⬅️</button>`:''}${x.status!=='done'?`<button onclick="changeProdStatus(${x.id},'done')">✅</button>`:''}<button onclick="deleteProd(${x.id})">🗑️</button></div>${act}</div>`; 
+            });
         }
-        window.addProduction = function() { let n=document.getElementById('prod-name').value.trim(); if(n){ let p=lsGet('productions'); p.push({id:Date.now(),name:n,type:document.getElementById('prod-type').value,date:document.getElementById('prod-date').value,status:'todo'}); lsSet('productions',p); document.getElementById('prod-name').value=''; document.getElementById('prod-date').value=''; window.renderProductions(); window.renderMasterCalendar(); } }
+        window.addProduction = function() { let n=document.getElementById('prod-name').value.trim(); if(n){ let p=lsGet('productions'); p.push({id:Date.now(),name:n,status:'todo'}); lsSet('productions',p); document.getElementById('prod-name').value=''; window.renderProductions(); } }
         window.changeProdStatus = function(id,s){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('productions',p); window.renderProductions();}
-        window.deleteProd = function(id){lsSet('productions',lsGet('productions').filter(x=>x.id!==id));window.renderProductions();window.renderMasterCalendar();}
-        window.editProd = function(id){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x){let n=prompt("Nome da Peça:",x.name);if(n){x.name=n;lsSet('productions',p);window.renderProductions();window.renderMasterCalendar();}}}
+        window.deleteProd = function(id){lsSet('productions',lsGet('productions').filter(x=>x.id!==id));window.renderProductions();}
         
         let curSellId=null;
-        window.openSellModal = function(id){ curSellId=id; document.getElementById('sell-piece-name').innerText=lsGet('productions').find(p=>p.id===id).name; document.getElementById('sell-modal').classList.remove('hidden'); window.toggleSellOptions(); }
+        window.openSellModal = function(id){ curSellId=id; document.getElementById('sell-modal').classList.remove('hidden'); }
         window.closeSellModal = function(){ document.getElementById('sell-modal').classList.add('hidden'); }
-        window.toggleSellOptions = function(){ let t=document.getElementById('sell-type').value; document.getElementById('sell-opt-fisica').classList.toggle('hidden',t!=='fisica'); document.getElementById('sell-opt-online').classList.toggle('hidden',t!=='online'); if(t==='online') document.getElementById('sell-opt-online').classList.add('flex'); }
         window.confirmSale = function(){ 
-            let v=parseFloat(document.getElementById('sell-value').value), t=document.getElementById('sell-type').value; 
-            if(isNaN(v)) return alert("Preencha o valor da peça!"); 
-            let pkg=parseFloat(t==='fisica'?document.getElementById('sell-pkg-fisica').value:document.getElementById('sell-pkg-online').value); 
-            let fr=t==='online'?parseFloat(document.getElementById('sell-freight').value||0):0; 
-            let f=lsGet('finances'); let pieceName = document.getElementById('sell-piece-name').innerText;
-            f.push({id:Date.now(),type:'income',method:'pix',category:'Loja',description:`Venda ${t==='online'?'Online':'Física'}: ${pieceName}`,amount:(v+pkg+fr),date:new Date().toISOString().split('T')[0]}); 
-            lsSet('finances',f); window.deleteProd(curSellId); window.closeSellModal(); alert("Venda registrada e valor enviado para as Finanças! 💸"); 
-            document.getElementById('sell-value').value=''; document.getElementById('sell-freight').value='';
-            window.renderFinances(); window.switchTab('financas');
+            let v=parseFloat(document.getElementById('sell-value').value); if(isNaN(v)) return alert("Preencha o valor!"); 
+            let f=lsGet('finances'); f.push({id:Date.now(),type:'income',method:'pix',category:'Loja',description:`Venda Loja`,amount:v,date:new Date().toISOString().split('T')[0]}); 
+            lsSet('finances',f); window.deleteProd(curSellId); window.closeSellModal(); window.renderFinances();
         }
 
-        // ==========================================
-        // TATTOO CRM PRO & PROMOS
-        // ==========================================
         window.renderTattoos = function() {
             let t=lsGet('tattoos'); let l=document.getElementById('tattoo-list'); l.innerHTML='';
-            if(!t.length) { l.innerHTML='<div class="bg-purple-50 border border-purple-100 p-4 rounded-xl text-center z-20 relative"><p class="text-xs font-bold text-purple-400">Nenhum agendamento 🖤</p></div>'; return; }
-            t.sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(x=>{ l.innerHTML+=`<div class="flex items-center justify-between p-3 bg-white border border-purple-100 rounded-xl shadow-sm mb-2 z-20 relative"><div class="overflow-hidden"><span class="text-[9px] font-black bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded tracking-widest uppercase">${x.date?new Date(x.date+'T00:00:00').toLocaleDateString('pt-BR'):'S/ Data'}</span><h4 class="font-black text-sm text-purple-900 mt-1 truncate">${x.name}</h4><p class="text-[10px] font-bold text-emerald-600 mt-0.5">R$ ${parseFloat(x.value||0).toFixed(2)}</p>${x.materialName?`<p class="text-[9px] text-slate-400 bg-slate-50 border inline-block px-1 rounded mt-1 truncate">- ${x.materialQty}x ${x.materialName}</p>`:''}</div><div class="flex gap-1 ml-2"><button onclick="deleteTattoo(${x.id})" class="text-slate-300 hover:text-red-500 p-1.5 bg-slate-50 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`; }); if(window.lucide) lucide.createIcons({root:l});
+            t.forEach(x=>{ l.innerHTML+=`<div class="flex justify-between bg-white p-3 rounded-xl mb-2"><span class="font-bold text-sm">${x.name}</span><button onclick="deleteTattoo(${x.id})">🗑️</button></div>`; });
         }
-        window.addTattoo = function(){ 
-            let n=document.getElementById('tattoo-name').value.trim(),v=document.getElementById('tattoo-value').value,d=document.getElementById('tattoo-date').value; 
-            if(!n||!d) return; let t=lsGet('tattoos'), inv=lsGet('tattooInventory'); 
-            let mid=document.getElementById('tattoo-material-select').value, mq=parseInt(document.getElementById('tattoo-material-qty').value), mn=null; 
-            if(mid&&mq>0){let i=inv.find(x=>x.id==mid); if(i){if(i.qty<mq) return alert("Estoque insuficiente!"); i.qty-=mq; mn=i.name; lsSet('tattooInventory',inv); window.renderInventory();}} 
-            t.push({id:Date.now(),name:n,value:v||0,date:d,materialName:mn,materialQty:mn?mq:null}); lsSet('tattoos',t); 
-            document.getElementById('tattoo-name').value=''; document.getElementById('tattoo-date').value=''; document.getElementById('tattoo-value').value=''; window.renderTattoos(); window.renderMasterCalendar();
-        }
-        window.deleteTattoo = function(id){lsSet('tattoos',lsGet('tattoos').filter(x=>x.id!==id));window.renderTattoos();window.renderMasterCalendar();}
+        window.addTattoo = function(){ let n=document.getElementById('tattoo-name').value.trim(); if(!n) return; let t=lsGet('tattoos'); t.push({id:Date.now(),name:n}); lsSet('tattoos',t); document.getElementById('tattoo-name').value=''; window.renderTattoos(); }
+        window.deleteTattoo = function(id){lsSet('tattoos',lsGet('tattoos').filter(x=>x.id!==id));window.renderTattoos();}
         
-        window.renderClients = function(){ 
-            let c=lsGet('clients'); let l=document.getElementById('crm-list'), dl=document.getElementById('client-list-data'); l.innerHTML=''; dl.innerHTML=''; 
-            if(!c.length) l.innerHTML='<p class="text-xs text-rose-400 font-bold z-20 relative">Nenhum cliente cadastrado.</p>';
-            c.forEach(x=>{ l.innerHTML+=`<div class="bg-white p-2.5 rounded-xl border border-pink-100 flex justify-between items-center shadow-sm z-20 relative"><div class="overflow-hidden"><h4 class="font-black text-rose-900 text-xs truncate">${x.name}</h4>${x.ig?`<p class="text-[9px] font-bold text-rose-500 mt-0.5 truncate"><i data-lucide="instagram" class="w-2.5 h-2.5 inline"></i> ${x.ig}</p>`:''}${x.notes?`<p class="text-[9px] text-slate-500 mt-0.5 truncate">${x.notes}</p>`:''}</div><button onclick="deleteClient(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; dl.innerHTML+=`<option value="${x.name}"></option>`;}); if(window.lucide) lucide.createIcons({root:l});
-        }
-        window.addClient = function(){ let n=document.getElementById('crm-name').value.trim(),i=document.getElementById('crm-ig').value.trim(), no=document.getElementById('crm-notes').value.trim(); if(n){let c=lsGet('clients'); c.push({id:Date.now(),name:n,ig:i,notes:no}); lsSet('clients',c); document.getElementById('crm-name').value='';document.getElementById('crm-ig').value='';document.getElementById('crm-notes').value=''; window.renderClients();}}
-        window.deleteClient = function(id){lsSet('clients',lsGet('clients').filter(x=>x.id!==id));window.renderClients();}
-        
-        window.renderPromos = function(){ 
-            let p=lsGet('promos'); let l=document.getElementById('promo-list'); l.innerHTML=''; 
-            if(!p.length) l.innerHTML='<p class="text-xs text-amber-500 font-bold z-20 relative">Nenhuma promoção.</p>';
-            p.forEach(x=>l.innerHTML+=`<div class="flex justify-between items-center bg-white p-2 rounded-lg border border-amber-100 shadow-sm z-20 relative"><span class="text-[10px] font-black text-amber-800 truncate">${x.name}</span><button onclick="deletePromo(${x.id})" class="text-amber-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div>`); if(window.lucide) lucide.createIcons({root:l});
-        }
-        window.addPromo = function(){ let n=document.getElementById('promo-name').value.trim(); if(n){let p=lsGet('promos'); p.push({id:Date.now(),name:n}); lsSet('promos',p); document.getElementById('promo-name').value=''; window.renderPromos();}}
-        window.deletePromo = function(id) { lsSet('promos',lsGet('promos').filter(x=>x.id!==id)); window.renderPromos(); }
-        
-        window.renderInventory = function(){ 
-            let i=lsGet('tattooInventory'); let l=document.getElementById('inventory-list'), s=document.getElementById('tattoo-material-select'); l.innerHTML=''; s.innerHTML='<option value="">Não descontar estoque</option>';
-            if(!i.length) l.innerHTML='<p class="text-xs text-slate-400 font-bold z-20 relative">Estoque vazio.</p>';
-            i.forEach(x=>{
-                l.innerHTML+=`<div class="flex justify-between items-center bg-white p-2 rounded-lg border border-slate-100 shadow-sm mb-1 z-20 relative"><span class="text-xs font-bold text-slate-700 truncate">${x.name}</span><div class="flex items-center gap-2"><span class="text-[10px] font-black ${x.qty<=2?'text-red-500 bg-red-50':'text-slate-600 bg-slate-50'} px-1.5 py-0.5 rounded">${x.qty}</span><button onclick="deleteInv(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; 
-                if(x.qty>0) s.innerHTML+=`<option value="${x.id}">${x.name} (${x.qty})</option>`;
-            }); if(window.lucide) lucide.createIcons({root:l}); 
-        }
-        window.addInventoryItem = function(){ let n=document.getElementById('inv-name').value.trim(), q=parseInt(document.getElementById('inv-qty').value); if(n&&q){let i=lsGet('tattooInventory'); let ex=i.find(x=>x.name.toLowerCase()===n.toLowerCase()); if(ex)ex.qty+=q; else i.push({id:Date.now(),name:n,qty:q}); lsSet('tattooInventory',i); document.getElementById('inv-name').value=''; document.getElementById('inv-qty').value=''; window.renderInventory();}}
-        window.deleteInv = function(id){lsSet('tattooInventory',lsGet('tattooInventory').filter(x=>x.id!==id));window.renderInventory();}
-
-        // ==========================================
-        // INSTAGRAM SOCIAL
-        // ==========================================
         window.renderInstaPosts = function(){ 
             let p=lsGet('instaPosts'); ['ideia','gravando','editando','publicado'].forEach(s=>document.getElementById(`insta-col-${s}`).innerHTML=''); 
-            p.forEach(x=>{
-                let dt = x.date ? `<span class="text-[8px] font-black bg-white px-1.5 py-0.5 rounded border inline-flex items-center gap-0.5"><i data-lucide="calendar" class="w-2 h-2 text-fuchsia-400"></i> ${new Date(x.date+'T00:00:00').toLocaleDateString('pt-BR')}</span>` : '';
-                document.getElementById(`insta-col-${x.status}`).innerHTML+=`
-                <div class="bg-white border p-3 rounded-xl shadow-sm hover:shadow-md transition-shadow z-20 relative">
-                    <div class="flex justify-between items-center mb-1"><span class="text-[8px] font-black uppercase bg-fuchsia-100 text-fuchsia-700 px-1.5 py-0.5 rounded">${x.type||'Post'}</span>${dt}</div>
-                    <h4 class="text-xs font-black text-slate-800 mb-2 truncate">${x.name}</h4>
-                    <div class="flex justify-between border-t pt-2 mt-1">
-                        <div class="flex gap-1">${x.status!=='ideia'?`<button onclick="changeInstaStatus(${x.id},'ideia')" class="p-1 bg-slate-50 rounded text-slate-400"><i data-lucide="arrow-left" class="w-3.5 h-3.5"></i></button>`:''}${x.status==='ideia'?`<button onclick="changeInstaStatus(${x.id},'gravando')" class="p-1 bg-fuchsia-50 rounded text-fuchsia-600"><i data-lucide="video" class="w-3.5 h-3.5"></i></button>`:''}${x.status==='gravando'?`<button onclick="changeInstaStatus(${x.id},'editando')" class="p-1 bg-purple-50 rounded text-purple-600"><i data-lucide="scissors" class="w-3.5 h-3.5"></i></button>`:''}${x.status==='editando'?`<button onclick="changeInstaStatus(${x.id},'publicado')" class="p-1 bg-emerald-50 rounded text-emerald-600"><i data-lucide="check" class="w-3.5 h-3.5"></i></button>`:''}</div>
-                        <button onclick="deleteInstaPost(${x.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
-                    </div>
-                </div>`; 
-            }); if(window.lucide) lucide.createIcons();
+            p.forEach(x=>{ document.getElementById(`insta-col-${x.status}`).innerHTML+=`<div class="bg-white p-2 rounded-xl mb-2 text-xs font-bold flex justify-between">${x.name} <button onclick="deleteInstaPost(${x.id})">🗑️</button></div>`; }); 
         }
-        window.addInstaPost = function() { let n=document.getElementById('insta-name').value.trim(); if(n){ let p=lsGet('instaPosts'); p.push({id:Date.now(),name:n,type:document.getElementById('insta-type').value,date:document.getElementById('insta-date').value,status:'ideia'}); lsSet('instaPosts',p); document.getElementById('insta-name').value=''; document.getElementById('insta-date').value=''; window.renderInstaPosts(); window.renderMasterCalendar(); } }
-        window.changeInstaStatus = function(id,s){let p=lsGet('instaPosts'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('instaPosts',p); window.renderInstaPosts();}
-        window.deleteInstaPost = function(id){lsSet('instaPosts',lsGet('instaPosts').filter(x=>x.id!==id));window.renderInstaPosts();window.renderMasterCalendar();}
-        
-        window.loadStoreNotes = function() { let n = lsGet('notes',{}); document.getElementById('store-notes').value = n['storeNotes']||''; }
-        window.saveStoreNotes = function() { let n = lsGet('notes',{}); n['storeNotes'] = document.getElementById('store-notes').value; lsSet('notes', n); }
-        window.loadInstaNotes = function() { let n = lsGet('notes',{}); document.getElementById('insta-notes').value = n['instaNotes']||''; }
-        window.saveInstaNotes = function() { let n = lsGet('notes',{}); n['instaNotes'] = document.getElementById('insta-notes').value; lsSet('notes', n); }
+        window.addInstaPost = function() { let n=document.getElementById('insta-name').value.trim(); if(n){ let p=lsGet('instaPosts'); p.push({id:Date.now(),name:n,status:'ideia'}); lsSet('instaPosts',p); document.getElementById('insta-name').value=''; window.renderInstaPosts(); } }
+        window.deleteInstaPost = function(id){lsSet('instaPosts',lsGet('instaPosts').filter(x=>x.id!==id));window.renderInstaPosts();}
 
-        // ==========================================
-        // FINANÇAS DASHBOARD E CARTÃO
-        // ==========================================
-        window.updateFinanceCategories = function() {
-            let t=document.getElementById('new-fin-type').value, l=document.getElementById('fin-categories'); l.innerHTML='';
-            (t==='income'?['Bolsa','Auxílio','Trabalho Edição','Tattoo','Loja','Outros']:['Materiais/Arte','Alimentação','Transporte','Lazer','Assinaturas','Pagamento Fatura','Outros']).forEach(c=>l.innerHTML+=`<option value="${c}"></option>`);
-            document.getElementById('new-fin-cat').value='';
-        }
-        window.changeFinMonth = function(d){ fMo.setMonth(fMo.getMonth()+d); window.renderFinances(); }
         window.renderFinances = function() {
-            let f = lsGet('finances').map(t=>{if(t.type==='in')t.type='income';if(t.type==='out')t.type='expense';if(!t.category)t.category=t.method==='cc'?'Cartão':'Outros';return t;});
-            document.getElementById('fin-month-display').innerText = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][fMo.getMonth()] + " " + fMo.getFullYear();
-            
-            let flt = f.filter(t => { if(!t.date)return false; let [y,m]=t.date.split('-'); return parseInt(y)===fMo.getFullYear() && parseInt(m)===(fMo.getMonth()+1); });
-            let l=document.getElementById('finance-list-new'), catCont=document.getElementById('finance-categories'); l.innerHTML=''; catCont.innerHTML='';
-            let inT=0, outT=0, ccT=0, catT={};
-
-            flt.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(t=>{
-                let a=parseFloat(t.amount||0), i=t.type==='income'; 
-                if(i) { inT+=a; } else { outT+=a; if(t.method==='cc') ccT+=a; catT[t.category||'Outros']=(catT[t.category||'Outros']||0)+a; }
-
-                l.innerHTML+=`<div class="flex items-center justify-between p-3.5 bg-white/90 border border-emerald-50 rounded-2xl shadow-sm hover:shadow-md transition-all group mb-2 z-20 relative"><div class="flex items-center gap-3 overflow-hidden"><div class="p-2 rounded-xl border ${i?'text-teal-500 bg-teal-50 border-teal-100':'text-rose-500 bg-rose-50 border-rose-100'}"><i data-lucide="${i?'arrow-up-circle':'arrow-down-circle'}" class="w-5 h-5"></i></div><div class="overflow-hidden"><p class="font-bold text-sm text-emerald-900 truncate">${t.description}</p><div class="flex items-center gap-1.5 text-[10px] text-emerald-600/70 font-black tracking-wider uppercase mt-0.5"><span class="bg-emerald-50 px-1.5 rounded border border-emerald-100">${t.date.split('-').reverse().join('/')}</span><span class="w-1 h-1 rounded-full bg-emerald-200"></span><span class="truncate">${t.category}</span>${t.method==='cc'?'<span class="w-1 h-1 rounded-full bg-amber-300"></span><span class="text-amber-500">Cartão</span>':''}</div></div></div><div class="flex items-center gap-3 pl-2 shrink-0"><span class="font-black text-sm ${i?'text-teal-600':'text-rose-600'}">${i?'+':'-'} ${formatCurrency(a)}</span><button onclick="deleteFinance(${t.id})" class="p-1.5 text-slate-300 hover:text-white hover:bg-rose-500 rounded-lg transition-colors opacity-0 group-hover:opacity-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
+            let f = lsGet('finances').filter(t => t.date && parseInt(t.date.split('-')[1])===(fMo.getMonth()+1));
+            let l=document.getElementById('finance-list-new'); l.innerHTML=''; let inT=0, outT=0;
+            f.forEach(t=>{
+                let a=parseFloat(t.amount||0), i=t.type==='income'; if(i) inT+=a; else outT+=a;
+                l.innerHTML+=`<div class="flex justify-between p-3 bg-white border rounded-2xl mb-2"><span class="font-bold text-sm">${t.description}</span><span class="font-black ${i?'text-teal-600':'text-rose-600'}">${i?'+':'-'} R$ ${a.toFixed(2)}</span></div>`;
             });
-            if(!l.innerHTML) l.innerHTML='<div class="p-6 text-center text-emerald-600/50 font-bold italic z-20 relative">Sem movimentos neste mês ✨</div>';
-
-            document.getElementById('fin-saldo-new').innerText = formatCurrency(inT-outT); document.getElementById('fin-saldo-new').className = (inT-outT)>=0?"text-xl md:text-2xl font-black text-emerald-600 z-20 relative":"text-xl md:text-2xl font-black text-rose-600 z-20 relative";
-            document.getElementById('fin-in-new').innerText = formatCurrency(inT); document.getElementById('fin-out-new').innerText = formatCurrency(outT-ccT); document.getElementById('fin-total-cc').innerText = formatCurrency(ccT);
-            
-            if(!Object.keys(catT).length) catCont.innerHTML='<div class="p-4 text-center text-emerald-600/50 font-bold italic z-20 relative">Sem despesas 🎀</div>';
-            else { let cIdx=0, cols=['bg-pink-400','bg-blue-400','bg-emerald-400','bg-amber-400','bg-purple-400']; Object.entries(catT).sort((a,b)=>b[1]-a[1]).forEach(([c,v])=>{ let p=outT>0?(v/outT)*100:0; catCont.innerHTML+=`<div class="flex flex-col gap-1.5 z-20 relative"><div class="flex justify-between items-end text-sm font-bold"><span class="text-emerald-900">${c}</span><div class="flex items-center gap-2"><span class="text-emerald-700">${formatCurrency(v)}</span><span class="text-[10px] bg-white px-1.5 py-0.5 rounded-md shadow-sm border">${p.toFixed(0)}%</span></div></div><div class="w-full h-2.5 bg-emerald-50 rounded-full overflow-hidden shadow-inner"><div class="h-full ${cols[cIdx++%cols.length]} rounded-full" style="width:${p}%"></div></div></div>`; }); }
-            if(window.lucide) lucide.createIcons({root:l});
+            document.getElementById('fin-saldo-new').innerText = "R$ " + (inT-outT).toFixed(2);
+            document.getElementById('fin-in-new').innerText = "R$ " + inT.toFixed(2);
+            document.getElementById('fin-out-new').innerText = "R$ " + outT.toFixed(2);
         }
-        window.openFinanceModal = function(){ document.getElementById('finance-modal').classList.remove('hidden'); window.updateFinanceCategories(); window.togglePaymentMethod(); }
-        window.closeFinanceModal = function(e){ if(e&&e.target!==e.currentTarget)return; document.getElementById('finance-modal').classList.add('hidden'); }
-        window.togglePaymentMethod = function(){ document.getElementById('div-fin-payment-details').classList.toggle('hidden', document.getElementById('new-fin-type').value==='income'); window.toggleInstallments(); }
-        window.toggleInstallments = function(){ document.getElementById('div-fin-installments').classList.toggle('hidden', document.getElementById('new-fin-method').value!=='cc'); }
+        window.openFinanceModal = function(){ document.getElementById('finance-modal').classList.remove('hidden'); }
+        window.closeFinanceModal = function(){ document.getElementById('finance-modal').classList.add('hidden'); }
         window.addTransaction = function(){ 
-            let f=lsGet('finances'); let desc=document.getElementById('new-fin-desc').value.trim(), amt=parseFloat(document.getElementById('new-fin-amount').value), type=document.getElementById('new-fin-type').value, date=document.getElementById('new-fin-date').value||new Date().toISOString().split('T')[0], cat=document.getElementById('new-fin-cat').value||'Outros', meth=document.getElementById('new-fin-method').value;
+            let f=lsGet('finances'), desc=document.getElementById('new-fin-desc').value.trim(), amt=parseFloat(document.getElementById('new-fin-amount').value), type=document.getElementById('new-fin-type').value;
             if(!desc||isNaN(amt))return;
-            if(type==='income'||meth==='pix') f.push({id:Date.now(),type,method:'pix',category:cat,description:desc,amount:amt,date});
-            else { let inst=parseInt(document.getElementById('new-fin-installments').value); let perI=amt/inst; let d=new Date(date+'T12:00:00'); for(let i=1;i<=inst;i++){ let nD=new Date(d.getFullYear(),d.getMonth()+(i-1),d.getDate()); f.push({id:Date.now()+i,type:'expense',method:'cc',category:cat,description:inst>1?`${desc} (${i}/${inst})`:desc,amount:perI,date:nD.toISOString().split('T')[0]}); } }
-            lsSet('finances',f); document.getElementById('new-fin-desc').value=''; document.getElementById('new-fin-amount').value=''; document.getElementById('new-fin-cat').value=''; document.getElementById('new-fin-installments').value='1'; window.closeFinanceModal(); window.renderFinances();
+            f.push({id:Date.now(),type,description:desc,amount:amt,date:document.getElementById('new-fin-date').value||new Date().toISOString().split('T')[0]});
+            lsSet('finances',f); window.closeFinanceModal(); window.renderFinances();
         }
-        window.deleteFinance = function(id){ lsSet('finances',lsGet('finances').filter(x=>x.id!==id)); window.renderFinances(); }
 
-        // INIT GERAL UNIFICADO (CHAMADO PELA NUVEM OU LOCALMENTE)
         window.renderAllApp = function() {
             if(window.lucide) lucide.createIcons(); 
             window.renderMasterCalendar(); 
             window.updateTimerDisplay(); 
             window.renderTasks(); 
             window.renderProductions(); 
-            window.renderReadingList(); 
-            window.renderExtraStudies();
-            window.renderClients(); 
-            window.renderPromos(); 
-            window.renderInventory(); 
             window.renderTattoos(); 
-            window.updateFinanceCategories(); 
             window.renderFinances(); 
             window.renderRoutineChart(); 
             window.renderInstaPosts();
-            window.updateClassCards(); 
-            window.loadStoreNotes();
-            window.loadInstaNotes();
         };
-
-        // Prepara ícones base logo de cara
-        if(window.lucide) lucide.createIcons();
     </script>
 </body>
 </html>
