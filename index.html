@@ -91,9 +91,10 @@
                 <h1 class="text-3xl md:text-5xl font-cute font-bold mb-1 drop-shadow-md tracking-wide">Planner da Taylise 🎀</h1>
                 <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Geografia • Ateliê • Tattoo • Social</p>
             </div>
-            <div class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center">
+            <div id="cloud-status-indicator" class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center transition-all">
                 <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5">Status da Nuvem</p>
-                <p class="text-sm md:text-lg font-cute font-bold drop-shadow-sm flex items-center gap-1"><i data-lucide="cloud-snow" class="w-5 h-5"></i> Sincronizado</p>
+                <!-- O Javascript vai mudar este texto automaticamente se não houver chave -->
+                <p id="cloud-status-text" class="text-sm md:text-lg font-cute font-bold drop-shadow-sm flex items-center gap-1"><i data-lucide="cloud-snow" class="w-5 h-5"></i> A verificar...</p>
             </div>
         </div>
     </header>
@@ -626,16 +627,13 @@
 
     <!-- SCRIPTS DA NUVEM (NOVO SISTEMA) -->
     <script type="module">
-        // Importando as ferramentas do banco de dados na nuvem
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Variáveis de controle
         let db, auth, userId, appId;
         let isInitialized = false;
 
-        // O seu Estado Global (Isso substitui o "localStorage" antigo)
         window.appState = {
             personalTasks: [], taskLog: [], disciplineEvents: {}, extraStudies: [],
             productions: [], tattoos: [], instaPosts: [], readingList: [],
@@ -643,7 +641,6 @@
             notes: {} 
         };
 
-        // Funções para ler e salvar no novo sistema
         window.lsGet = (k, d = []) => window.appState[k] !== undefined ? window.appState[k] : d;
         window.lsSet = (k, v) => {
             window.appState[k] = v;
@@ -655,15 +652,36 @@
         // ==========================================
         let firebaseConfig = null;
 
-        // Verificando se estamos no ambiente especial (Canvas) que injeta a chave
+        // SE NÃO ESTIVER NO CANVAS, ELE VAI PROCURAR A SUA CHAVE AQUI:
         if (typeof __firebase_config !== 'undefined') {
             firebaseConfig = JSON.parse(__firebase_config);
         } else {
-            // ATENÇÃO: Se for jogar isso para o Vercel, você vai colar a sua chave aqui dentro!
-            // Exemplo: firebaseConfig = { apiKey: "...", authDomain: "...", projectId: "..." };
+            // ========================================================
+            // 🛑 FIREBASE
+            // 
+           firebaseConfig = {
+          apiKey: "AIzaSyAbnSRtJC2HDP-4RdkQu786M0sLXwU9xjA",
+          authDomain: "meu-planner-bf562.firebaseapp.com",
+          projectId: "meu-planner-bf562",
+          storageBucket: "meu-planner-bf562.firebasestorage.app",
+          messagingSenderId: "778926180756",
+          appId: "1:778926180756:web:901c4e77278c09d004a781",
+          measurementId: "G-Y97D6CJREP"
+        };
+
+        function updateCloudStatusUI(isWorking) {
+            const ind = document.getElementById('cloud-status-indicator');
+            const txt = document.getElementById('cloud-status-text');
+            if(isWorking) {
+                ind.className = "bg-emerald-500/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-emerald-400/50 shadow-inner flex flex-col justify-center items-center transition-all";
+                txt.innerHTML = '<i data-lucide="cloud-snow" class="w-5 h-5 text-emerald-200"></i> <span class="text-emerald-100">Sincronizado</span>';
+            } else {
+                ind.className = "bg-rose-500/80 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-rose-300 shadow-inner flex flex-col justify-center items-center transition-all";
+                txt.innerHTML = '<i data-lucide="cloud-off" class="w-5 h-5 text-white"></i> <span class="text-white">Nuvem Desligada</span>';
+            }
+            if(window.lucide) lucide.createIcons();
         }
 
-        // Se a chave for encontrada, liga os motores!
         if (firebaseConfig) {
             const app = initializeApp(firebaseConfig);
             auth = getAuth(app);
@@ -680,53 +698,63 @@
             
             initAuth();
 
-            // Quando o sistema reconhecer quem é você, ele começa a puxar os dados
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     userId = user.uid;
                     listenToCloud();
+                    updateCloudStatusUI(true);
                 }
             });
 
         } else {
-            // Se você rodar no Vercel sem colar a chave do banco, ele vai liberar o uso (mas não salva na nuvem ainda)
-            console.warn("Nuvem não configurada. Mostrando o app limpo.");
+            console.warn("Nuvem não configurada. A funcionar apenas em modo local temporário.");
+            updateCloudStatusUI(false);
+            
+            // Oculta o ecrã de carregamento imediatamente pois não há banco de dados
             document.getElementById('cloud-loading').style.opacity = '0';
             setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
+            
+            // Tenta puxar do armazenamento antigo do navegador caso a pessoa tenha dados
+            let localSave = localStorage.getItem('backupPlannerNuvem');
+            if(localSave) window.appState = JSON.parse(localSave);
+
+            // Permite usar o planner mas guarda na memória do telemóvel temporariamente
+            window.saveToCloud = function() {
+                 localStorage.setItem('backupPlannerNuvem', JSON.stringify(window.appState));
+            }
             if(window.renderAllApp) window.renderAllApp();
         }
 
-        // Função que fica "escutando" as mudanças na nuvem
         function listenToCloud() {
             if (!userId || !db) return;
-            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data'); // FIX: Added 'data' segment to make it even
+            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data');
 
             onSnapshot(docRef, (snapshot) => {
                 if (snapshot.exists()) {
                     window.appState = { ...window.appState, ...snapshot.data() };
                 }
                 
-                // Se for a primeira vez que carregou
                 if (!isInitialized) {
                     isInitialized = true;
-                    // Esconde a tela de loading bonitinha
                     document.getElementById('cloud-loading').style.opacity = '0';
                     setTimeout(() => document.getElementById('cloud-loading').style.display = 'none', 500);
                     if(window.renderAllApp) window.renderAllApp();
                 } else {
-                    // Se foi uma atualização no fundo (ex: você mudou no pc, e o celular viu)
                     if(window.renderAllApp) window.renderAllApp();
                 }
             }, (error) => {
                 console.error("Erro de sincronização:", error);
+                updateCloudStatusUI(false);
             });
         }
 
-        // Função que empurra suas anotações para a nuvem
         window.saveToCloud = function() {
             if (!userId || !db) return;
-            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data'); // FIX: Added 'data' segment to make it even
-            setDoc(docRef, window.appState).catch(e => console.error("Erro ao salvar:", e));
+            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'data', 'planner_data');
+            setDoc(docRef, window.appState).catch(e => {
+                console.error("Erro ao salvar:", e);
+                updateCloudStatusUI(false);
+            });
         };
     </script>
 
