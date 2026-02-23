@@ -355,7 +355,7 @@
                                 <option value="Capítulo">Capítulo</option>
                                 <option value="Artigo">Artigo</option>
                             </select>
-                            <button onclick="addReading()" class="bg-pink-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm"><i data-lucide="plus"></i></button>
+                            <button onclick="addReading()" class="bg-pink-400 hover:bg-pink-500 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm transition"><i data-lucide="plus"></i></button>
                         </div>
                     </div>
                     <div id="reading-list-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
@@ -374,7 +374,7 @@
                         </div>
                         <div class="flex gap-2">
                             <input type="text" id="new-study-repeat" placeholder="Repete? (Ex: Toda Ter/Qui)" class="flex-1 bg-white rounded-lg p-2.5 text-xs font-bold border outline-none text-slate-500">
-                            <button onclick="addExtraStudy()" class="bg-blue-500 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center"><i data-lucide="plus"></i></button>
+                            <button onclick="addExtraStudy()" class="bg-blue-500 hover:bg-blue-600 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center transition"><i data-lucide="plus"></i></button>
                         </div>
                     </div>
                     <div id="extra-study-grid" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
@@ -382,7 +382,7 @@
             </div>
 
             <!-- NOVA SEÇÃO: TRACKER DE LISTAS E BANCO DE ERROS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mb-8">
                 
                 <!-- Tracker de Listas -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
@@ -390,28 +390,39 @@
                     <div class="absolute top-0 left-0 w-full h-2 bg-purple-400"></div>
                     <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="list-checks" class="text-purple-500"></i> Tracker de Listas 📋</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-purple-50 p-3 rounded-xl border border-purple-100 z-20">
-                        <input type="text" id="new-list-title" placeholder="Nome da Lista (Ex: Lista 1)..." class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                        <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / Extra" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-purple-700">
                         <div class="flex gap-2">
-                            <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / Extra" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-purple-700">
-                            <button onclick="addListTracker()" class="bg-purple-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm"><i data-lucide="plus"></i></button>
+                            <input type="text" id="new-list-title" placeholder="Nome da Lista (Ex: Lista 1)..." class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                            <button onclick="addListTracker()" class="bg-purple-400 hover:bg-purple-500 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm transition"><i data-lucide="plus"></i></button>
                         </div>
                     </div>
                     <div id="list-tracker-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
                 </div>
 
-                <!-- Banco de Erros -->
+                <!-- Banco de Erros Completo -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
                     <i data-lucide="alert-triangle" class="absolute top-4 right-4 w-16 h-16 text-red-400/10 fill-red-400/10 animate-float z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-red-400"></div>
                     <h3 class="text-xl font-cute text-red-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="alert-triangle" class="text-red-500"></i> Banco de Erros 🚨</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-red-50 p-3 rounded-xl border border-red-100 z-20">
-                        <input type="text" id="new-error-title" placeholder="Questão ou Conceito errado..." class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
-                        <div class="flex gap-2">
-                            <input list="study-subjects" id="new-error-subject" placeholder="Disciplina / Assunto" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-red-700">
-                            <button onclick="addErrorBank()" class="bg-red-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center"><i data-lucide="plus"></i></button>
-                        </div>
+                        <input list="study-subjects" id="new-error-subject" placeholder="Disciplina / Assunto" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-red-700">
+                        <input type="text" id="new-error-problem" placeholder="O Problema (Questão)" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                        <textarea id="new-error-mistake" placeholder="Onde eu errei..." rows="2" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none resize-none"></textarea>
+                        <textarea id="new-error-correction" placeholder="Raciocínio Correto..." rows="2" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none resize-none"></textarea>
+                        <button onclick="addErrorBank()" class="bg-red-400 hover:bg-red-500 text-white p-2.5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center gap-2 transition-colors"><i data-lucide="save"></i> Guardar Erro</button>
                     </div>
-                    <div id="error-bank-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
+                    <div id="error-bank-container" class="flex flex-col gap-2 overflow-y-auto max-h-[300px] pr-1 z-20"></div>
+                </div>
+            </div>
+
+            <!-- NOVO: RESUMO DO MÊS (ESTUDOS) -->
+            <div class="cute-card p-6 md:p-8 bg-white mb-8 relative overflow-hidden">
+                <i data-lucide="book" class="absolute top-10 right-10 w-24 h-24 text-blue-300/20 fill-blue-300/20 rotate-12 animate-float z-0"></i>
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-300 to-purple-300"></div>
+                <h3 class="font-cute text-blue-900 text-xl flex items-center gap-2 mb-6 relative z-10"><i data-lucide="pie-chart" class="text-blue-500"></i> Resumo de Desempenho 📈</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
+                    <div id="study-summary-text" class="flex flex-col gap-2 max-h-[250px] overflow-y-auto pr-2"></div>
+                    <div class="relative w-full h-52 bg-slate-50 rounded-3xl p-4 border border-slate-100"><canvas id="studyChart"></canvas></div>
                 </div>
             </div>
 
@@ -949,7 +960,7 @@
 
 
     <!-- ========================================================== -->
-    <!-- OS SEUS SCRIPTS ORIGINAIS INTACTOS (100% IGUAIS)           -->
+    <!-- OS SEUS SCRIPTS ORIGINAIS INTACTOS (COM AS NOVAS FUNÇÕES)  -->
     <!-- ========================================================== -->
     <script>
         const lsGet = (k,d=[]) => { try { return JSON.parse(localStorage.getItem(k))||d; } catch(e) { return localStorage.getItem(k)||d; } };
@@ -969,7 +980,7 @@
             if(t==='resumo') renderMasterCalendar(); if(t==='rotina') renderRoutineChart(); if(t==='financas') renderFinances();
             if(t==='tattoo') { renderTattoos(); renderClients(); renderPromos(); renderInventory(); } 
             if(t==='instagram') renderInstaPosts(); if(t==='loja') renderProductions();
-            if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); updateClassCards(); }
+            if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); renderStudyChart(); updateClassCards(); }
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
 
@@ -1120,14 +1131,40 @@
             });
         }
 
+        // ==========================================
+        // LEITURAS E AULAS EXTRAS
+        // ==========================================
         function renderReadingList() {
-            let r=lsGet('readingList'); let c=document.getElementById('reading-list-container'); c.innerHTML='';
+            let r=lsGet('readingList'); let c=document.getElementById('reading-list-container'); 
+            if(!c) return; c.innerHTML='';
             if(!r.length) { c.innerHTML='<p class="text-xs text-pink-400 font-bold z-20 relative">Nenhuma leitura 🎀</p>'; return; }
-            r.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleReadingDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-rose-900 ${i.done?'opacity-50 line-through':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+            r.forEach(i=>{ 
+                if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; } // Compatibilidade com a versão antiga
+                let selColor = i.status==='concluido'?'bg-emerald-100 text-emerald-700':i.status==='em_andamento'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-500';
+                c.innerHTML+=`
+                <div class="flex items-center justify-between p-2 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative">
+                    <div class="flex flex-col flex-1 overflow-hidden pr-2">
+                        <span class="text-xs font-extrabold truncate text-rose-900 ${i.status==='concluido'?'opacity-50 line-through':''}">${i.title}</span>
+                        <span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select onchange="changeReadingStatus(${i.id}, this.value)" class="text-[9px] font-black outline-none rounded p-1 ${selColor}">
+                            <option value="nao_comecei" ${i.status==='nao_comecei'?'selected':''}>⏳ A Fazer</option>
+                            <option value="em_andamento" ${i.status==='em_andamento'?'selected':''}>📖 Lendo</option>
+                            <option value="concluido" ${i.status==='concluido'?'selected':''}>✅ Concluído</option>
+                        </select>
+                        <div class="flex gap-1 ml-1">
+                            <button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+                            <button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                        </div>
+                    </div>
+                </div>`; 
+            }); 
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
         }
-        function addReading() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,done:false}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; renderReadingList(); } }
-        function toggleReadingDone(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('readingList',r);renderReadingList();}}
-        function deleteReading(id){lsSet('readingList',lsGet('readingList').filter(x=>x.id!==id));renderReadingList();}
+        function changeReadingStatus(id, s){ let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.status=s; lsSet('readingList',r); renderReadingList(); if(typeof renderStudyChart==='function') renderStudyChart();} }
+        function addReading() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,status:'nao_comecei', date:new Date().toISOString()}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; renderReadingList(); if(typeof renderStudyChart==='function') renderStudyChart(); } }
+        function deleteReading(id){lsSet('readingList',lsGet('readingList').filter(x=>x.id!==id));renderReadingList(); if(typeof renderStudyChart==='function') renderStudyChart();}
         function editReading(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Leitura:",i.title);if(n){i.title=n;lsSet('readingList',r);renderReadingList();}}}
         
         function renderExtraStudies() {
@@ -1155,25 +1192,135 @@
             let lists = lsGet('listTracker'); let c = document.getElementById('list-tracker-container'); 
             if(!c) return; c.innerHTML='';
             if(!lists.length) { c.innerHTML='<p class="text-xs text-purple-400 font-bold z-20 relative">Nenhuma lista pendente 🎀</p>'; return; }
-            lists.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-purple-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleListTrackerDone(${i.id})" class="reading-checkbox w-4 h-4 text-purple-400 rounded focus:ring-purple-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-purple-900 ${i.done?'line-through opacity-60':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':'bg-purple-100 text-purple-700'}">${i.subject||'Geral'}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editListTracker(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteListTracker(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); 
+            lists.forEach(i=>{ 
+                if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; } // Compatibilidade com a versão antiga
+                let selColor = i.status==='concluido'?'bg-emerald-100 text-emerald-700':i.status==='em_andamento'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-500';
+                c.innerHTML+=`
+                <div class="flex items-center justify-between p-2 bg-white border border-purple-100 rounded-xl shadow-sm z-20 relative">
+                    <div class="flex flex-col flex-1 overflow-hidden pr-2">
+                        <span class="text-xs font-extrabold truncate text-purple-900 ${i.status==='concluido'?'line-through opacity-60':''}">${i.title}</span>
+                        <span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.status==='concluido'?'bg-slate-100 text-slate-400':'bg-purple-100 text-purple-700'}">${i.subject||'Geral'}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select onchange="changeListTrackerStatus(${i.id}, this.value)" class="text-[9px] font-black outline-none rounded p-1 ${selColor}">
+                            <option value="nao_comecei" ${i.status==='nao_comecei'?'selected':''}>⏳ A Fazer</option>
+                            <option value="em_andamento" ${i.status==='em_andamento'?'selected':''}>📝 Fazendo</option>
+                            <option value="concluido" ${i.status==='concluido'?'selected':''}>✅ Concluído</option>
+                        </select>
+                        <div class="flex gap-1 ml-1">
+                            <button onclick="deleteListTracker(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                        </div>
+                    </div>
+                </div>`; 
+            }); 
             if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
         }
-        function addListTracker() { let t=document.getElementById('new-list-title').value.trim(), s=document.getElementById('new-list-subject').value.trim(); if(t){ let r=lsGet('listTracker'); r.push({id:Date.now(),title:t,subject:s,done:false}); lsSet('listTracker',r); document.getElementById('new-list-title').value=''; document.getElementById('new-list-subject').value=''; renderListTracker(); } }
-        function toggleListTrackerDone(id){let r=lsGet('listTracker'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('listTracker',r);renderListTracker();}}
-        function deleteListTracker(id){lsSet('listTracker',lsGet('listTracker').filter(x=>x.id!==id));renderListTracker();}
-        function editListTracker(id){let r=lsGet('listTracker'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Lista:",i.title);if(n){i.title=n;lsSet('listTracker',r);renderListTracker();}}}
+        function changeListTrackerStatus(id, s) { let r=lsGet('listTracker'); let i=r.find(x=>x.id===id); if(i){i.status=s; lsSet('listTracker',r); renderListTracker(); if(typeof renderStudyChart==='function') renderStudyChart();} }
+        function addListTracker() { let t=document.getElementById('new-list-title').value.trim(), s=document.getElementById('new-list-subject').value.trim(); if(t){ let r=lsGet('listTracker'); r.push({id:Date.now(),title:t,subject:s,status:'nao_comecei', date:new Date().toISOString()}); lsSet('listTracker',r); document.getElementById('new-list-title').value=''; document.getElementById('new-list-subject').value=''; renderListTracker(); if(typeof renderStudyChart==='function') renderStudyChart(); } }
+        function deleteListTracker(id){lsSet('listTracker',lsGet('listTracker').filter(x=>x.id!==id));renderListTracker(); if(typeof renderStudyChart==='function') renderStudyChart();}
 
         function renderErrorBank() {
             let errs = lsGet('errorBank'); let c = document.getElementById('error-bank-container'); 
             if(!c) return; c.innerHTML='';
             if(!errs.length) { c.innerHTML='<p class="text-xs text-red-400 font-bold z-20 relative">Nenhum erro registrado ✨</p>'; return; }
-            errs.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-red-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleErrorBankDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-red-900 ${i.done?'line-through opacity-60':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':'bg-red-100 text-red-700'}">${i.subject||'Geral'}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editErrorBank(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteErrorBank(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); 
+            errs.forEach(i=>{ 
+                c.innerHTML+=`
+                <details class="bg-white border border-red-100 rounded-xl shadow-sm z-20 relative overflow-hidden group mb-2 [&::-webkit-details-marker]:hidden">
+                    <summary class="p-2.5 flex items-center justify-between cursor-pointer list-none bg-red-50/50 hover:bg-red-50 transition-colors">
+                        <div class="flex flex-col flex-1 overflow-hidden pr-2">
+                            <span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mb-0.5 bg-red-100 text-red-700">${i.subject||'Geral'}</span>
+                            <span class="text-xs font-extrabold text-red-900 truncate">${i.problem}</span>
+                        </div>
+                        <button onclick="deleteErrorBank(${i.id})" class="text-slate-400 hover:text-red-500 p-1 shrink-0"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </summary>
+                    <div class="p-3 border-t border-red-100 text-xs">
+                        <p class="font-bold text-rose-700 mb-0.5">Onde errei:</p>
+                        <p class="text-slate-600 mb-2">${i.mistake}</p>
+                        <p class="font-bold text-emerald-600 mb-0.5">Raciocínio Correto:</p>
+                        <p class="text-slate-600">${i.correction}</p>
+                    </div>
+                </details>`; 
+            }); 
             if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
         }
-        function addErrorBank() { let t=document.getElementById('new-error-title').value.trim(), s=document.getElementById('new-error-subject').value.trim(); if(t){ let r=lsGet('errorBank'); r.push({id:Date.now(),title:t,subject:s,done:false}); lsSet('errorBank',r); document.getElementById('new-error-title').value=''; document.getElementById('new-error-subject').value=''; renderErrorBank(); } }
-        function toggleErrorBankDone(id){let r=lsGet('errorBank'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('errorBank',r);renderErrorBank();}}
-        function deleteErrorBank(id){lsSet('errorBank',lsGet('errorBank').filter(x=>x.id!==id));renderErrorBank();}
-        function editErrorBank(id){let r=lsGet('errorBank'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Descreva o Erro:",i.title);if(n){i.title=n;lsSet('errorBank',r);renderErrorBank();}}}
+        function addErrorBank() { 
+            let s=document.getElementById('new-error-subject').value.trim(), 
+                p=document.getElementById('new-error-problem').value.trim(),
+                m=document.getElementById('new-error-mistake').value.trim(),
+                c=document.getElementById('new-error-correction').value.trim(); 
+            if(p){ 
+                let r=lsGet('errorBank'); 
+                r.push({id:Date.now(), subject:s, problem:p, mistake:m, correction:c, date:new Date().toISOString()}); 
+                lsSet('errorBank',r); 
+                document.getElementById('new-error-subject').value=''; 
+                document.getElementById('new-error-problem').value=''; 
+                document.getElementById('new-error-mistake').value=''; 
+                document.getElementById('new-error-correction').value=''; 
+                renderErrorBank(); 
+                if(typeof renderStudyChart==='function') renderStudyChart();
+            } 
+        }
+        function deleteErrorBank(id){lsSet('errorBank',lsGet('errorBank').filter(x=>x.id!==id));renderErrorBank(); if(typeof renderStudyChart==='function') renderStudyChart();}
+
+        // ==========================================
+        // GRÁFICO DE RESUMO DE ESTUDOS
+        // ==========================================
+        let studyChartInst = null;
+        function renderStudyChart() {
+            let r=lsGet('readingList'), l=lsGet('listTracker'), e=lsGet('errorBank');
+            
+            let rStats = {nao_comecei:0, em_andamento:0, concluido:0};
+            let lStats = {nao_comecei:0, em_andamento:0, concluido:0};
+            
+            r.forEach(x => { let s = x.status || (x.done ? 'concluido' : 'nao_comecei'); rStats[s] = (rStats[s]||0)+1; });
+            l.forEach(x => { let s = x.status || (x.done ? 'concluido' : 'nao_comecei'); lStats[s] = (lStats[s]||0)+1; });
+            
+            let txt = document.getElementById('study-summary-text');
+            if(txt) {
+                txt.innerHTML = `
+                <div class="flex justify-between items-center bg-pink-50 p-2.5 rounded-xl border border-pink-100 shadow-sm z-20 relative">
+                    <span class="text-xs font-bold text-pink-800"><i data-lucide="book-open" class="w-3.5 h-3.5 inline mr-1 text-pink-500"></i> Leituras Concluídas</span>
+                    <span class="text-xs font-black text-pink-700 bg-white px-2 py-0.5 rounded-lg border border-pink-200">${rStats.concluido} / ${r.length}</span>
+                </div>
+                <div class="flex justify-between items-center bg-purple-50 p-2.5 rounded-xl border border-purple-100 shadow-sm z-20 relative">
+                    <span class="text-xs font-bold text-purple-800"><i data-lucide="list-checks" class="w-3.5 h-3.5 inline mr-1 text-purple-500"></i> Listas Concluídas</span>
+                    <span class="text-xs font-black text-purple-700 bg-white px-2 py-0.5 rounded-lg border border-purple-200">${lStats.concluido} / ${l.length}</span>
+                </div>
+                <div class="flex justify-between items-center bg-red-50 p-2.5 rounded-xl border border-red-100 shadow-sm z-20 relative">
+                    <span class="text-xs font-bold text-red-800"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 inline mr-1 text-red-500"></i> Erros Catalogados</span>
+                    <span class="text-xs font-black text-red-700 bg-white px-2 py-0.5 rounded-lg border border-red-200">${e.length}</span>
+                </div>
+                `;
+            }
+
+            if(studyChartInst) studyChartInst.destroy();
+            let chartEl = document.getElementById('studyChart');
+            if(chartEl && (r.length > 0 || l.length > 0)) {
+                studyChartInst = new Chart(chartEl, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Leituras', 'Listas'],
+                        datasets: [
+                            { label: 'Concluído', data: [rStats.concluido, lStats.concluido], backgroundColor: '#10b981', borderRadius:4 },
+                            { label: 'Em Andamento', data: [rStats.em_andamento, lStats.em_andamento], backgroundColor: '#f59e0b', borderRadius:4 },
+                            { label: 'A Fazer', data: [rStats.nao_comecei, lStats.nao_comecei], backgroundColor: '#cbd5e1', borderRadius:4 }
+                        ]
+                    },
+                    options: { 
+                        responsive: true, maintainAspectRatio: false, 
+                        plugins: { legend: { position: 'bottom', labels:{font:{size:10, family:'Quicksand'}} } }, 
+                        scales: { 
+                            y: { stacked: true, beginAtZero: true, ticks: {stepSize:1, font:{family:'Quicksand'}} }, 
+                            x: { stacked: true, grid: {display: false}, ticks: {font:{family:'Quicksand', weight:'bold'}} } 
+                        } 
+                    }
+                });
+            } else if(chartEl) {
+                // Se estiver vazio, cria um gráfico vazio só para manter a estrutura
+                studyChartInst = new Chart(chartEl, { type: 'bar', data: { labels: [''], datasets: [] }, options: { scales: { y: { display: false }, x: { display: false } }, plugins: { legend: { display: false } } } });
+            }
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        }
 
         // ==========================================
         // ATELIÊ & VENDAS ONLINE/FÍSICA
@@ -1370,6 +1517,7 @@
             if(typeof renderExtraStudies === 'function') renderExtraStudies();
             if(typeof renderListTracker === 'function') renderListTracker();
             if(typeof renderErrorBank === 'function') renderErrorBank();
+            if(typeof renderStudyChart === 'function') renderStudyChart();
             if(typeof renderClients === 'function') renderClients(); 
             if(typeof renderPromos === 'function') renderPromos(); 
             if(typeof renderInventory === 'function') renderInventory(); 
@@ -1387,6 +1535,7 @@
             if(typeof lucide !== 'undefined') lucide.createIcons();
             if(typeof renderListTracker === 'function') renderListTracker();
             if(typeof renderErrorBank === 'function') renderErrorBank();
+            if(typeof renderStudyChart === 'function') renderStudyChart();
         };
     </script>
 </body>
