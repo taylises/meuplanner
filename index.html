@@ -380,6 +380,53 @@
                     <div id="extra-study-grid" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
                 </div>
             </div>
+
+            <!-- NOVA SEÇÃO: TRACKER DE LISTAS E BANCO DE ERROS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                
+                <!-- Tracker de Listas -->
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
+                    <i data-lucide="list-checks" class="absolute bottom-4 right-4 w-16 h-16 text-purple-400/10 fill-purple-400/10 animate-pulse z-0"></i>
+                    <div class="absolute top-0 left-0 w-full h-2 bg-purple-400"></div>
+                    <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="list-checks" class="text-purple-500"></i> Tracker de Listas 📋</h3>
+                    <div class="flex flex-col gap-2 mb-4 bg-purple-50 p-3 rounded-xl border border-purple-100 z-20">
+                        <input type="text" id="new-list-title" placeholder="Nome da Lista (Ex: Lista 1)..." class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                        <div class="flex gap-2">
+                            <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / Extra" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-purple-700">
+                            <button onclick="addListTracker()" class="bg-purple-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm"><i data-lucide="plus"></i></button>
+                        </div>
+                    </div>
+                    <div id="list-tracker-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
+                </div>
+
+                <!-- Banco de Erros -->
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
+                    <i data-lucide="alert-triangle" class="absolute top-4 right-4 w-16 h-16 text-red-400/10 fill-red-400/10 animate-float z-0"></i>
+                    <div class="absolute top-0 left-0 w-full h-2 bg-red-400"></div>
+                    <h3 class="text-xl font-cute text-red-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="alert-triangle" class="text-red-500"></i> Banco de Erros 🚨</h3>
+                    <div class="flex flex-col gap-2 mb-4 bg-red-50 p-3 rounded-xl border border-red-100 z-20">
+                        <input type="text" id="new-error-title" placeholder="Questão ou Conceito errado..." class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                        <div class="flex gap-2">
+                            <input list="study-subjects" id="new-error-subject" placeholder="Disciplina / Assunto" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-red-700">
+                            <button onclick="addErrorBank()" class="bg-red-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center"><i data-lucide="plus"></i></button>
+                        </div>
+                    </div>
+                    <div id="error-bank-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
+                </div>
+            </div>
+
+            <!-- Datalist Compartilhado para Facilitar -->
+            <datalist id="study-subjects">
+                <option value="Constituição e Tendências em Ed. Ciências"></option>
+                <option value="Conceitos Foucaultianos"></option>
+                <option value="Conceitos Foucaultianos (Presencial)"></option>
+                <option value="História e Fund. da Geografia"></option>
+                <option value="Geografia Cultural"></option>
+                <option value="Geografia da América Latina"></option>
+                <option value="Aulas Extras"></option>
+                <option value="Resumos de Leituras"></option>
+            </datalist>
+
         </div>
 
         <!-- ========================================== -->
@@ -706,7 +753,7 @@
 
 
     <!-- ========================================================== -->
-    <!-- SCRIPT DA NUVEM (O "ESPIÃO INVISÍVEL")                     -->
+    <!-- SCRIPT DA NUVEM (O "ESPIÃO INVISÍVEL") COM TRATAMENTO DE ERROS -->
     <!-- ========================================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -727,48 +774,75 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
-        const overlay = document.getElementById('login-overlay');
-        const loader = document.getElementById('cloud-overlay');
-        const errTxt = document.getElementById('login-error');
-        const cloudStatus = document.getElementById('cloud-status-text');
-
+        const appId = 'meuplanner-taylise';
         window.dbUser = null;
         window.isFetchingFromCloud = false;
 
         window.doGoogleLogin = async () => {
-            errTxt.classList.add('hidden');
+            const errP = document.getElementById('login-error');
+            if(errP) errP.classList.add('hidden');
             try {
                 await signInWithPopup(auth, googleProvider);
             } catch(error) {
                 console.error(error);
-                if (error.code === 'auth/unauthorized-domain') {
-                    errTxt.innerHTML = `⚠️ <b>Ação necessária:</b> Vá no painel do Firebase > Authentication > Configurações > Domínios autorizados e adicione o domínio:<br><b class="text-rose-600">${window.location.hostname}</b>`;
-                } else {
-                    errTxt.innerText = "Erro ao fazer login com o Google. Tente novamente.";
+                if(errP) {
+                    if (error.code === 'auth/unauthorized-domain') {
+                        errP.innerHTML = `⚠️ <b>Ação necessária:</b> Vá no painel do Firebase > Authentication > Settings (Configurações) > Authorized domains (Domínios autorizados) e adicione o domínio:<br><b class="text-rose-600">${window.location.hostname}</b>`;
+                    } else {
+                        errP.innerText = "Erro ao fazer login com o Google. Tente novamente.";
+                    }
+                    errP.classList.remove('hidden');
                 }
-                errTxt.classList.remove('hidden');
             }
         };
 
         window.doLogin = async () => {
-            const e = document.getElementById('login-email').value;
-            const p = document.getElementById('login-pass').value;
-            errTxt.classList.add('hidden');
-            if(!e || !p) { errTxt.innerText = "Preencha o e-mail e a senha!"; errTxt.classList.remove('hidden'); return; }
-            try { await signInWithEmailAndPassword(auth, e, p); }
-            catch(err) { errTxt.innerText = "E-mail ou senha incorretos!"; errTxt.classList.remove('hidden'); }
+            const emailInput = document.getElementById('login-email');
+            const passInput = document.getElementById('login-pass');
+            const errP = document.getElementById('login-error');
+            
+            const e = emailInput ? emailInput.value.trim() : '';
+            const p = passInput ? passInput.value : '';
+            
+            if(errP) errP.classList.add('hidden');
+            if(!e || !p) { 
+                if(errP) { errP.innerText = "Preencha o e-mail e a senha!"; errP.classList.remove('hidden'); }
+                return; 
+            }
+            try { 
+                const loader = document.getElementById('cloud-overlay');
+                if(loader) { loader.classList.remove('hidden'); loader.classList.add('flex'); }
+                await signInWithEmailAndPassword(auth, e, p); 
+            } catch(err) { 
+                const loader = document.getElementById('cloud-overlay');
+                if(loader) { loader.classList.add('hidden'); loader.classList.remove('flex'); }
+                if(errP) { errP.innerText = "E-mail ou senha incorretos!"; errP.classList.remove('hidden'); }
+            }
         };
 
         window.doSignup = async () => {
-            const e = document.getElementById('login-email').value;
-            const p = document.getElementById('login-pass').value;
-            errTxt.classList.add('hidden');
-            if(!e || p.length < 6) { errTxt.innerText = "A senha deve ter no mínimo 6 letras!"; errTxt.classList.remove('hidden'); return; }
+            const emailInput = document.getElementById('login-email');
+            const passInput = document.getElementById('login-pass');
+            const errP = document.getElementById('login-error');
+            
+            const e = emailInput ? emailInput.value.trim() : '';
+            const p = passInput ? passInput.value : '';
+            
+            if(errP) errP.classList.add('hidden');
+            if(!e || p.length < 6) { 
+                if(errP) { errP.innerText = "A senha deve ter no mínimo 6 letras!"; errP.classList.remove('hidden'); }
+                return; 
+            }
             try {
+                const loader = document.getElementById('cloud-overlay');
+                if(loader) { loader.classList.remove('hidden'); loader.classList.add('flex'); }
                 await createUserWithEmailAndPassword(auth, e, p);
                 alert("Conta segura criada com sucesso, Taylise! 🎀");
+            } catch(err) { 
+                const loader = document.getElementById('cloud-overlay');
+                if(loader) { loader.classList.add('hidden'); loader.classList.remove('flex'); }
+                if(errP) { errP.innerText = "Erro ao criar conta. O E-mail já existe?"; errP.classList.remove('hidden'); }
             }
-            catch(err) { errTxt.innerText = "Erro ao criar conta. O E-mail já existe?"; errTxt.classList.remove('hidden'); }
         };
 
         window.doLogout = async () => {
@@ -781,7 +855,10 @@
 
         async function syncFromCloud() {
             if (!window.dbUser) return;
+            const cloudStatus = document.getElementById('cloud-status-text');
+            const loader = document.getElementById('cloud-overlay');
             if (cloudStatus) cloudStatus.innerText = "A baixar...";
+            
             try {
                 const docRef = doc(db, 'planners', window.dbUser.uid);
                 const snap = await getDoc(docRef);
@@ -802,19 +879,20 @@
                 }
 
                 if (cloudStatus) cloudStatus.innerText = "Sincronizado ☁️";
-                loader.classList.add('hidden');
+                if(loader) { loader.classList.add('hidden'); loader.classList.remove('flex'); }
                 if(typeof window.renderAllApp === 'function') window.renderAllApp();
 
             } catch (error) {
                 console.error(error);
                 if (cloudStatus) cloudStatus.innerText = "Offline ⚠️";
-                loader.classList.add('hidden');
+                if(loader) { loader.classList.add('hidden'); loader.classList.remove('flex'); }
                 if(typeof window.renderAllApp === 'function') window.renderAllApp();
             }
         }
 
         window.syncToCloud = async () => {
             if(!window.dbUser || !db) return;
+            const cloudStatus = document.getElementById('cloud-status-text');
             if(cloudStatus) cloudStatus.innerText = "A guardar...";
             let data = {};
             for(let i=0; i<localStorage.length; i++) {
@@ -834,15 +912,17 @@
         };
 
         onAuthStateChanged(auth, (user) => {
+            const overlay = document.getElementById('login-overlay');
+            const loader = document.getElementById('cloud-overlay');
             if (user) {
                 window.dbUser = user;
-                overlay.classList.add('hidden');
-                loader.classList.remove('hidden');
+                if(overlay) overlay.classList.add('hidden');
+                if(loader) { loader.classList.remove('hidden'); loader.classList.add('flex'); }
                 syncFromCloud();
             } else {
                 window.dbUser = null;
-                overlay.classList.remove('hidden');
-                loader.classList.add('hidden');
+                if(overlay) overlay.classList.remove('hidden');
+                if(loader) { loader.classList.add('hidden'); loader.classList.remove('flex'); }
             }
         });
 
@@ -889,6 +969,7 @@
             if(t==='resumo') renderMasterCalendar(); if(t==='rotina') renderRoutineChart(); if(t==='financas') renderFinances();
             if(t==='tattoo') { renderTattoos(); renderClients(); renderPromos(); renderInventory(); } 
             if(t==='instagram') renderInstaPosts(); if(t==='loja') renderProductions();
+            if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); updateClassCards(); }
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
 
@@ -1042,7 +1123,7 @@
         function renderReadingList() {
             let r=lsGet('readingList'); let c=document.getElementById('reading-list-container'); c.innerHTML='';
             if(!r.length) { c.innerHTML='<p class="text-xs text-pink-400 font-bold z-20 relative">Nenhuma leitura 🎀</p>'; return; }
-            r.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleReadingDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-rose-900">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+            r.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleReadingDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-rose-900 ${i.done?'opacity-50 line-through':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':i.type==='Livro'?'bg-rose-100 text-rose-700':i.type==='Artigo'?'bg-red-100 text-red-700':'bg-pink-100 text-pink-700'}">${i.type}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editReading(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteReading(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
         }
         function addReading() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,done:false}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; renderReadingList(); } }
         function toggleReadingDone(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('readingList',r);renderReadingList();}}
@@ -1067,6 +1148,36 @@
         function deleteExtraStudy(id){lsSet('extraStudies',lsGet('extraStudies').filter(x=>x.id!==id));renderExtraStudies();renderMasterCalendar();}
         function editExtraStudy(id){let e=lsGet('extraStudies'); let i=e.find(x=>x.id===id); if(i){let n=prompt("Nome do Extra:",i.title);if(n){i.title=n;lsSet('extraStudies',e);renderExtraStudies();renderMasterCalendar();}}}
 
+        // ==========================================
+        // TRACKER DE LISTAS & BANCO DE ERROS
+        // ==========================================
+        function renderListTracker() {
+            let lists = lsGet('listTracker'); let c = document.getElementById('list-tracker-container'); 
+            if(!c) return; c.innerHTML='';
+            if(!lists.length) { c.innerHTML='<p class="text-xs text-purple-400 font-bold z-20 relative">Nenhuma lista pendente 🎀</p>'; return; }
+            lists.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-purple-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleListTrackerDone(${i.id})" class="reading-checkbox w-4 h-4 text-purple-400 rounded focus:ring-purple-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-purple-900 ${i.done?'line-through opacity-60':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':'bg-purple-100 text-purple-700'}">${i.subject||'Geral'}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editListTracker(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteListTracker(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); 
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addListTracker() { let t=document.getElementById('new-list-title').value.trim(), s=document.getElementById('new-list-subject').value.trim(); if(t){ let r=lsGet('listTracker'); r.push({id:Date.now(),title:t,subject:s,done:false}); lsSet('listTracker',r); document.getElementById('new-list-title').value=''; document.getElementById('new-list-subject').value=''; renderListTracker(); } }
+        function toggleListTrackerDone(id){let r=lsGet('listTracker'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('listTracker',r);renderListTracker();}}
+        function deleteListTracker(id){lsSet('listTracker',lsGet('listTracker').filter(x=>x.id!==id));renderListTracker();}
+        function editListTracker(id){let r=lsGet('listTracker'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Lista:",i.title);if(n){i.title=n;lsSet('listTracker',r);renderListTracker();}}}
+
+        function renderErrorBank() {
+            let errs = lsGet('errorBank'); let c = document.getElementById('error-bank-container'); 
+            if(!c) return; c.innerHTML='';
+            if(!errs.length) { c.innerHTML='<p class="text-xs text-red-400 font-bold z-20 relative">Nenhum erro registrado ✨</p>'; return; }
+            errs.forEach(i=>{ c.innerHTML+=`<div class="flex items-center justify-between p-2.5 bg-white border border-red-100 rounded-xl shadow-sm z-20 relative"><label class="flex items-center gap-2 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${i.done?'checked':''} onchange="toggleErrorBankDone(${i.id})" class="reading-checkbox w-4 h-4 text-red-400 rounded focus:ring-red-400"><div class="flex flex-col"><span class="text-xs font-extrabold truncate text-red-900 ${i.done?'line-through opacity-60':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.done?'bg-slate-100 text-slate-400':'bg-red-100 text-red-700'}">${i.subject||'Geral'}</span></div></label><div class="flex gap-1 ml-2"><button onclick="editErrorBank(${i.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button><button onclick="deleteErrorBank(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div>`; }); 
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addErrorBank() { let t=document.getElementById('new-error-title').value.trim(), s=document.getElementById('new-error-subject').value.trim(); if(t){ let r=lsGet('errorBank'); r.push({id:Date.now(),title:t,subject:s,done:false}); lsSet('errorBank',r); document.getElementById('new-error-title').value=''; document.getElementById('new-error-subject').value=''; renderErrorBank(); } }
+        function toggleErrorBankDone(id){let r=lsGet('errorBank'); let i=r.find(x=>x.id===id); if(i){i.done=!i.done;lsSet('errorBank',r);renderErrorBank();}}
+        function deleteErrorBank(id){lsSet('errorBank',lsGet('errorBank').filter(x=>x.id!==id));renderErrorBank();}
+        function editErrorBank(id){let r=lsGet('errorBank'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Descreva o Erro:",i.title);if(n){i.title=n;lsSet('errorBank',r);renderErrorBank();}}}
+
+        // ==========================================
+        // ATELIÊ & VENDAS ONLINE/FÍSICA
+        // ==========================================
         function renderProductions() {
             let p=lsGet('productions'); ['todo','doing','done'].forEach(s=>document.getElementById(`prod-col-${s}`).innerHTML='');
             p.forEach(x => { 
@@ -1107,6 +1218,9 @@
             renderFinances(); switchTab('financas');
         }
 
+        // ==========================================
+        // TATTOO CRM PRO & PROMOS
+        // ==========================================
         function renderTattoos() {
             let t=lsGet('tattoos'); let l=document.getElementById('tattoo-list'); l.innerHTML='';
             if(!t.length) { l.innerHTML='<div class="bg-purple-50 border border-purple-100 p-4 rounded-xl text-center z-20 relative"><p class="text-xs font-bold text-purple-400">Nenhum agendamento 🖤</p></div>'; return; }
@@ -1149,6 +1263,9 @@
         function addInventoryItem(){ let n=document.getElementById('inv-name').value.trim(), q=parseInt(document.getElementById('inv-qty').value); if(n&&q){let i=lsGet('tattooInventory'); let ex=i.find(x=>x.name.toLowerCase()===n.toLowerCase()); if(ex)ex.qty+=q; else i.push({id:Date.now(),name:n,qty:q}); lsSet('tattooInventory',i); document.getElementById('inv-name').value=''; document.getElementById('inv-qty').value=''; renderInventory();}}
         function deleteInv(id){lsSet('tattooInventory',lsGet('tattooInventory').filter(x=>x.id!==id));renderInventory();}
 
+        // ==========================================
+        // INSTAGRAM SOCIAL
+        // ==========================================
         function renderInstaPosts(){ 
             let p=lsGet('instaPosts'); ['ideia','gravando','editando','publicado'].forEach(s=>document.getElementById(`insta-col-${s}`).innerHTML=''); 
             p.forEach(x=>{
@@ -1167,15 +1284,17 @@
         function addInstaPost() { let n=document.getElementById('insta-name').value.trim(); if(n){ let p=lsGet('instaPosts'); p.push({id:Date.now(),name:n,type:document.getElementById('insta-type').value,date:document.getElementById('insta-date').value,status:'ideia'}); lsSet('instaPosts',p); document.getElementById('insta-name').value=''; document.getElementById('insta-date').value=''; renderInstaPosts(); renderMasterCalendar(); } }
         function changeInstaStatus(id,s){let p=lsGet('instaPosts'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('instaPosts',p); renderInstaPosts();}
         function deleteInstaPost(id){lsSet('instaPosts',lsGet('instaPosts').filter(x=>x.id!==id));renderInstaPosts();renderMasterCalendar();}
-        
-        function loadStoreNotes() { let n = document.getElementById('store-notes'); if(n) n.value = lsGet('notes',{})['storeNotes']||''; }
-        function saveStoreNotes() { let notes = lsGet('notes',{}); notes['storeNotes'] = document.getElementById('store-notes').value; lsSet('notes', notes); }
-        function loadInstaNotes() { let n = document.getElementById('insta-notes'); if(n) n.value = lsGet('notes',{})['instaNotes']||''; }
-        function saveInstaNotes() { let notes = lsGet('notes',{}); notes['instaNotes'] = document.getElementById('insta-notes').value; lsSet('notes', notes); }
+        function loadStoreNotes() { let el=document.getElementById('store-notes'); if(el) el.value = lsGet('notes',{})['storeNotes']||''; }
+        function saveStoreNotes() { let n = lsGet('notes',{}); n['storeNotes'] = document.getElementById('store-notes').value; lsSet('notes', n); }
+        function loadInstaNotes() { let el=document.getElementById('insta-notes'); if(el) el.value = lsGet('notes',{})['instaNotes']||''; }
+        function saveInstaNotes() { let n = lsGet('notes',{}); n['instaNotes'] = document.getElementById('insta-notes').value; lsSet('notes', n); }
 
+        // ==========================================
+        // FINANÇAS DASHBOARD E CARTÃO
+        // ==========================================
         function updateFinanceCategories() {
             let t=document.getElementById('new-fin-type').value, l=document.getElementById('fin-categories'); 
-            if(l) {
+            if(l){
                 l.innerHTML='';
                 (t==='income'?['Bolsa','Auxílio','Trabalho Edição','Tattoo','Loja','Outros']:['Materiais/Arte','Alimentação','Transporte','Lazer','Assinaturas','Pagamento Fatura','Outros']).forEach(c=>l.innerHTML+=`<option value="${c}"></option>`);
             }
@@ -1220,6 +1339,7 @@
         function addTransaction(){ 
             let f=lsGet('finances'); let desc=document.getElementById('new-fin-desc').value.trim(), amt=parseFloat(document.getElementById('new-fin-amount').value), type=document.getElementById('new-fin-type').value, date=document.getElementById('new-fin-date').value||new Date().toISOString().split('T')[0], cat=document.getElementById('new-fin-cat') ? document.getElementById('new-fin-cat').value||'Outros' : 'Outros', meth=document.getElementById('new-fin-method') ? document.getElementById('new-fin-method').value : 'pix';
             if(!desc||isNaN(amt))return;
+            
             if(type==='income'||meth==='pix') {
                 f.push({id:Date.now(),type,method:'pix',category:cat,description:desc,amount:amt,date});
             } else { 
@@ -1228,7 +1348,9 @@
                 let perI=amt/inst; let d=new Date(date+'T12:00:00'); 
                 for(let i=1;i<=inst;i++){ let nD=new Date(d.getFullYear(),d.getMonth()+(i-1),d.getDate()); f.push({id:Date.now()+i,type:'expense',method:'cc',category:cat,description:inst>1?`${desc} (${i}/${inst})`:desc,amount:perI,date:nD.toISOString().split('T')[0]}); } 
             }
-            lsSet('finances',f); document.getElementById('new-fin-desc').value=''; document.getElementById('new-fin-amount').value=''; 
+            
+            lsSet('finances',f); 
+            document.getElementById('new-fin-desc').value=''; document.getElementById('new-fin-amount').value=''; 
             if(document.getElementById('new-fin-cat')) document.getElementById('new-fin-cat').value=''; 
             if(document.getElementById('new-fin-installments')) document.getElementById('new-fin-installments').value='1'; 
             closeFinanceModal(); renderFinances();
@@ -1246,6 +1368,8 @@
             if(typeof renderProductions === 'function') renderProductions(); 
             if(typeof renderReadingList === 'function') renderReadingList(); 
             if(typeof renderExtraStudies === 'function') renderExtraStudies();
+            if(typeof renderListTracker === 'function') renderListTracker();
+            if(typeof renderErrorBank === 'function') renderErrorBank();
             if(typeof renderClients === 'function') renderClients(); 
             if(typeof renderPromos === 'function') renderPromos(); 
             if(typeof renderInventory === 'function') renderInventory(); 
@@ -1261,6 +1385,8 @@
 
         window.onload = () => {
             if(typeof lucide !== 'undefined') lucide.createIcons();
+            if(typeof renderListTracker === 'function') renderListTracker();
+            if(typeof renderErrorBank === 'function') renderErrorBank();
         };
     </script>
 </body>
