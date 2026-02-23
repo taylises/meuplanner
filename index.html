@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Meu Planner 🎀 Hello Kitty - Taylise</title>
     
     <link rel="icon" href="https://img.icons8.com/color/512/ribbon.png" type="image/png">
@@ -30,7 +30,11 @@
         .font-cute { font-family: 'Fredoka', sans-serif; } 
 
         input, select, textarea { font-size: 16px !important; font-family: 'Quicksand', sans-serif; }
-        .main-content { padding-bottom: calc(100px + var(--safe-area-inset-bottom)); }
+        
+        /* Ajuste do espaço principal e da barrinha do iPhone */
+        .main-content { padding-bottom: calc(110px + var(--safe-area-inset-bottom)); }
+        .safe-pb { padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 16px) !important; }
+        
         @media (min-width: 768px) { .main-content { padding-bottom: 2rem; } }
 
         /* ======================================================== */
@@ -680,7 +684,7 @@
     </main>
 
     <!-- NAVEGAÇÃO MOBILE (BOTTOM BAR) -->
-    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t-2 border-pink-100 z-[90] pb-[var(--safe-area-inset-bottom)] flex overflow-x-auto hide-scrollbar md:hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-3xl pt-2 px-1">
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t-2 border-pink-100 z-[90] flex overflow-x-auto hide-scrollbar md:hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-3xl pt-2 px-1 safe-pb">
         <button onclick="switchTab('resumo')" id="mob-btn-resumo" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="calendar-days"></i><span class="text-[9px] font-bold">Resumo</span></button>
         <button onclick="switchTab('rotina')" id="mob-btn-rotina" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="coffee"></i><span class="text-[9px] font-bold">Rotina</span></button>
         <button onclick="switchTab('estudos')" id="mob-btn-estudos" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="book-heart"></i><span class="text-[9px] font-bold">Estudos</span></button>
