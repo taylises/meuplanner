@@ -82,12 +82,7 @@
             
             <!-- BOTÃO DO GOOGLE -->
             <button onclick="window.doGoogleLogin()" class="w-full bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-3 rounded-xl mb-4 shadow-sm transition flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
+                <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                 Entrar com Google
             </button>
 
@@ -95,10 +90,8 @@
                 <div class="flex-1 h-px bg-pink-100"></div><span class="text-[10px] text-pink-300 font-bold uppercase tracking-widest">ou E-mail</span><div class="flex-1 h-px bg-pink-100"></div>
             </div>
 
-            <!-- OPÇÕES DE E-MAIL -->
             <input type="email" id="login-email" placeholder="Seu E-mail" class="bg-pink-50 border border-pink-200 rounded-xl p-3 mb-3 outline-none font-bold text-rose-700 text-sm w-full">
             <input type="password" id="login-pass" placeholder="Senha (Mín. 6 letras)" class="bg-pink-50 border border-pink-200 rounded-xl p-3 mb-2 outline-none font-bold text-rose-700 text-sm w-full">
-            
             <p id="login-error" class="text-[11px] font-bold text-red-500 mb-3 hidden"></p>
             
             <button onclick="window.doLogin()" class="bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 rounded-xl mb-3 shadow-md transition">Entrar</button>
@@ -112,14 +105,11 @@
         <h2 class="text-xl font-cute text-rose-700 font-bold">Sincronizando... ☁️</h2>
     </div>
 
-    <!-- Header com Patinhas Flutuantes Fofas -->
+    <!-- Header -->
     <header class="bg-gradient-to-br from-pink-400 via-rose-400 to-red-400 text-white pt-8 pb-10 md:pt-10 md:pb-16 px-4 md:px-12 rounded-b-[3rem] md:rounded-b-[4rem] shadow-lg border-b-4 border-white/50 mb-6 relative overflow-hidden">
-        <!-- Ícones Originais -->
         <i data-lucide="heart" class="absolute top-4 left-6 w-12 h-12 text-white/20 rotate-12 fill-white/20 animate-float"></i>
         <i data-lucide="palette" class="absolute bottom-2 right-12 w-10 h-10 text-yellow-300/40 fill-yellow-300/40 -rotate-12 animate-float" style="animation-delay: 1s;"></i>
         <i data-lucide="sparkles" class="absolute top-8 right-1/4 w-8 h-8 text-white/30 animate-pulse"></i>
-        
-        <!-- Patinhas Fofas 🐾 -->
         <i data-lucide="paw-print" class="absolute top-10 left-1/3 w-8 h-8 text-white/20 fill-white/20 rotate-12 animate-float" style="animation-delay: 0.5s;"></i>
         <i data-lucide="paw-print" class="absolute bottom-4 left-[20%] w-6 h-6 text-pink-100/40 fill-pink-100/40 -rotate-45 animate-pulse" style="animation-delay: 1.5s;"></i>
         <i data-lucide="paw-print" class="absolute top-4 right-[40%] w-10 h-10 text-white/10 fill-white/10 rotate-45 animate-float" style="animation-delay: 2s;"></i>
@@ -131,7 +121,6 @@
                 <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Geografia • Ateliê • Tattoo • Social</p>
             </div>
             
-            <!-- BOTÃO DE LOGOUT ADICIONADO AO SEU HEADER ORIGINAL -->
             <button onclick="window.doLogout()" class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center hover:bg-white/30 transition cursor-pointer group">
                 <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5 group-hover:hidden">Status Nuvem</p>
                 <p id="cloud-status-text" class="text-sm md:text-lg font-cute font-bold drop-shadow-sm group-hover:hidden">A verificar... ☁️</p>
@@ -157,7 +146,6 @@
         <!-- ========================================== -->
         <div id="tab-resumo" class="tab-content animate-pop block">
             <div class="cute-card p-6 md:p-10 relative overflow-hidden bg-white mb-8">
-                <!-- Enfeites de fundo 🎀 -->
                 <i data-lucide="star" class="absolute top-16 right-12 w-24 h-24 text-pink-300/20 fill-pink-300/20 animate-float z-0" style="animation-delay: 1s;"></i>
                 <i data-lucide="heart" class="absolute bottom-10 left-10 w-20 h-20 text-rose-300/20 fill-rose-300/20 -rotate-12 animate-pulse z-0"></i>
                 <i data-lucide="sparkles" class="absolute top-1/2 left-4 w-12 h-12 text-yellow-300/20 fill-yellow-300/20 animate-float z-0"></i>
@@ -185,14 +173,11 @@
                 </div>
                 <div id="calendar-days" class="grid grid-cols-7 gap-1 md:gap-2 mt-2 relative z-10"></div>
 
-                <!-- Resumo dos Eventos do Mês -->
                 <div class="mt-10 border-t-2 border-pink-50 pt-6 relative z-10">
                     <h3 class="font-cute font-bold text-rose-700 text-lg mb-4 flex items-center gap-2">
                         <i data-lucide="list-heart" class="w-5 h-5 text-pink-400"></i> Eventos e Prazos Deste Mês
                     </h3>
-                    <div id="monthly-summary-list" class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
-                        <!-- Injetado via JS -->
-                    </div>
+                    <div id="monthly-summary-list" class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2"></div>
                 </div>
             </div>
         </div>
@@ -203,9 +188,7 @@
         <div id="tab-rotina" class="tab-content hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <div class="cute-card p-6 relative flex flex-col overflow-hidden">
-                    <!-- Enfeites -->
                     <i data-lucide="sparkles" class="absolute top-1/3 right-4 w-20 h-20 text-rose-300/20 fill-rose-300/20 animate-float z-0"></i>
-
                     <div class="absolute top-0 left-0 w-full h-2 bg-rose-300"></div>
                     <h3 class="font-cute text-rose-800 text-xl flex items-center gap-2 mb-4 relative z-10"><i data-lucide="list-todo" class="text-rose-400"></i> Tarefas de Hoje</h3>
                     <div class="flex flex-col gap-3 mb-4 bg-rose-50 p-4 rounded-2xl border border-rose-100 relative z-10">
@@ -214,7 +197,6 @@
                             <button onclick="addTask()" class="bg-rose-400 text-white px-5 rounded-xl shadow-md hover:bg-rose-500 transition-colors"><i data-lucide="plus"></i></button>
                         </div>
                         <div class="flex flex-wrap gap-1.5 mt-1">
-                            <!-- Os 13 Botões -->
                             <button onclick="addQuickTask('🏋️‍♀️ Academia', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Academia</button>
                             <button onclick="addQuickTask('🚶‍♀️ Caminhada', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Caminhada</button>
                             <button onclick="addQuickTask('🛒 Mercado', 'casa')" class="text-[10px] font-bold bg-white border border-amber-200 text-amber-600 px-3 py-1.5 rounded-lg hover:bg-amber-50 transition">Mercado</button>
@@ -235,9 +217,7 @@
                 
                 <div class="flex flex-col gap-6">
                     <div class="cute-card p-6 flex flex-col items-center bg-white relative overflow-hidden">
-                        <!-- Enfeites -->
                         <i data-lucide="star" class="absolute top-4 right-6 w-14 h-14 text-yellow-300/30 fill-yellow-300/30 animate-pulse z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
                         <h3 class="font-cute text-rose-800 text-lg mb-3 flex items-center gap-2 relative z-10"><i data-lucide="timer" class="text-red-400"></i> Foco Pomodoro</h3>
                         <div class="text-5xl font-cute text-rose-500 mb-5 relative z-10" id="timer-display">25:00</div>
@@ -253,7 +233,6 @@
                     
                     <div class="cute-card p-4 relative flex-1 flex flex-col min-h-[140px] overflow-hidden">
                         <i data-lucide="music" class="absolute bottom-4 right-4 w-16 h-16 text-yellow-400/20 fill-yellow-400/20 animate-float z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-yellow-200"></div>
                         <h3 class="font-cute text-rose-800 text-base mb-3 flex items-center gap-1 relative z-10"><i data-lucide="music" class="w-4 h-4 text-yellow-500"></i> Vibes 🎧</h3>
                         <div class="flex-1 w-full bg-pink-50 rounded-xl overflow-hidden border border-pink-100 h-full relative z-10">
@@ -265,7 +244,6 @@
             
             <div class="cute-card p-6 md:p-8 bg-white mb-8 relative overflow-hidden">
                 <i data-lucide="heart" class="absolute top-10 right-10 w-24 h-24 text-purple-300/20 fill-purple-300/20 rotate-12 animate-float z-0"></i>
-
                 <div class="absolute top-0 left-0 w-full h-2 bg-purple-300"></div>
                 <h3 class="font-cute text-purple-800 text-xl flex items-center gap-2 mb-6 relative z-10"><i data-lucide="bar-chart-2" class="text-purple-400"></i> Resumo do Mês 🌸</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
@@ -276,7 +254,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- ABA 3: ESTUDOS                             -->
+        <!-- ABA 3: ESTUDOS (ESTRITAMENTE FECHADA AQUI) -->
         <!-- ========================================== -->
         <div id="tab-estudos" class="tab-content hidden">
             
@@ -349,9 +327,9 @@
                     <div class="absolute top-0 left-0 w-full h-2 bg-pink-400"></div>
                     <h3 class="text-xl font-cute text-rose-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="book-open" class="text-pink-500"></i> Leituras 📖</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-pink-50 p-3 rounded-xl border border-pink-100 z-20">
-                        <input type="text" id="new-reading-title" placeholder="Título da Leitura..." class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                        <input type="text" id="new-reading-title" placeholder="Título da Leitura..." class="w-full bg-white rounded-lg p-3 text-sm font-bold border outline-none shadow-sm">
                         <div class="flex gap-2">
-                            <select id="new-reading-type" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-rose-700">
+                            <select id="new-reading-type" class="flex-1 bg-white rounded-lg p-3 text-sm font-bold border outline-none text-rose-700 shadow-sm">
                                 <option value="Livro">Livro</option>
                                 <option value="Capítulo">Capítulo</option>
                                 <option value="Artigo">Artigo</option>
@@ -368,13 +346,13 @@
                     <div class="absolute top-0 left-0 w-full h-2 bg-blue-400"></div>
                     <h3 class="text-xl font-cute text-blue-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="pencil" class="text-blue-500"></i> Aulas Extras 📝</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-blue-50 p-3 rounded-xl border border-blue-100 z-20">
-                        <input type="text" id="new-study-title" placeholder="Nome (Ex: Curso Inglês)" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
+                        <input type="text" id="new-study-title" placeholder="Nome (Ex: Curso Inglês)" class="w-full bg-white rounded-lg p-3 text-sm font-bold border outline-none shadow-sm">
                         <div class="flex gap-2">
-                            <input type="date" id="new-study-date" class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-slate-600">
-                            <input type="time" id="new-study-time" class="w-28 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-slate-600">
+                            <input type="date" id="new-study-date" class="flex-1 bg-white rounded-lg p-3 text-sm font-bold border outline-none text-slate-600 shadow-sm">
+                            <input type="time" id="new-study-time" class="w-28 bg-white rounded-lg p-3 text-sm font-bold border outline-none text-slate-600 shadow-sm">
                         </div>
                         <div class="flex gap-2">
-                            <input type="text" id="new-study-repeat" placeholder="Repete? (Ex: Toda Ter/Qui)" class="flex-1 bg-white rounded-lg p-2.5 text-xs font-bold border outline-none text-slate-500">
+                            <input type="text" id="new-study-repeat" placeholder="Repete? (Ex: Toda Ter/Qui)" class="flex-1 bg-white rounded-lg p-3 text-xs font-bold border outline-none text-slate-500 shadow-sm">
                             <button onclick="addExtraStudy()" class="bg-blue-500 hover:bg-blue-600 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center transition"><i data-lucide="plus"></i></button>
                         </div>
                     </div>
@@ -389,11 +367,11 @@
                     <i data-lucide="list-checks" class="absolute bottom-4 right-4 w-16 h-16 text-purple-400/10 fill-purple-400/10 animate-pulse z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-purple-400"></div>
                     <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="list-checks" class="text-purple-500"></i> Tracker de Listas 📋</h3>
-                    <div class="flex flex-col gap-2 mb-4 bg-purple-50 p-3 rounded-xl border border-purple-100 z-20">
-                        <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / Extra" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-purple-700">
-                        <div class="flex gap-2">
-                            <input type="text" id="new-list-title" placeholder="Nome da Lista (Ex: Lista 1)..." class="flex-1 bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
-                            <button onclick="addListTracker()" class="bg-purple-400 hover:bg-purple-500 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm transition"><i data-lucide="plus"></i></button>
+                    <div class="flex flex-col gap-2 mb-4 bg-purple-50 p-4 rounded-xl border border-purple-100 z-20">
+                        <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / Extra" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none text-purple-700 shadow-sm">
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="new-list-title" placeholder="Nome da Lista (Ex: Lista 1)..." class="flex-1 bg-white rounded-xl p-3 text-sm font-bold border outline-none shadow-sm">
+                            <button onclick="addListTracker()" class="bg-purple-400 hover:bg-purple-500 text-white p-3 rounded-xl active:scale-95 font-black shadow-sm transition flex justify-center items-center"><i data-lucide="plus"></i> Salvar</button>
                         </div>
                     </div>
                     <div id="list-tracker-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
@@ -404,12 +382,12 @@
                     <i data-lucide="alert-triangle" class="absolute top-4 right-4 w-16 h-16 text-red-400/10 fill-red-400/10 animate-float z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-red-400"></div>
                     <h3 class="text-xl font-cute text-red-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="alert-triangle" class="text-red-500"></i> Banco de Erros 🚨</h3>
-                    <div class="flex flex-col gap-2 mb-4 bg-red-50 p-3 rounded-xl border border-red-100 z-20">
-                        <input list="study-subjects" id="new-error-subject" placeholder="Disciplina / Assunto" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none text-red-700">
-                        <input type="text" id="new-error-problem" placeholder="O Problema (Questão)" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none">
-                        <textarea id="new-error-mistake" placeholder="Onde eu errei..." rows="2" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none resize-none"></textarea>
-                        <textarea id="new-error-correction" placeholder="Raciocínio Correto..." rows="2" class="w-full bg-white rounded-lg p-2.5 text-sm font-bold border outline-none resize-none"></textarea>
-                        <button onclick="addErrorBank()" class="bg-red-400 hover:bg-red-500 text-white p-2.5 rounded-lg active:scale-95 font-black shadow-sm flex justify-center items-center gap-2 transition-colors"><i data-lucide="save"></i> Guardar Erro</button>
+                    <div class="flex flex-col gap-2 mb-4 bg-red-50 p-4 rounded-xl border border-red-100 z-20">
+                        <input list="study-subjects" id="new-error-subject" placeholder="Disciplina / Assunto" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none text-red-700 shadow-sm">
+                        <input type="text" id="new-error-problem" placeholder="O Problema (Questão)" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none shadow-sm">
+                        <textarea id="new-error-mistake" placeholder="Onde eu errei..." rows="2" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none resize-none shadow-sm"></textarea>
+                        <textarea id="new-error-correction" placeholder="Raciocínio Correto..." rows="2" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none resize-none shadow-sm"></textarea>
+                        <button onclick="addErrorBank()" class="bg-red-400 hover:bg-red-500 text-white p-3 rounded-xl active:scale-95 font-black shadow-sm flex justify-center items-center gap-2 transition-colors"><i data-lucide="save"></i> Guardar Erro</button>
                     </div>
                     <div id="error-bank-container" class="flex flex-col gap-2 overflow-y-auto max-h-[300px] pr-1 z-20"></div>
                 </div>
@@ -441,35 +419,76 @@
         </div> <!-- ===================== FIM DA ABA DE ESTUDOS ===================== -->
 
         <!-- ========================================== -->
-        <!-- ABA MESTRADO (SISTEMA INTEGRADO)           -->
+        <!-- ABA MESTRADO (SISTEMA INTEGRADO E FUNCIONAL) -->
         <!-- ========================================== -->
         <div id="tab-mestrado" class="tab-content hidden animate-pop block">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-4 w-full md:w-auto">
-                    <button onclick="switchTab('estudos')" class="bg-white border-2 border-purple-200 text-purple-600 p-2.5 rounded-xl hover:bg-purple-50 active:scale-95 transition-transform shadow-sm"><i data-lucide="arrow-left"></i></button>
+                    <button onclick="switchTab('estudos')" class="bg-white border-2 border-purple-200 text-purple-600 px-4 py-2.5 rounded-xl hover:bg-purple-50 active:scale-95 transition-transform shadow-sm flex items-center gap-2 font-bold"><i data-lucide="arrow-left"></i> Voltar</button>
                     <h2 class="text-2xl md:text-3xl font-cute font-bold text-purple-900 flex items-center gap-2"><i data-lucide="graduation-cap" class="text-purple-500 w-8 h-8"></i> Centro de Mestrado 🎓</h2>
                 </div>
                 <!-- Menu Rápido Interno -->
-                <div class="flex gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar p-1">
-                    <button onclick="switchMesTab('visao')" class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-purple-200 shadow-sm">1. Visão Geral</button>
-                    <button onclick="switchMesTab('reunioes')" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-blue-200 shadow-sm">2. Reuniões</button>
-                    <button onclick="switchMesTab('leituras')" class="bg-rose-100 text-rose-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-rose-200 shadow-sm">3. Leituras</button>
-                    <button onclick="switchMesTab('producao')" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-amber-200 shadow-sm">4. Produção</button>
-                    <button onclick="switchMesTab('disciplinas')" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-emerald-200 shadow-sm">5. Disciplinas</button>
-                    <button onclick="switchMesTab('dissertacao')" class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-indigo-200 shadow-sm">6. Dissertação</button>
-                    <button onclick="switchMesTab('semanal')" class="bg-pink-100 text-pink-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-pink-200 shadow-sm">7. Semanal</button>
-                    <button onclick="switchMesTab('emocional')" class="bg-teal-100 text-teal-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-teal-200 shadow-sm">8. Emocional</button>
+                <div class="flex gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar p-1 pb-2 snap-x">
+                    <button onclick="switchMesTab('visao')" class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-purple-200 shadow-sm snap-start">1. Dashboard</button>
+                    <button onclick="switchMesTab('reunioes')" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-blue-200 shadow-sm snap-start">2. Reuniões</button>
+                    <button onclick="switchMesTab('leituras')" class="bg-rose-100 text-rose-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-rose-200 shadow-sm snap-start">3. Leituras</button>
+                    <button onclick="switchMesTab('producao')" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-amber-200 shadow-sm snap-start">4. Produção</button>
+                    <button onclick="switchMesTab('disciplinas')" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-emerald-200 shadow-sm snap-start">5. Disciplinas</button>
+                    <button onclick="switchMesTab('dissertacao')" class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-indigo-200 shadow-sm snap-start">6. Dissertação</button>
+                    <button onclick="switchMesTab('semanal')" class="bg-pink-100 text-pink-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-pink-200 shadow-sm snap-start">7. Semanal</button>
+                    <button onclick="switchMesTab('emocional')" class="bg-teal-100 text-teal-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-teal-200 shadow-sm snap-start">8. Emocional</button>
                 </div>
             </div>
 
             <!-- PAINÉIS DO MESTRADO -->
             
-            <!-- 1. Visão Geral -->
+            <!-- 1. Dashboard e Visão Geral -->
             <div id="mes-visao" class="mes-panel animate-pop block">
+                <div class="grid grid-cols-2 gap-4 mb-6 relative z-10">
+                    <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl shadow-sm text-center">
+                        <h4 class="text-xs font-bold text-indigo-800 uppercase mb-1">Progresso Dissertação</h4>
+                        <p id="dash-mes-prog" class="text-3xl font-black text-indigo-600">0%</p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 p-4 rounded-2xl shadow-sm text-center">
+                        <h4 class="text-xs font-bold text-blue-800 uppercase mb-1">Próxima Reunião</h4>
+                        <p id="dash-mes-reuniao" class="text-sm font-black text-blue-600 mt-2 truncate">Sem agendamentos</p>
+                    </div>
+                </div>
+
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
                     <div class="absolute top-0 left-0 w-full h-2 bg-purple-400"></div>
-                    <h3 class="text-xl font-cute text-purple-900 mb-3 flex items-center gap-2 relative z-10"><i data-lucide="map" class="w-5 h-5 text-purple-500"></i> Mapa Mestre</h3>
-                    <textarea id="mestrado-1" oninput="saveMestrado(1)" class="w-full flex-1 bg-purple-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-purple-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                    <h3 class="text-xl font-cute text-purple-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="map" class="w-5 h-5 text-purple-500"></i> Mapa Mestre (Visão Geral)</h3>
+                    
+                    <div class="flex flex-col gap-4 z-10 flex-1 overflow-y-auto pr-2 hide-scrollbar">
+                        <div>
+                            <label class="text-[10px] font-bold text-purple-700 uppercase mb-1 block">Tema da Pesquisa</label>
+                            <input type="text" id="mes-v-tema" oninput="saveMesVisao()" class="w-full bg-purple-50 border border-purple-100 rounded-xl p-3 font-bold text-slate-700 text-sm outline-none shadow-inner">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-purple-700 uppercase mb-1 block">Problema de Pesquisa</label>
+                            <textarea id="mes-v-problema" oninput="saveMesVisao()" rows="2" class="w-full bg-purple-50 border border-purple-100 rounded-xl p-3 font-bold text-slate-700 text-sm outline-none resize-none shadow-inner"></textarea>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label class="text-[10px] font-bold text-purple-700 uppercase mb-1 block">Objetivo Geral</label>
+                                <textarea id="mes-v-objgeral" oninput="saveMesVisao()" rows="3" class="w-full bg-purple-50 border border-purple-100 rounded-xl p-3 font-bold text-slate-700 text-sm outline-none resize-none shadow-inner"></textarea>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-[10px] font-bold text-purple-700 uppercase mb-1 block">Objetivos Específicos</label>
+                                <textarea id="mes-v-objesp" oninput="saveMesVisao()" rows="3" class="w-full bg-purple-50 border border-purple-100 rounded-xl p-3 font-bold text-slate-700 text-sm outline-none resize-none shadow-inner" placeholder="- &#10;- &#10;- "></textarea>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label class="text-[10px] font-bold text-purple-700 uppercase mb-1 block">Palavras-chave</label>
+                                <input type="text" id="mes-v-palavras" oninput="saveMesVisao()" class="w-full bg-purple-50 border border-purple-100 rounded-xl p-3 font-bold text-slate-700 text-sm outline-none shadow-inner">
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-[10px] font-bold text-purple-700 uppercase mb-1 block">Linha de Pesquisa</label>
+                                <input type="text" id="mes-v-linha" oninput="saveMesVisao()" class="w-full bg-purple-50 border border-purple-100 rounded-xl p-3 font-bold text-slate-700 text-sm outline-none shadow-inner">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -485,44 +504,57 @@
                         <input type="date" id="new-meeting-date" class="bg-white border border-blue-200 rounded-xl p-3 outline-none font-bold text-blue-800 text-sm w-full md:w-40 shadow-sm">
                         <input type="text" id="new-meeting-subject" placeholder="Assunto Principal da Reunião..." class="flex-1 bg-white border border-blue-200 rounded-xl p-3 outline-none font-bold text-blue-800 text-sm shadow-sm">
                         <select id="new-meeting-type" class="bg-white border border-blue-200 rounded-xl p-3 outline-none font-bold text-blue-800 text-sm shadow-sm w-full md:w-32"><option value="Online">Online</option><option value="Presencial">Presencial</option></select>
-                        <button onclick="addMestradoMeeting()" class="bg-blue-500 text-white px-5 rounded-xl hover:bg-blue-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Adicionar</button>
+                        <button onclick="addMestradoMeeting()" class="bg-blue-500 text-white px-5 py-3 rounded-xl hover:bg-blue-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Adicionar</button>
                     </div>
                     <div id="mestrado-meetings-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
                 </div>
             </div>
 
-            <!-- 3. Leituras Aprofundadas -->
+            <!-- 3. Leituras Aprofundadas (Fichamento Estruturado) -->
             <div id="mes-leituras" class="mes-panel hidden animate-pop">
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
                     <div class="absolute top-0 left-0 w-full h-2 bg-rose-400"></div>
                     <h3 class="text-xl font-cute text-rose-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="book-open" class="w-5 h-5 text-rose-500"></i> Fichamento de Leituras</h3>
                     <p class="text-xs text-rose-500 font-bold mb-4 relative z-10">Onde a sua pesquisa ganha corpo.</p>
-                    <textarea id="mestrado-3" oninput="saveMestrado(3)" class="w-full flex-1 bg-rose-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-rose-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                    
+                    <div class="flex flex-col md:flex-row gap-2 mb-5 relative z-10">
+                        <select id="new-mesl-tipo" class="bg-white border border-rose-200 rounded-xl p-3 outline-none font-bold text-rose-800 text-sm shadow-sm w-full md:w-32"><option value="Artigo">Artigo</option><option value="Livro">Livro</option><option value="Capítulo">Capítulo</option></select>
+                        <input type="text" id="new-mesl-ref" placeholder="Referência (Autor, Ano, Título)..." class="flex-1 bg-white border border-rose-200 rounded-xl p-3 outline-none font-bold text-rose-800 text-sm shadow-sm">
+                        <button onclick="addMesLeitura()" class="bg-rose-400 text-white px-5 py-3 rounded-xl hover:bg-rose-500 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Salvar</button>
+                    </div>
+                    <div id="mestrado-leituras-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
                 </div>
             </div>
 
-            <!-- 4. Produção Acadêmica -->
+            <!-- 4. Produção Acadêmica (COM CALENDÁRIO) -->
             <div id="mes-producao" class="mes-panel hidden animate-pop">
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
                     <div class="absolute top-0 left-0 w-full h-2 bg-amber-400"></div>
-                    <h3 class="text-xl font-cute text-amber-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="award" class="w-5 h-5 text-amber-500"></i> Produção Acadêmica</h3>
-                    <p class="text-xs text-amber-600 font-bold mb-4 relative z-10">Artigos, congressos e publicações.</p>
+                    <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-2 z-10">
+                        <h3 class="text-xl font-cute text-amber-900 flex items-center gap-2"><i data-lucide="award" class="w-5 h-5 text-amber-500"></i> Produção Acadêmica</h3>
+                        <span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-lg border border-amber-100">📅 Sincronizado com Calendário</span>
+                    </div>
+                    
                     <div class="flex flex-col md:flex-row gap-2 mb-4 relative z-10">
-                        <input type="text" id="new-prod-ac-title" placeholder="Título / Evento..." class="flex-1 bg-white border border-amber-200 rounded-xl p-3 outline-none font-bold text-amber-800 text-sm shadow-sm">
+                        <input type="text" id="new-prod-ac-title" placeholder="Título do Artigo / Evento..." class="flex-1 bg-white border border-amber-200 rounded-xl p-3 outline-none font-bold text-amber-800 text-sm shadow-sm">
                         <input type="date" id="new-prod-ac-date" class="bg-white border border-amber-200 rounded-xl p-3 outline-none font-bold text-amber-800 text-sm w-full md:w-40 shadow-sm" title="Prazo de Submissão">
-                        <button onclick="addMestradoProducao()" class="bg-amber-500 text-white px-5 rounded-xl hover:bg-amber-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Salvar</button>
+                        <button onclick="addMestradoProducao()" class="bg-amber-500 text-white px-5 py-3 rounded-xl hover:bg-amber-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i></button>
                     </div>
                     <div id="mestrado-producao-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
-                    <textarea id="mestrado-4" oninput="saveMestrado(4)" rows="4" class="w-full bg-amber-50/50 rounded-xl p-4 outline-none font-bold text-slate-700 text-sm border border-amber-100 resize-none z-10 mt-4 hide-scrollbar" placeholder="Anotações gerais sobre publicações, ideias, coautores..."></textarea>
                 </div>
             </div>
 
-            <!-- 5. Disciplinas -->
+            <!-- 5. Disciplinas Estruturadas -->
             <div id="mes-disciplinas" class="mes-panel hidden animate-pop">
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
                     <div class="absolute top-0 left-0 w-full h-2 bg-emerald-400"></div>
-                    <h3 class="text-xl font-cute text-emerald-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="layout-grid" class="w-5 h-5 text-emerald-500"></i> Controle de Disciplinas</h3>
-                    <textarea id="mestrado-5" oninput="saveMestrado(5)" class="w-full flex-1 bg-emerald-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-emerald-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                    <h3 class="text-xl font-cute text-emerald-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="layout-grid" class="w-5 h-5 text-emerald-500"></i> Gestão de Disciplinas</h3>
+                    
+                    <div class="flex flex-col md:flex-row gap-2 mb-5 relative z-10">
+                        <input type="text" id="new-mesd-nome" placeholder="Nome da Disciplina..." class="flex-1 bg-white border border-emerald-200 rounded-xl p-3 outline-none font-bold text-emerald-800 text-sm shadow-sm">
+                        <button onclick="addMesDisciplina()" class="bg-emerald-500 text-white px-5 py-3 rounded-xl hover:bg-emerald-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Inserir</button>
+                    </div>
+                    <div id="mestrado-disciplinas-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
                 </div>
             </div>
 
@@ -540,42 +572,42 @@
                                 <span class="font-black text-indigo-900">Introdução</span> 
                                 <select id="ms-cap1" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
                             </div>
-                            <div class="flex items-center gap-3"><input type="range" id="ms-prog1" oninput="updateMsProg(1); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val1" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog1" oninput="updateMsProg(1); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val1" class="text-xs font-bold text-indigo-400 w-8 text-right">0%</span></div>
                         </div>
                         <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-black text-indigo-900">Referencial Teórico</span> 
                                 <select id="ms-cap2" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
                             </div>
-                            <div class="flex items-center gap-3"><input type="range" id="ms-prog2" oninput="updateMsProg(2); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val2" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog2" oninput="updateMsProg(2); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val2" class="text-xs font-bold text-indigo-400 w-8 text-right">0%</span></div>
                         </div>
                         <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-black text-indigo-900">Metodologia</span> 
                                 <select id="ms-cap3" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
                             </div>
-                            <div class="flex items-center gap-3"><input type="range" id="ms-prog3" oninput="updateMsProg(3); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val3" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog3" oninput="updateMsProg(3); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val3" class="text-xs font-bold text-indigo-400 w-8 text-right">0%</span></div>
                         </div>
                         <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-black text-indigo-900">Resultados</span> 
                                 <select id="ms-cap4" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
                             </div>
-                            <div class="flex items-center gap-3"><input type="range" id="ms-prog4" oninput="updateMsProg(4); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val4" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog4" oninput="updateMsProg(4); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val4" class="text-xs font-bold text-indigo-400 w-8 text-right">0%</span></div>
                         </div>
                         <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-black text-indigo-900">Discussão</span> 
                                 <select id="ms-cap5" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
                             </div>
-                            <div class="flex items-center gap-3"><input type="range" id="ms-prog5" oninput="updateMsProg(5); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val5" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog5" oninput="updateMsProg(5); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val5" class="text-xs font-bold text-indigo-400 w-8 text-right">0%</span></div>
                         </div>
                         <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
                             <div class="flex justify-between items-center mb-3">
                                 <span class="font-black text-indigo-900">Considerações Finais</span> 
                                 <select id="ms-cap6" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
                             </div>
-                            <div class="flex items-center gap-3"><input type="range" id="ms-prog6" oninput="updateMsProg(6); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val6" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog6" oninput="updateMsProg(6); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val6" class="text-xs font-bold text-indigo-400 w-8 text-right">0%</span></div>
                         </div>
 
                         <!-- Caixa de Pendências -->
@@ -599,7 +631,19 @@
                     <div class="absolute top-0 left-0 w-full h-2 bg-teal-400"></div>
                     <h3 class="text-xl font-cute text-teal-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="smile" class="w-5 h-5 text-teal-500"></i> Controle Emocional</h3>
                     <p class="text-xs text-teal-600 font-bold mb-4 relative z-10">Mestrado mexe com a autoestima. Avalie-se!</p>
-                    <textarea id="mestrado-8" oninput="saveMestrado(8)" class="w-full flex-1 bg-teal-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-teal-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                    
+                    <div class="flex flex-col md:flex-row gap-2 mb-5 relative z-10">
+                        <input type="month" id="new-emo-date" class="bg-white border border-teal-200 rounded-xl p-3 outline-none font-bold text-teal-800 text-sm w-full md:w-40 shadow-sm">
+                        <select id="new-emo-energy" class="bg-white border border-teal-200 rounded-xl p-3 outline-none font-bold text-teal-800 text-sm w-full md:w-40 shadow-sm">
+                            <option value="5">Energia: 5/5 🔋</option>
+                            <option value="4">Energia: 4/5 🔋</option>
+                            <option value="3">Energia: 3/5 🔋</option>
+                            <option value="2">Energia: 2/5 🪫</option>
+                            <option value="1">Energia: 1/5 🪫</option>
+                        </select>
+                        <button onclick="addMesEmocional()" class="bg-teal-500 text-white px-5 py-3 rounded-xl hover:bg-teal-600 shadow-md font-bold transition active:scale-95 flex-1 md:flex-none"><i data-lucide="plus" class="w-5 h-5 inline"></i> Registrar Mês</button>
+                    </div>
+                    <div id="mestrado-emocional-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
                 </div>
             </div>
             
@@ -612,7 +656,7 @@
                     <div class="flex flex-col md:flex-row gap-2 mb-4 relative z-10">
                         <select id="new-ideia-type" class="bg-white border border-yellow-200 rounded-xl p-3 outline-none font-bold text-yellow-800 text-sm w-full md:w-32 shadow-sm"><option value="Artigo">Artigo</option><option value="Capítulo">Capítulo</option><option value="Pergunta">Pergunta</option></select>
                         <input type="text" id="new-ideia-desc" placeholder="Descreva a ideia brilhante..." class="flex-1 bg-white border border-yellow-200 rounded-xl p-3 outline-none font-bold text-yellow-800 text-sm shadow-sm">
-                        <button onclick="addMestradoIdeia()" class="bg-yellow-400 text-white px-5 rounded-xl hover:bg-yellow-500 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Salvar</button>
+                        <button onclick="addMestradoIdeia()" class="bg-yellow-400 text-white px-5 py-3 rounded-xl hover:bg-yellow-500 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Salvar</button>
                     </div>
                     <div id="mestrado-ideias-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
                 </div>
@@ -819,7 +863,7 @@
                         <button onclick="changeFinMonth(1)" class="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg hover:bg-emerald-100"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
                     </div>
                 </div>
-                <button onclick="openFinanceModal()" class="w-full md:w-auto bg-emerald-400 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-2xl shadow-md font-bold transition flex items-center justify-center gap-2"><i data-lucide="plus"></i> Nova Transação</button>
+                <button onclick="openFinanceModal()" class="w-full md:w-auto bg-emerald-400 hover:bg-emerald-50 text-white px-8 py-3.5 rounded-2xl shadow-md font-bold transition flex items-center justify-center gap-2"><i data-lucide="plus"></i> Nova Transação</button>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1167,11 +1211,14 @@
                 if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-rose-600 w-16 transition-all transform -translate-y-2 bg-pink-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-pink-300 w-16 transition-all";
             });
             
-            if(t==='resumo') renderMasterCalendar(); if(t==='rotina') renderRoutineChart(); if(t==='financas') renderFinances();
+            if(t==='resumo') renderMasterCalendar(); 
+            if(t==='rotina') renderRoutineChart(); 
+            if(t==='financas') renderFinances();
             if(t==='tattoo') { renderTattoos(); renderClients(); renderPromos(); renderInventory(); } 
-            if(t==='instagram') renderInstaPosts(); if(t==='loja') renderProductions();
+            if(t==='instagram') renderInstaPosts(); 
+            if(t==='loja') renderProductions();
             if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); renderStudyChart(); updateClassCards(); }
-            if(t==='mestrado') { switchMesTab('visao'); renderMestradoMeetings(); renderMestradoProducao(); renderMestradoIdeias(); loadMestrado(); loadMsCap(); }
+            if(t==='mestrado') { switchMesTab('visao'); renderMestradoMeetings(); renderMesLeituras(); renderMestradoProducao(); renderMesDisciplinas(); renderMesEmocional(); renderMestradoIdeias(); loadMestrado(); loadMsCap(); }
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
 
@@ -1180,13 +1227,8 @@
             ['visao', 'reunioes', 'leituras', 'producao', 'disciplinas', 'dissertacao', 'semanal', 'emocional', 'ideias'].forEach(s => {
                 let el = document.getElementById('mes-'+s);
                 if(el) {
-                    if(s === sub) {
-                        el.classList.remove('hidden');
-                        el.classList.add('block');
-                    } else {
-                        el.classList.add('hidden');
-                        el.classList.remove('block');
-                    }
+                    if(s === sub) { el.classList.remove('hidden'); el.classList.add('block'); } 
+                    else { el.classList.add('hidden'); el.classList.remove('block'); }
                 }
             });
         }
@@ -1201,7 +1243,7 @@
             lsGet('tattoos').forEach(t => addEv(t.date, `Tattoo: ${t.name}`, 'tattoo'));
             lsGet('instaPosts').forEach(p => addEv(p.date, `Post: ${p.name}`, 'insta'));
             
-            // Reuniões do Mestrado adicionadas ao Calendário Mestre
+            // Reuniões e Produção do Mestrado adicionadas ao Calendário Mestre
             lsGet('mestradoMeetings').forEach(m => addEv(m.date, `Reunião Mestrado: ${m.subject}`, 'mestrado'));
             lsGet('mesProducao').forEach(m => addEv(m.date, `Submissão: ${m.title}`, 'mestrado'));
 
@@ -1535,23 +1577,53 @@
         // ==========================================
         // MESTRADO (SISTEMA INTEGRADO E FUNCIONAL)
         // ==========================================
-        const mestradoTemplates = {
-            m1: "🎯 Tema e Direção\nTema provisório da pesquisa:\nProblema de pesquisa:\nObjetivo geral:\nObjetivos específicos:\nPalavras-chave:\nLinha de pesquisa:\n(Se mudar no meio do caminho, você atualiza. Mestrado é organismo vivo.)\n\n🗓️ Linha do Tempo (por semestre)\nDisciplinas obrigatórias:\nDisciplinas eletivas:\nPrazo para qualificação:\nPrazo para defesa:\nEntrega de artigo:\nParticipação em evento:\nRelatórios para bolsa:\n",
-            m3: "Referência completa (ABNT já pronta):\nResumo em 5–10 linhas:\nConceitos principais:\nCitações importantes (com página!):\nComo isso conversa com minha pesquisa?:\nIdeias que surgiram a partir do texto:\n",
-            m4: "Ideias de artigos:\nEventos acadêmicos:\nSubmissões feitas:\nStatus (em escrita / submetido / aceito / recusado):\nPrazos:\n\nMestrado não é só dissertação. É posicionamento acadêmico.",
-            m5: "Ementa:\nDatas de entrega:\nTrabalhos finais:\nLeituras obrigatórias:\nNota final:\n\n“Como essa disciplina alimenta minha dissertação?”:\n",
-            m7: "Leituras da semana:\nEscrita da semana (quantas páginas ou qual seção?):\nReuniões:\nEventos:\nPrazos:\n\nO que avançou na minha pesquisa essa semana?:\n(Se não avançou, você ajusta a rota.)",
-            m8: "Como estou me sentindo em relação à pesquisa?:\nO que está me travando?:\nO que está fluindo?:\nPreciso conversar algo com meu orientador?:\n\nMestrado mexe com autoestima. Ignorar isso é pedir pra surtar no segundo ano."
-        };
+
+        function renderMesDashboard() {
+            let p1 = parseInt(lsGet('msprog_1', '0'));
+            let p2 = parseInt(lsGet('msprog_2', '0'));
+            let p3 = parseInt(lsGet('msprog_3', '0'));
+            let p4 = parseInt(lsGet('msprog_4', '0'));
+            let p5 = parseInt(lsGet('msprog_5', '0'));
+            let p6 = parseInt(lsGet('msprog_6', '0'));
+            let totalProg = Math.round((p1+p2+p3+p4+p5+p6)/6);
+            
+            let dp = document.getElementById('dash-mes-prog');
+            if(dp) dp.innerText = totalProg + "%";
+
+            let m = lsGet('mestradoMeetings');
+            let dr = document.getElementById('dash-mes-reuniao');
+            if(dr) {
+                let futureMeetings = m.filter(x => new Date(x.date) >= new Date()).sort((a,b)=>new Date(a.date)-new Date(b.date));
+                if(futureMeetings.length > 0) {
+                    dr.innerText = futureMeetings[0].date.split('-').reverse().join('/') + " - " + futureMeetings[0].subject;
+                } else {
+                    dr.innerText = "Sem agendamentos";
+                }
+            }
+        }
 
         function loadMestrado() {
-            [1, 3, 4, 5, 7, 8].forEach(i => {
-                let el = document.getElementById('mestrado-'+i);
-                if(el) {
-                    let saved = lsGet('mestrado_'+i, '');
-                    el.value = saved || mestradoTemplates['m'+i];
-                }
-            });
+            let visao = lsGet('mesVisao', {});
+            if(document.getElementById('mes-v-tema')) document.getElementById('mes-v-tema').value = visao.tema || '';
+            if(document.getElementById('mes-v-problema')) document.getElementById('mes-v-problema').value = visao.problema || '';
+            if(document.getElementById('mes-v-objgeral')) document.getElementById('mes-v-objgeral').value = visao.objgeral || '';
+            if(document.getElementById('mes-v-objesp')) document.getElementById('mes-v-objesp').value = visao.objesp || '';
+            if(document.getElementById('mes-v-palavras')) document.getElementById('mes-v-palavras').value = visao.palavras || '';
+            if(document.getElementById('mes-v-linha')) document.getElementById('mes-v-linha').value = visao.linha || '';
+
+            if(document.getElementById('mestrado-7')) document.getElementById('mestrado-7').value = lsGet('mestrado_7', '');
+        }
+
+        function saveMesVisao() {
+            let visao = {
+                tema: document.getElementById('mes-v-tema') ? document.getElementById('mes-v-tema').value : '',
+                problema: document.getElementById('mes-v-problema') ? document.getElementById('mes-v-problema').value : '',
+                objgeral: document.getElementById('mes-v-objgeral') ? document.getElementById('mes-v-objgeral').value : '',
+                objesp: document.getElementById('mes-v-objesp') ? document.getElementById('mes-v-objesp').value : '',
+                palavras: document.getElementById('mes-v-palavras') ? document.getElementById('mes-v-palavras').value : '',
+                linha: document.getElementById('mes-v-linha') ? document.getElementById('mes-v-linha').value : ''
+            };
+            lsSet('mesVisao', visao);
         }
 
         function saveMestrado(i) {
@@ -1572,6 +1644,7 @@
             }
             let t = document.getElementById('mestrado-6');
             if(t) t.value = lsGet('mestrado_6', '');
+            renderMesDashboard();
         }
 
         function updateMsProg(i) {
@@ -1587,11 +1660,12 @@
                 if(s) lsSet('mscap_'+i, s.value);
                 if(p) lsSet('msprog_'+i, p.value);
             }
+            renderMesDashboard();
         }
 
         // Módulo de Reuniões
         function renderMestradoMeetings() {
-            let m = lsGet('mestradoMeetings');
+            let m = lsGet('mestradoMeetings', []);
             let c = document.getElementById('mestrado-meetings-list');
             if(!c) return; c.innerHTML = '';
             if(!m.length) { c.innerHTML = '<p class="text-xs text-blue-400 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-blue-100 mt-2">Nenhuma reunião. Agende uma com seu orientador! ☕</p>'; return; }
@@ -1602,14 +1676,14 @@
                         <div class="flex flex-col overflow-hidden pr-2">
                             <div class="flex gap-1 mb-1">
                                 <span class="text-[9px] font-black text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded-lg border border-blue-200">${i.date?i.date.split('-').reverse().join('/'):'-'}</span>
-                                <span class="text-[9px] font-black text-blue-500 bg-white px-1.5 py-0.5 rounded-lg border border-blue-200">${i.type}</span>
+                                <span class="text-[9px] font-black text-blue-500 bg-white px-1.5 py-0.5 rounded-lg border border-blue-200">${i.type||'Geral'}</span>
                             </div>
                             <span class="text-xs font-extrabold text-blue-900 truncate">${i.subject}</span>
                         </div>
                         <button onclick="deleteMestradoMeeting(${i.id})" class="text-slate-400 hover:text-red-500 p-1.5 shrink-0 bg-white rounded-lg shadow-sm border border-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                     </summary>
                     <div class="p-3 border-t border-blue-100 text-xs flex flex-col gap-2 bg-slate-50/50">
-                        <textarea oninput="updateMestradoMeeting(${i.id}, 'details', this.value)" rows="6" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 outline-none resize-none hide-scrollbar text-slate-700 font-bold leading-relaxed shadow-inner">${i.details||''}</textarea>
+                        <textarea oninput="updateMestradoMeeting(${i.id}, 'details', this.value)" rows="6" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 outline-none resize-none hide-scrollbar text-slate-700 font-bold leading-relaxed shadow-inner" placeholder="Assuntos, decisões e tarefas...">${i.details||''}</textarea>
                     </div>
                 </details>`;
             });
@@ -1618,9 +1692,10 @@
         function addMestradoMeeting() {
             let d = document.getElementById('new-meeting-date').value;
             let s = document.getElementById('new-meeting-subject').value.trim();
-            let t = document.getElementById('new-meeting-type').value;
+            let ty = document.getElementById('new-meeting-type');
+            let t = ty ? ty.value : 'Geral';
             if(d && s) {
-                let m = lsGet('mestradoMeetings');
+                let m = lsGet('mestradoMeetings', []);
                 let template = "📌 Assuntos discutidos:\n\n✅ Decisões tomadas:\n\n✏️ Correções sugeridas:\n\n📚 Referências indicadas:\n\n🎯 Tarefas para próxima reunião:\n\n❓ Dúvidas que ficaram:\n";
                 m.push({id: Date.now(), date: d, subject: s, type: t, details: template});
                 lsSet('mestradoMeetings', m);
@@ -1628,23 +1703,73 @@
                 document.getElementById('new-meeting-subject').value = '';
                 renderMestradoMeetings();
                 renderMasterCalendar();
+                renderMesDashboard();
             } else {
                 alert('Preencha a Data e o Assunto da Reunião!');
             }
         }
-        function deleteMestradoMeeting(id) { lsSet('mestradoMeetings', lsGet('mestradoMeetings').filter(x=>x.id!==id)); renderMestradoMeetings(); renderMasterCalendar(); }
-        function updateMestradoMeeting(id, field, val) { let m = lsGet('mestradoMeetings'); let f = m.find(x=>x.id===id); if(f){ f[field]=val; lsSet('mestradoMeetings', m); } }
+        function deleteMestradoMeeting(id) { lsSet('mestradoMeetings', lsGet('mestradoMeetings', []).filter(x=>x.id!==id)); renderMestradoMeetings(); renderMasterCalendar(); renderMesDashboard(); }
+        function updateMestradoMeeting(id, field, val) { let m = lsGet('mestradoMeetings', []); let f = m.find(x=>x.id===id); if(f){ f[field]=val; lsSet('mestradoMeetings', m); } }
+
+        // Módulo de Fichamento de Leituras (Mestrado)
+        function renderMesLeituras() {
+            let m = lsGet('mesLeituras', []);
+            let c = document.getElementById('mestrado-leituras-list');
+            if(!c) return; c.innerHTML = '';
+            if(!m.length) { c.innerHTML = '<p class="text-xs text-rose-400 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-rose-100 mt-2">Nenhum fichamento criado 📖</p>'; return; }
+            m.forEach(i => {
+                c.innerHTML += `
+                <details class="bg-white border border-rose-100 rounded-xl shadow-sm z-20 relative overflow-hidden group mb-2 [&::-webkit-details-marker]:hidden">
+                    <summary class="p-3 flex items-center justify-between cursor-pointer list-none bg-rose-50/50 hover:bg-rose-50 transition-colors">
+                        <div class="flex flex-col overflow-hidden pr-2">
+                            <span class="text-[9px] font-black text-rose-700 bg-rose-100 px-1.5 py-0.5 rounded-lg w-max mb-1 border border-rose-200">${i.tipo}</span>
+                            <span class="text-xs font-extrabold text-rose-900 truncate">${i.ref}</span>
+                        </div>
+                        <button onclick="deleteMesLeitura(${i.id})" class="text-slate-400 hover:text-red-500 p-1.5 shrink-0 bg-white rounded-lg shadow-sm border border-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </summary>
+                    <div class="p-3 border-t border-rose-100 text-xs flex flex-col gap-3 bg-slate-50/50">
+                        <div>
+                            <p class="font-bold text-rose-700 mb-1">Resumo / Conceitos:</p>
+                            <textarea oninput="updateMesLeitura(${i.id}, 'resumo', this.value)" rows="3" class="w-full bg-white border border-slate-200 rounded-lg p-2 outline-none resize-none hide-scrollbar text-slate-700 font-bold shadow-inner">${i.resumo||''}</textarea>
+                        </div>
+                        <div>
+                            <p class="font-bold text-rose-700 mb-1">Citações Importantes:</p>
+                            <textarea oninput="updateMesLeitura(${i.id}, 'citacoes', this.value)" rows="2" class="w-full bg-white border border-slate-200 rounded-lg p-2 outline-none resize-none hide-scrollbar text-slate-700 font-bold shadow-inner">${i.citacoes||''}</textarea>
+                        </div>
+                        <div>
+                            <p class="font-bold text-rose-700 mb-1">Relação com a Pesquisa:</p>
+                            <textarea oninput="updateMesLeitura(${i.id}, 'relacao', this.value)" rows="2" class="w-full bg-white border border-slate-200 rounded-lg p-2 outline-none resize-none hide-scrollbar text-slate-700 font-bold shadow-inner">${i.relacao||''}</textarea>
+                        </div>
+                    </div>
+                </details>`;
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addMesLeitura() {
+            let r = document.getElementById('new-mesl-ref').value.trim();
+            let ty = document.getElementById('new-mesl-tipo');
+            let t = ty ? ty.value : 'Artigo';
+            if(r) {
+                let m = lsGet('mesLeituras', []);
+                m.push({id: Date.now(), ref: r, tipo: t});
+                lsSet('mesLeituras', m);
+                document.getElementById('new-mesl-ref').value = '';
+                renderMesLeituras();
+            }
+        }
+        function deleteMesLeitura(id) { lsSet('mesLeituras', lsGet('mesLeituras', []).filter(x=>x.id!==id)); renderMesLeituras(); }
+        function updateMesLeitura(id, field, val) { let m = lsGet('mesLeituras', []); let f = m.find(x=>x.id===id); if(f){ f[field]=val; lsSet('mesLeituras', m); } }
 
         // Módulo de Produção
         function renderMestradoProducao() {
-            let p = lsGet('mesProducao');
+            let p = lsGet('mesProducao', []);
             let c = document.getElementById('mestrado-producao-list');
             if(!c) return; c.innerHTML = '';
             if(!p.length) { c.innerHTML = '<p class="text-xs text-amber-500 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-amber-100 mt-2">Nenhuma produção registrada ✍️</p>'; return; }
             p.sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(i => {
                 let statusColor = i.status==='Aceito'?'text-emerald-600 bg-emerald-100':i.status==='Submetido'?'text-blue-600 bg-blue-100':i.status==='Recusado'?'text-red-600 bg-red-100':'text-amber-600 bg-amber-100';
                 c.innerHTML += `
-                <div class="bg-white border border-amber-100 rounded-xl shadow-sm p-3 relative flex flex-col gap-2">
+                <div class="bg-white border border-amber-100 rounded-xl shadow-sm p-3 relative flex flex-col gap-2 mb-2">
                     <div class="flex justify-between items-start">
                         <div class="flex flex-col pr-2 overflow-hidden">
                             <span class="text-xs font-extrabold text-amber-900 truncate">${i.title}</span>
@@ -1669,7 +1794,7 @@
             let t = document.getElementById('new-prod-ac-title').value.trim();
             let d = document.getElementById('new-prod-ac-date').value;
             if(t) {
-                let p = lsGet('mesProducao');
+                let p = lsGet('mesProducao', []);
                 p.push({id: Date.now(), title: t, date: d, status: 'Ideia'});
                 lsSet('mesProducao', p);
                 document.getElementById('new-prod-ac-title').value = '';
@@ -1678,18 +1803,92 @@
                 renderMasterCalendar();
             }
         }
-        function deleteMesProducao(id) { lsSet('mesProducao', lsGet('mesProducao').filter(x=>x.id!==id)); renderMestradoProducao(); renderMasterCalendar(); }
-        function updateMesProducao(id, val) { let p = lsGet('mesProducao'); let f = p.find(x=>x.id===id); if(f){ f.status=val; lsSet('mesProducao', p); renderMestradoProducao(); } }
+        function deleteMesProducao(id) { lsSet('mesProducao', lsGet('mesProducao', []).filter(x=>x.id!==id)); renderMestradoProducao(); renderMasterCalendar(); }
+        function updateMesProducao(id, val) { let p = lsGet('mesProducao', []); let f = p.find(x=>x.id===id); if(f){ f.status=val; lsSet('mesProducao', p); renderMestradoProducao(); } }
+
+        // Módulo de Disciplinas
+        function renderMesDisciplinas() {
+            let m = lsGet('mesDisciplinas', []);
+            let c = document.getElementById('mestrado-disciplinas-list');
+            if(!c) return; c.innerHTML = '';
+            if(!m.length) { c.innerHTML = '<p class="text-xs text-emerald-500 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-emerald-100 mt-2">Nenhuma disciplina adicionada 📊</p>'; return; }
+            m.forEach(i => {
+                c.innerHTML += `
+                <details class="bg-white border border-emerald-100 rounded-xl shadow-sm z-20 relative overflow-hidden group mb-2 [&::-webkit-details-marker]:hidden">
+                    <summary class="p-3 flex items-center justify-between cursor-pointer list-none bg-emerald-50/50 hover:bg-emerald-50 transition-colors">
+                        <span class="text-xs font-extrabold text-emerald-900 truncate pr-2">${i.nome}</span>
+                        <button onclick="deleteMesDisciplina(${i.id})" class="text-slate-400 hover:text-red-500 p-1.5 shrink-0 bg-white rounded-lg shadow-sm border border-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </summary>
+                    <div class="p-3 border-t border-emerald-100 text-xs flex flex-col gap-3 bg-slate-50/50">
+                        <textarea oninput="updateMesDisciplina(${i.id}, 'detalhes', this.value)" rows="5" class="w-full bg-white border border-slate-200 rounded-lg p-2 outline-none resize-none hide-scrollbar text-slate-700 font-bold shadow-inner" placeholder="Professor:\nDatas de entrega:\nTrabalhos finais:\nNota final:\n\nComo essa disciplina ajuda na dissertação?">${i.detalhes||''}</textarea>
+                    </div>
+                </details>`;
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addMesDisciplina() {
+            let n = document.getElementById('new-mesd-nome').value.trim();
+            if(n) {
+                let m = lsGet('mesDisciplinas', []);
+                m.push({id: Date.now(), nome: n});
+                lsSet('mesDisciplinas', m);
+                document.getElementById('new-mesd-nome').value = '';
+                renderMesDisciplinas();
+            }
+        }
+        function deleteMesDisciplina(id) { lsSet('mesDisciplinas', lsGet('mesDisciplinas', []).filter(x=>x.id!==id)); renderMesDisciplinas(); }
+        function updateMesDisciplina(id, field, val) { let m = lsGet('mesDisciplinas', []); let f = m.find(x=>x.id===id); if(f){ f[field]=val; lsSet('mesDisciplinas', m); } }
+
+        // Módulo Emocional
+        function renderMesEmocional() {
+            let m = lsGet('mesEmocional', []);
+            let c = document.getElementById('mestrado-emocional-list');
+            if(!c) return; c.innerHTML = '';
+            if(!m.length) { c.innerHTML = '<p class="text-xs text-teal-500 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-teal-100 mt-2">Nenhum check-in emocional. Cuide de si! 🧘‍♀️</p>'; return; }
+            m.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(i => {
+                c.innerHTML += `
+                <details class="bg-white border border-teal-100 rounded-xl shadow-sm z-20 relative overflow-hidden group mb-2 [&::-webkit-details-marker]:hidden">
+                    <summary class="p-3 flex items-center justify-between cursor-pointer list-none bg-teal-50/50 hover:bg-teal-50 transition-colors">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black text-teal-700 bg-teal-100 px-2 py-1 rounded-lg border border-teal-200">${i.date?i.date.split('-').reverse().join('/'):'-'}</span>
+                            <span class="text-xs font-extrabold text-teal-900">Energia: ${i.energia}/5</span>
+                        </div>
+                        <button onclick="deleteMesEmocional(${i.id})" class="text-slate-400 hover:text-red-500 p-1.5 shrink-0 bg-white rounded-lg shadow-sm border border-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </summary>
+                    <div class="p-3 border-t border-teal-100 text-xs flex flex-col gap-3 bg-slate-50/50">
+                        <textarea oninput="updateMesEmocional(${i.id}, 'detalhes', this.value)" rows="5" class="w-full bg-white border border-slate-200 rounded-lg p-2 outline-none resize-none hide-scrollbar text-slate-700 font-bold shadow-inner" placeholder="O que está a fluir:\nO que está a travar:\nComo me sinto com a pesquisa?">${i.detalhes||''}</textarea>
+                    </div>
+                </details>`;
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addMesEmocional() {
+            let d = document.getElementById('new-emo-date').value;
+            let ey = document.getElementById('new-emo-energy');
+            let e = ey ? ey.value : '3';
+            if(d) {
+                let m = lsGet('mesEmocional', []);
+                m.push({id: Date.now(), date: d, energia: e});
+                lsSet('mesEmocional', m);
+                document.getElementById('new-emo-date').value = '';
+                renderMesEmocional();
+            } else {
+                alert("Selecione o mês para o Check-in!");
+            }
+        }
+        function deleteMesEmocional(id) { lsSet('mesEmocional', lsGet('mesEmocional', []).filter(x=>x.id!==id)); renderMesEmocional(); }
+        function updateMesEmocional(id, field, val) { let m = lsGet('mesEmocional', []); let f = m.find(x=>x.id===id); if(f){ f[field]=val; lsSet('mesEmocional', m); } }
+
 
         // Módulo de Ideias
         function renderMestradoIdeias() {
-            let id = lsGet('mesIdeias');
+            let id = lsGet('mesIdeias', []);
             let c = document.getElementById('mestrado-ideias-list');
             if(!c) return; c.innerHTML = '';
             if(!id.length) return;
             id.forEach(i => {
                 c.innerHTML += `
-                <div class="flex items-center justify-between p-2.5 bg-white border border-yellow-100 rounded-xl shadow-sm">
+                <div class="flex items-center justify-between p-2.5 bg-white border border-yellow-100 rounded-xl shadow-sm mb-2">
                     <div class="flex flex-col flex-1 overflow-hidden pr-2">
                         <span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mb-0.5 bg-yellow-100 text-yellow-700">${i.type}</span>
                         <span class="text-xs font-bold text-slate-700 truncate">${i.desc}</span>
@@ -1700,18 +1899,18 @@
             if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
         }
         function addMestradoIdeia() {
-            let t = document.getElementById('new-ideia-type').value;
+            let ty = document.getElementById('new-ideia-type');
+            let t = ty ? ty.value : 'Ideia';
             let d = document.getElementById('new-ideia-desc').value.trim();
             if(d) {
-                let id = lsGet('mesIdeias');
+                let id = lsGet('mesIdeias', []);
                 id.push({id: Date.now(), type: t, desc: d});
                 lsSet('mesIdeias', id);
                 document.getElementById('new-ideia-desc').value = '';
                 renderMestradoIdeias();
             }
         }
-        function deleteMesIdeia(id) { lsSet('mesIdeias', lsGet('mesIdeias').filter(x=>x.id!==id)); renderMestradoIdeias(); }
-
+        function deleteMesIdeia(id) { lsSet('mesIdeias', lsGet('mesIdeias', []).filter(x=>x.id!==id)); renderMestradoIdeias(); }
 
         // ==========================================
         // ATELIÊ & VENDAS ONLINE/FÍSICA
@@ -1909,6 +2108,9 @@
             if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
             if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
             if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
+            if(typeof renderMesDisciplinas === 'function') renderMesDisciplinas();
+            if(typeof renderMesEmocional === 'function') renderMesEmocional();
+            if(typeof renderMesLeituras === 'function') renderMesLeituras();
             if(typeof renderClients === 'function') renderClients(); 
             if(typeof renderPromos === 'function') renderPromos(); 
             if(typeof renderInventory === 'function') renderInventory(); 
@@ -1922,6 +2124,7 @@
             if(typeof loadInstaNotes === 'function') loadInstaNotes();
             if(typeof loadMestrado === 'function') loadMestrado();
             if(typeof loadMsCap === 'function') loadMsCap();
+            if(typeof renderMesDashboard === 'function') renderMesDashboard();
         };
 
         window.onload = () => {
@@ -1933,7 +2136,11 @@
             if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
             if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
             if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
+            if(typeof renderMesDisciplinas === 'function') renderMesDisciplinas();
+            if(typeof renderMesEmocional === 'function') renderMesEmocional();
+            if(typeof renderMesLeituras === 'function') renderMesLeituras();
             if(typeof loadMsCap === 'function') loadMsCap();
+            if(typeof renderMesDashboard === 'function') renderMesDashboard();
         };
     </script>
 </body>
