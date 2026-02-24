@@ -31,32 +31,21 @@
 
         input, select, textarea { font-size: 16px !important; font-family: 'Quicksand', sans-serif; }
         
-        /* Ajuste do espaço principal e da barrinha do iPhone */
         .main-content { padding-bottom: calc(110px + var(--safe-area-inset-bottom)); }
         .safe-pb { padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 16px) !important; }
         
         @media (min-width: 768px) { .main-content { padding-bottom: 2rem; } }
 
         /* ======================================================== */
-        /* PADRÃO DE PATINHAS NAS CAIXAS (Iguais as do Banner)      */
+        /* PADRÃO DE PATINHAS NAS CAIXAS                            */
         /* ======================================================== */
-        .cute-card, .class-card, .glass, .glass-emerald, .glass-rose {
-            position: relative;
-        }
+        .cute-card, .class-card, .glass, .glass-emerald, .glass-rose { position: relative; }
         .cute-card::before, .class-card::before, .glass::before, .glass-emerald::before, .glass-rose::before {
-            content: "";
-            position: absolute;
-            inset: 0;
+            content: ""; position: absolute; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23fbcfe8' stroke='%23fbcfe8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.3'%3E%3Cg transform='translate(10, 10) rotate(15) scale(1.2)'%3E%3Ccircle cx='11' cy='4' r='2'/%3E%3Ccircle cx='18' cy='8' r='2'/%3E%3Ccircle cx='20' cy='16' r='2'/%3E%3Cpath d='M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z'/%3E%3C/g%3E%3Cg transform='translate(60, 50) rotate(-20) scale(0.9)'%3E%3Ccircle cx='11' cy='4' r='2'/%3E%3Ccircle cx='18' cy='8' r='2'/%3E%3Ccircle cx='20' cy='16' r='2'/%3E%3Cpath d='M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            background-size: 100px 100px;
-            pointer-events: none; 
-            border-radius: inherit;
-            z-index: 0;
+            background-size: 100px 100px; pointer-events: none; border-radius: inherit; z-index: 0;
         }
-        .cute-card > *, .class-card > *, .glass > *, .glass-emerald > *, .glass-rose > * {
-            position: relative;
-            z-index: 10;
-        }
+        .cute-card > *, .class-card > *, .glass > *, .glass-emerald > *, .glass-rose > * { position: relative; z-index: 10; }
 
         .cute-card { transition: all 0.3s ease; border-radius: 1.5rem; border: 2px solid #ffe4e6; background: white; box-shadow: 0 4px 10px -2px rgba(255, 105, 180, 0.08); }
         .cute-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -3px rgba(255, 105, 180, 0.15); border-color: #fbcfe8; }
@@ -91,14 +80,8 @@
             <h2 class="text-3xl font-cute text-rose-700 mb-2">Acesso Seguro 🎀</h2>
             <p class="text-slate-500 font-bold text-sm mb-6">Seu Planner na nuvem!</p>
             
-            <!-- BOTÃO DO GOOGLE -->
             <button onclick="window.doGoogleLogin()" class="w-full bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-3 rounded-xl mb-4 shadow-sm transition flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
+                <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                 Entrar com Google
             </button>
 
@@ -106,10 +89,8 @@
                 <div class="flex-1 h-px bg-pink-100"></div><span class="text-[10px] text-pink-300 font-bold uppercase tracking-widest">ou E-mail</span><div class="flex-1 h-px bg-pink-100"></div>
             </div>
 
-            <!-- OPÇÕES DE E-MAIL -->
             <input type="email" id="login-email" placeholder="Seu E-mail" class="bg-pink-50 border border-pink-200 rounded-xl p-3 mb-3 outline-none font-bold text-rose-700 text-sm w-full">
             <input type="password" id="login-pass" placeholder="Senha (Mín. 6 letras)" class="bg-pink-50 border border-pink-200 rounded-xl p-3 mb-2 outline-none font-bold text-rose-700 text-sm w-full">
-            
             <p id="login-error" class="text-[11px] font-bold text-red-500 mb-3 hidden"></p>
             
             <button onclick="window.doLogin()" class="bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 rounded-xl mb-3 shadow-md transition">Entrar</button>
@@ -142,7 +123,6 @@
                 <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Geografia • Ateliê • Tattoo • Social</p>
             </div>
             
-            <!-- BOTÃO DE LOGOUT ADICIONADO AO SEU HEADER ORIGINAL -->
             <button onclick="window.doLogout()" class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center hover:bg-white/30 transition cursor-pointer group">
                 <p class="text-[9px] text-pink-100 uppercase tracking-widest font-bold mb-0.5 group-hover:hidden">Status Nuvem</p>
                 <p id="cloud-status-text" class="text-sm md:text-lg font-cute font-bold drop-shadow-sm group-hover:hidden">A verificar... ☁️</p>
@@ -153,7 +133,7 @@
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 main-content">
         <!-- NAVEGAÇÃO DESKTOP -->
-        <div class="hidden md:flex justify-center flex-wrap pb-4 mb-6 gap-3 relative z-20">
+        <div id="main-nav-desk" class="hidden md:flex justify-center flex-wrap pb-4 mb-6 gap-3 relative z-20">
             <button onclick="switchTab('resumo')" id="desk-btn-resumo" class="nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white"><i data-lucide="calendar-days" class="w-4 h-4"></i> Resumo</button>
             <button onclick="switchTab('rotina')" id="desk-btn-rotina" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="coffee" class="w-4 h-4"></i> Rotina</button>
             <button onclick="switchTab('estudos')" id="desk-btn-estudos" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="book-heart" class="w-4 h-4"></i> Estudos</button>
@@ -168,7 +148,6 @@
         <!-- ========================================== -->
         <div id="tab-resumo" class="tab-content animate-pop block">
             <div class="cute-card p-6 md:p-10 relative overflow-hidden bg-white mb-8">
-                <!-- Enfeites de fundo 🎀 -->
                 <i data-lucide="star" class="absolute top-16 right-12 w-24 h-24 text-pink-300/20 fill-pink-300/20 animate-float z-0" style="animation-delay: 1s;"></i>
                 <i data-lucide="heart" class="absolute bottom-10 left-10 w-20 h-20 text-rose-300/20 fill-rose-300/20 -rotate-12 animate-pulse z-0"></i>
                 <i data-lucide="sparkles" class="absolute top-1/2 left-4 w-12 h-12 text-yellow-300/20 fill-yellow-300/20 animate-float z-0"></i>
@@ -180,6 +159,7 @@
                         <span class="text-red-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-400"></span> Estudos</span> 
                         <span class="text-emerald-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Ateliê</span> 
                         <span class="text-purple-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Tattoo</span> 
+                        <span class="text-indigo-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-400"></span> Mestrado</span> 
                         <span class="text-fuchsia-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-fuchsia-400"></span> Social</span>
                     </div>
                 </div>
@@ -195,14 +175,11 @@
                 </div>
                 <div id="calendar-days" class="grid grid-cols-7 gap-1 md:gap-2 mt-2 relative z-10"></div>
 
-                <!-- Resumo dos Eventos do Mês -->
                 <div class="mt-10 border-t-2 border-pink-50 pt-6 relative z-10">
                     <h3 class="font-cute font-bold text-rose-700 text-lg mb-4 flex items-center gap-2">
                         <i data-lucide="list-heart" class="w-5 h-5 text-pink-400"></i> Eventos e Prazos Deste Mês
                     </h3>
-                    <div id="monthly-summary-list" class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
-                        <!-- Injetado via JS -->
-                    </div>
+                    <div id="monthly-summary-list" class="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2"></div>
                 </div>
             </div>
         </div>
@@ -213,9 +190,7 @@
         <div id="tab-rotina" class="tab-content hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <div class="cute-card p-6 relative flex flex-col overflow-hidden">
-                    <!-- Enfeites -->
                     <i data-lucide="sparkles" class="absolute top-1/3 right-4 w-20 h-20 text-rose-300/20 fill-rose-300/20 animate-float z-0"></i>
-
                     <div class="absolute top-0 left-0 w-full h-2 bg-rose-300"></div>
                     <h3 class="font-cute text-rose-800 text-xl flex items-center gap-2 mb-4 relative z-10"><i data-lucide="list-todo" class="text-rose-400"></i> Tarefas de Hoje</h3>
                     <div class="flex flex-col gap-3 mb-4 bg-rose-50 p-4 rounded-2xl border border-rose-100 relative z-10">
@@ -224,7 +199,6 @@
                             <button onclick="addTask()" class="bg-rose-400 text-white px-5 rounded-xl shadow-md hover:bg-rose-500 transition-colors"><i data-lucide="plus"></i></button>
                         </div>
                         <div class="flex flex-wrap gap-1.5 mt-1">
-                            <!-- Os 13 Botões -->
                             <button onclick="addQuickTask('🏋️‍♀️ Academia', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Academia</button>
                             <button onclick="addQuickTask('🚶‍♀️ Caminhada', 'saude')" class="text-[10px] font-bold bg-white border border-emerald-200 text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition">Caminhada</button>
                             <button onclick="addQuickTask('🛒 Mercado', 'casa')" class="text-[10px] font-bold bg-white border border-amber-200 text-amber-600 px-3 py-1.5 rounded-lg hover:bg-amber-50 transition">Mercado</button>
@@ -245,9 +219,7 @@
                 
                 <div class="flex flex-col gap-6">
                     <div class="cute-card p-6 flex flex-col items-center bg-white relative overflow-hidden">
-                        <!-- Enfeites -->
                         <i data-lucide="star" class="absolute top-4 right-6 w-14 h-14 text-yellow-300/30 fill-yellow-300/30 animate-pulse z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
                         <h3 class="font-cute text-rose-800 text-lg mb-3 flex items-center gap-2 relative z-10"><i data-lucide="timer" class="text-red-400"></i> Foco Pomodoro</h3>
                         <div class="text-5xl font-cute text-rose-500 mb-5 relative z-10" id="timer-display">25:00</div>
@@ -263,7 +235,6 @@
                     
                     <div class="cute-card p-4 relative flex-1 flex flex-col min-h-[140px] overflow-hidden">
                         <i data-lucide="music" class="absolute bottom-4 right-4 w-16 h-16 text-yellow-400/20 fill-yellow-400/20 animate-float z-0"></i>
-
                         <div class="absolute top-0 left-0 w-full h-2 bg-yellow-200"></div>
                         <h3 class="font-cute text-rose-800 text-base mb-3 flex items-center gap-1 relative z-10"><i data-lucide="music" class="w-4 h-4 text-yellow-500"></i> Vibes 🎧</h3>
                         <div class="flex-1 w-full bg-pink-50 rounded-xl overflow-hidden border border-pink-100 h-full relative z-10">
@@ -275,7 +246,6 @@
             
             <div class="cute-card p-6 md:p-8 bg-white mb-8 relative overflow-hidden">
                 <i data-lucide="heart" class="absolute top-10 right-10 w-24 h-24 text-purple-300/20 fill-purple-300/20 rotate-12 animate-float z-0"></i>
-
                 <div class="absolute top-0 left-0 w-full h-2 bg-purple-300"></div>
                 <h3 class="font-cute text-purple-800 text-xl flex items-center gap-2 mb-6 relative z-10"><i data-lucide="bar-chart-2" class="text-purple-400"></i> Resumo do Mês 🌸</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
@@ -286,24 +256,31 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- ABA 3: ESTUDOS (COM LEMBRETES DE PROVA)    -->
+        <!-- ABA 3: ESTUDOS                             -->
         <!-- ========================================== -->
         <div id="tab-estudos" class="tab-content hidden">
+            
+            <!-- Minhas Disciplinas -->
             <div class="bg-white rounded-[2rem] p-6 border-2 border-pink-100 shadow-lg mb-6 relative overflow-hidden cute-card">
                 <i data-lucide="book-heart" class="absolute top-6 right-[20%] w-32 h-32 text-pink-300/10 fill-pink-300/10 -rotate-12 animate-float z-0"></i>
-
                 <div class="absolute top-0 left-0 w-full h-2 bg-red-300"></div>
+                
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-10">
                     <h2 class="text-2xl md:text-3xl font-cute text-rose-800 flex items-center gap-2"><i data-lucide="book-heart" class="text-red-400 w-7 h-7"></i> Minhas Disciplinas</h2>
-                    <div class="flex gap-3 text-[10px] font-bold uppercase bg-pink-50 px-4 py-2 rounded-xl border border-pink-100 shadow-sm">
-                        <a href="https://www.ufrgs.br/site/aluno/" target="_blank" class="text-blue-500 hover:text-blue-600 transition">Portal Aluno</a>
-                        <span class="text-pink-200">•</span>
-                        <a href="https://moodle.ufrgs.br" target="_blank" class="text-orange-500 hover:text-orange-600 transition">Moodle</a>
+                    <div class="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
+                        <!-- O FAMOSO BOTÃO DE MESTRADO AQUI -->
+                        <button onclick="switchTab('mestrado')" class="w-full md:w-auto bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white px-5 py-2.5 rounded-xl shadow-md font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 border-2 border-white">
+                            <i data-lucide="graduation-cap" class="w-5 h-5"></i> Espaço Mestrado
+                        </button>
+                        <div class="bg-pink-50 px-4 py-2 rounded-xl shadow-sm border border-pink-100 flex gap-4 text-[10px] font-bold uppercase w-full md:w-auto justify-center">
+                            <a href="https://www.ufrgs.br/site/aluno/" target="_blank" class="text-blue-500 hover:text-blue-600 transition">Portal Aluno</a>
+                            <span class="text-pink-200">•</span>
+                            <a href="https://moodle.ufrgs.br" target="_blank" class="text-orange-500 hover:text-orange-600 transition">Moodle</a>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
-                    <!-- CARDS DE DISCIPLINAS -->
                     <div data-class-name="Constituição e Tendências em Ed. Ciências" onclick="openNoteModal('Constituição e Tendências em Ed. Ciências')" class="class-card cursor-pointer bg-red-50 border-2 border-l-8 border-red-200 border-l-red-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
                         <span class="text-[9px] font-bold text-red-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-red-100 uppercase tracking-widest relative z-10">SEG • 14H - 17H</span>
                         <h4 class="font-bold text-red-900 text-sm md:text-base leading-snug relative z-10">Constituição e Tendências em Ed. Ciências</h4>
@@ -345,7 +322,7 @@
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <!-- Leituras com Opções -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
                     <i data-lucide="star" class="absolute bottom-4 right-4 w-16 h-16 text-pink-400/10 fill-pink-400/10 animate-pulse z-0"></i>
@@ -359,7 +336,7 @@
                                 <option value="Capítulo">Capítulo</option>
                                 <option value="Artigo">Artigo</option>
                             </select>
-                            <button onclick="addReading()" class="bg-pink-400 hover:bg-pink-500 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm transition"><i data-lucide="plus"></i></button>
+                            <button onclick="addReading()" class="bg-pink-400 text-white px-5 rounded-lg active:scale-95 font-black shadow-sm transition"><i data-lucide="plus"></i></button>
                         </div>
                     </div>
                     <div id="reading-list-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
@@ -385,9 +362,8 @@
                 </div>
             </div>
 
-            <!-- NOVA SEÇÃO: TRACKER DE LISTAS E BANCO DE ERROS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mb-8">
-                
+            <!-- TRACKER DE LISTAS E BANCO DE ERROS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <!-- Tracker de Listas -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
                     <i data-lucide="list-checks" class="absolute bottom-4 right-4 w-16 h-16 text-purple-400/10 fill-purple-400/10 animate-pulse z-0"></i>
@@ -419,18 +395,18 @@
                 </div>
             </div>
 
-            <!-- NOVO: RESUMO DO MÊS (ESTUDOS) -->
+            <!-- RESUMO DO MÊS (ESTUDOS) -->
             <div class="cute-card p-6 md:p-8 bg-white mb-8 relative overflow-hidden">
                 <i data-lucide="book" class="absolute top-10 right-10 w-24 h-24 text-blue-300/20 fill-blue-300/20 rotate-12 animate-float z-0"></i>
                 <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-300 to-purple-300"></div>
                 <h3 class="font-cute text-blue-900 text-xl flex items-center gap-2 mb-6 relative z-10"><i data-lucide="pie-chart" class="text-blue-500"></i> Resumo de Desempenho 📈</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
-                    <div id="study-summary-text" class="flex flex-col gap-2 max-h-[250px] overflow-y-auto pr-2"></div>
+                    <div id="study-summary-text" class="flex flex-col gap-3 max-h-[250px] overflow-y-auto pr-2"></div>
                     <div class="relative w-full h-52 bg-slate-50 rounded-3xl p-4 border border-slate-100"><canvas id="studyChart"></canvas></div>
                 </div>
             </div>
 
-            <!-- Datalist Compartilhado para Facilitar -->
+            <!-- Datalist Compartilhado -->
             <datalist id="study-subjects">
                 <option value="Constituição e Tendências em Ed. Ciências"></option>
                 <option value="Conceitos Foucaultianos"></option>
@@ -442,7 +418,187 @@
                 <option value="Resumos de Leituras"></option>
             </datalist>
 
-        </div>
+        </div> <!-- ===================== FIM DA ABA DE ESTUDOS ===================== -->
+
+        <!-- ========================================== -->
+        <!-- ABA MESTRADO (SISTEMA INTEGRADO)           -->
+        <!-- ========================================== -->
+        <div id="tab-mestrado" class="tab-content hidden animate-pop block">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-4 w-full md:w-auto">
+                    <button onclick="switchTab('estudos')" class="bg-white border-2 border-purple-200 text-purple-600 p-2.5 rounded-xl hover:bg-purple-50 active:scale-95 transition-transform shadow-sm"><i data-lucide="arrow-left"></i></button>
+                    <h2 class="text-2xl md:text-3xl font-cute font-bold text-purple-900 flex items-center gap-2"><i data-lucide="graduation-cap" class="text-purple-500 w-8 h-8"></i> Centro de Mestrado 🎓</h2>
+                </div>
+                <!-- Menu Rápido Interno -->
+                <div class="flex gap-2 overflow-x-auto w-full md:w-auto hide-scrollbar p-1">
+                    <button onclick="switchMesTab('visao')" class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-purple-200 shadow-sm">1. Visão Geral</button>
+                    <button onclick="switchMesTab('reunioes')" class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-blue-200 shadow-sm">2. Reuniões</button>
+                    <button onclick="switchMesTab('leituras')" class="bg-rose-100 text-rose-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-rose-200 shadow-sm">3. Leituras</button>
+                    <button onclick="switchMesTab('producao')" class="bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-amber-200 shadow-sm">4. Produção</button>
+                    <button onclick="switchMesTab('disciplinas')" class="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-emerald-200 shadow-sm">5. Disciplinas</button>
+                    <button onclick="switchMesTab('dissertacao')" class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-indigo-200 shadow-sm">6. Dissertação</button>
+                    <button onclick="switchMesTab('semanal')" class="bg-pink-100 text-pink-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-pink-200 shadow-sm">7. Semanal</button>
+                    <button onclick="switchMesTab('emocional')" class="bg-teal-100 text-teal-700 px-4 py-2 rounded-lg font-bold text-xs shrink-0 whitespace-nowrap border border-teal-200 shadow-sm">8. Emocional</button>
+                </div>
+            </div>
+
+            <!-- PAINÉIS DO MESTRADO -->
+            
+            <!-- 1. Visão Geral -->
+            <div id="mes-visao" class="mes-panel animate-pop block">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-purple-400"></div>
+                    <h3 class="text-xl font-cute text-purple-900 mb-3 flex items-center gap-2 relative z-10"><i data-lucide="map" class="w-5 h-5 text-purple-500"></i> Mapa Mestre</h3>
+                    <textarea id="mestrado-1" oninput="saveMestrado(1)" class="w-full flex-1 bg-purple-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-purple-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                </div>
+            </div>
+
+            <!-- 2. Reuniões (COM CALENDÁRIO) -->
+            <div id="mes-reunioes" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-blue-400"></div>
+                    <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-2 z-10">
+                        <h3 class="text-xl font-cute text-blue-900 flex items-center gap-2"><i data-lucide="users" class="w-5 h-5 text-blue-500"></i> Controle de Reuniões</h3>
+                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-lg border border-blue-100">📅 Sincronizado com Calendário</span>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 mb-5 relative z-10">
+                        <input type="date" id="new-meeting-date" class="bg-white border border-blue-200 rounded-xl p-3 outline-none font-bold text-blue-800 text-sm w-full md:w-40 shadow-sm">
+                        <input type="text" id="new-meeting-subject" placeholder="Assunto Principal da Reunião..." class="flex-1 bg-white border border-blue-200 rounded-xl p-3 outline-none font-bold text-blue-800 text-sm shadow-sm">
+                        <select id="new-meeting-type" class="bg-white border border-blue-200 rounded-xl p-3 outline-none font-bold text-blue-800 text-sm shadow-sm w-full md:w-32"><option value="Online">Online</option><option value="Presencial">Presencial</option></select>
+                        <button onclick="addMestradoMeeting()" class="bg-blue-500 text-white px-5 rounded-xl hover:bg-blue-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Adicionar</button>
+                    </div>
+                    <div id="mestrado-meetings-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
+                </div>
+            </div>
+
+            <!-- 3. Leituras Aprofundadas -->
+            <div id="mes-leituras" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-rose-400"></div>
+                    <h3 class="text-xl font-cute text-rose-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="book-open" class="w-5 h-5 text-rose-500"></i> Fichamento de Leituras</h3>
+                    <p class="text-xs text-rose-500 font-bold mb-4 relative z-10">Onde a sua pesquisa ganha corpo.</p>
+                    <textarea id="mestrado-3" oninput="saveMestrado(3)" class="w-full flex-1 bg-rose-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-rose-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                </div>
+            </div>
+
+            <!-- 4. Produção Acadêmica -->
+            <div id="mes-producao" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-amber-400"></div>
+                    <h3 class="text-xl font-cute text-amber-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="award" class="w-5 h-5 text-amber-500"></i> Produção Acadêmica</h3>
+                    <p class="text-xs text-amber-600 font-bold mb-4 relative z-10">Artigos, congressos e publicações.</p>
+                    <div class="flex flex-col md:flex-row gap-2 mb-4 relative z-10">
+                        <input type="text" id="new-prod-ac-title" placeholder="Título / Evento..." class="flex-1 bg-white border border-amber-200 rounded-xl p-3 outline-none font-bold text-amber-800 text-sm shadow-sm">
+                        <input type="date" id="new-prod-ac-date" class="bg-white border border-amber-200 rounded-xl p-3 outline-none font-bold text-amber-800 text-sm w-full md:w-40 shadow-sm" title="Prazo de Submissão">
+                        <button onclick="addMestradoProducao()" class="bg-amber-500 text-white px-5 rounded-xl hover:bg-amber-600 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Salvar</button>
+                    </div>
+                    <div id="mestrado-producao-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
+                    <textarea id="mestrado-4" oninput="saveMestrado(4)" rows="4" class="w-full bg-amber-50/50 rounded-xl p-4 outline-none font-bold text-slate-700 text-sm border border-amber-100 resize-none z-10 mt-4 hide-scrollbar" placeholder="Anotações gerais sobre publicações, ideias, coautores..."></textarea>
+                </div>
+            </div>
+
+            <!-- 5. Disciplinas -->
+            <div id="mes-disciplinas" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-emerald-400"></div>
+                    <h3 class="text-xl font-cute text-emerald-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="layout-grid" class="w-5 h-5 text-emerald-500"></i> Controle de Disciplinas</h3>
+                    <textarea id="mestrado-5" oninput="saveMestrado(5)" class="w-full flex-1 bg-emerald-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-emerald-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                </div>
+            </div>
+
+            <!-- 6. Dissertação -->
+            <div id="mes-dissertacao" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-indigo-400"></div>
+                    <h3 class="text-xl font-cute text-indigo-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="book" class="w-5 h-5 text-indigo-500"></i> Progresso da Dissertação</h3>
+                    <p class="text-xs text-indigo-500 font-bold mb-5 relative z-10">Cada capítulo é uma vitória. Evite a sensação de "não fiz nada"!</p>
+                    
+                    <div class="flex flex-col gap-3 z-10 flex-1 overflow-y-auto pr-2 hide-scrollbar">
+                        <!-- Capítulos Dinâmicos -->
+                        <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-black text-indigo-900">Introdução</span> 
+                                <select id="ms-cap1" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
+                            </div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog1" oninput="updateMsProg(1); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val1" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                        </div>
+                        <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-black text-indigo-900">Referencial Teórico</span> 
+                                <select id="ms-cap2" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
+                            </div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog2" oninput="updateMsProg(2); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val2" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                        </div>
+                        <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-black text-indigo-900">Metodologia</span> 
+                                <select id="ms-cap3" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
+                            </div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog3" oninput="updateMsProg(3); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val3" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                        </div>
+                        <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-black text-indigo-900">Resultados</span> 
+                                <select id="ms-cap4" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
+                            </div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog4" oninput="updateMsProg(4); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val4" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                        </div>
+                        <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-black text-indigo-900">Discussão</span> 
+                                <select id="ms-cap5" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
+                            </div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog5" oninput="updateMsProg(5); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val5" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                        </div>
+                        <div class="bg-white p-4 border border-indigo-100 rounded-2xl shadow-sm">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-black text-indigo-900">Considerações Finais</span> 
+                                <select id="ms-cap6" onchange="saveMsCap()" class="text-xs font-bold rounded-lg p-1.5 bg-indigo-50 text-indigo-700 outline-none border border-indigo-200 cursor-pointer"><option value="Não Iniciado">Não Iniciado</option><option value="Rascunho">Rascunho</option><option value="Revisando">Revisando</option><option value="Finalizado">✅ Finalizado</option></select>
+                            </div>
+                            <div class="flex items-center gap-3"><input type="range" id="ms-prog6" oninput="updateMsProg(6); saveMsCap()" class="w-full accent-indigo-500" min="0" max="100" value="0"><span id="ms-val6" class="text-xs font-bold text-indigo-400 w-8">0%</span></div>
+                        </div>
+
+                        <!-- Caixa de Pendências -->
+                        <textarea id="mestrado-6" oninput="saveMestrado(6)" rows="4" class="w-full bg-indigo-50/50 rounded-xl p-4 outline-none font-bold text-slate-700 text-sm border border-indigo-100 mt-2 resize-none" placeholder="O que falta pesquisar?\nPendências gerais da dissertação..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Semanal -->
+            <div id="mes-semanal" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-pink-400"></div>
+                    <h3 class="text-xl font-cute text-pink-900 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="calendar-days" class="w-5 h-5 text-pink-500"></i> Planner Semanal da Pesquisa</h3>
+                    <textarea id="mestrado-7" oninput="saveMestrado(7)" class="w-full flex-1 bg-pink-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-pink-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                </div>
+            </div>
+
+            <!-- 8. Emocional -->
+            <div id="mes-emocional" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-teal-400"></div>
+                    <h3 class="text-xl font-cute text-teal-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="smile" class="w-5 h-5 text-teal-500"></i> Controle Emocional</h3>
+                    <p class="text-xs text-teal-600 font-bold mb-4 relative z-10">Mestrado mexe com a autoestima. Avalie-se!</p>
+                    <textarea id="mestrado-8" oninput="saveMestrado(8)" class="w-full flex-1 bg-teal-50/50 rounded-xl p-5 outline-none font-bold text-slate-700 text-sm border border-teal-100 resize-none z-10 hide-scrollbar leading-relaxed"></textarea>
+                </div>
+            </div>
+            
+            <!-- 9. Banco de Ideias -->
+            <div id="mes-ideias" class="mes-panel hidden animate-pop">
+                <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden min-h-[500px]">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-yellow-400"></div>
+                    <h3 class="text-xl font-cute text-yellow-900 mb-1 flex items-center gap-2 relative z-10"><i data-lucide="lightbulb" class="w-5 h-5 text-yellow-500"></i> Banco de Ideias 💡</h3>
+                    <p class="text-xs text-yellow-600 font-bold mb-4 relative z-10">Capture insights antes que sumam!</p>
+                    <div class="flex flex-col md:flex-row gap-2 mb-4 relative z-10">
+                        <select id="new-ideia-type" class="bg-white border border-yellow-200 rounded-xl p-3 outline-none font-bold text-yellow-800 text-sm w-full md:w-32 shadow-sm"><option value="Artigo">Artigo</option><option value="Capítulo">Capítulo</option><option value="Pergunta">Pergunta</option></select>
+                        <input type="text" id="new-ideia-desc" placeholder="Descreva a ideia brilhante..." class="flex-1 bg-white border border-yellow-200 rounded-xl p-3 outline-none font-bold text-yellow-800 text-sm shadow-sm">
+                        <button onclick="addMestradoIdeia()" class="bg-yellow-400 text-white px-5 rounded-xl hover:bg-yellow-500 shadow-md font-bold transition active:scale-95"><i data-lucide="plus" class="w-5 h-5 inline"></i> Salvar</button>
+                    </div>
+                    <div id="mestrado-ideias-list" class="flex flex-col gap-3 overflow-y-auto pr-2 z-10 hide-scrollbar flex-1"></div>
+                </div>
+            </div>
+
+        </div> <!-- FIM DA ABA MESTRADO -->
 
         <!-- ========================================== -->
         <!-- ABA 4: ATELIÊ VENDAS INTELIGENTES          -->
@@ -688,6 +844,7 @@
         <button onclick="switchTab('resumo')" id="mob-btn-resumo" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="calendar-days"></i><span class="text-[9px] font-bold">Resumo</span></button>
         <button onclick="switchTab('rotina')" id="mob-btn-rotina" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="coffee"></i><span class="text-[9px] font-bold">Rotina</span></button>
         <button onclick="switchTab('estudos')" id="mob-btn-estudos" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="book-heart"></i><span class="text-[9px] font-bold">Estudos</span></button>
+        <button onclick="switchTab('mestrado')" id="mob-btn-mestrado" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="graduation-cap"></i><span class="text-[9px] font-bold">Mestrado</span></button>
         <button onclick="switchTab('loja')" id="mob-btn-loja" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="palette"></i><span class="text-[9px] font-bold">Ateliê</span></button>
         <button onclick="switchTab('tattoo')" id="mob-btn-tattoo" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="pen-tool"></i><span class="text-[9px] font-bold">Tattoo</span></button>
         <button onclick="switchTab('instagram')" id="mob-btn-instagram" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="camera"></i><span class="text-[9px] font-bold">Social</span></button>
@@ -975,17 +1132,43 @@
         let currMo = new Date(); 
 
         function switchTab(t) {
-            ['resumo','rotina','estudos','loja','tattoo','instagram','financas'].forEach(x => {
+            ['resumo','rotina','estudos','mestrado','loja','tattoo','instagram','financas'].forEach(x => {
                 const e=document.getElementById('tab-'+x), d=document.getElementById('desk-btn-'+x), m=document.getElementById('mob-btn-'+x);
                 if(e) e.classList.toggle('hidden', x!==t);
+                
+                // Ocultar a navegação principal APENAS na aba de Mestrado para imersão total
+                let navDesk = document.getElementById('main-nav-desk');
+                if (navDesk) {
+                    if (t === 'mestrado') navDesk.classList.add('hidden');
+                    else navDesk.classList.remove('hidden');
+                }
+
                 if(d) d.className = (x===t) ? "nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white" : "nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200";
                 if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-rose-600 w-16 transition-all transform -translate-y-2 bg-pink-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-pink-300 w-16 transition-all";
             });
+            
             if(t==='resumo') renderMasterCalendar(); if(t==='rotina') renderRoutineChart(); if(t==='financas') renderFinances();
             if(t==='tattoo') { renderTattoos(); renderClients(); renderPromos(); renderInventory(); } 
             if(t==='instagram') renderInstaPosts(); if(t==='loja') renderProductions();
             if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); renderStudyChart(); updateClassCards(); }
+            if(t==='mestrado') { switchMesTab('visao'); renderMestradoMeetings(); renderMestradoProducao(); renderMestradoIdeias(); loadMestrado(); loadMsCap(); }
             if(typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // Navegação Interna do Mestrado
+        function switchMesTab(sub) {
+            ['visao', 'reunioes', 'leituras', 'producao', 'disciplinas', 'dissertacao', 'semanal', 'emocional', 'ideias'].forEach(s => {
+                let el = document.getElementById('mes-'+s);
+                if(el) {
+                    if(s === sub) {
+                        el.classList.remove('hidden');
+                        el.classList.add('block');
+                    } else {
+                        el.classList.add('hidden');
+                        el.classList.remove('block');
+                    }
+                }
+            });
         }
 
         function renderMasterCalendar() {
@@ -997,6 +1180,10 @@
             lsGet('productions').forEach(p => addEv(p.date, `Ateliê: ${p.name}`, 'loja'));
             lsGet('tattoos').forEach(t => addEv(t.date, `Tattoo: ${t.name}`, 'tattoo'));
             lsGet('instaPosts').forEach(p => addEv(p.date, `Post: ${p.name}`, 'insta'));
+            
+            // Reuniões do Mestrado adicionadas ao Calendário Mestre
+            lsGet('mestradoMeetings').forEach(m => addEv(m.date, `Reunião Mestrado: ${m.subject}`, 'mestrado'));
+            lsGet('mesProducao').forEach(m => addEv(m.date, `Submissão: ${m.title}`, 'mestrado'));
 
             let fd = new Date(currMo.getFullYear(), currMo.getMonth(), 1).getDay(), ld = new Date(currMo.getFullYear(), currMo.getMonth() + 1, 0).getDate();
             let html = ''; for(let i=0;i<fd;i++) html+='<div></div>';
@@ -1011,8 +1198,8 @@
                 let dots='', tt='';
                 if(evs[k]) {
                     evs[k].forEach(ev => monthEventsArr.push({date: k, title: ev.title, type: ev.type}));
-                    dots=`<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">`+(evs[k].some(e=>e.type==='estudo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='loja')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='tattoo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-purple-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='insta')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-fuchsia-400 border border-white"></span>`:'')+`</div>`;
-                    tt=`<div class="cal-tooltip hidden absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[150px] md:max-w-[200px] bg-slate-800 text-white text-[9px] md:text-[10px] p-2 rounded-xl shadow-xl border border-slate-700 pointer-events-none z-[60]">`+evs[k].map(e=>`<div class="flex items-center gap-1.5 mb-1"><span class="w-1.5 h-1.5 rounded-full shrink-0 ${e.type==='estudo'?'bg-red-400':e.type==='loja'?'bg-emerald-400':e.type==='tattoo'?'bg-purple-400':'bg-fuchsia-400'}"></span><span class="truncate">${e.title}</span></div>`).join('')+`</div>`;
+                    dots=`<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">`+(evs[k].some(e=>e.type==='estudo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='loja')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='tattoo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-purple-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='insta')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-fuchsia-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='mestrado')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-indigo-500 border border-white"></span>`:'')+`</div>`;
+                    tt=`<div class="cal-tooltip hidden absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[150px] md:max-w-[200px] bg-slate-800 text-white text-[9px] md:text-[10px] p-2 rounded-xl shadow-xl border border-slate-700 pointer-events-none z-[60]">`+evs[k].map(e=>`<div class="flex items-center gap-1.5 mb-1"><span class="w-1.5 h-1.5 rounded-full shrink-0 ${e.type==='estudo'?'bg-red-400':e.type==='loja'?'bg-emerald-400':e.type==='tattoo'?'bg-purple-400':e.type==='mestrado'?'bg-indigo-500':'bg-fuchsia-400'}"></span><span class="truncate">${e.title}</span></div>`).join('')+`</div>`;
                 }
                 html+=`<div class="py-1"><div class="${c}">${d}${dots}${tt}</div></div>`;
             }
@@ -1026,7 +1213,7 @@
                     sumList.innerHTML = '<p class="text-sm text-pink-400 font-bold italic text-center py-4 bg-pink-50 rounded-2xl border border-pink-100">O mês está livre por enquanto! 🌸</p>';
                 } else {
                     monthEventsArr.forEach(e => {
-                        let badge = e.type==='estudo'?'bg-red-50 text-red-600 border-red-100':e.type==='loja'?'bg-emerald-50 text-emerald-600 border-emerald-100':e.type==='tattoo'?'bg-purple-50 text-purple-600 border-purple-100':'bg-fuchsia-50 text-fuchsia-600 border-fuchsia-100';
+                        let badge = e.type==='estudo'?'bg-red-50 text-red-600 border-red-100':e.type==='loja'?'bg-emerald-50 text-emerald-600 border-emerald-100':e.type==='tattoo'?'bg-purple-50 text-purple-600 border-purple-100':e.type==='mestrado'?'bg-indigo-50 text-indigo-600 border-indigo-100':'bg-fuchsia-50 text-fuchsia-600 border-fuchsia-100';
                         sumList.innerHTML += `<div class="flex items-center gap-3 p-3.5 bg-white border border-pink-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow z-20 relative"><span class="text-[10px] font-bold uppercase tracking-widest ${badge} border px-2.5 py-1 rounded-lg shrink-0">${e.date.split('-').reverse().join('/')}</span><span class="text-sm font-bold text-rose-800 truncate">${e.title}</span></div>`;
                     });
                 }
@@ -1143,7 +1330,7 @@
             if(!c) return; c.innerHTML='';
             if(!r.length) { c.innerHTML='<p class="text-xs text-pink-400 font-bold z-20 relative">Nenhuma leitura 🎀</p>'; return; }
             r.forEach(i=>{ 
-                if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; } // Compatibilidade com a versão antiga
+                if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; }
                 let selColor = i.status==='concluido'?'bg-emerald-100 text-emerald-700':i.status==='em_andamento'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-500';
                 c.innerHTML+=`
                 <div class="flex items-center justify-between p-2 bg-white border border-pink-100 rounded-xl shadow-sm z-20 relative">
@@ -1190,14 +1377,14 @@
         function editExtraStudy(id){let e=lsGet('extraStudies'); let i=e.find(x=>x.id===id); if(i){let n=prompt("Nome do Extra:",i.title);if(n){i.title=n;lsSet('extraStudies',e);renderExtraStudies();renderMasterCalendar();}}}
 
         // ==========================================
-        // TRACKER DE LISTAS & BANCO DE ERROS
+        // TRACKER DE LISTAS E BANCO DE ERROS
         // ==========================================
         function renderListTracker() {
             let lists = lsGet('listTracker'); let c = document.getElementById('list-tracker-container'); 
             if(!c) return; c.innerHTML='';
             if(!lists.length) { c.innerHTML='<p class="text-xs text-purple-400 font-bold z-20 relative">Nenhuma lista pendente 🎀</p>'; return; }
             lists.forEach(i=>{ 
-                if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; } // Compatibilidade com a versão antiga
+                if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; }
                 let selColor = i.status==='concluido'?'bg-emerald-100 text-emerald-700':i.status==='em_andamento'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-500';
                 c.innerHTML+=`
                 <div class="flex items-center justify-between p-2 bg-white border border-purple-100 rounded-xl shadow-sm z-20 relative">
@@ -1239,9 +1426,9 @@
                     </summary>
                     <div class="p-3 border-t border-red-100 text-xs">
                         <p class="font-bold text-rose-700 mb-0.5">Onde errei:</p>
-                        <p class="text-slate-600 mb-2">${i.mistake}</p>
+                        <p class="text-slate-600 mb-2 whitespace-pre-wrap">${i.mistake}</p>
                         <p class="font-bold text-emerald-600 mb-0.5">Raciocínio Correto:</p>
-                        <p class="text-slate-600">${i.correction}</p>
+                        <p class="text-slate-600 whitespace-pre-wrap">${i.correction}</p>
                     </div>
                 </details>`; 
             }); 
@@ -1320,11 +1507,191 @@
                     }
                 });
             } else if(chartEl) {
-                // Se estiver vazio, cria um gráfico vazio só para manter a estrutura
                 studyChartInst = new Chart(chartEl, { type: 'bar', data: { labels: [''], datasets: [] }, options: { scales: { y: { display: false }, x: { display: false } }, plugins: { legend: { display: false } } } });
             }
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
+
+        // ==========================================
+        // MESTRADO (SISTEMA INTEGRADO E FUNCIONAL)
+        // ==========================================
+        const mestradoTemplates = {
+            m1: "🎯 Tema e Direção\nTema provisório da pesquisa:\nProblema de pesquisa:\nObjetivo geral:\nObjetivos específicos:\nPalavras-chave:\nLinha de pesquisa:\n(Se mudar no meio do caminho, você atualiza. Mestrado é organismo vivo.)\n\n🗓️ Linha do Tempo (por semestre)\nDisciplinas obrigatórias:\nDisciplinas eletivas:\nPrazo para qualificação:\nPrazo para defesa:\nEntrega de artigo:\nParticipação em evento:\nRelatórios para bolsa:\n",
+            m3: "Referência completa (ABNT já pronta):\nResumo em 5–10 linhas:\nConceitos principais:\nCitações importantes (com página!):\nComo isso conversa com minha pesquisa?:\nIdeias que surgiram a partir do texto:\n",
+            m4: "Ideias de artigos:\nEventos acadêmicos:\nSubmissões feitas:\nStatus (em escrita / submetido / aceito / recusado):\nPrazos:\n\nMestrado não é só dissertação. É posicionamento acadêmico.",
+            m5: "Ementa:\nDatas de entrega:\nTrabalhos finais:\nLeituras obrigatórias:\nNota final:\n\n“Como essa disciplina alimenta minha dissertação?”:\n",
+            m7: "Leituras da semana:\nEscrita da semana (quantas páginas ou qual seção?):\nReuniões:\nEventos:\nPrazos:\n\nO que avançou na minha pesquisa essa semana?:\n(Se não avançou, você ajusta a rota.)",
+            m8: "Como estou me sentindo em relação à pesquisa?:\nO que está me travando?:\nO que está fluindo?:\nPreciso conversar algo com meu orientador?:\n\nMestrado mexe com autoestima. Ignorar isso é pedir pra surtar no segundo ano."
+        };
+
+        function loadMestrado() {
+            [1, 3, 4, 5, 7, 8].forEach(i => {
+                let el = document.getElementById('mestrado-'+i);
+                if(el) {
+                    let saved = lsGet('mestrado_'+i, '');
+                    el.value = saved || mestradoTemplates['m'+i];
+                }
+            });
+        }
+
+        function saveMestrado(i) {
+            let el = document.getElementById('mestrado-'+i);
+            if(el) lsSet('mestrado_'+i, el.value);
+        }
+
+        function loadMsCap() {
+            for(let i=1; i<=6; i++) {
+                let s = document.getElementById('ms-cap'+i);
+                let p = document.getElementById('ms-prog'+i);
+                let v = document.getElementById('ms-val'+i);
+                if(s) s.value = lsGet('mscap_'+i, 'Não Iniciado');
+                if(p) {
+                    p.value = lsGet('msprog_'+i, '0');
+                    if(v) v.innerText = p.value + '%';
+                }
+            }
+            let t = document.getElementById('mestrado-6');
+            if(t) t.value = lsGet('mestrado_6', '');
+        }
+
+        function updateMsProg(i) {
+            let p = document.getElementById('ms-prog'+i);
+            let v = document.getElementById('ms-val'+i);
+            if(p && v) v.innerText = p.value + '%';
+        }
+
+        function saveMsCap() {
+            for(let i=1; i<=6; i++) {
+                let s = document.getElementById('ms-cap'+i);
+                let p = document.getElementById('ms-prog'+i);
+                if(s) lsSet('mscap_'+i, s.value);
+                if(p) lsSet('msprog_'+i, p.value);
+            }
+        }
+
+        // Módulo de Reuniões
+        function renderMestradoMeetings() {
+            let m = lsGet('mestradoMeetings');
+            let c = document.getElementById('mestrado-meetings-list');
+            if(!c) return; c.innerHTML = '';
+            if(!m.length) { c.innerHTML = '<p class="text-xs text-blue-400 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-blue-100 mt-2">Nenhuma reunião. Agende uma com seu orientador! ☕</p>'; return; }
+            m.sort((a,b)=>new Date(b.date)-new Date(a.date)).forEach(i => {
+                c.innerHTML += `
+                <details class="bg-white border border-blue-100 rounded-xl shadow-sm z-20 relative overflow-hidden group mb-2 [&::-webkit-details-marker]:hidden">
+                    <summary class="p-3 flex items-center justify-between cursor-pointer list-none bg-blue-50/50 hover:bg-blue-50 transition-colors">
+                        <div class="flex flex-col overflow-hidden pr-2">
+                            <div class="flex gap-1 mb-1">
+                                <span class="text-[9px] font-black text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded-lg border border-blue-200">${i.date?i.date.split('-').reverse().join('/'):'-'}</span>
+                                <span class="text-[9px] font-black text-blue-500 bg-white px-1.5 py-0.5 rounded-lg border border-blue-200">${i.type}</span>
+                            </div>
+                            <span class="text-xs font-extrabold text-blue-900 truncate">${i.subject}</span>
+                        </div>
+                        <button onclick="deleteMestradoMeeting(${i.id})" class="text-slate-400 hover:text-red-500 p-1.5 shrink-0 bg-white rounded-lg shadow-sm border border-slate-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    </summary>
+                    <div class="p-3 border-t border-blue-100 text-xs flex flex-col gap-2 bg-slate-50/50">
+                        <textarea oninput="updateMestradoMeeting(${i.id}, 'details', this.value)" rows="6" class="w-full bg-white border border-slate-200 rounded-lg p-2.5 outline-none resize-none hide-scrollbar text-slate-700 font-bold leading-relaxed shadow-inner">${i.details||''}</textarea>
+                    </div>
+                </details>`;
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addMestradoMeeting() {
+            let d = document.getElementById('new-meeting-date').value;
+            let s = document.getElementById('new-meeting-subject').value.trim();
+            let t = document.getElementById('new-meeting-type').value;
+            if(d && s) {
+                let m = lsGet('mestradoMeetings');
+                let template = "📌 Assuntos discutidos:\n\n✅ Decisões tomadas:\n\n✏️ Correções sugeridas:\n\n📚 Referências indicadas:\n\n🎯 Tarefas para próxima reunião:\n\n❓ Dúvidas que ficaram:\n";
+                m.push({id: Date.now(), date: d, subject: s, type: t, details: template});
+                lsSet('mestradoMeetings', m);
+                document.getElementById('new-meeting-date').value = '';
+                document.getElementById('new-meeting-subject').value = '';
+                renderMestradoMeetings();
+                renderMasterCalendar();
+            } else {
+                alert('Preencha a Data e o Assunto da Reunião!');
+            }
+        }
+        function deleteMestradoMeeting(id) { lsSet('mestradoMeetings', lsGet('mestradoMeetings').filter(x=>x.id!==id)); renderMestradoMeetings(); renderMasterCalendar(); }
+        function updateMestradoMeeting(id, field, val) { let m = lsGet('mestradoMeetings'); let f = m.find(x=>x.id===id); if(f){ f[field]=val; lsSet('mestradoMeetings', m); } }
+
+        // Módulo de Produção
+        function renderMestradoProducao() {
+            let p = lsGet('mesProducao');
+            let c = document.getElementById('mestrado-producao-list');
+            if(!c) return; c.innerHTML = '';
+            if(!p.length) { c.innerHTML = '<p class="text-xs text-amber-500 font-bold p-3 text-center bg-white rounded-xl shadow-sm border border-amber-100 mt-2">Nenhuma produção registrada ✍️</p>'; return; }
+            p.sort((a,b)=>new Date(a.date)-new Date(b.date)).forEach(i => {
+                let statusColor = i.status==='Aceito'?'text-emerald-600 bg-emerald-100':i.status==='Submetido'?'text-blue-600 bg-blue-100':i.status==='Recusado'?'text-red-600 bg-red-100':'text-amber-600 bg-amber-100';
+                c.innerHTML += `
+                <div class="bg-white border border-amber-100 rounded-xl shadow-sm p-3 relative flex flex-col gap-2">
+                    <div class="flex justify-between items-start">
+                        <div class="flex flex-col pr-2 overflow-hidden">
+                            <span class="text-xs font-extrabold text-amber-900 truncate">${i.title}</span>
+                            <span class="text-[9px] font-bold text-slate-500 mt-0.5">Prazo: ${i.date?i.date.split('-').reverse().join('/'):'Sem data'}</span>
+                        </div>
+                        <button onclick="deleteMesProducao(${i.id})" class="text-slate-300 hover:text-red-500 shrink-0"><i data-lucide="x" class="w-4 h-4"></i></button>
+                    </div>
+                    <div class="flex justify-between items-center mt-1 pt-2 border-t border-slate-50">
+                        <select onchange="updateMesProducao(${i.id}, this.value)" class="text-[9px] font-black outline-none rounded p-1 ${statusColor}">
+                            <option value="Ideia" ${i.status==='Ideia'?'selected':''}>💡 Ideia</option>
+                            <option value="Escrevendo" ${i.status==='Escrevendo'?'selected':''}>✍️ Escrevendo</option>
+                            <option value="Submetido" ${i.status==='Submetido'?'selected':''}>📬 Submetido</option>
+                            <option value="Aceito" ${i.status==='Aceito'?'selected':''}>✅ Aceito</option>
+                            <option value="Recusado" ${i.status==='Recusado'?'selected':''}>❌ Recusado</option>
+                        </select>
+                    </div>
+                </div>`;
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addMestradoProducao() {
+            let t = document.getElementById('new-prod-ac-title').value.trim();
+            let d = document.getElementById('new-prod-ac-date').value;
+            if(t) {
+                let p = lsGet('mesProducao');
+                p.push({id: Date.now(), title: t, date: d, status: 'Ideia'});
+                lsSet('mesProducao', p);
+                document.getElementById('new-prod-ac-title').value = '';
+                document.getElementById('new-prod-ac-date').value = '';
+                renderMestradoProducao();
+                renderMasterCalendar();
+            }
+        }
+        function deleteMesProducao(id) { lsSet('mesProducao', lsGet('mesProducao').filter(x=>x.id!==id)); renderMestradoProducao(); renderMasterCalendar(); }
+        function updateMesProducao(id, val) { let p = lsGet('mesProducao'); let f = p.find(x=>x.id===id); if(f){ f.status=val; lsSet('mesProducao', p); renderMestradoProducao(); } }
+
+        // Módulo de Ideias
+        function renderMestradoIdeias() {
+            let id = lsGet('mesIdeias');
+            let c = document.getElementById('mestrado-ideias-list');
+            if(!c) return; c.innerHTML = '';
+            if(!id.length) return;
+            id.forEach(i => {
+                c.innerHTML += `
+                <div class="flex items-center justify-between p-2.5 bg-white border border-yellow-100 rounded-xl shadow-sm">
+                    <div class="flex flex-col flex-1 overflow-hidden pr-2">
+                        <span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mb-0.5 bg-yellow-100 text-yellow-700">${i.type}</span>
+                        <span class="text-xs font-bold text-slate-700 truncate">${i.desc}</span>
+                    </div>
+                    <button onclick="deleteMesIdeia(${i.id})" class="text-slate-300 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </div>`;
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons({root: c});
+        }
+        function addMestradoIdeia() {
+            let t = document.getElementById('new-ideia-type').value;
+            let d = document.getElementById('new-ideia-desc').value.trim();
+            if(d) {
+                let id = lsGet('mesIdeias');
+                id.push({id: Date.now(), type: t, desc: d});
+                lsSet('mesIdeias', id);
+                document.getElementById('new-ideia-desc').value = '';
+                renderMestradoIdeias();
+            }
+        }
+        function deleteMesIdeia(id) { lsSet('mesIdeias', lsGet('mesIdeias').filter(x=>x.id!==id)); renderMestradoIdeias(); }
+
 
         // ==========================================
         // ATELIÊ & VENDAS ONLINE/FÍSICA
@@ -1440,9 +1807,6 @@
         function loadInstaNotes() { let el=document.getElementById('insta-notes'); if(el) el.value = lsGet('notes',{})['instaNotes']||''; }
         function saveInstaNotes() { let n = lsGet('notes',{}); n['instaNotes'] = document.getElementById('insta-notes').value; lsSet('notes', n); }
 
-        // ==========================================
-        // FINANÇAS DASHBOARD E CARTÃO
-        // ==========================================
         function updateFinanceCategories() {
             let t=document.getElementById('new-fin-type').value, l=document.getElementById('fin-categories'); 
             if(l){
@@ -1522,6 +1886,9 @@
             if(typeof renderListTracker === 'function') renderListTracker();
             if(typeof renderErrorBank === 'function') renderErrorBank();
             if(typeof renderStudyChart === 'function') renderStudyChart();
+            if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
+            if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
+            if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
             if(typeof renderClients === 'function') renderClients(); 
             if(typeof renderPromos === 'function') renderPromos(); 
             if(typeof renderInventory === 'function') renderInventory(); 
@@ -1533,6 +1900,8 @@
             if(typeof updateClassCards === 'function') updateClassCards(); 
             if(typeof loadStoreNotes === 'function') loadStoreNotes();
             if(typeof loadInstaNotes === 'function') loadInstaNotes();
+            if(typeof loadMestrado === 'function') loadMestrado();
+            if(typeof loadMsCap === 'function') loadMsCap();
         };
 
         window.onload = () => {
@@ -1540,6 +1909,11 @@
             if(typeof renderListTracker === 'function') renderListTracker();
             if(typeof renderErrorBank === 'function') renderErrorBank();
             if(typeof renderStudyChart === 'function') renderStudyChart();
+            if(typeof loadMestrado === 'function') loadMestrado();
+            if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
+            if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
+            if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
+            if(typeof loadMsCap === 'function') loadMsCap();
         };
     </script>
 </body>
