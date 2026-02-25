@@ -2209,4 +2209,19 @@
         function deleteFinance(id){ lsSet('finances',lsGet('finances').filter(x=>x.id!==id)); renderFinances(); }
 
         // ==========================================
-        // INIT GERAL UNIFICADO (CHAMADO PELA
+        // INIT GERAL UNIFICADO (CHAMADO PELA NUVEM OU LOCALMENTE)
+        // ==========================================
+        window.renderAllApp = () => {
+            if(window.lucide) lucide.createIcons();
+            let fns = [renderMasterCalendar, updateTimerDisplay, renderTasks, renderProductions, renderReadingList, renderExtraStudies, renderListTracker, renderErrorBank, renderStudyChart, renderMestradoMeetings, renderMestradoProducao, renderMestradoIdeias, renderMesDisciplinas, renderMesEmocional, renderMesLeituras, renderClients, renderPromos, renderInventory, renderTattoos, updateFinanceCategories, renderFinances, renderRoutineChart, renderInstaPosts, updateClassCards, loadStoreNotes, loadInstaNotes, loadMestrado, loadMsCap, renderMesDashboard];
+            fns.forEach(fn => { if(typeof fn === 'function') fn(); });
+        };
+        
+        window.onload = () => { 
+            window.renderAllApp(); 
+            setTimeout(() => { if(window.lucide) lucide.createIcons(); }, 100); 
+        };
+    </script>
+</body>
+</html>
+
