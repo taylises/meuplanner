@@ -254,7 +254,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- ABA 3: ESTUDOS (ESTRITAMENTE FECHADA AQUI) -->
+        <!-- ABA 3: ESTUDOS                             -->
         <!-- ========================================== -->
         <div id="tab-estudos" class="tab-content hidden">
             
@@ -987,6 +987,62 @@
         </div>
     </div>
 
+    <!-- CUSTOM DIALOG MODAL (Substitui alert, confirm e prompt) -->
+    <div id="custom-dialog-modal" class="fixed inset-0 bg-pink-900/40 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-6 max-w-sm w-full text-center shadow-2xl border-2 border-pink-200 cute-card">
+            <p id="custom-dialog-msg" class="text-rose-800 font-bold mb-4 font-cute text-lg"></p>
+            <input type="text" id="custom-dialog-input" class="w-full bg-pink-50 border border-pink-200 rounded-xl p-3 outline-none font-bold text-rose-700 text-sm mb-4 hidden focus:ring-2 ring-pink-300">
+            <div class="flex justify-center gap-3">
+                <button id="custom-dialog-cancel" class="hidden bg-slate-100 text-slate-600 px-5 py-2.5 rounded-xl font-bold shadow-sm hover:bg-slate-200 transition">Cancelar</button>
+                <button id="custom-dialog-ok" class="bg-rose-400 text-white px-6 py-2.5 rounded-xl font-bold shadow-md hover:bg-rose-500 transition">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de Diálogo Customizado para iFrame
+        window.customDialog = (type, msg, defaultVal, callback) => {
+            const modal = document.getElementById('custom-dialog-modal');
+            const msgEl = document.getElementById('custom-dialog-msg');
+            const inputEl = document.getElementById('custom-dialog-input');
+            const okBtn = document.getElementById('custom-dialog-ok');
+            const cancelBtn = document.getElementById('custom-dialog-cancel');
+
+            msgEl.innerText = msg;
+            inputEl.value = defaultVal || '';
+            
+            if (type === 'alert') {
+                inputEl.classList.add('hidden');
+                cancelBtn.classList.add('hidden');
+            } else if (type === 'confirm') {
+                inputEl.classList.add('hidden');
+                cancelBtn.classList.remove('hidden');
+            } else if (type === 'prompt') {
+                inputEl.classList.remove('hidden');
+                cancelBtn.classList.remove('hidden');
+                setTimeout(() => inputEl.focus(), 100);
+            }
+
+            modal.classList.remove('hidden');
+
+            okBtn.onclick = () => {
+                modal.classList.add('hidden');
+                if (callback) {
+                    if (type === 'prompt') callback(inputEl.value);
+                    else if (type === 'confirm') callback(true);
+                    else callback();
+                }
+            };
+
+            cancelBtn.onclick = () => {
+                modal.classList.add('hidden');
+                if (callback) {
+                    if (type === 'prompt') callback(null);
+                    else if (type === 'confirm') callback(false);
+                }
+            };
+        };
+    </script>
 
     <!-- ========================================================== -->
     <!-- SCRIPT DA NUVEM (O "ESPIÃO INVISÍVEL") COM TRATAMENTO DE ERROS -->
@@ -1073,7 +1129,7 @@
                 const loader = document.getElementById('cloud-overlay');
                 if(loader) { loader.classList.remove('hidden'); loader.classList.add('flex'); }
                 await createUserWithEmailAndPassword(auth, e, p);
-                alert("Conta segura criada com sucesso, Taylise! 🎀");
+                window.customDialog('alert', "Conta segura criada com sucesso, Taylise! 🎀");
             } catch(err) { 
                 const loader = document.getElementById('cloud-overlay');
                 if(loader) { loader.classList.add('hidden'); loader.classList.remove('flex'); }
@@ -1082,11 +1138,13 @@
         };
 
         window.doLogout = async () => {
-            if(confirm("Tem certeza que deseja sair do seu Planner?")) {
-                await signOut(auth);
-                localStorage.clear();
-                window.location.reload();
-            }
+            window.customDialog('confirm', "Tem certeza que deseja sair do seu Planner?", null, async (res) => {
+                if(res) {
+                    await signOut(auth);
+                    localStorage.clear();
+                    window.location.reload();
+                }
+            });
         };
 
         async function syncFromCloud() {
@@ -1196,17 +1254,17 @@
         let currMo = new Date(); 
 
         function switchTab(t) {
+            // Ocultar a navegação principal APENAS na aba de Mestrado para imersão total
+            let navDesk = document.getElementById('main-nav-desk');
+            if (navDesk) {
+                if (t === 'mestrado') navDesk.style.display = 'none';
+                else navDesk.style.display = '';
+            }
+
             ['resumo','rotina','estudos','mestrado','loja','tattoo','instagram','financas'].forEach(x => {
                 const e=document.getElementById('tab-'+x), d=document.getElementById('desk-btn-'+x), m=document.getElementById('mob-btn-'+x);
                 if(e) e.classList.toggle('hidden', x!==t);
                 
-                // Ocultar a navegação principal APENAS na aba de Mestrado para imersão total
-                let navDesk = document.getElementById('main-nav-desk');
-                if (navDesk) {
-                    if (t === 'mestrado') navDesk.classList.add('hidden');
-                    else navDesk.classList.remove('hidden');
-                }
-
                 if(d) d.className = (x===t) ? "nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white" : "nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200";
                 if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-rose-600 w-16 transition-all transform -translate-y-2 bg-pink-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-pink-300 w-16 transition-all";
             });
@@ -1297,7 +1355,21 @@
         }
         function addTask() { let i=document.getElementById('new-task-input'); if(i.value.trim()){ addQuickTask(i.value.trim(),'geral'); i.value=''; } }
         function addQuickTask(txt, typ) { let pt=lsGet('personalTasks'); pt.push({id:Date.now(), text:txt, type:typ, done:false}); lsSet('personalTasks',pt); renderTasks(); }
-        function editTask(id) { let pt=lsGet('personalTasks'); let x=pt.find(t=>t.id===id); if(x){let n=prompt("Editar tarefa 🎀:",x.text); if(n){x.text=n; lsSet('personalTasks',pt); renderTasks();}} }
+        
+        function editTask(id) { 
+            let pt=lsGet('personalTasks'); 
+            let x=pt.find(t=>t.id===id); 
+            if(x){
+                window.customDialog('prompt', "Editar tarefa 🎀:", x.text, (n) => {
+                    if(n){
+                        x.text=n; 
+                        lsSet('personalTasks',pt); 
+                        renderTasks();
+                    }
+                });
+            } 
+        }
+
         function deleteTask(id) { lsSet('personalTasks', lsGet('personalTasks').filter(t=>t.id!==id)); renderTasks(); }
         function toggleTask(id) {
             let pt=lsGet('personalTasks'), log=lsGet('taskLog'); let x=pt.find(t=>t.id===id);
@@ -1329,7 +1401,18 @@
         function toggleTimer() {
             let ic=document.getElementById('icon-toggle');
             if(iR){ clearInterval(tmr); iR=false; ic.setAttribute('data-lucide','play'); }
-            else { tmr=setInterval(()=>{tL--;updateTimerDisplay();if(tL<=0){clearInterval(tmr);iR=false;alert(iW?"🍎 Foco!":"🎀 Pausa!");setTimerMode(iW?'break':'work');}},1000); iR=true; ic.setAttribute('data-lucide','pause'); }
+            else { 
+                tmr=setInterval(()=>{
+                    tL--;updateTimerDisplay();
+                    if(tL<=0){
+                        clearInterval(tmr);
+                        iR=false;
+                        window.customDialog('alert', iW?"🍎 Foco!":"🎀 Pausa!");
+                        setTimerMode(iW?'break':'work');
+                    }
+                },1000); 
+                iR=true; ic.setAttribute('data-lucide','pause'); 
+            }
             if(typeof lucide !== 'undefined') lucide.createIcons();
         }
         function resetTimer() { clearInterval(tmr); iR=false; tL=iW?25*60:5*60; updateTimerDisplay(); document.getElementById('icon-toggle').setAttribute('data-lucide','play'); if(typeof lucide !== 'undefined') lucide.createIcons(); }
@@ -1418,7 +1501,16 @@
         function changeReadingStatus(id, s){ let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){i.status=s; lsSet('readingList',r); renderReadingList(); if(typeof renderStudyChart==='function') renderStudyChart();} }
         function addReading() { let t=document.getElementById('new-reading-title').value.trim(); if(t){ let r=lsGet('readingList'); r.push({id:Date.now(),title:t,type:document.getElementById('new-reading-type').value,status:'nao_comecei', date:new Date().toISOString()}); lsSet('readingList',r); document.getElementById('new-reading-title').value=''; renderReadingList(); if(typeof renderStudyChart==='function') renderStudyChart(); } }
         function deleteReading(id){lsSet('readingList',lsGet('readingList').filter(x=>x.id!==id));renderReadingList(); if(typeof renderStudyChart==='function') renderStudyChart();}
-        function editReading(id){let r=lsGet('readingList'); let i=r.find(x=>x.id===id); if(i){let n=prompt("Título da Leitura:",i.title);if(n){i.title=n;lsSet('readingList',r);renderReadingList();}}}
+        
+        function editReading(id){
+            let r=lsGet('readingList'); 
+            let i=r.find(x=>x.id===id); 
+            if(i){
+                window.customDialog('prompt', "Título da Leitura:", i.title, (n)=>{
+                    if(n){i.title=n;lsSet('readingList',r);renderReadingList();}
+                });
+            }
+        }
         
         function renderExtraStudies() {
             let e=lsGet('extraStudies'); let c=document.getElementById('extra-study-grid'); c.innerHTML='';
@@ -1436,7 +1528,16 @@
             renderExtraStudies(); renderMasterCalendar();
         }
         function deleteExtraStudy(id){lsSet('extraStudies',lsGet('extraStudies').filter(x=>x.id!==id));renderExtraStudies();renderMasterCalendar();}
-        function editExtraStudy(id){let e=lsGet('extraStudies'); let i=e.find(x=>x.id===id); if(i){let n=prompt("Nome do Extra:",i.title);if(n){i.title=n;lsSet('extraStudies',e);renderExtraStudies();renderMasterCalendar();}}}
+        
+        function editExtraStudy(id){
+            let e=lsGet('extraStudies'); 
+            let i=e.find(x=>x.id===id); 
+            if(i){
+                window.customDialog('prompt', "Nome do Extra:", i.title, (n)=>{
+                    if(n){i.title=n;lsSet('extraStudies',e);renderExtraStudies();renderMasterCalendar();}
+                });
+            }
+        }
 
         // ==========================================
         // TRACKER DE LISTAS E BANCO DE ERROS
@@ -1705,7 +1806,7 @@
                 renderMasterCalendar();
                 renderMesDashboard();
             } else {
-                alert('Preencha a Data e o Assunto da Reunião!');
+                window.customDialog('alert', 'Preencha a Data e o Assunto da Reunião!');
             }
         }
         function deleteMestradoMeeting(id) { lsSet('mestradoMeetings', lsGet('mestradoMeetings', []).filter(x=>x.id!==id)); renderMestradoMeetings(); renderMasterCalendar(); renderMesDashboard(); }
@@ -1873,7 +1974,7 @@
                 document.getElementById('new-emo-date').value = '';
                 renderMesEmocional();
             } else {
-                alert("Selecione o mês para o Check-in!");
+                window.customDialog('alert', "Selecione o mês para o Check-in!");
             }
         }
         function deleteMesEmocional(id) { lsSet('mesEmocional', lsGet('mesEmocional', []).filter(x=>x.id!==id)); renderMesEmocional(); }
@@ -1937,7 +2038,15 @@
         function addProduction() { let n=document.getElementById('prod-name').value.trim(); if(n){ let p=lsGet('productions'); p.push({id:Date.now(),name:n,type:document.getElementById('prod-type').value,date:document.getElementById('prod-date').value,status:'todo'}); lsSet('productions',p); document.getElementById('prod-name').value=''; document.getElementById('prod-date').value=''; renderProductions(); renderMasterCalendar(); } }
         function changeProdStatus(id,s){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x)x.status=s; lsSet('productions',p); renderProductions();}
         function deleteProd(id){lsSet('productions',lsGet('productions').filter(x=>x.id!==id));renderProductions();renderMasterCalendar();}
-        function editProd(id){let p=lsGet('productions'); let x=p.find(i=>i.id===id); if(x){let n=prompt("Nome da Peça:",x.name);if(n){x.name=n;lsSet('productions',p);renderProductions();renderMasterCalendar();}}}
+        function editProd(id){
+            let p=lsGet('productions'); 
+            let x=p.find(i=>i.id===id); 
+            if(x){
+                window.customDialog('prompt', "Nome da Peça:", x.name, (n)=>{
+                    if(n){x.name=n;lsSet('productions',p);renderProductions();renderMasterCalendar();}
+                });
+            }
+        }
         
         let curSellId=null;
         function openSellModal(id){ curSellId=id; document.getElementById('sell-piece-name').innerText=lsGet('productions').find(p=>p.id===id).name; document.getElementById('sell-modal').classList.remove('hidden'); toggleSellOptions(); }
@@ -1945,12 +2054,13 @@
         function toggleSellOptions(){ let t=document.getElementById('sell-type').value; document.getElementById('sell-opt-fisica').classList.toggle('hidden',t!=='fisica'); document.getElementById('sell-opt-online').classList.toggle('hidden',t!=='online'); if(t==='online') document.getElementById('sell-opt-online').classList.add('flex'); }
         function confirmSale(){ 
             let v=parseFloat(document.getElementById('sell-value').value), t=document.getElementById('sell-type').value; 
-            if(isNaN(v)) return alert("Preencha o valor da peça!"); 
+            if(isNaN(v)) { window.customDialog('alert', "Preencha o valor da peça!"); return; } 
             let pkg=parseFloat(t==='fisica'?document.getElementById('sell-pkg-fisica').value:document.getElementById('sell-pkg-online').value); 
             let fr=t==='online'?parseFloat(document.getElementById('sell-freight').value||0):0; 
             let f=lsGet('finances'); let pieceName = document.getElementById('sell-piece-name').innerText;
             f.push({id:Date.now(),type:'income',method:'pix',category:'Loja',description:`Venda ${t==='online'?'Online':'Física'}: ${pieceName}`,amount:(v+pkg+fr),date:new Date().toISOString().split('T')[0]}); 
-            lsSet('finances',f); deleteProd(curSellId); closeSellModal(); alert("Venda registrada e valor enviado para as Finanças! 💸"); 
+            lsSet('finances',f); deleteProd(curSellId); closeSellModal(); 
+            window.customDialog('alert', "Venda registrada e valor enviado para as Finanças! 💸"); 
             document.getElementById('sell-value').value=''; document.getElementById('sell-freight').value='';
             renderFinances(); switchTab('financas');
         }
@@ -1965,9 +2075,16 @@
         }
         function addTattoo(){ 
             let n=document.getElementById('tattoo-name').value.trim(),v=document.getElementById('tattoo-value').value,d=document.getElementById('tattoo-date').value; 
-            if(!n||!d) return; let t=lsGet('tattoos'), inv=lsGet('tattooInventory'); 
+            if(!n||!d) return; 
+            let t=lsGet('tattoos'), inv=lsGet('tattooInventory'); 
             let mid=document.getElementById('tattoo-material-select').value, mq=parseInt(document.getElementById('tattoo-material-qty').value), mn=null; 
-            if(mid&&mq>0){let i=inv.find(x=>x.id==mid); if(i){if(i.qty<mq) return alert("Estoque insuficiente!"); i.qty-=mq; mn=i.name; lsSet('tattooInventory',inv); renderInventory();}} 
+            if(mid&&mq>0){
+                let i=inv.find(x=>x.id==mid); 
+                if(i){
+                    if(i.qty<mq) { window.customDialog('alert', "Estoque insuficiente!"); return; }
+                    i.qty-=mq; mn=i.name; lsSet('tattooInventory',inv); renderInventory();
+                }
+            } 
             t.push({id:Date.now(),name:n,value:v||0,date:d,materialName:mn,materialQty:mn?mq:null}); lsSet('tattoos',t); 
             document.getElementById('tattoo-name').value=''; document.getElementById('tattoo-date').value=''; document.getElementById('tattoo-value').value=''; renderTattoos(); renderMasterCalendar();
         }
@@ -2092,56 +2209,4 @@
         function deleteFinance(id){ lsSet('finances',lsGet('finances').filter(x=>x.id!==id)); renderFinances(); }
 
         // ==========================================
-        // INIT GERAL UNIFICADO (CHAMADO PELA NUVEM OU LOCALMENTE)
-        // ==========================================
-        window.renderAllApp = () => {
-            if(typeof lucide !== 'undefined') lucide.createIcons(); 
-            if(typeof renderMasterCalendar === 'function') renderMasterCalendar(); 
-            if(typeof updateTimerDisplay === 'function') updateTimerDisplay(); 
-            if(typeof renderTasks === 'function') renderTasks(); 
-            if(typeof renderProductions === 'function') renderProductions(); 
-            if(typeof renderReadingList === 'function') renderReadingList(); 
-            if(typeof renderExtraStudies === 'function') renderExtraStudies();
-            if(typeof renderListTracker === 'function') renderListTracker();
-            if(typeof renderErrorBank === 'function') renderErrorBank();
-            if(typeof renderStudyChart === 'function') renderStudyChart();
-            if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
-            if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
-            if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
-            if(typeof renderMesDisciplinas === 'function') renderMesDisciplinas();
-            if(typeof renderMesEmocional === 'function') renderMesEmocional();
-            if(typeof renderMesLeituras === 'function') renderMesLeituras();
-            if(typeof renderClients === 'function') renderClients(); 
-            if(typeof renderPromos === 'function') renderPromos(); 
-            if(typeof renderInventory === 'function') renderInventory(); 
-            if(typeof renderTattoos === 'function') renderTattoos(); 
-            if(typeof updateFinanceCategories === 'function') updateFinanceCategories(); 
-            if(typeof renderFinances === 'function') renderFinances(); 
-            if(typeof renderRoutineChart === 'function') renderRoutineChart(); 
-            if(typeof renderInstaPosts === 'function') renderInstaPosts();
-            if(typeof updateClassCards === 'function') updateClassCards(); 
-            if(typeof loadStoreNotes === 'function') loadStoreNotes();
-            if(typeof loadInstaNotes === 'function') loadInstaNotes();
-            if(typeof loadMestrado === 'function') loadMestrado();
-            if(typeof loadMsCap === 'function') loadMsCap();
-            if(typeof renderMesDashboard === 'function') renderMesDashboard();
-        };
-
-        window.onload = () => {
-            if(typeof lucide !== 'undefined') lucide.createIcons();
-            if(typeof renderListTracker === 'function') renderListTracker();
-            if(typeof renderErrorBank === 'function') renderErrorBank();
-            if(typeof renderStudyChart === 'function') renderStudyChart();
-            if(typeof loadMestrado === 'function') loadMestrado();
-            if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
-            if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
-            if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
-            if(typeof renderMesDisciplinas === 'function') renderMesDisciplinas();
-            if(typeof renderMesEmocional === 'function') renderMesEmocional();
-            if(typeof renderMesLeituras === 'function') renderMesLeituras();
-            if(typeof loadMsCap === 'function') loadMsCap();
-            if(typeof renderMesDashboard === 'function') renderMesDashboard();
-        };
-    </script>
-</body>
-</html>
+        // INIT GERAL UNIFICADO (CHAMADO PELA
