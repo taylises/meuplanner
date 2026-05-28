@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Meu Planner 🎀 Hello Kitty - Taylise</title>
+    <title>Planner da Taylise</title>
     
     <link rel="icon" href="https://img.icons8.com/color/512/ribbon.png" type="image/png">
     <link rel="apple-touch-icon" href="https://img.icons8.com/color/512/ribbon.png">
@@ -70,6 +70,99 @@
         .modal-body { max-height: calc(85vh - 140px); overflow-y: auto; }
         .animate-float { animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    
+        /* ======================================================== */
+        /* CAMADA NOVA: VISUAL MAIS "PLANILHA"                     */
+        /* ======================================================== */
+        body {
+            background-color: #eef2f7 !important;
+            background-image:
+                linear-gradient(rgba(148, 163, 184, 0.10) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.10) 1px, transparent 1px);
+            background-size: 28px 28px !important;
+            color: #0f172a !important;
+        }
+
+        .font-cute {
+            font-family: 'Quicksand', sans-serif !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.01em !important;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+            color: #0f172a !important;
+            border-bottom: 1px solid #cbd5e1 !important;
+        }
+        header * { text-shadow: none !important; }
+
+        .cute-card, .class-card, .glass, .glass-emerald, .glass-rose {
+            background: rgba(255,255,255,0.96) !important;
+            border: 1px solid #dbe3ee !important;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+            border-radius: 1.5rem !important;
+        }
+
+        .cute-card::before, .class-card::before, .glass::before, .glass-emerald::before, .glass-rose::before {
+            opacity: 0.18 !important;
+        }
+
+        #main-nav-desk {
+            gap: 0.6rem !important;
+        }
+        .nav-desk-btn {
+            border-radius: 0.9rem !important;
+            border-width: 1px !important;
+            border-color: #cbd5e1 !important;
+            background: #ffffff !important;
+            color: #0f172a !important;
+            box-shadow: 0 4px 14px rgba(15,23,42,0.06) !important;
+        }
+        .nav-desk-btn.bg-rose-500,
+        .nav-desk-btn.bg-rose-500:hover {
+            background: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+
+        #tab-resumo .cute-card,
+        #tab-rotina .cute-card,
+        #tab-estudos .cute-card,
+        #tab-mestrado .cute-card {
+            border-color: #dbe3ee !important;
+        }
+
+        input, select, textarea {
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+        }
+
+        #monthly-summary-list .bg-white,
+        #routine-summary-text .bg-purple-50,
+        #study-summary-text .bg-slate-50,
+        #task-list > div,
+        #mestrado-meetings-list > div,
+        #mestrado-leituras-list > div,
+        #mestrado-producao-list > div,
+        #mestrado-disciplinas-list > div,
+        #error-bank-container > div,
+        #list-tracker-container > div,
+        #reading-list-container > div,
+        #extra-study-grid > div {
+            border-color: #dbe3ee !important;
+            box-shadow: 0 3px 10px rgba(15,23,42,0.04) !important;
+        }
+
+        /* Mobile bottom tabs mais discretas e "de planilha" */
+        nav.fixed.bottom-0, nav.md\:hidden.fixed.bottom-0 {
+            border-top: 1px solid #cbd5e1 !important;
+            background: rgba(248,250,252,0.96) !important;
+            backdrop-filter: blur(12px);
+        }
+        nav.fixed.bottom-0 button, nav.md\:hidden.fixed.bottom-0 button {
+            border-right: 1px solid #e2e8f0 !important;
+        }
+
     </style>
 </head>
 <body class="antialiased relative min-h-screen">
@@ -118,7 +211,7 @@
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10 text-center md:text-left">
             <div>
                 <h1 class="text-3xl md:text-5xl font-cute font-bold mb-1 drop-shadow-md tracking-wide">Planner da Taylise 🎀</h1>
-                <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Geografia • Ateliê • Tattoo • Social</p>
+                <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Resumo • Rotina • Estudos • Mestrado</p>
             </div>
             
             <button onclick="window.doLogout()" class="bg-white/20 backdrop-blur-md px-5 py-2.5 rounded-2xl border-2 border-white/40 shadow-inner flex flex-col justify-center items-center hover:bg-white/30 transition cursor-pointer group">
@@ -132,13 +225,10 @@
     <main class="max-w-6xl mx-auto px-4 sm:px-6 main-content">
         <!-- NAVEGAÇÃO DESKTOP -->
         <div id="main-nav-desk" class="hidden md:flex justify-center flex-wrap pb-4 mb-6 gap-3 relative z-20">
-            <button onclick="switchTab('resumo')" id="desk-btn-resumo" class="nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white"><i data-lucide="calendar-days" class="w-4 h-4"></i> Resumo</button>
-            <button onclick="switchTab('rotina')" id="desk-btn-rotina" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="coffee" class="w-4 h-4"></i> Rotina</button>
-            <button onclick="switchTab('estudos')" id="desk-btn-estudos" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="book-heart" class="w-4 h-4"></i> Estudos</button>
-            <button onclick="switchTab('loja')" id="desk-btn-loja" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="palette" class="w-4 h-4"></i> Ateliê</button>
-            <button onclick="switchTab('tattoo')" id="desk-btn-tattoo" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="pen-tool" class="w-4 h-4"></i> Tattoo</button>
-            <button onclick="switchTab('instagram')" id="desk-btn-instagram" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="camera" class="w-4 h-4"></i> Social</button>
-            <button onclick="switchTab('financas')" id="desk-btn-financas" class="nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200"><i data-lucide="wallet" class="w-4 h-4"></i> Finanças</button>
+            <button onclick="switchTab('resumo')" id="desk-btn-resumo" class="nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white"><i data-lucide="calendar-days" class="w-4 h-4"></i> Resumo</button>
+            <button onclick="switchTab('rotina')" id="desk-btn-rotina" class="nav-desk-btn bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-slate-200"><i data-lucide="calendar-check-2" class="w-4 h-4"></i> Rotina</button>
+            <button onclick="switchTab('estudos')" id="desk-btn-estudos" class="nav-desk-btn bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-slate-200"><i data-lucide="book-heart" class="w-4 h-4"></i> Estudos</button>
+            <button onclick="switchTab('mestrado')" id="desk-btn-mestrado" class="nav-desk-btn bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-slate-200"><i data-lucide="graduation-cap" class="w-4 h-4"></i> Mestrado</button>
         </div>
 
         <!-- ========================================== -->
@@ -152,13 +242,11 @@
 
                 <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-pink-300 to-purple-300"></div>
                 <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4 mt-2 relative z-10">
-                    <h2 class="text-2xl md:text-3xl font-cute font-bold text-rose-700 flex items-center gap-2"><i data-lucide="calendar-heart" class="text-pink-400 w-8 h-8"></i> Calendário Mestre 🎀</h2>
-                    <div class="flex flex-wrap justify-center gap-2 bg-rose-50 px-4 py-2.5 rounded-2xl border border-rose-100 text-[10px] font-bold uppercase tracking-wider">
-                        <span class="text-red-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-400"></span> Estudos</span> 
-                        <span class="text-emerald-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Ateliê</span> 
-                        <span class="text-purple-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Tattoo</span> 
-                        <span class="text-indigo-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-400"></span> Mestrado</span> 
-                        <span class="text-fuchsia-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-fuchsia-400"></span> Social</span>
+                    <h2 class="text-2xl md:text-3xl font-cute font-bold text-rose-700 flex items-center gap-2"><i data-lucide="calendar-heart" class="text-slate-500 w-8 h-8"></i> Calendário de Controle</h2>
+                    <div class="flex flex-wrap justify-center gap-2 bg-slate-50 px-4 py-2.5 rounded-2xl border border-slate-200 text-[10px] font-bold uppercase tracking-wider">
+                        <span class="text-red-600 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span> Estudos</span> 
+                        <span class="text-emerald-600 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Rotina</span> 
+                        <span class="text-indigo-600 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> Mestrado</span>
                     </div>
                 </div>
                 
@@ -190,7 +278,7 @@
                 <div class="cute-card p-6 relative flex flex-col overflow-hidden">
                     <i data-lucide="sparkles" class="absolute top-1/3 right-4 w-20 h-20 text-rose-300/20 fill-rose-300/20 animate-float z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-rose-300"></div>
-                    <h3 class="font-cute text-rose-800 text-xl flex items-center gap-2 mb-4 relative z-10"><i data-lucide="list-todo" class="text-rose-400"></i> Tarefas de Hoje</h3>
+                    <h3 class="font-cute text-rose-800 text-xl flex items-center gap-2 mb-4 relative z-10"><i data-lucide="list-todo" class="text-rose-400"></i> Tarefas de Hoje</h3><p class="text-[10px] font-bold text-slate-500 mb-4 relative z-10">As tarefas concluídas aparecem no calendário do Resumo no mesmo mês.</p><p class="text-[10px] font-bold text-slate-500 mb-4 relative z-10">As tarefas concluídas entram no calendário do Resumo no mesmo mês.</p>
                     <div class="flex flex-col gap-3 mb-4 bg-rose-50 p-4 rounded-2xl border border-rose-100 relative z-10">
                         <div class="flex gap-2">
                             <input type="text" id="new-task-input" placeholder="Nova tarefa..." class="flex-1 bg-white border border-pink-200 rounded-xl p-3 outline-none font-bold text-rose-700 text-sm shadow-sm">
@@ -904,15 +992,11 @@
     </main>
 
     <!-- NAVEGAÇÃO MOBILE (BOTTOM BAR) -->
-    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t-2 border-pink-100 z-[90] flex overflow-x-auto hide-scrollbar md:hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-3xl pt-2 px-1 safe-pb">
-        <button onclick="switchTab('resumo')" id="mob-btn-resumo" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="calendar-days"></i><span class="text-[9px] font-bold">Resumo</span></button>
-        <button onclick="switchTab('rotina')" id="mob-btn-rotina" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="coffee"></i><span class="text-[9px] font-bold">Rotina</span></button>
-        <button onclick="switchTab('estudos')" id="mob-btn-estudos" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="book-heart"></i><span class="text-[9px] font-bold">Estudos</span></button>
-        <button onclick="switchTab('mestrado')" id="mob-btn-mestrado" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="graduation-cap"></i><span class="text-[9px] font-bold">Mestrado</span></button>
-        <button onclick="switchTab('loja')" id="mob-btn-loja" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="palette"></i><span class="text-[9px] font-bold">Ateliê</span></button>
-        <button onclick="switchTab('tattoo')" id="mob-btn-tattoo" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="pen-tool"></i><span class="text-[9px] font-bold">Tattoo</span></button>
-        <button onclick="switchTab('instagram')" id="mob-btn-instagram" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="camera"></i><span class="text-[9px] font-bold">Social</span></button>
-        <button onclick="switchTab('financas')" id="mob-btn-financas" class="flex flex-col items-center p-2 text-pink-300 w-16 transition-colors shrink-0"><i data-lucide="wallet"></i><span class="text-[9px] font-bold">Finanças</span></button>
+    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-xl border-t-2 border-slate-200 z-[90] flex overflow-x-auto hide-scrollbar md:hidden shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-3xl pt-2 px-1 safe-pb">
+        <button onclick="switchTab('resumo')" id="mob-btn-resumo" class="flex flex-col items-center p-2 text-slate-500 w-16 transition-colors shrink-0"><i data-lucide="calendar-days"></i><span class="text-[9px] font-bold">Resumo</span></button>
+        <button onclick="switchTab('rotina')" id="mob-btn-rotina" class="flex flex-col items-center p-2 text-slate-500 w-16 transition-colors shrink-0"><i data-lucide="calendar-check-2"></i><span class="text-[9px] font-bold">Rotina</span></button>
+        <button onclick="switchTab('estudos')" id="mob-btn-estudos" class="flex flex-col items-center p-2 text-slate-500 w-16 transition-colors shrink-0"><i data-lucide="book-heart"></i><span class="text-[9px] font-bold">Estudos</span></button>
+        <button onclick="switchTab('mestrado')" id="mob-btn-mestrado" class="flex flex-col items-center p-2 text-slate-500 w-16 transition-colors shrink-0"><i data-lucide="graduation-cap"></i><span class="text-[9px] font-bold">Mestrado</span></button>
     </nav>
 
     <!-- MODAIS ESPECÍFICOS -->
@@ -1261,20 +1345,16 @@
                 else navDesk.style.display = '';
             }
 
-            ['resumo','rotina','estudos','mestrado','loja','tattoo','instagram','financas'].forEach(x => {
+            ['resumo','rotina','estudos','mestrado'].forEach(x => {
                 const e=document.getElementById('tab-'+x), d=document.getElementById('desk-btn-'+x), m=document.getElementById('mob-btn-'+x);
                 if(e) e.classList.toggle('hidden', x!==t);
-                
-                if(d) d.className = (x===t) ? "nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white" : "nav-desk-btn bg-white text-rose-500 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-rose-200";
-                if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-rose-600 w-16 transition-all transform -translate-y-2 bg-pink-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-pink-300 w-16 transition-all";
+
+                if(d) d.className = (x===t) ? "nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white" : "nav-desk-btn bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-slate-200";
+                if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-slate-700 w-16 transition-all transform -translate-y-2 bg-slate-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-slate-500 w-16 transition-all";
             });
-            
+
             if(t==='resumo') renderMasterCalendar(); 
             if(t==='rotina') renderRoutineChart(); 
-            if(t==='financas') renderFinances();
-            if(t==='tattoo') { renderTattoos(); renderClients(); renderPromos(); renderInventory(); } 
-            if(t==='instagram') renderInstaPosts(); 
-            if(t==='loja') renderProductions();
             if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); renderStudyChart(); updateClassCards(); }
             if(t==='mestrado') { switchMesTab('visao'); renderMestradoMeetings(); renderMesLeituras(); renderMestradoProducao(); renderMesDisciplinas(); renderMesEmocional(); renderMestradoIdeias(); loadMestrado(); loadMsCap(); }
             if(typeof lucide !== 'undefined') lucide.createIcons();
@@ -1294,32 +1374,30 @@
         function renderMasterCalendar() {
             document.getElementById('calendar-month-year').innerText = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][currMo.getMonth()] + " " + currMo.getFullYear();
             let evs = {}; const addEv = (d,t,y) => { if(d){evs[d]=evs[d]||[]; evs[d].push({title:t,type:y});} };
-            
+
             let de = lsGet('disciplineEvents',{}); Object.keys(de).forEach(c => de[c].forEach(e => addEv(e.date, `${c}: ${e.name}`, 'estudo')));
             lsGet('extraStudies').forEach(e => { if(e.date) addEv(e.date, `Extra: ${e.title}`, 'estudo'); });
-            lsGet('productions').forEach(p => addEv(p.date, `Ateliê: ${p.name}`, 'loja'));
-            lsGet('tattoos').forEach(t => addEv(t.date, `Tattoo: ${t.name}`, 'tattoo'));
-            lsGet('instaPosts').forEach(p => addEv(p.date, `Post: ${p.name}`, 'insta'));
-            
+            lsGet('taskLog').forEach(t => { if(t.date) addEv(t.date, `Rotina: ${t.text}`, 'rotina'); });
+
             // Reuniões e Produção do Mestrado adicionadas ao Calendário Mestre
             lsGet('mestradoMeetings').forEach(m => addEv(m.date, `Reunião Mestrado: ${m.subject}`, 'mestrado'));
             lsGet('mesProducao').forEach(m => addEv(m.date, `Submissão: ${m.title}`, 'mestrado'));
 
             let fd = new Date(currMo.getFullYear(), currMo.getMonth(), 1).getDay(), ld = new Date(currMo.getFullYear(), currMo.getMonth() + 1, 0).getDate();
             let html = ''; for(let i=0;i<fd;i++) html+='<div></div>';
-            
+
             let currentYearMo = `${currMo.getFullYear()}-${String(currMo.getMonth()+1).padStart(2,'0')}`;
             let monthEventsArr = [];
 
             for(let d=1; d<=ld; d++) {
                 let k = `${currentYearMo}-${String(d).padStart(2,'0')}`;
                 let isT = d===new Date().getDate() && currMo.getMonth()===new Date().getMonth() && currMo.getFullYear()===new Date().getFullYear();
-                let c = "w-8 h-8 md:w-12 md:h-12 mx-auto flex items-center justify-center rounded-full font-bold text-xs md:text-sm relative transition-all cal-day cursor-pointer " + (isT?"bg-rose-400 text-white shadow-md shadow-rose-200":"text-slate-600 bg-slate-50 border border-slate-100 hover:bg-pink-50 hover:text-pink-600 hover:border-pink-200");
+                let c = "w-8 h-8 md:w-12 md:h-12 mx-auto flex items-center justify-center rounded-full font-bold text-xs md:text-sm relative transition-all cal-day cursor-pointer " + (isT?"bg-slate-300 text-slate-900 shadow-md shadow-slate-200":"text-slate-600 bg-slate-50 border border-slate-100 hover:bg-slate-100 hover:text-slate-800 hover:border-slate-200");
                 let dots='', tt='';
                 if(evs[k]) {
                     evs[k].forEach(ev => monthEventsArr.push({date: k, title: ev.title, type: ev.type}));
-                    dots=`<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">`+(evs[k].some(e=>e.type==='estudo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='loja')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='tattoo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-purple-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='insta')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-fuchsia-400 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='mestrado')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-indigo-500 border border-white"></span>`:'')+`</div>`;
-                    tt=`<div class="cal-tooltip hidden absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[150px] md:max-w-[200px] bg-slate-800 text-white text-[9px] md:text-[10px] p-2 rounded-xl shadow-xl border border-slate-700 pointer-events-none z-[60]">`+evs[k].map(e=>`<div class="flex items-center gap-1.5 mb-1"><span class="w-1.5 h-1.5 rounded-full shrink-0 ${e.type==='estudo'?'bg-red-400':e.type==='loja'?'bg-emerald-400':e.type==='tattoo'?'bg-purple-400':e.type==='mestrado'?'bg-indigo-500':'bg-fuchsia-400'}"></span><span class="truncate">${e.title}</span></div>`).join('')+`</div>`;
+                    dots=`<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">`+(evs[k].some(e=>e.type==='estudo')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-red-500 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='rotina')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-500 border border-white"></span>`:'')+(evs[k].some(e=>e.type==='mestrado')?`<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-indigo-500 border border-white"></span>`:'')+`</div>`;
+                    tt=`<div class="cal-tooltip hidden absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[150px] md:max-w-[200px] bg-slate-800 text-white text-[9px] md:text-[10px] p-2 rounded-xl shadow-xl border border-slate-700 pointer-events-none z-[60]">`+evs[k].map(e=>`<div class="flex items-center gap-1.5 mb-1"><span class="w-1.5 h-1.5 rounded-full shrink-0 ${e.type==='estudo'?'bg-red-500':e.type==='rotina'?'bg-emerald-500':'bg-indigo-500'}"></span><span class="truncate">${e.title}</span></div>`).join('')+`</div>`;
                 }
                 html+=`<div class="py-1"><div class="${c}">${d}${dots}${tt}</div></div>`;
             }
@@ -1330,11 +1408,11 @@
             if(sumList) {
                 sumList.innerHTML = '';
                 if(monthEventsArr.length === 0) {
-                    sumList.innerHTML = '<p class="text-sm text-pink-400 font-bold italic text-center py-4 bg-pink-50 rounded-2xl border border-pink-100">O mês está livre por enquanto! 🌸</p>';
+                    sumList.innerHTML = '<p class="text-sm text-slate-500 font-bold italic text-center py-4 bg-slate-50 rounded-2xl border border-slate-200">O mês está livre por enquanto.</p>';
                 } else {
                     monthEventsArr.forEach(e => {
-                        let badge = e.type==='estudo'?'bg-red-50 text-red-600 border-red-100':e.type==='loja'?'bg-emerald-50 text-emerald-600 border-emerald-100':e.type==='tattoo'?'bg-purple-50 text-purple-600 border-purple-100':e.type==='mestrado'?'bg-indigo-50 text-indigo-600 border-indigo-100':'bg-fuchsia-50 text-fuchsia-600 border-fuchsia-100';
-                        sumList.innerHTML += `<div class="flex items-center gap-3 p-3.5 bg-white border border-pink-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow z-20 relative"><span class="text-[10px] font-bold uppercase tracking-widest ${badge} border px-2.5 py-1 rounded-lg shrink-0">${e.date.split('-').reverse().join('/')}</span><span class="text-sm font-bold text-rose-800 truncate">${e.title}</span></div>`;
+                        let badge = e.type==='estudo'?'bg-red-50 text-red-700 border-red-200':e.type==='rotina'?'bg-emerald-50 text-emerald-700 border-emerald-200':'bg-indigo-50 text-indigo-700 border-indigo-200';
+                        sumList.innerHTML += `<div class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow z-20 relative"><span class="text-[10px] font-bold uppercase tracking-widest ${badge} border px-2.5 py-1 rounded-lg shrink-0">${e.date.split('-').reverse().join('/')}</span><span class="text-sm font-bold text-slate-800 truncate">${e.title}</span></div>`;
                     });
                 }
             }
@@ -2224,6 +2302,5 @@
     </script>
 </body>
 </html>
-
 
 
