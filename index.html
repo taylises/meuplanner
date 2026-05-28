@@ -164,14 +164,1032 @@
         }
 
     </style>
+
+
+
+
+<style id="taylise-final-fix-redesign">
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap');
+
+:root{
+  --ink:#2b2034;
+  --muted:#675973;
+  --paper:#fffaff;
+  --panel:#ffffff;
+  --pink:#e85f9f;
+  --pink-soft:#ffd3e7;
+  --violet:#815cf6;
+  --violet-soft:#e5dcff;
+  --blue:#2997dc;
+  --blue-soft:#d8f0ff;
+  --mint:#36b88f;
+  --mint-soft:#d9f8ed;
+  --yellow:#e9b834;
+  --yellow-soft:#fff0b8;
+  --peach:#ef875e;
+  --peach-soft:#ffe0d2;
+  --line:#d8cfe1;
+  --shadow:0 16px 40px rgba(60,35,80,.13);
+  --shadow2:0 8px 22px rgba(60,35,80,.10);
+}
+
+*{ box-sizing:border-box; }
+html,body{ min-height:100%; }
+
+body{
+  font-family:'Nunito', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(232,95,159,.22), transparent 28%),
+    radial-gradient(circle at 92% 0%, rgba(129,92,246,.22), transparent 30%),
+    radial-gradient(circle at 85% 70%, rgba(54,184,143,.18), transparent 28%),
+    linear-gradient(135deg,#fff7fc 0%,#f5efff 43%,#eef9ff 100%) !important;
+  background-attachment:fixed !important;
+  color:var(--ink) !important;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.34;
+  background-image:
+    linear-gradient(rgba(129,92,246,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,95,159,.07) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+
+/* Esconde de verdade qualquer aba inativa */
+.tab-content.hidden,
+.mes-panel.hidden{
+  display:none !important;
+}
+.tab-content:not(.hidden){
+  display:block !important;
+  position:relative !important;
+}
+#tab-estudos.hidden{
+  display:none !important;
+  visibility:hidden !important;
+}
+#tab-mestrado:not(.hidden){
+  display:block !important;
+  z-index:40 !important;
+  isolation:isolate !important;
+}
+
+/* Remove textura de patinhas antiga nos cards */
+.cute-card::before,
+.class-card::before,
+.glass::before,
+.glass-emerald::before,
+.glass-rose::before{
+  display:none !important;
+}
+
+/* Header */
+header{
+  background:linear-gradient(135deg,var(--pink) 0%,var(--violet) 56%,var(--blue) 100%) !important;
+  border:0 !important;
+  border-radius:0 0 36px 36px !important;
+  box-shadow:0 18px 48px rgba(110,61,155,.18) !important;
+  padding-top:2rem !important;
+  padding-bottom:2.1rem !important;
+  margin-bottom:1.2rem !important;
+}
+header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.38), transparent 22%),
+    radial-gradient(circle at 82% 15%, rgba(255,255,255,.24), transparent 24%);
+  pointer-events:none;
+}
+header h1{
+  font-family:'Nunito', sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:-.055em !important;
+  color:#fff !important;
+  text-shadow:0 4px 18px rgba(43,32,52,.22) !important;
+}
+header p{
+  color:rgba(255,255,255,.92) !important;
+  font-size:.78rem !important;
+  font-weight:900 !important;
+  letter-spacing:.06em !important;
+  text-transform:uppercase !important;
+}
+header [data-lucide]{
+  color:rgba(255,255,255,.35) !important;
+  fill:transparent !important;
+}
+header button{
+  background:rgba(255,255,255,.24) !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.38) !important;
+  box-shadow:0 10px 26px rgba(44,23,67,.14) !important;
+  border-radius:24px !important;
+  backdrop-filter:blur(16px) !important;
+}
+
+/* Login redesenhado */
+#login-overlay{
+  background:
+    radial-gradient(circle at 14% 10%, rgba(232,95,159,.25), transparent 27%),
+    radial-gradient(circle at 86% 14%, rgba(129,92,246,.24), transparent 27%),
+    linear-gradient(135deg,#fff7fc,#f5efff,#eef9ff) !important;
+}
+#login-overlay::before{
+  content:"Planner Taylise";
+  position:absolute;
+  top:9%;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:900;
+  font-size:clamp(2rem, 6vw, 4rem);
+  letter-spacing:-.06em;
+  color:rgba(43,32,52,.08);
+  white-space:nowrap;
+}
+#login-overlay > div{
+  max-width:430px !important;
+  background:rgba(255,255,255,.78) !important;
+  border:1px solid rgba(255,255,255,.92) !important;
+  border-radius:34px !important;
+  box-shadow:0 24px 70px rgba(60,35,80,.18) !important;
+  backdrop-filter:blur(20px) !important;
+  padding:2rem !important;
+}
+#login-overlay h2{
+  color:var(--ink) !important;
+  font-family:'Nunito', sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:-.04em !important;
+}
+#login-overlay h2::after{
+  content:"";
+  display:block;
+  width:68px;
+  height:5px;
+  margin:.7rem auto 0;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue));
+}
+#login-overlay p{
+  color:var(--muted) !important;
+}
+#login-overlay input{
+  background:#fff !important;
+  border:1px solid var(--line) !important;
+  color:var(--ink) !important;
+  border-radius:18px !important;
+  box-shadow:var(--shadow2) !important;
+}
+#login-overlay button{
+  border-radius:18px !important;
+  font-weight:900 !important;
+}
+#login-overlay button[onclick="window.doLogin()"]{
+  background:linear-gradient(135deg,var(--pink),var(--violet)) !important;
+  box-shadow:0 14px 24px rgba(129,92,246,.22) !important;
+}
+#login-overlay button[onclick="window.doSignup()"]{
+  background:#fff !important;
+  color:var(--violet) !important;
+  border:1px solid var(--line) !important;
+}
+
+/* Menu principal vira dock lateral no desktop */
+#main-nav-desk{
+  position:fixed !important;
+  left:18px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:74px !important;
+  z-index:90 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:10px !important;
+  padding:10px !important;
+  border-radius:28px !important;
+  background:rgba(255,255,255,.76) !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  box-shadow:var(--shadow) !important;
+  backdrop-filter:blur(18px) !important;
+}
+#main-nav-desk button,
+.nav-desk-btn{
+  width:54px !important;
+  height:54px !important;
+  padding:0 !important;
+  border-radius:20px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border:0 !important;
+  background:transparent !important;
+  color:var(--muted) !important;
+  box-shadow:none !important;
+  overflow:hidden !important;
+  font-size:0 !important;
+}
+#main-nav-desk button i,
+.nav-desk-btn i{
+  width:24px !important;
+  height:24px !important;
+  color:currentColor !important;
+}
+#main-nav-desk button.bg-rose-500,
+#main-nav-desk button.bg-pink-400,
+#main-nav-desk button.text-white{
+  background:linear-gradient(135deg,var(--pink),var(--violet)) !important;
+  color:#fff !important;
+  box-shadow:0 10px 24px rgba(129,92,246,.26) !important;
+}
+main{
+  max-width:1160px !important;
+}
+@media(min-width:1024px){
+  main{ padding-left:90px !important; }
+}
+
+/* Cards e painéis */
+.cute-card,
+.class-card,
+.glass,
+.glass-emerald,
+.glass-rose,
+.bg-white.rounded-\[2rem\],
+.bg-white.rounded-2xl,
+.bg-white{
+  background:rgba(255,255,255,.86) !important;
+  border:1px solid rgba(255,255,255,.96) !important;
+  border-radius:30px !important;
+  box-shadow:var(--shadow) !important;
+  backdrop-filter:blur(18px) !important;
+}
+.cute-card:hover,
+.class-card:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:0 20px 48px rgba(60,35,80,.15) !important;
+}
+.absolute.top-0.left-0.w-full.h-2,
+.absolute.top-0.left-0.w-full.h-3{
+  height:9px !important;
+  background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue),var(--mint)) !important;
+}
+
+/* Tipografia e legibilidade */
+h1,h2,h3,.font-cute{
+  font-family:'Nunito', sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:-.045em !important;
+}
+h2,h3,h4{
+  color:var(--ink) !important;
+}
+.text-slate-500,.text-gray-500,.text-gray-400{
+  color:var(--muted) !important;
+}
+.text-rose-700,.text-rose-800,.text-rose-900,.text-pink-400,.text-pink-500,.text-pink-600,.text-red-600,.text-purple-700,.text-purple-800,.text-blue-700,.text-blue-800{
+  color:var(--pink) !important;
+}
+
+/* Inputs */
+input,select,textarea{
+  font-family:'Nunito', sans-serif !important;
+  background:#fff !important;
+  color:var(--ink) !important;
+  border:1px solid var(--line) !important;
+  border-radius:18px !important;
+  box-shadow:0 8px 18px rgba(60,35,80,.06) !important;
+  font-weight:800 !important;
+}
+input:focus,select:focus,textarea:focus{
+  outline:0 !important;
+  border-color:rgba(129,92,246,.55) !important;
+  box-shadow:0 0 0 4px rgba(129,92,246,.15), 0 8px 18px rgba(60,35,80,.06) !important;
+}
+
+/* Botões e cores */
+button{
+  font-family:'Nunito', sans-serif !important;
+  font-weight:900 !important;
+  transition:transform .16s ease, box-shadow .16s ease, filter .16s ease !important;
+}
+button:hover{ transform:translateY(-1px) !important; filter:saturate(1.04); }
+button:active{ transform:scale(.98) !important; }
+
+.bg-rose-400,.bg-rose-500,.bg-pink-400,.bg-pink-500,.bg-red-300,.bg-red-400{
+  background:linear-gradient(135deg,var(--pink),#cf3f87) !important;
+  color:#fff !important;
+}
+.bg-purple-400,.bg-purple-500,.bg-indigo-500,.bg-violet-500{
+  background:linear-gradient(135deg,var(--violet),#6841d9) !important;
+  color:#fff !important;
+}
+.bg-blue-400,.bg-blue-500{
+  background:linear-gradient(135deg,var(--blue),#177fbe) !important;
+  color:#fff !important;
+}
+.bg-emerald-400,.bg-emerald-500,.bg-teal-500{
+  background:linear-gradient(135deg,var(--mint),#229b76) !important;
+  color:#fff !important;
+}
+.bg-amber-400,.bg-amber-500,.bg-yellow-200{
+  background:linear-gradient(135deg,var(--yellow),#d49d19) !important;
+  color:#5a4013 !important;
+}
+.bg-pink-50,.bg-rose-50{ background:var(--pink-soft) !important; }
+.bg-purple-50{ background:var(--violet-soft) !important; }
+.bg-blue-50{ background:var(--blue-soft) !important; }
+.bg-emerald-50,.bg-teal-50{ background:var(--mint-soft) !important; }
+.bg-amber-50,.bg-yellow-50{ background:var(--yellow-soft) !important; }
+.bg-red-50{ background:var(--peach-soft) !important; }
+.bg-slate-50{ background:#f7f4ff !important; }
+.border-pink-100,.border-pink-200,.border-rose-100,.border-rose-200,.border-purple-100,.border-blue-100,.border-red-100,.border-emerald-100,.border-amber-100,.border-slate-200{
+  border-color:var(--line) !important;
+}
+
+/* Disciplinas */
+.discipline-card{
+  background:#fff !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  border-left:8px solid var(--violet) !important;
+  min-height:150px !important;
+}
+.discipline-card:nth-child(4n+1){ border-left-color:var(--pink) !important; }
+.discipline-card:nth-child(4n+2){ border-left-color:var(--violet) !important; }
+.discipline-card:nth-child(4n+3){ border-left-color:var(--blue) !important; }
+.discipline-card:nth-child(4n+4){ border-left-color:var(--mint) !important; }
+.discipline-editor-panel > div{
+  background:linear-gradient(135deg,rgba(255,211,231,.82),rgba(229,220,255,.74)) !important;
+  border:1px solid rgba(255,255,255,.92) !important;
+}
+
+/* Calendário */
+#calendar-month-year{
+  background:#fff !important;
+  color:var(--ink) !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  border-radius:999px !important;
+  box-shadow:var(--shadow2) !important;
+}
+.cal-day,#calendar-days > div{
+  color:var(--ink) !important;
+  border:1px solid rgba(255,255,255,.92) !important;
+  background:#fff !important;
+  border-radius:18px !important;
+  box-shadow:0 8px 16px rgba(60,35,80,.06) !important;
+}
+
+/* Mestrado corrigido */
+#tab-mestrado{
+  padding-top:.25rem !important;
+}
+#tab-mestrado > .flex:first-child{
+  position:sticky !important;
+  top:12px !important;
+  z-index:120 !important;
+  background:rgba(255,255,255,.92) !important;
+  border:1px solid rgba(255,255,255,.98) !important;
+  border-radius:28px !important;
+  padding:14px !important;
+  box-shadow:0 16px 38px rgba(60,35,80,.14) !important;
+  backdrop-filter:blur(20px) !important;
+  align-items:center !important;
+}
+#tab-mestrado > .flex:first-child > div:first-child{
+  flex-shrink:0 !important;
+}
+#tab-mestrado > .flex:first-child > div:last-child{
+  margin-left:auto !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  overflow-x:auto !important;
+  padding:4px 2px 8px !important;
+  max-width:min(760px, 100%) !important;
+}
+#tab-mestrado > .flex:first-child > div:last-child button{
+  border:0 !important;
+  border-radius:999px !important;
+  padding:.72rem 1rem !important;
+  color:var(--ink) !important;
+  background:#f4efff !important;
+  box-shadow:0 7px 16px rgba(60,35,80,.08) !important;
+}
+#tab-mestrado .mes-panel{
+  position:relative !important;
+  z-index:1 !important;
+}
+#tab-mestrado .cute-card{
+  overflow:visible !important;
+}
+
+/* Cronograma editável */
+.schedule-editor-box{
+  background:linear-gradient(135deg,var(--blue-soft),var(--violet-soft));
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:18px;
+  padding:12px;
+  margin-bottom:12px;
+}
+.schedule-item-card{
+  background:#fff;
+  border:1px solid rgba(255,255,255,.92);
+  border-radius:16px;
+  padding:10px;
+  box-shadow:0 8px 18px rgba(60,35,80,.07);
+}
+
+/* Nav mobile */
+nav.fixed,
+.fixed.bottom-0,
+nav.md\:hidden.fixed.bottom-0{
+  left:50% !important;
+  right:auto !important;
+  bottom:10px !important;
+  transform:translateX(-50%) !important;
+  width:calc(100% - 22px) !important;
+  max-width:480px !important;
+  background:rgba(255,255,255,.90) !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  border-radius:30px !important;
+  box-shadow:0 16px 38px rgba(60,35,80,.18) !important;
+  backdrop-filter:blur(18px) !important;
+  padding:8px 8px calc(env(safe-area-inset-bottom,0px) + 8px) !important;
+  z-index:160 !important;
+}
+nav.fixed button{
+  border:0 !important;
+  border-radius:22px !important;
+  color:var(--muted) !important;
+}
+nav.fixed button.bg-rose-500,
+nav.fixed button.bg-pink-400,
+nav.fixed button.text-slate-700{
+  background:linear-gradient(135deg,var(--pink),var(--violet)) !important;
+  color:#fff !important;
+}
+.main-content{
+  padding-bottom:calc(126px + env(safe-area-inset-bottom,20px)) !important;
+}
+
+/* Mobile equivalente */
+@media(max-width:767px){
+  header{
+    padding:1.55rem 1rem 1.35rem !important;
+    border-radius:0 0 28px 28px !important;
+  }
+  header h1{ font-size:2.05rem !important; }
+  header p{ font-size:.64rem !important; }
+  #main-nav-desk{ display:none !important; }
+  main{
+    padding-left:1rem !important;
+    padding-right:1rem !important;
+  }
+  .cute-card,.class-card,.glass,.glass-emerald,.glass-rose,.bg-white.rounded-\[2rem\],.bg-white.rounded-2xl,.bg-white{
+    border-radius:24px !important;
+    box-shadow:0 12px 30px rgba(60,35,80,.12) !important;
+  }
+  #tab-mestrado > .flex:first-child{
+    top:8px !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    border-radius:24px !important;
+  }
+  #tab-mestrado > .flex:first-child > div:first-child{
+    flex-wrap:wrap !important;
+    gap:.7rem !important;
+  }
+  #tab-mestrado > .flex:first-child > div:last-child{
+    max-width:100% !important;
+    margin-left:0 !important;
+  }
+  #tab-mestrado > .flex:first-child > div:last-child button{
+    padding:.62rem .85rem !important;
+    font-size:.7rem !important;
+  }
+  .discipline-editor-panel > div{
+    border-radius:22px !important;
+  }
+  #editable-disciplines-grid{
+    grid-template-columns:1fr !important;
+  }
+  #modal-schedule-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+</style>
+
+
+<style id="mestrado-menu-popup-fix">
+/* ======================================================
+   Ajustes Centro de Mestrado + popups sem vazamento
+   ====================================================== */
+
+/* Menu do Centro de Mestrado: vira grid flexível, sem precisar arrastar para o lado */
+#tab-mestrado > .flex:first-child{
+  position:relative !important;
+  top:auto !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:14px !important;
+  overflow:visible !important;
+  align-items:stretch !important;
+}
+
+#tab-mestrado > .flex:first-child > div:first-child{
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  flex-wrap:wrap !important;
+}
+
+#tab-mestrado > .flex:first-child > div:last-child{
+  width:100% !important;
+  max-width:100% !important;
+  margin-left:0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(4, minmax(0, 1fr)) !important;
+  gap:10px !important;
+  overflow:visible !important;
+  padding:0 !important;
+}
+
+#tab-mestrado > .flex:first-child > div:last-child button{
+  width:100% !important;
+  min-width:0 !important;
+  white-space:normal !important;
+  line-height:1.05rem !important;
+  text-align:center !important;
+  padding:12px 10px !important;
+  border-radius:18px !important;
+  font-size:.75rem !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+/* Estado ativo do menu interno */
+#tab-mestrado > .flex:first-child > div:last-child button.mes-active{
+  background:linear-gradient(135deg,var(--violet),var(--pink)) !important;
+  color:#fff !important;
+  box-shadow:0 10px 24px rgba(129,92,246,.23) !important;
+}
+
+/* Popup/modal geral: impede tudo de vazar para fora */
+.fixed.inset-0,
+[id*="modal"],
+.modal,
+#note-modal,
+#custom-modal{
+  max-width:100vw !important;
+}
+
+.modal-body{
+  max-height:calc(78vh - 100px) !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  padding-right:4px !important;
+}
+
+/* Conteúdo interno do modal de disciplina/anotações */
+#note-modal .bg-white,
+#custom-modal .bg-white,
+[id*="modal"] .bg-white{
+  max-width:min(94vw, 760px) !important;
+  max-height:88vh !important;
+  overflow:hidden !important;
+}
+
+/* Formulários dentro de popups: quebram linha ao invés de sair da caixa */
+#modal-schedule-container,
+#modal-schedule-container *,
+#modal-schedule-grid,
+#modal-schedule-grid *{
+  min-width:0 !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+
+.schedule-editor-box{
+  width:100% !important;
+  overflow:hidden !important;
+}
+
+.schedule-editor-box .grid{
+  grid-template-columns:1fr !important;
+}
+
+.schedule-editor-box input,
+.schedule-editor-box select,
+.schedule-editor-box button{
+  width:100% !important;
+  min-width:0 !important;
+}
+
+#modal-schedule-grid{
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  overflow:hidden !important;
+}
+
+.schedule-item-card{
+  min-width:0 !important;
+  word-break:break-word !important;
+  overflow:hidden !important;
+}
+
+/* Evita inputs lado a lado estourarem no modal */
+#modal-schedule-date,
+#modal-schedule-type{
+  min-width:0 !important;
+}
+
+/* Campos de horário/aula em qualquer editor de disciplina */
+.discipline-editor-panel input,
+.discipline-editor-panel select,
+.discipline-editor-panel textarea,
+.discipline-editor-panel button,
+#editable-disciplines-grid input,
+#editable-disciplines-grid select,
+#editable-disciplines-grid textarea,
+#editable-disciplines-grid button{
+  min-width:0 !important;
+  max-width:100% !important;
+}
+
+/* Correção para grids que estavam vazando */
+.grid{
+  min-width:0;
+}
+.grid > *{
+  min-width:0;
+}
+
+/* Responsivo */
+@media(max-width: 1023px){
+  #tab-mestrado > .flex:first-child > div:last-child{
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media(max-width: 520px){
+  #tab-mestrado > .flex:first-child{
+    border-radius:24px !important;
+    padding:12px !important;
+  }
+
+  #tab-mestrado > .flex:first-child > div:first-child{
+    align-items:flex-start !important;
+  }
+
+  #tab-mestrado > .flex:first-child > div:first-child h2{
+    font-size:1.45rem !important;
+    line-height:1.7rem !important;
+  }
+
+  #tab-mestrado > .flex:first-child > div:first-child button{
+    width:100% !important;
+    justify-content:center !important;
+  }
+
+  #tab-mestrado > .flex:first-child > div:last-child{
+    grid-template-columns:1fr !important;
+  }
+
+  #tab-mestrado > .flex:first-child > div:last-child button{
+    font-size:.78rem !important;
+    padding:11px 12px !important;
+  }
+
+  #modal-schedule-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .modal-body{
+    max-height:calc(74vh - 90px) !important;
+  }
+}
+</style>
+
+
+<style id="hard-tab-separation-real-fix">
+/* Correção real: Estudos e Mestrado são abas separadas, não fluxo contínuo */
+.tab-content.hidden{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+  position:absolute !important;
+  left:-99999px !important;
+  z-index:-1 !important;
+}
+
+.tab-content.planner-active-tab{
+  display:block !important;
+  visibility:visible !important;
+  height:auto !important;
+  overflow:visible !important;
+  pointer-events:auto !important;
+  position:relative !important;
+  left:auto !important;
+  z-index:30 !important;
+}
+
+/* Se estiver no Mestrado, nada da aba Estudos pode aparecer ou ocupar espaço */
+body.mode-mestrado #tab-estudos{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+  position:absolute !important;
+  left:-99999px !important;
+  top:auto !important;
+  z-index:-1 !important;
+}
+
+/* Se estiver nos Estudos, nada do Centro de Mestrado aparece */
+body.mode-estudos #tab-mestrado{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+  position:absolute !important;
+  left:-99999px !important;
+  top:auto !important;
+  z-index:-1 !important;
+}
+
+/* Dentro do mestrado, só o painel ativo aparece */
+#tab-mestrado .mes-panel.hidden{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  overflow:hidden !important;
+}
+
+#tab-mestrado .mes-panel.mes-active-panel{
+  display:block !important;
+  visibility:visible !important;
+  height:auto !important;
+  overflow:visible !important;
+}
+
+/* O Centro de Mestrado começa no topo da aba */
+#tab-mestrado.planner-active-tab{
+  margin-top:0 !important;
+  padding-top:0 !important;
+  clear:both !important;
+}
+</style>
+
+
+<style id="final-structure-and-modal-fix">
+/* ======================================================
+   Correção final: abas separadas + popup com rolagem real
+   ====================================================== */
+
+/* Abas: apenas a ativa ocupa espaço */
+.tab-content.hidden{
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+    position:absolute !important;
+    left:-99999px !important;
+    z-index:-1 !important;
+}
+
+.tab-content.planner-active-tab{
+    display:block !important;
+    visibility:visible !important;
+    height:auto !important;
+    overflow:visible !important;
+    pointer-events:auto !important;
+    position:relative !important;
+    left:auto !important;
+    z-index:30 !important;
+}
+
+/* Segurança: no Mestrado, a aba Estudos não existe visualmente */
+body.mode-mestrado #tab-estudos,
+body.mode-mestrado #tab-estudos *{
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+}
+
+/* Segurança: em Estudos, Mestrado não ocupa espaço */
+body.mode-estudos #tab-mestrado,
+body.mode-estudos #tab-mestrado *{
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+}
+
+/* Painéis internos do mestrado: só um aparece */
+#tab-mestrado .mes-panel.hidden{
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    overflow:hidden !important;
+}
+
+#tab-mestrado .mes-panel.mes-active-panel{
+    display:block !important;
+    visibility:visible !important;
+    height:auto !important;
+    overflow:visible !important;
+}
+
+/* Modal de disciplinas: rolagem real, inclusive no celular */
+#note-modal{
+    align-items:center !important;
+    justify-content:center !important;
+    padding:12px !important;
+    overflow:hidden !important;
+}
+
+#note-modal > div{
+    width:min(94vw, 720px) !important;
+    height:min(92dvh, 760px) !important;
+    max-height:92dvh !important;
+    display:flex !important;
+    flex-direction:column !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+}
+
+#note-modal .modal-body{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior:contain !important;
+    padding-bottom:24px !important;
+}
+
+#note-modal > div > div:first-child,
+#note-modal > div > div:last-child{
+    flex:0 0 auto !important;
+}
+
+#note-modal > div > div:last-child{
+    position:sticky !important;
+    bottom:0 !important;
+    z-index:20 !important;
+}
+
+/* Nada dentro do popup deve vazar para fora */
+#note-modal *,
+#modal-schedule-container *,
+#modal-events-list *{
+    max-width:100% !important;
+    box-sizing:border-box !important;
+    min-width:0 !important;
+}
+
+#modal-schedule-container{
+    overflow:hidden !important;
+}
+
+.schedule-editor-box{
+    width:100% !important;
+    overflow:hidden !important;
+}
+
+.schedule-editor-box .grid{
+    grid-template-columns:1fr !important;
+}
+
+.schedule-editor-box input,
+.schedule-editor-box select,
+.schedule-editor-box button,
+#modal-link-moodle,
+#modal-link-aula,
+#modal-event-name,
+#modal-event-date,
+#modal-textarea{
+    width:100% !important;
+    min-width:0 !important;
+}
+
+/* Linhas de link/provas quebram em tela menor */
+#note-modal .flex.gap-2{
+    min-width:0 !important;
+}
+
+@media(max-width:640px){
+    #note-modal{
+        padding:8px !important;
+        align-items:flex-end !important;
+    }
+
+    #note-modal > div{
+        width:100% !important;
+        height:92dvh !important;
+        max-height:92dvh !important;
+        border-radius:24px 24px 0 0 !important;
+    }
+
+    #note-modal .modal-body{
+        padding:16px !important;
+    }
+
+    #note-modal .modal-body .flex.gap-2{
+        flex-direction:column !important;
+    }
+
+    #note-modal .modal-body button{
+        width:100% !important;
+        min-height:42px !important;
+    }
+
+    #modal-schedule-grid{
+        grid-template-columns:1fr !important;
+    }
+}
+</style>
+
+
+<style id="menu-active-state-fix">
+/* Estado ativo real do menu principal */
+#main-nav-desk button.main-tab-active,
+.nav-desk-btn.main-tab-active{
+    background:linear-gradient(135deg,var(--pink),var(--violet)) !important;
+    color:#fff !important;
+    box-shadow:0 12px 26px rgba(129,92,246,.28) !important;
+    transform:translateY(-1px) !important;
+}
+
+#main-nav-desk button:not(.main-tab-active),
+.nav-desk-btn:not(.main-tab-active){
+    background:rgba(255,255,255,.72) !important;
+    color:var(--muted) !important;
+}
+
+nav.fixed button.main-tab-active,
+nav.md\:hidden button.main-tab-active,
+#bottom-nav button.main-tab-active{
+    background:linear-gradient(135deg,var(--pink),var(--violet)) !important;
+    color:#fff !important;
+    box-shadow:0 10px 22px rgba(129,92,246,.22) !important;
+}
+
+nav.fixed button:not(.main-tab-active),
+nav.md\:hidden button:not(.main-tab-active),
+#bottom-nav button:not(.main-tab-active){
+    background:transparent !important;
+    color:var(--muted) !important;
+}
+</style>
+
+
+<style id="menu-active-state-fix-v2">
+/* Estado ativo real do menu principal — versão reforçada */
+#main-nav-desk button.main-tab-active,
+.nav-desk-btn.main-tab-active,
+nav button.main-tab-active,
+#bottom-nav button.main-tab-active{
+    background:linear-gradient(135deg,var(--pink),var(--violet)) !important;
+    color:#fff !important;
+    box-shadow:0 12px 26px rgba(129,92,246,.28) !important;
+    opacity:1 !important;
+}
+
+#main-nav-desk button:not(.main-tab-active),
+.nav-desk-btn:not(.main-tab-active),
+nav button:not(.main-tab-active),
+#bottom-nav button:not(.main-tab-active){
+    background:rgba(255,255,255,.72) !important;
+    color:var(--muted) !important;
+}
+</style>
+
 </head>
 <body class="antialiased relative min-h-screen">
 
     <!-- TELA DE LOGIN SEGURA 🔒 -->
     <div id="login-overlay" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#fff0f5] bg-[radial-gradient(#ffb6c1_1.5px,transparent_1.5px)] bg-[size:28px_28px] transition-opacity duration-300">
         <div class="bg-white p-8 rounded-[2rem] shadow-xl border-2 border-pink-200 w-full max-w-sm flex flex-col relative text-center">
-            <h2 class="text-3xl font-cute text-rose-700 mb-2">Acesso Seguro 🎀</h2>
-            <p class="text-slate-500 font-bold text-sm mb-6">Seu Planner na nuvem!</p>
+            <h2 class="text-3xl font-cute text-rose-700 mb-2">Acesso ao Planner</h2>
+            <p class="text-slate-500 font-bold text-sm mb-6">Organização, estudos e mestrado em um só lugar.</p>
             
             <!-- BOTÃO DO GOOGLE -->
             <button onclick="window.doGoogleLogin()" class="w-full bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-3 rounded-xl mb-4 shadow-sm transition flex items-center justify-center gap-2">
@@ -210,7 +1228,7 @@
 
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 relative z-10 text-center md:text-left">
             <div>
-                <h1 class="text-3xl md:text-5xl font-cute font-bold mb-1 drop-shadow-md tracking-wide">Planner da Taylise 🎀</h1>
+                <h1 class="text-3xl md:text-5xl font-cute font-bold mb-1 drop-shadow-md tracking-wide">Planner Taylise</h1>
                 <p class="text-pink-100 text-sm md:text-lg font-bold drop-shadow tracking-wide">Resumo • Rotina • Estudos • Mestrado</p>
             </div>
             
@@ -366,47 +1384,25 @@
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10">
-                    <div data-class-name="Constituição e Tendências em Ed. Ciências" onclick="openNoteModal('Constituição e Tendências em Ed. Ciências')" class="class-card cursor-pointer bg-red-50 border-2 border-l-8 border-red-200 border-l-red-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-red-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-red-100 uppercase tracking-widest relative z-10">SEG • 14H - 17H</span>
-                        <h4 class="font-bold text-red-900 text-sm md:text-base leading-snug relative z-10">Constituição e Tendências em Ed. Ciências</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                        <i data-lucide="sparkles" class="absolute -bottom-2 -right-2 w-16 h-16 text-red-400/20 fill-red-400/20 transition-transform group-hover:scale-110"></i>
+                <div class="discipline-editor-panel relative z-10 mb-5">
+                    <div class="flex flex-col lg:flex-row gap-3 items-stretch lg:items-end bg-white/80 rounded-3xl border border-violet-100 p-4 shadow-sm">
+                        <div class="flex-1">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-violet-700 mb-1">Nome da disciplina</label>
+                            <input type="text" id="new-discipline-name" placeholder="Ex: Cartografia Temática" class="w-full bg-white rounded-2xl border border-violet-100 p-3 text-sm font-bold text-slate-700 outline-none">
+                        </div>
+                        <div class="lg:w-56">
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-violet-700 mb-1">Horário / período</label>
+                            <input type="text" id="new-discipline-time" placeholder="SEG • 18:30" class="w-full bg-white rounded-2xl border border-violet-100 p-3 text-sm font-bold text-slate-700 outline-none">
+                        </div>
+                        <button onclick="addEditableDiscipline()" class="bg-violet-500 hover:bg-violet-600 text-white px-5 py-3 rounded-2xl shadow-sm font-black flex items-center justify-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i> Adicionar
+                        </button>
                     </div>
-                    
-                    <div data-class-name="Conceitos Foucaultianos" onclick="openNoteModal('Conceitos Foucaultianos')" class="class-card cursor-pointer bg-rose-50 border-2 border-l-8 border-rose-200 border-l-rose-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-rose-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-rose-100 uppercase tracking-widest relative z-10">TER • 19H - 21H</span>
-                        <h4 class="font-bold text-rose-900 text-sm md:text-base leading-snug relative z-10">Conceitos Foucaultianos</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                        <i data-lucide="sparkles" class="absolute -bottom-2 -right-2 w-16 h-16 text-rose-400/20 fill-rose-400/20 transition-transform group-hover:scale-110"></i>
-                    </div>
-                    
-                    <div data-class-name="Conceitos Foucaultianos (Presencial)" onclick="openNoteModal('Conceitos Foucaultianos (Presencial)')" class="class-card cursor-pointer bg-rose-50 border-2 border-l-8 border-rose-200 border-l-rose-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-rose-600 bg-white px-2.5 py-1 rounded-lg w-max mb-2 shadow-sm border border-rose-100 uppercase tracking-widest relative z-10">SÁB • 09H - 13H</span>
-                        <h4 class="font-bold text-rose-900 text-sm md:text-base leading-snug relative z-10">Conceitos Foucaultianos (Presencial)</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                        <i data-lucide="sparkles" class="absolute -bottom-2 -right-2 w-16 h-16 text-rose-400/20 fill-rose-400/20 transition-transform group-hover:scale-110"></i>
-                    </div>
-                    
-                    <div data-class-name="História e Fund. da Geografia" onclick="openNoteModal('História e Fund. da Geografia')" class="class-card cursor-pointer bg-white border-2 border-l-8 border-pink-100 border-l-pink-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg w-max mb-2 border border-pink-100 uppercase tracking-widest relative z-10">QUA • 18:30</span>
-                        <h4 class="font-bold text-pink-900 text-sm md:text-base leading-snug relative z-10">História e Fundamentos da Geografia</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                    </div>
-                    
-                    <div data-class-name="Geografia Cultural" onclick="openNoteModal('Geografia Cultural')" class="class-card cursor-pointer bg-white border-2 border-l-8 border-pink-100 border-l-pink-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg w-max mb-2 border border-pink-100 uppercase tracking-widest relative z-10">QUI • 18:30</span>
-                        <h4 class="font-bold text-pink-900 text-sm md:text-base leading-snug relative z-10">Geografia Cultural</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                    </div>
-                    
-                    <div data-class-name="Geografia da América Latina" onclick="openNoteModal('Geografia da América Latina')" class="class-card cursor-pointer bg-white border-2 border-l-8 border-pink-100 border-l-pink-300 p-5 relative group flex flex-col justify-center min-h-[130px] shadow-sm">
-                        <span class="text-[9px] font-bold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-lg w-max mb-2 border border-pink-100 uppercase tracking-widest relative z-10">SEX • 18:30</span>
-                        <h4 class="font-bold text-pink-900 text-sm md:text-base leading-snug relative z-10">Geografia da América Latina</h4>
-                        <div class="event-alerts mt-2 flex flex-col gap-1 w-full relative z-20"></div>
-                    </div>
+                    <p class="text-[11px] text-slate-500 font-bold mt-2 px-2">Clique no card para abrir anotações e prazos. Use editar para alterar nome/horário sem perder os eventos.</p>
                 </div>
-            </div>
+
+                <div id="editable-disciplines-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 relative z-10"></div>
+                </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <!-- Leituras com Opções -->
@@ -509,7 +1505,7 @@
         <!-- ========================================== -->
         <!-- ABA MESTRADO (SISTEMA INTEGRADO E FUNCIONAL) -->
         <!-- ========================================== -->
-        <div id="tab-mestrado" class="tab-content hidden animate-pop block">
+        <div id="tab-mestrado" class="tab-content hidden animate-pop">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-4 w-full md:w-auto">
                     <button onclick="switchTab('estudos')" class="bg-white border-2 border-purple-200 text-purple-600 px-4 py-2.5 rounded-xl hover:bg-purple-50 active:scale-95 transition-transform shadow-sm flex items-center gap-2 font-bold"><i data-lucide="arrow-left"></i> Voltar</button>
@@ -755,7 +1751,7 @@
         <!-- ========================================== -->
         <!-- ABA 4: ATELIÊ VENDAS INTELIGENTES          -->
         <!-- ========================================== -->
-        <div id="tab-loja" class="tab-content hidden">
+        <div id="tab-loja" style="display:none!important" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] border-2 border-emerald-100 shadow-lg p-6 md:p-8 mb-6 relative overflow-hidden cute-card">
                 <i data-lucide="palette" class="absolute top-1/2 right-10 w-32 h-32 text-emerald-400/10 fill-emerald-400/10 rotate-12 animate-float z-0"></i>
                 <i data-lucide="sparkles" class="absolute bottom-10 left-10 w-20 h-20 text-emerald-300/20 fill-emerald-300/20 animate-pulse z-0"></i>
@@ -812,7 +1808,7 @@
         <!-- ========================================== -->
         <!-- ABA 5: TATTOO STUDIO PRO                   -->
         <!-- ========================================== -->
-        <div id="tab-tattoo" class="tab-content hidden">
+        <div id="tab-tattoo" style="display:none!important" class="tab-content hidden">
             <h2 class="text-2xl md:text-3xl font-cute text-purple-900 mb-6 flex items-center gap-2"><i data-lucide="pen-tool" class="text-purple-400"></i> Tattoo Studio Pro 🖤</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -895,7 +1891,7 @@
         <!-- ========================================== -->
         <!-- ABA 6: INSTAGRAM & SOCIAL                  -->
         <!-- ========================================== -->
-        <div id="tab-instagram" class="tab-content hidden">
+        <div id="tab-instagram" style="display:none!important" class="tab-content hidden">
             <div class="bg-white rounded-[2rem] border-2 border-fuchsia-100 shadow-lg p-6 md:p-8 mb-8 relative overflow-hidden cute-card">
                 <i data-lucide="star" class="absolute bottom-10 left-10 w-24 h-24 text-fuchsia-400/10 fill-fuchsia-400/10 rotate-45 animate-float z-0"></i>
 
@@ -941,7 +1937,7 @@
         <!-- ========================================== -->
         <!-- ABA 7: FINANÇAS DASHBOARD                  -->
         <!-- ========================================== -->
-        <div id="tab-financas" class="tab-content hidden space-y-6">
+        <div id="tab-financas" style="display:none!important" class="tab-content hidden space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-center bg-white/80 glass rounded-[2.5rem] p-6 shadow-sm gap-4">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-cute text-emerald-700 flex items-center gap-2"><i data-lucide="piggy-bank" class="text-emerald-400"></i> Gestão Financeira</h2>
@@ -1009,7 +2005,25 @@
                 <button type="button" onclick="closeNoteModal()" class="text-pink-400 p-2 bg-white rounded-full shadow-sm"><i data-lucide="x" class="w-4 h-4"></i></button>
             </div>
             <div class="p-6 modal-body bg-white overflow-y-auto hide-scrollbar">
-                <div id="modal-schedule-container" class="mb-5 hidden"><label class="text-[10px] font-bold text-rose-800 uppercase block mb-2"><i data-lucide="map" class="w-3 h-3 inline"></i> Cronograma de Aulas</label><div id="modal-schedule-grid" class="grid grid-cols-2 gap-2"></div></div>
+                <div id="modal-schedule-container" class="mb-5 hidden">
+                    <label class="text-[10px] font-bold text-rose-800 uppercase block mb-2"><i data-lucide="calendar-check-2" class="w-3 h-3 inline"></i> Cronograma de Aulas</label>
+                    <div class="schedule-editor-box">
+                        <div class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-2">
+                            <input type="text" id="modal-schedule-date" placeholder="Data. Ex: 21/03" class="bg-white rounded-xl p-2.5 text-xs font-bold border outline-none">
+                            <select id="modal-schedule-type" class="bg-white rounded-xl p-2.5 text-xs font-bold border outline-none">
+                                <option value="Presencial">Presencial</option>
+                                <option value="Online">Online</option>
+                                <option value="Híbrida">Híbrida</option>
+                                <option value="Entrega">Entrega</option>
+                            </select>
+                            <button type="button" onclick="addScheduleItem()" class="bg-blue-400 text-white px-4 py-2 rounded-xl text-xs font-black shadow-sm flex items-center justify-center gap-1">
+                                <i data-lucide="plus" class="w-3 h-3"></i> Aula
+                            </button>
+                        </div>
+                        <p class="text-[10px] font-bold text-slate-500 mt-2">Você pode adicionar, editar ou apagar aulas desta disciplina.</p>
+                    </div>
+                    <div id="modal-schedule-grid" class="grid grid-cols-2 gap-2"></div>
+                </div>
                 <div class="mb-5 bg-blue-50 p-4 rounded-2xl border border-blue-100">
                     <label class="text-[10px] font-bold text-blue-800 uppercase block mb-2"><i data-lucide="link" class="w-3 h-3 inline"></i> Links da Disciplina</label>
                     <div class="flex flex-col gap-2">
@@ -1338,37 +2352,126 @@
         let currMo = new Date(); 
 
         function switchTab(t) {
-            // Ocultar a navegação principal APENAS na aba de Mestrado para imersão total
-            let navDesk = document.getElementById('main-nav-desk');
-            if (navDesk) {
-                if (t === 'mestrado') navDesk.style.display = 'none';
-                else navDesk.style.display = '';
-            }
+            const mainTabs = ['resumo','rotina','estudos','mestrado'];
 
-            ['resumo','rotina','estudos','mestrado'].forEach(x => {
-                const e=document.getElementById('tab-'+x), d=document.getElementById('desk-btn-'+x), m=document.getElementById('mob-btn-'+x);
-                if(e) e.classList.toggle('hidden', x!==t);
+            mainTabs.forEach(x => {
+                const e = document.getElementById('tab-' + x);
+                const d = document.getElementById('desk-btn-' + x);
+                const m = document.getElementById('mob-btn-' + x);
 
-                if(d) d.className = (x===t) ? "nav-desk-btn bg-rose-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white" : "nav-desk-btn bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-slate-200";
-                if(m) m.className = (x===t) ? "flex flex-col items-center p-2 text-slate-700 w-16 transition-all transform -translate-y-2 bg-slate-100 rounded-2xl shadow-sm" : "flex flex-col items-center p-2 text-slate-500 w-16 transition-all";
+                if (e) {
+                    const active = x === t;
+
+                    e.classList.toggle('hidden', !active);
+                    e.classList.toggle('planner-active-tab', active);
+
+                    e.style.display = active ? 'block' : 'none';
+                    e.style.visibility = active ? 'visible' : 'hidden';
+                    e.style.opacity = active ? '1' : '0';
+                    e.style.height = active ? 'auto' : '0';
+                    e.style.overflow = active ? 'visible' : 'hidden';
+                    e.style.pointerEvents = active ? 'auto' : 'none';
+                    e.style.position = active ? 'relative' : 'absolute';
+                    e.style.left = active ? 'auto' : '-99999px';
+                    e.style.zIndex = active ? '30' : '-1';
+                }
+
+                if (d) {
+                    d.className = activeClassMain(x === t, 'desk');
+                }
+
+                if (m) {
+                    m.className = activeClassMain(x === t, 'mobile');
+                }
             });
 
-            if(t==='resumo') renderMasterCalendar(); 
-            if(t==='rotina') renderRoutineChart(); 
-            if(t==='estudos') { renderReadingList(); renderExtraStudies(); renderListTracker(); renderErrorBank(); renderStudyChart(); updateClassCards(); }
-            if(t==='mestrado') { switchMesTab('visao'); renderMestradoMeetings(); renderMesLeituras(); renderMestradoProducao(); renderMesDisciplinas(); renderMesEmocional(); renderMestradoIdeias(); loadMestrado(); loadMsCap(); }
-            if(typeof lucide !== 'undefined') lucide.createIcons();
+            document.body.classList.remove('mode-resumo','mode-rotina','mode-estudos','mode-mestrado');
+            document.body.classList.add('mode-' + t);
+
+            if (t === 'resumo') {
+                renderMasterCalendar();
+            }
+
+            if (t === 'rotina') {
+                renderRoutineChart();
+            }
+
+            if (t === 'estudos') {
+                renderReadingList();
+                renderExtraStudies();
+                renderListTracker();
+                renderErrorBank();
+                renderStudyChart();
+                updateClassCards();
+            }
+
+            if (t === 'mestrado') {
+                // Aqui é a correção principal:
+                // ao entrar no Mestrado, inicia diretamente no Centro de Mestrado,
+                // sem renderizar/mostrar nada da aba Estudos.
+                switchMesTab('visao');
+                renderMestradoMeetings();
+                renderMesLeituras();
+                renderMestradoProducao();
+                renderMesDisciplinas();
+                renderMesEmocional();
+                renderMestradoIdeias();
+                loadMestrado();
+                loadMsCap();
+
+                setTimeout(() => {
+                    const mestrado = document.getElementById('tab-mestrado');
+                    if (mestrado) {
+                        const top = mestrado.getBoundingClientRect().top + window.pageYOffset - 12;
+                        window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+                    }
+                }, 0);
+            }
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function activeClassMain(isActive, type) {
+            if (type === 'mobile') {
+                return isActive 
+                    ? "flex flex-col items-center p-2 text-white w-16 transition-all transform -translate-y-2 bg-pink-400 rounded-2xl shadow-sm"
+                    : "flex flex-col items-center p-2 text-slate-500 w-16 transition-all";
+            }
+
+            return isActive
+                ? "nav-desk-btn bg-pink-400 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-md flex items-center gap-2 border-2 border-white"
+                : "nav-desk-btn bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm flex items-center gap-2 border-2 border-slate-200";
         }
 
         // Navegação Interna do Mestrado
         function switchMesTab(sub) {
             ['visao', 'reunioes', 'leituras', 'producao', 'disciplinas', 'dissertacao', 'semanal', 'emocional', 'ideias'].forEach(s => {
-                let el = document.getElementById('mes-'+s);
-                if(el) {
-                    if(s === sub) { el.classList.remove('hidden'); el.classList.add('block'); } 
-                    else { el.classList.add('hidden'); el.classList.remove('block'); }
+                let el = document.getElementById('mes-' + s);
+                if (el) {
+                    const active = s === sub;
+
+                    el.classList.toggle('hidden', !active);
+                    el.classList.toggle('mes-active-panel', active);
+
+                    el.style.display = active ? 'block' : 'none';
+                    el.style.visibility = active ? 'visible' : 'hidden';
+                    el.style.opacity = active ? '1' : '0';
+                    el.style.height = active ? 'auto' : '0';
+                    el.style.overflow = active ? 'visible' : 'hidden';
                 }
             });
+
+            const menu = document.querySelector('#tab-mestrado > .flex:first-child > div:last-child');
+            if (menu) {
+                menu.querySelectorAll('button').forEach(btn => btn.classList.remove('mes-active'));
+                const target = Array.from(menu.querySelectorAll('button')).find(btn => {
+                    const attr = btn.getAttribute('onclick') || '';
+                    return attr.includes("switchMesTab('" + sub + "'") || attr.includes('switchMesTab("' + sub + '"');
+                });
+                if (target) target.classList.add('mes-active');
+            }
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
         function renderMasterCalendar() {
@@ -2300,6 +3403,616 @@
             setTimeout(() => { if(window.lucide) lucide.createIcons(); }, 100); 
         };
     </script>
+
+<script id="editable-disciplines-and-layout-update">
+(function(){
+  const defaultDisciplines = [
+    {id:'disc-1', name:'Constituição e Tendências em Ed. Ciências', time:'SEG • 14H - 17H'},
+    {id:'disc-2', name:'Conceitos Foucaultianos', time:'TER • 19H - 21H'},
+    {id:'disc-3', name:'Conceitos Foucaultianos (Presencial)', time:'SÁB • 09H - 13H'},
+    {id:'disc-4', name:'História e Fund. da Geografia', time:'QUA • 18:30'},
+    {id:'disc-5', name:'Geografia Cultural', time:'QUI • 18:30'},
+    {id:'disc-6', name:'Geografia da América Latina', time:'SEX • 18:30'}
+  ];
+  const scheduleMap = {
+    'Constituição e Tendências em Ed. Ciências':[{d:'02/03',t:'Presencial'},{d:'16/03',t:'Online'},{d:'30/03',t:'Online'},{d:'13/04',t:'Online'},{d:'27/04',t:'Online'},{d:'11/05',t:'Online'},{d:'25/05',t:'Online'},{d:'15/06',t:'Presencial'},{d:'29/06',t:'Presencial'}],
+    'Conceitos Foucaultianos':[{d:'24/03',t:'Online'},{d:'31/03',t:'Online'},{d:'07/04',t:'Online'},{d:'14/04',t:'Online'},{d:'21/04',t:'Online'},{d:'28/04',t:'Online'},{d:'05/05',t:'Online'},{d:'12/05',t:'Online'},{d:'19/05',t:'Online'},{d:'26/05',t:'Online'},{d:'02/06',t:'Online'},{d:'23/06',t:'Online'}],
+    'Conceitos Foucaultianos (Presencial)':[{d:'21/03',t:'Presencial'},{d:'20/06',t:'Presencial'}]
+  };
+  function getDisciplines(){
+    const stored = lsGet('editableDisciplines', null);
+    if(Array.isArray(stored) && stored.length) return stored;
+    lsSet('editableDisciplines', defaultDisciplines);
+    return defaultDisciplines;
+  }
+  function setDisciplines(list){ lsSet('editableDisciplines', list); }
+  function esc(s){ return String(s||'').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+  window.renderEditableDisciplines = function(){
+    const grid = document.getElementById('editable-disciplines-grid');
+    if(!grid) return;
+    const list = getDisciplines();
+    grid.innerHTML = list.map((d,idx)=>`
+      <div data-class-name="${esc(d.name)}" class="class-card discipline-card cursor-pointer p-5 relative group flex flex-col justify-between shadow-sm" onclick="openNoteModal('${esc(d.name).replace(/&#39;/g,"\\'")}')">
+        <div>
+          <span class="inline-flex items-center gap-1 text-[10px] font-black text-violet-700 bg-white/80 px-3 py-1 rounded-full mb-3 shadow-sm border border-white uppercase tracking-widest relative z-10">
+            <i data-lucide="calendar-check-2" class="w-3 h-3"></i>${esc(d.time || 'Sem horário')}
+          </span>
+          <h4 class="font-black text-slate-800 text-base leading-snug relative z-10 pr-8">${esc(d.name)}</h4>
+          <div class="event-alerts mt-3 flex flex-col gap-1 w-full relative z-20"></div>
+        </div>
+        <div class="edit-actions flex gap-2 mt-4 relative z-30" onclick="event.stopPropagation()">
+          <button type="button" onclick="editEditableDiscipline('${d.id}')" class="bg-violet-100 hover:bg-violet-200 text-violet-700 px-3 py-1.5 rounded-xl text-[10px] font-black flex items-center gap-1"><i data-lucide="pencil" class="w-3 h-3"></i> Editar</button>
+          <button type="button" onclick="deleteEditableDiscipline('${d.id}')" class="bg-rose-100 hover:bg-rose-200 text-rose-700 px-3 py-1.5 rounded-xl text-[10px] font-black flex items-center gap-1"><i data-lucide="trash-2" class="w-3 h-3"></i> Apagar</button>
+        </div>
+      </div>`).join('');
+    updateStudyDatalist();
+    if(typeof updateClassCards==='function') updateClassCards();
+    if(window.lucide) lucide.createIcons({root:grid});
+  };
+  window.addEditableDiscipline = function(){
+    const nameEl=document.getElementById('new-discipline-name');
+    const timeEl=document.getElementById('new-discipline-time');
+    const name=(nameEl?.value||'').trim();
+    const time=(timeEl?.value||'').trim();
+    if(!name){ window.customDialog ? customDialog('alert','Coloca o nome da disciplina primeiro ✨') : alert('Coloca o nome da disciplina primeiro'); return; }
+    const list=getDisciplines();
+    if(list.some(d=>d.name.toLowerCase()===name.toLowerCase())){ customDialog('alert','Essa disciplina já existe.'); return; }
+    list.push({id:'disc-'+Date.now(), name, time:time||'Sem horário'});
+    setDisciplines(list);
+    if(nameEl) nameEl.value=''; if(timeEl) timeEl.value='';
+    renderEditableDisciplines(); renderMasterCalendar?.(); window.syncToCloud?.();
+  };
+  function migrateDisciplineData(oldName,newName){
+    if(oldName===newName) return;
+    const evs=lsGet('disciplineEvents',{});
+    if(evs[oldName]){ evs[newName]=(evs[newName]||[]).concat(evs[oldName]); delete evs[oldName]; lsSet('disciplineEvents',evs); }
+    const notes=lsGet('notes',{});
+    ['note_','moodle_','classlink_'].forEach(prefix=>{ if(notes[prefix+oldName]){ notes[prefix+newName]=notes[prefix+oldName]; delete notes[prefix+oldName]; }});
+    lsSet('notes',notes);
+  }
+  window.editEditableDiscipline = function(id){
+    const list=getDisciplines(); const d=list.find(x=>x.id===id); if(!d) return;
+    customDialog('prompt','Novo nome da disciplina:',d.name,(newName)=>{
+      newName=(newName||'').trim(); if(!newName) return;
+      customDialog('prompt','Novo horário/período:',d.time||'',(newTime)=>{
+        const old=d.name; d.name=newName; d.time=(newTime||'').trim()||'Sem horário';
+        migrateDisciplineData(old,newName); setDisciplines(list);
+        renderEditableDisciplines(); renderMasterCalendar?.(); updateClassCards?.(); window.syncToCloud?.();
+      });
+    });
+  };
+  window.deleteEditableDiscipline = function(id){
+    const list=getDisciplines(); const d=list.find(x=>x.id===id); if(!d) return;
+    customDialog('confirm',`Apagar a disciplina "${d.name}"? Os prazos/anotações ficam salvos no armazenamento, mas o card sai da tela.`,null,(ok)=>{
+      if(!ok) return; setDisciplines(list.filter(x=>x.id!==id)); renderEditableDisciplines(); renderMasterCalendar?.(); window.syncToCloud?.();
+    });
+  };
+  window.updateStudyDatalist = function(){
+    const dl=document.getElementById('study-subjects'); if(!dl) return;
+    const extras=['Aulas Extras','Resumos de Leituras'];
+    dl.innerHTML=[...getDisciplines().map(d=>d.name),...extras].map(n=>`<option value="${esc(n)}"></option>`).join('');
+  };
+  const originalOpen = window.openNoteModal;
+  window.openNoteModal = function(c){
+    if(typeof originalOpen === 'function') originalOpen(c);
+    const d=getDisciplines().find(x=>x.name===c);
+    const container=document.getElementById('modal-schedule-container');
+    const grid=document.getElementById('modal-schedule-grid');
+    if(!container || !grid) return;
+    const sch=scheduleMap[c];
+    if(sch && sch.length){
+      container.classList.remove('hidden');
+      grid.innerHTML='';
+      sch.forEach(i=>{ grid.innerHTML+=`<div class="flex justify-between items-center p-2.5 rounded-xl border shadow-sm ${i.t.toLowerCase()==='online'?'bg-blue-50 text-blue-700 border-blue-200':'bg-rose-50 text-rose-700 border-rose-200'} text-xs font-extrabold"><span>${i.d}</span><span class="flex items-center gap-1 uppercase text-[9px]"><i data-lucide="${i.t.toLowerCase()==='online'?'laptop':'map-pin'}" class="w-3 h-3"></i> ${i.t}</span></div>`; });
+    } else if(d && d.time){
+      container.classList.remove('hidden');
+      grid.innerHTML=`<div class="flex justify-between items-center p-2.5 rounded-xl border shadow-sm bg-violet-50 text-violet-700 border-violet-100 text-xs font-extrabold"><span>Horário</span><span class="flex items-center gap-1 uppercase text-[9px]"><i data-lucide="calendar-check-2" class="w-3 h-3"></i> ${esc(d.time)}</span></div>`;
+    }
+    if(window.lucide) lucide.createIcons({root:container});
+  };
+  const oldRenderAll=window.renderAllApp;
+  window.renderAllApp=function(){ if(typeof oldRenderAll==='function') oldRenderAll(); renderEditableDisciplines(); };
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(renderEditableDisciplines,120));
+})();
+</script>
+
+
+<script id="schedule-and-layout-fix">
+(function(){
+  const defaultScheduleMap = {
+    'Constituição e Tendências em Ed. Ciências':[{d:'02/03',t:'Presencial'},{d:'16/03',t:'Online'},{d:'30/03',t:'Online'},{d:'13/04',t:'Online'},{d:'27/04',t:'Online'},{d:'11/05',t:'Online'},{d:'25/05',t:'Online'},{d:'15/06',t:'Presencial'},{d:'29/06',t:'Presencial'}],
+    'Conceitos Foucaultianos':[{d:'24/03',t:'Online'},{d:'31/03',t:'Online'},{d:'07/04',t:'Online'},{d:'14/04',t:'Online'},{d:'21/04',t:'Online'},{d:'28/04',t:'Online'},{d:'05/05',t:'Online'},{d:'12/05',t:'Online'},{d:'19/05',t:'Online'},{d:'26/05',t:'Online'},{d:'02/06',t:'Online'},{d:'23/06',t:'Online'}],
+    'Conceitos Foucaultianos (Presencial)':[{d:'21/03',t:'Presencial'},{d:'20/06',t:'Presencial'}]
+  };
+
+  let activeScheduleClass = '';
+
+  function safeGet(key, fallback){
+    try { return typeof lsGet === 'function' ? lsGet(key, fallback) : JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); }
+    catch(e){ return fallback; }
+  }
+  function safeSet(key, value){
+    try { if(typeof lsSet === 'function') lsSet(key, value); else localStorage.setItem(key, JSON.stringify(value)); }
+    catch(e){}
+  }
+  function esc(s){
+    return String(s||'').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  }
+  function getAllSchedules(){
+    const stored = safeGet('editableSchedules', null);
+    if(stored && typeof stored === 'object') return stored;
+    const seeded = {};
+    Object.keys(defaultScheduleMap).forEach(k => {
+      seeded[k] = defaultScheduleMap[k].map((x,i)=>({id:'sch-'+Date.now()+'-'+i, ...x}));
+    });
+    safeSet('editableSchedules', seeded);
+    return seeded;
+  }
+  function setAllSchedules(all){ safeSet('editableSchedules', all); }
+
+  window.renderEditableSchedule = function(className){
+    activeScheduleClass = className || activeScheduleClass;
+    const container = document.getElementById('modal-schedule-container');
+    const grid = document.getElementById('modal-schedule-grid');
+    if(!container || !grid || !activeScheduleClass) return;
+
+    const all = getAllSchedules();
+    if(!Array.isArray(all[activeScheduleClass])) all[activeScheduleClass] = [];
+    setAllSchedules(all);
+
+    container.classList.remove('hidden');
+    const items = all[activeScheduleClass];
+
+    if(!items.length){
+      grid.innerHTML = `<div class="col-span-2 schedule-item-card text-center text-xs font-extrabold text-slate-500">Nenhuma aula cadastrada ainda.</div>`;
+    } else {
+      grid.innerHTML = items.map(item => {
+        const type = item.t || 'Aula';
+        const icon = type.toLowerCase().includes('online') ? 'laptop' : type.toLowerCase().includes('entrega') ? 'file-check-2' : 'map-pin';
+        const tone = type.toLowerCase().includes('online') ? 'bg-blue-50 text-blue-800' : type.toLowerCase().includes('entrega') ? 'bg-amber-50 text-amber-800' : 'bg-rose-50 text-rose-800';
+        return `<div class="schedule-item-card ${tone}">
+          <div class="flex items-start justify-between gap-2">
+            <div class="min-w-0">
+              <p class="text-[10px] font-black uppercase tracking-widest opacity-75">Data</p>
+              <p class="text-sm font-black">${esc(item.d || '-')}</p>
+              <p class="mt-1 text-[10px] font-black uppercase flex items-center gap-1"><i data-lucide="${icon}" class="w-3 h-3"></i>${esc(type)}</p>
+            </div>
+            <div class="flex gap-1 shrink-0">
+              <button type="button" onclick="editScheduleItem('${item.id}')" class="bg-white/80 text-slate-700 rounded-lg p-1.5 shadow-sm"><i data-lucide="pencil" class="w-3 h-3"></i></button>
+              <button type="button" onclick="deleteScheduleItem('${item.id}')" class="bg-white/80 text-rose-700 rounded-lg p-1.5 shadow-sm"><i data-lucide="trash-2" class="w-3 h-3"></i></button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    if(window.lucide) lucide.createIcons({root:container});
+  };
+
+  window.addScheduleItem = function(){
+    const dateEl = document.getElementById('modal-schedule-date');
+    const typeEl = document.getElementById('modal-schedule-type');
+    const d = (dateEl?.value || '').trim();
+    const t = (typeEl?.value || 'Presencial').trim();
+    if(!activeScheduleClass) return;
+    if(!d){
+      if(typeof customDialog === 'function') customDialog('alert','Coloca a data da aula primeiro.');
+      else alert('Coloca a data da aula primeiro.');
+      return;
+    }
+    const all = getAllSchedules();
+    all[activeScheduleClass] = all[activeScheduleClass] || [];
+    all[activeScheduleClass].push({id:'sch-'+Date.now(), d, t});
+    setAllSchedules(all);
+    if(dateEl) dateEl.value = '';
+    renderEditableSchedule(activeScheduleClass);
+    if(typeof window.syncToCloud === 'function') window.syncToCloud();
+  };
+
+  window.editScheduleItem = function(id){
+    const all = getAllSchedules();
+    const list = all[activeScheduleClass] || [];
+    const item = list.find(x => String(x.id) === String(id));
+    if(!item) return;
+    const ask = (msg, def, cb) => {
+      if(typeof customDialog === 'function') customDialog('prompt', msg, def, cb);
+      else cb(prompt(msg, def));
+    };
+    ask('Nova data da aula:', item.d || '', (newDate)=>{
+      newDate = (newDate || '').trim();
+      if(!newDate) return;
+      ask('Tipo da aula: Online, Presencial, Híbrida ou Entrega', item.t || 'Presencial', (newType)=>{
+        item.d = newDate;
+        item.t = (newType || 'Presencial').trim();
+        setAllSchedules(all);
+        renderEditableSchedule(activeScheduleClass);
+        if(typeof window.syncToCloud === 'function') window.syncToCloud();
+      });
+    });
+  };
+
+  window.deleteScheduleItem = function(id){
+    const remove = () => {
+      const all = getAllSchedules();
+      all[activeScheduleClass] = (all[activeScheduleClass] || []).filter(x => String(x.id) !== String(id));
+      setAllSchedules(all);
+      renderEditableSchedule(activeScheduleClass);
+      if(typeof window.syncToCloud === 'function') window.syncToCloud();
+    };
+    if(typeof customDialog === 'function'){
+      customDialog('confirm','Apagar esta aula do cronograma?',null,(ok)=>{ if(ok) remove(); });
+    } else if(confirm('Apagar esta aula do cronograma?')) remove();
+  };
+
+  const previousOpenNote = window.openNoteModal;
+  window.openNoteModal = function(className){
+    if(typeof previousOpenNote === 'function') previousOpenNote(className);
+    activeScheduleClass = className;
+    setTimeout(()=>renderEditableSchedule(className), 20);
+  };
+
+  /* Se editar o nome da disciplina, migra também o cronograma */
+  const previousEdit = window.editEditableDiscipline;
+  window.editEditableDiscipline = function(id){
+    const before = safeGet('editableDisciplines', []).find(d => d.id === id);
+    const oldName = before ? before.name : null;
+
+    if(typeof previousEdit !== 'function') return;
+
+    const oldSet = window.lsSet;
+    if(typeof oldSet === 'function' && oldName){
+      window.lsSet = function(key, value){
+        if(key === 'editableDisciplines'){
+          const changed = Array.isArray(value) ? value.find(d => d.id === id) : null;
+          const newName = changed ? changed.name : null;
+          if(newName && newName !== oldName){
+            const schedules = getAllSchedules();
+            if(schedules[oldName]){
+              schedules[newName] = (schedules[newName] || []).concat(schedules[oldName]);
+              delete schedules[oldName];
+              setAllSchedules(schedules);
+            }
+          }
+        }
+        return oldSet.apply(this, arguments);
+      };
+      setTimeout(()=>{ window.lsSet = oldSet; }, 5000);
+    }
+    previousEdit(id);
+  };
+
+  /* Troca de abas mais segura para não empilhar Estudos sobre Mestrado */
+  const oldSwitchTab = window.switchTab;
+  window.switchTab = function(t){
+    ['resumo','rotina','estudos','mestrado'].forEach(x => {
+      const el = document.getElementById('tab-'+x);
+      if(el){
+        el.classList.toggle('hidden', x !== t);
+        el.style.display = (x === t) ? 'block' : 'none';
+      }
+    });
+    if(typeof oldSwitchTab === 'function') oldSwitchTab(t);
+    ['resumo','rotina','estudos','mestrado'].forEach(x => {
+      const el = document.getElementById('tab-'+x);
+      if(el) el.style.display = (x === t) ? 'block' : 'none';
+    });
+    if(t === 'mestrado' && typeof switchMesTab === 'function'){
+      setTimeout(()=>switchMesTab('visao'), 10);
+    }
+    if(window.lucide) setTimeout(()=>lucide.createIcons(), 30);
+  };
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    setTimeout(()=>{
+      document.querySelectorAll('#tab-mestrado .mes-panel').forEach((p,idx)=>{
+        if(idx === 0){ p.classList.remove('hidden'); p.style.display='block'; }
+        else { p.classList.add('hidden'); p.style.display='none'; }
+      });
+      if(window.lucide) lucide.createIcons();
+    },120);
+  });
+})();
+</script>
+
+
+
+
+
+
+
+
+<script id="init-real-tab-state">
+document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(function(){
+        // Estado inicial seguro
+        if (typeof switchTab === 'function') {
+            switchTab('resumo');
+        }
+    }, 80);
+});
+</script>
+
+
+<script id="final-tab-and-modal-behavior">
+(function(){
+    const tabs = ['resumo','rotina','estudos','mestrado'];
+
+    function activateTab(tab){
+        if(!tabs.includes(tab)) return;
+
+        document.body.classList.remove('mode-resumo','mode-rotina','mode-estudos','mode-mestrado');
+        document.body.classList.add('mode-' + tab);
+
+        tabs.forEach(name => {
+            const el = document.getElementById('tab-' + name);
+            if(!el) return;
+
+            const active = name === tab;
+            el.classList.toggle('hidden', !active);
+            el.classList.toggle('planner-active-tab', active);
+
+            el.style.display = active ? 'block' : 'none';
+            el.style.visibility = active ? 'visible' : 'hidden';
+            el.style.height = active ? 'auto' : '0';
+            el.style.overflow = active ? 'visible' : 'hidden';
+            el.style.pointerEvents = active ? 'auto' : 'none';
+            el.style.position = active ? 'relative' : 'absolute';
+            el.style.left = active ? 'auto' : '-99999px';
+            el.style.zIndex = active ? '30' : '-1';
+        });
+
+        if(tab === 'resumo' && typeof renderMasterCalendar === 'function') renderMasterCalendar();
+        if(tab === 'rotina' && typeof renderRoutineChart === 'function') renderRoutineChart();
+
+        if(tab === 'estudos'){
+            if(typeof renderReadingList === 'function') renderReadingList();
+            if(typeof renderExtraStudies === 'function') renderExtraStudies();
+            if(typeof renderListTracker === 'function') renderListTracker();
+            if(typeof renderErrorBank === 'function') renderErrorBank();
+            if(typeof renderStudyChart === 'function') renderStudyChart();
+            if(typeof updateClassCards === 'function') updateClassCards();
+        }
+
+        if(tab === 'mestrado'){
+            if(typeof switchMesTab === 'function') switchMesTab('visao');
+            if(typeof renderMestradoMeetings === 'function') renderMestradoMeetings();
+            if(typeof renderMesLeituras === 'function') renderMesLeituras();
+            if(typeof renderMestradoProducao === 'function') renderMestradoProducao();
+            if(typeof renderMesDisciplinas === 'function') renderMesDisciplinas();
+            if(typeof renderMesEmocional === 'function') renderMesEmocional();
+            if(typeof renderMestradoIdeias === 'function') renderMestradoIdeias();
+            if(typeof loadMestrado === 'function') loadMestrado();
+            if(typeof loadMsCap === 'function') loadMsCap();
+        }
+
+        if(window.lucide) setTimeout(()=>lucide.createIcons(), 20);
+    }
+
+    function activateMesPanel(panel){
+        document.querySelectorAll('#tab-mestrado .mes-panel').forEach(el => {
+            const active = el.id === 'mes-' + panel;
+            el.classList.toggle('hidden', !active);
+            el.classList.toggle('mes-active-panel', active);
+            el.style.display = active ? 'block' : 'none';
+            el.style.visibility = active ? 'visible' : 'hidden';
+            el.style.height = active ? 'auto' : '0';
+            el.style.overflow = active ? 'visible' : 'hidden';
+        });
+
+        const menu = document.querySelector('#tab-mestrado > .flex:first-child > div:last-child');
+        if(menu){
+            menu.querySelectorAll('button').forEach(btn => btn.classList.remove('mes-active'));
+            const target = Array.from(menu.querySelectorAll('button')).find(btn => {
+                const attr = btn.getAttribute('onclick') || '';
+                return attr.includes("switchMesTab('" + panel + "'") || attr.includes('switchMesTab("' + panel + '"');
+            });
+            if(target) target.classList.add('mes-active');
+        }
+
+        if(window.lucide) setTimeout(()=>lucide.createIcons(), 20);
+    }
+
+    window.switchTab = activateTab;
+    window.switchMesTab = activateMesPanel;
+
+    // Intercepta os onclick antigos antes de qualquer script conflitante
+    document.addEventListener('click', function(event){
+        const tabBtn = event.target.closest('[onclick*="switchTab"]');
+        if(tabBtn){
+            const attr = tabBtn.getAttribute('onclick') || '';
+            const match = attr.match(/switchTab\(['"]([^'"]+)['"]\)/);
+            if(match && tabs.includes(match[1])){
+                event.preventDefault();
+                event.stopPropagation();
+                activateTab(match[1]);
+                return;
+            }
+        }
+
+        const mesBtn = event.target.closest('[onclick*="switchMesTab"]');
+        if(mesBtn){
+            const attr = mesBtn.getAttribute('onclick') || '';
+            const match = attr.match(/switchMesTab\(['"]([^'"]+)['"]\)/);
+            if(match){
+                event.preventDefault();
+                event.stopPropagation();
+                activateMesPanel(match[1]);
+            }
+        }
+    }, true);
+
+    // Quando abrir o popup, força o scroll a começar do topo e permite rolar
+    const oldOpenNoteModal = window.openNoteModal;
+    window.openNoteModal = function(className){
+        if(typeof oldOpenNoteModal === 'function') oldOpenNoteModal(className);
+        setTimeout(() => {
+            const body = document.querySelector('#note-modal .modal-body');
+            if(body) body.scrollTop = 0;
+        }, 30);
+    };
+
+    document.addEventListener('DOMContentLoaded', function(){
+        setTimeout(() => activateTab('resumo'), 100);
+    });
+})();
+</script>
+
+
+<script id="menu-active-state-fix-script">
+(function(){
+    const tabs = ['resumo','rotina','estudos','mestrado'];
+
+    function tabFromButton(btn){
+        if(!btn) return null;
+
+        const id = btn.id || '';
+        for(const tab of tabs){
+            if(id === 'desk-btn-' + tab || id === 'mob-btn-' + tab || id === 'mobile-btn-' + tab){
+                return tab;
+            }
+        }
+
+        const attr = btn.getAttribute('onclick') || '';
+        const match = attr.match(/switchTab\(['"]([^'"]+)['"]\)/);
+        if(match && tabs.includes(match[1])) return match[1];
+
+        return null;
+    }
+
+    function markActiveMenu(tab){
+        document.querySelectorAll('#main-nav-desk button, .nav-desk-btn, nav.fixed button, nav.md\\:hidden button, #bottom-nav button').forEach(btn => {
+            const btnTab = tabFromButton(btn);
+            if(!btnTab) return;
+            btn.classList.toggle('main-tab-active', btnTab === tab);
+
+            // Limpa classes antigas que deixavam o calendário parecendo sempre ativo
+            if(btnTab !== tab){
+                btn.classList.remove('bg-rose-500','bg-pink-400','text-white');
+                btn.classList.add('bg-white','text-rose-500');
+            }else{
+                btn.classList.remove('bg-white','text-rose-500','text-slate-500');
+                btn.classList.add('bg-pink-400','text-white');
+            }
+        });
+    }
+
+    const oldSwitchTab = window.switchTab;
+    window.switchTab = function(tab){
+        if(typeof oldSwitchTab === 'function'){
+            oldSwitchTab(tab);
+        }
+        if(tabs.includes(tab)){
+            markActiveMenu(tab);
+        }
+    };
+
+    // Garante que o clique já atualize visualmente na hora
+    document.addEventListener('click', function(event){
+        const btn = event.target.closest('#main-nav-desk button, .nav-desk-btn, nav.fixed button, nav.md\\:hidden button, #bottom-nav button');
+        const tab = tabFromButton(btn);
+        if(tab){
+            setTimeout(() => markActiveMenu(tab), 0);
+        }
+    }, true);
+
+    document.addEventListener('DOMContentLoaded', function(){
+        setTimeout(() => markActiveMenu('resumo'), 150);
+    });
+
+    window.markActivePlannerMenu = markActiveMenu;
+})();
+</script>
+
+
+<script id="menu-active-state-fix-v2-script">
+(function(){
+    const tabs = ['resumo','rotina','estudos','mestrado'];
+
+    function getTabFromElement(el){
+        if(!el) return null;
+
+        const id = el.id || '';
+        for(const tab of tabs){
+            if(id.includes(tab)) return tab;
+        }
+
+        const onclick = el.getAttribute && (el.getAttribute('onclick') || '');
+        const match = onclick.match(/switchTab\(['"]([^'"]+)['"]\)/);
+        if(match && tabs.includes(match[1])) return match[1];
+
+        const text = (el.innerText || el.textContent || '').toLowerCase();
+        if(text.includes('resumo')) return 'resumo';
+        if(text.includes('rotina')) return 'rotina';
+        if(text.includes('estudo')) return 'estudos';
+        if(text.includes('mestrado')) return 'mestrado';
+
+        return null;
+    }
+
+    function getAllMainMenuButtons(){
+        return Array.from(document.querySelectorAll('button')).filter(btn => {
+            return getTabFromElement(btn) && (
+                btn.closest('#main-nav-desk') ||
+                btn.closest('nav') ||
+                btn.classList.contains('nav-desk-btn') ||
+                (btn.getAttribute('onclick') || '').includes('switchTab')
+            );
+        });
+    }
+
+    function markActiveMenu(tab){
+        getAllMainMenuButtons().forEach(btn => {
+            const btnTab = getTabFromElement(btn);
+            const active = btnTab === tab;
+
+            btn.classList.toggle('main-tab-active', active);
+
+            if(active){
+                btn.classList.remove('bg-white','text-rose-500','text-slate-500','text-gray-500');
+                btn.classList.add('bg-pink-400','text-white');
+            }else{
+                btn.classList.remove('bg-rose-500','bg-pink-400','text-white','main-tab-active');
+                btn.classList.add('bg-white','text-rose-500');
+            }
+        });
+    }
+
+    const previousSwitchTab = window.switchTab;
+    window.switchTab = function(tab){
+        if(typeof previousSwitchTab === 'function'){
+            previousSwitchTab(tab);
+        }
+
+        if(tabs.includes(tab)){
+            // marca imediatamente e de novo após os scripts antigos mexerem nas classes
+            markActiveMenu(tab);
+            setTimeout(() => markActiveMenu(tab), 30);
+            setTimeout(() => markActiveMenu(tab), 120);
+        }
+    };
+
+    document.addEventListener('click', function(event){
+        const btn = event.target.closest('button');
+        const tab = getTabFromElement(btn);
+
+        if(tab && tabs.includes(tab)){
+            markActiveMenu(tab);
+            setTimeout(() => markActiveMenu(tab), 30);
+            setTimeout(() => markActiveMenu(tab), 120);
+        }
+    }, true);
+
+    document.addEventListener('DOMContentLoaded', function(){
+        setTimeout(() => {
+            const activeTab = document.querySelector('.tab-content.planner-active-tab');
+            const activeName = activeTab?.id?.replace('tab-','') || 'resumo';
+            markActiveMenu(tabs.includes(activeName) ? activeName : 'resumo');
+        }, 180);
+    });
+
+    window.markActivePlannerMenu = markActiveMenu;
+})();
+</script>
+
 </body>
 </html>
 
