@@ -1644,20 +1644,21 @@ nav button:not(.main-tab-active),
                 </div>
             </div>
 
-            <!-- TRACKER DE LISTAS E BANCO DE ERROS -->
+            <!-- RESUMOS E BANCO DE ERROS -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Tracker de Listas -->
+                <!-- Resumos -->
                 <div class="cute-card p-6 flex flex-col relative bg-white overflow-hidden">
-                    <i data-lucide="list-checks" class="absolute bottom-4 right-4 w-16 h-16 text-purple-400/10 fill-purple-400/10 animate-pulse z-0"></i>
+                    <i data-lucide="file-text" class="absolute bottom-4 right-4 w-16 h-16 text-purple-400/10 fill-purple-400/10 animate-pulse z-0"></i>
                     <div class="absolute top-0 left-0 w-full h-2 bg-purple-400"></div>
-                    <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="list-checks" class="text-purple-500"></i> Tracker de Listas 📋</h3>
+                    <h3 class="text-xl font-cute text-purple-800 mb-4 flex items-center gap-2 relative z-10"><i data-lucide="file-text" class="text-purple-500"></i> Resumos 📋</h3>
                     <div class="flex flex-col gap-2 mb-4 bg-purple-50 p-4 rounded-xl border border-purple-100 z-20">
-                        <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / Extra" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none text-purple-700 shadow-sm">
+                        <input list="study-subjects" id="new-list-subject" placeholder="Disciplina / tema do resumo" class="w-full bg-white rounded-xl p-3 text-sm font-bold border outline-none text-purple-700 shadow-sm">
                         <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="new-list-title" placeholder="Nome da Lista (Ex: Lista 1)..." class="flex-1 bg-white rounded-xl p-3 text-sm font-bold border outline-none shadow-sm">
+                            <input type="text" id="new-list-title" placeholder="Título do resumo (Ex: Revolução Verde, Foucault, Cartografia...)" class="flex-1 bg-white rounded-xl p-3 text-sm font-bold border outline-none shadow-sm">
                             <button onclick="addListTracker()" class="bg-purple-400 hover:bg-purple-500 text-white p-3 rounded-xl active:scale-95 font-black shadow-sm transition flex justify-center items-center"><i data-lucide="plus"></i> Salvar</button>
                         </div>
                     </div>
+                    <p class="text-[11px] text-purple-600 font-bold mb-2 z-20 relative">Use este espaço para acompanhar resumos escritos, em andamento e concluídos. O Banco de Erros fica para questões e raciocínios das disciplinas.</p>
                     <div id="list-tracker-container" class="flex flex-col gap-2 overflow-y-auto max-h-[250px] pr-1 z-20"></div>
                 </div>
 
@@ -2921,12 +2922,12 @@ nav button:not(.main-tab-active),
         }
 
         // ==========================================
-        // TRACKER DE LISTAS E BANCO DE ERROS
+        // RESUMOS E BANCO DE ERROS
         // ==========================================
         function renderListTracker() {
             let lists = lsGet('listTracker'); let c = document.getElementById('list-tracker-container'); 
             if(!c) return; c.innerHTML='';
-            if(!lists.length) { c.innerHTML='<p class="text-xs text-purple-400 font-bold z-20 relative">Nenhuma lista pendente 🎀</p>'; return; }
+            if(!lists.length) { c.innerHTML='<p class="text-xs text-purple-400 font-bold z-20 relative">Nenhum resumo registrado ainda ✍️</p>'; return; }
             lists.forEach(i=>{ 
                 if(i.done !== undefined) { i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; } // Compatibilidade
                 let selColor = i.status==='concluido'?'bg-emerald-100 text-emerald-700':i.status==='em_andamento'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-500';
@@ -3018,7 +3019,7 @@ nav button:not(.main-tab-active),
                     <span class="text-xs font-black text-pink-700 bg-white px-2 py-0.5 rounded-lg border border-pink-200">${rStats.concluido} / ${r.length}</span>
                 </div>
                 <div class="flex justify-between items-center bg-purple-50 p-2.5 rounded-xl border border-purple-100 shadow-sm z-20 relative">
-                    <span class="text-xs font-bold text-purple-800"><i data-lucide="list-checks" class="w-3.5 h-3.5 inline mr-1 text-purple-500"></i> Listas Concluídas</span>
+                    <span class="text-xs font-bold text-purple-800"><i data-lucide="list-checks" class="w-3.5 h-3.5 inline mr-1 text-purple-500"></i> Resumos Concluídos</span>
                     <span class="text-xs font-black text-purple-700 bg-white px-2 py-0.5 rounded-lg border border-purple-200">${lStats.concluido} / ${l.length}</span>
                 </div>
                 <div class="flex justify-between items-center bg-red-50 p-2.5 rounded-xl border border-red-100 shadow-sm z-20 relative">
@@ -3034,7 +3035,7 @@ nav button:not(.main-tab-active),
                 studyChartInst = new Chart(chartEl, {
                     type: 'bar',
                     data: {
-                        labels: ['Leituras', 'Listas'],
+                        labels: ['Leituras', 'Resumos'],
                         datasets: [
                             { label: 'Concluído', data: [rStats.concluido, lStats.concluido], backgroundColor: '#10b981', borderRadius:4 },
                             { label: 'Em Andamento', data: [rStats.em_andamento, lStats.em_andamento], backgroundColor: '#f59e0b', borderRadius:4 },
@@ -4213,7 +4214,278 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
+
+<script id="taylise-prioridades-reset-graficos-v2">
+/* ======================================================
+   Prioridades no calendário + reset diário + gráfico útil
+   ====================================================== */
+(function(){
+    const MONTHS = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+    const PRIORITY = { mestrado: 0, estudo: 1, rotina: 2 };
+    const TYPE_LABEL = { mestrado: 'Mestrado', estudo: 'Estudos', rotina: 'Rotina' };
+    const TYPE_DOT = { mestrado: 'bg-indigo-500', estudo: 'bg-red-500', rotina: 'bg-emerald-500' };
+    const TYPE_BADGE = {
+        mestrado: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+        estudo: 'bg-red-50 text-red-700 border-red-200',
+        rotina: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+    };
+    const TYPE_LINE = { mestrado: 'border-l-indigo-500', estudo: 'border-l-red-500', rotina: 'border-l-emerald-500' };
+
+    function todayLocalISO(){
+        const d = new Date();
+        d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+        return d.toISOString().slice(0,10);
+    }
+    window.todayLocalISO = todayLocalISO;
+
+    function daysInMonth(year, monthIndex){
+        return new Date(year, monthIndex + 1, 0).getDate();
+    }
+
+    window.resetDailyTasksIfNeeded = function(){
+        const today = todayLocalISO();
+        const last = localStorage.getItem('plannerTaskDate');
+        if(last !== today){
+            const current = (typeof lsGet === 'function') ? lsGet('personalTasks', []) : [];
+            if(Array.isArray(current) && current.length){
+                const archived = (typeof lsGet === 'function') ? lsGet('personalTasksArchive', []) : [];
+                archived.push({ date: last || today, clearedAt: new Date().toISOString(), tasks: current });
+                if(typeof lsSet === 'function') lsSet('personalTasksArchive', archived.slice(-45));
+            }
+            if(typeof lsSet === 'function') lsSet('personalTasks', []);
+            localStorage.setItem('plannerTaskDate', today);
+        }
+    };
+
+    // sobrescreve as tarefas para sempre usar data local e limpar ao virar o dia
+    window.renderTasks = function(){
+        resetDailyTasksIfNeeded();
+        let pts = lsGet('personalTasks', []);
+        const l = document.getElementById('task-list');
+        if(!l) return;
+        l.innerHTML = '';
+        if(!pts.length){
+            l.innerHTML = '<p class="text-xs text-pink-400 font-bold text-center py-4">Novo dia, lista limpinha 🌸<br><span class="text-[10px] text-slate-500">As tarefas de ontem foram resetadas automaticamente.</span></p>';
+            return;
+        }
+        pts.sort((a,b)=>Number(a.done)-Number(b.done)).forEach(t => {
+            let c = t.type==='saude'?'bg-emerald-50 border-emerald-100 text-emerald-800':t.type==='trabalho'?'bg-blue-50 border-blue-100 text-blue-800':t.type==='casa'?'bg-amber-50 border-amber-100 text-amber-800':t.type==='estudos'?'bg-red-50 border-red-100 text-red-800':t.type==='criacao'?'bg-fuchsia-50 border-fuchsia-100 text-fuchsia-800':t.type==='lazer'?'bg-purple-50 border-purple-100 text-purple-800':'bg-white border-pink-100 text-rose-800';
+            l.innerHTML += `<div class="flex items-center justify-between p-3 ${c} border rounded-2xl shadow-sm z-20 relative"><label class="flex items-center gap-3 cursor-pointer flex-1 overflow-hidden"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${t.id})" class="task-checkbox w-4 h-4 rounded text-rose-400 focus:ring-rose-400"><div class="text-sm font-bold truncate">${t.text}</div></label><div class="flex gap-1 ml-2"><button onclick="editTask(${t.id})" class="text-slate-400 hover:text-blue-500 p-1"><i data-lucide="pencil" class="w-4 h-4"></i></button><button onclick="deleteTask(${t.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
+        });
+        if(typeof lucide !== 'undefined') lucide.createIcons({root:l});
+    };
+
+    window.addQuickTask = function(txt, typ){
+        resetDailyTasksIfNeeded();
+        let pt = lsGet('personalTasks', []);
+        pt.push({ id: Date.now(), text: txt, type: typ || 'geral', done: false, createdDate: todayLocalISO() });
+        lsSet('personalTasks', pt);
+        renderTasks();
+    };
+
+    window.toggleTask = function(id){
+        resetDailyTasksIfNeeded();
+        let pt = lsGet('personalTasks', []), log = lsGet('taskLog', []);
+        let x = pt.find(t => t.id === id);
+        if(!x) return;
+        x.done = !x.done;
+        const d = todayLocalISO();
+        if(x.done){
+            log.push({ id: Date.now(), taskId: x.id, text: x.text, type: x.type || 'geral', date: d });
+        }else{
+            let idx = log.findIndex(l => l.taskId === x.id && l.date === d);
+            if(idx > -1) log.splice(idx, 1);
+        }
+        lsSet('taskLog', log);
+        lsSet('personalTasks', pt);
+        renderTasks();
+        renderRoutineChart();
+        renderMasterCalendar();
+    };
+
+    function collectMasterEvents(){
+        let evs = {};
+        const addEv = (d, t, y) => {
+            if(!d) return;
+            evs[d] = evs[d] || [];
+            evs[d].push({ title: t, type: y });
+        };
+
+        let de = lsGet('disciplineEvents', {});
+        Object.keys(de).forEach(c => (de[c] || []).forEach(e => addEv(e.date, `${c}: ${e.name}`, 'estudo')));
+        lsGet('extraStudies', []).forEach(e => { if(e.date) addEv(e.date, `Extra: ${e.title}`, 'estudo'); });
+        lsGet('taskLog', []).forEach(t => { if(t.date) addEv(t.date, `Rotina: ${t.text}`, 'rotina'); });
+        lsGet('mestradoMeetings', []).forEach(m => addEv(m.date, `Reunião Mestrado: ${m.subject}`, 'mestrado'));
+        lsGet('mesProducao', []).forEach(m => addEv(m.date, `Submissão: ${m.title}`, 'mestrado'));
+
+        Object.keys(evs).forEach(k => evs[k].sort((a,b) => (PRIORITY[a.type] ?? 9) - (PRIORITY[b.type] ?? 9) || a.title.localeCompare(b.title)));
+        return evs;
+    }
+
+    window.renderMasterCalendar = function(){
+        const title = document.getElementById('calendar-month-year');
+        if(title) title.innerText = MONTHS[currMo.getMonth()] + ' ' + currMo.getFullYear();
+
+        const evs = collectMasterEvents();
+        const fd = new Date(currMo.getFullYear(), currMo.getMonth(), 1).getDay();
+        const ld = daysInMonth(currMo.getFullYear(), currMo.getMonth());
+        const currentYearMo = `${currMo.getFullYear()}-${String(currMo.getMonth()+1).padStart(2,'0')}`;
+        const today = todayLocalISO();
+        let html = '';
+        let monthEventsArr = [];
+
+        for(let i=0;i<fd;i++) html += '<div></div>';
+
+        for(let d=1; d<=ld; d++){
+            const k = `${currentYearMo}-${String(d).padStart(2,'0')}`;
+            const dayEvents = evs[k] || [];
+            dayEvents.forEach(ev => monthEventsArr.push({ date:k, title:ev.title, type:ev.type }));
+
+            const hasStudy = dayEvents.some(e => e.type === 'estudo');
+            const hasMestrado = dayEvents.some(e => e.type === 'mestrado');
+            const onlyRoutine = dayEvents.length && !hasStudy && !hasMestrado;
+            const isToday = k === today;
+
+            let c = 'w-8 h-8 md:w-12 md:h-12 mx-auto flex items-center justify-center rounded-full font-black text-xs md:text-sm relative transition-all cal-day cursor-pointer overflow-visible ';
+            if(hasMestrado) c += 'bg-indigo-50 text-indigo-900 border-2 border-indigo-300 shadow-md shadow-indigo-100 ring-2 ring-indigo-100';
+            else if(hasStudy) c += 'bg-red-50 text-red-900 border-2 border-red-300 shadow-md shadow-red-100 ring-2 ring-red-100';
+            else if(onlyRoutine) c += 'bg-emerald-50 text-emerald-900 border border-emerald-200';
+            else c += (isToday ? 'bg-slate-300 text-slate-900 shadow-md shadow-slate-200' : 'text-slate-600 bg-slate-50 border border-slate-100 hover:bg-slate-100 hover:text-slate-800 hover:border-slate-200');
+
+            const priorityChips = dayEvents.filter(e => e.type !== 'rotina').slice(0,2).map(e => `<span class="calendar-priority-chip ${e.type}">${e.type==='mestrado'?'MES':'EST'}</span>`).join('');
+            const routineDot = dayEvents.some(e => e.type==='rotina') ? '<span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-500 border border-white"></span>' : '';
+            const dots = dayEvents.length ? `<div class="absolute -bottom-1 flex gap-0.5 justify-center w-full flex-wrap max-w-full">${routineDot}</div>` : '';
+            const tt = dayEvents.length ? `<div class="cal-tooltip hidden absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[170px] md:max-w-[240px] bg-slate-800 text-white text-[9px] md:text-[10px] p-2 rounded-xl shadow-xl border border-slate-700 pointer-events-none z-[60]">${dayEvents.map(e=>`<div class="flex items-center gap-1.5 mb-1"><span class="w-1.5 h-1.5 rounded-full shrink-0 ${TYPE_DOT[e.type]}"></span><span class="truncate">${e.title}</span></div>`).join('')}</div>` : '';
+            html += `<div class="py-1"><div class="${c}"><div class="calendar-priority-stack">${priorityChips}</div><span class="relative z-10">${d}</span>${dots}${tt}</div></div>`;
+        }
+
+        const cal = document.getElementById('calendar-days');
+        if(cal) cal.innerHTML = html;
+
+        monthEventsArr.sort((a,b) => (PRIORITY[a.type] ?? 9) - (PRIORITY[b.type] ?? 9) || new Date(a.date) - new Date(b.date));
+        const sumList = document.getElementById('monthly-summary-list');
+        if(sumList){
+            sumList.innerHTML = '';
+            if(!monthEventsArr.length){
+                sumList.innerHTML = '<p class="text-sm text-slate-500 font-bold italic text-center py-4 bg-slate-50 rounded-2xl border border-slate-200">O mês está livre por enquanto.</p>';
+            }else{
+                const high = monthEventsArr.filter(e => e.type === 'mestrado' || e.type === 'estudo');
+                const routine = monthEventsArr.filter(e => e.type === 'rotina');
+                const block = (label, items, extra='') => items.length ? `<div class="mb-3"><h4 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2 ${extra}">${label}</h4>${items.map(e => `<div class="flex items-center gap-3 p-3.5 bg-white border border-slate-200 border-l-4 ${TYPE_LINE[e.type]} rounded-2xl shadow-sm hover:shadow-md transition-shadow z-20 relative mb-2"><span class="text-[10px] font-black uppercase tracking-widest ${TYPE_BADGE[e.type]} border px-2.5 py-1 rounded-lg shrink-0">${e.date.split('-').reverse().join('/')}</span><div class="min-w-0 flex-1"><span class="block text-[9px] uppercase font-black text-slate-400">${TYPE_LABEL[e.type]}</span><span class="text-sm font-extrabold text-slate-800 truncate block">${e.title}</span></div></div>`).join('')}</div>` : '';
+                sumList.innerHTML = block('Prioridade alta — Estudos e Mestrado', high, 'text-rose-600') + block('Rotina registrada no mês', routine);
+            }
+        }
+        if(typeof lucide !== 'undefined') lucide.createIcons();
+    };
+
+    // gráfico de rotina: eixo X = dias do mês, cores = tarefas; assim dá para ver frequência e distribuição
+    window.renderRoutineChart = function(){
+        const log = lsGet('taskLog', []);
+        const year = currMo?.getFullYear ? currMo.getFullYear() : new Date().getFullYear();
+        const month = currMo?.getMonth ? currMo.getMonth() : new Date().getMonth();
+        const prefix = `${year}-${String(month+1).padStart(2,'0')}`;
+        const monthLog = log.filter(l => l.date && l.date.startsWith(prefix));
+        const days = Array.from({length: daysInMonth(year, month)}, (_,i) => String(i+1).padStart(2,'0'));
+        const tasks = [...new Set(monthLog.map(l => l.text))].sort((a,b) => a.localeCompare(b));
+        const palette = ['#e85f9f','#815cf6','#2997dc','#36b88f','#e9b834','#ef875e','#14b8a6','#f43f5e','#8b5cf6','#0ea5e9'];
+
+        const txt = document.getElementById('routine-summary-text');
+        if(txt){
+            if(!monthLog.length){
+                txt.innerHTML = '<p class="text-xs font-bold text-pink-400 bg-pink-50 p-4 rounded-2xl border border-pink-100 text-center mt-2 z-20 relative">Faça check nas tarefas para ver seu progresso por dia e por tarefa ✨</p>';
+            }else{
+                const byTask = {};
+                monthLog.forEach(l => {
+                    byTask[l.text] = byTask[l.text] || { count:0, dates:[] };
+                    byTask[l.text].count++;
+                    const day = l.date.split('-')[2];
+                    if(!byTask[l.text].dates.includes(day)) byTask[l.text].dates.push(day);
+                });
+                txt.innerHTML = Object.entries(byTask).sort((a,b)=>b[1].count-a[1].count).map(([task, info]) => `<div class="bg-purple-50 p-2.5 rounded-xl border border-purple-100 text-purple-800 font-bold text-xs shadow-sm z-20 relative"><div class="flex justify-between gap-3"><span class="truncate pr-2">${task}</span><span class="bg-purple-200 px-2 rounded-lg shrink-0">${info.count}x</span></div><div class="text-[10px] text-slate-500 mt-1">Dias: ${info.dates.sort().join(', ')}</div></div>`).join('');
+            }
+        }
+
+        if(window.rcInst) window.rcInst.destroy();
+        const chartEl = document.getElementById('routineChart');
+        if(chartEl){
+            window.rcInst = new Chart(chartEl, {
+                type: 'bar',
+                data: {
+                    labels: days,
+                    datasets: tasks.length ? tasks.map((task, idx) => ({
+                        label: task,
+                        data: days.map(day => monthLog.filter(l => l.text === task && l.date.endsWith('-' + day)).length),
+                        backgroundColor: palette[idx % palette.length],
+                        borderRadius: 6,
+                        maxBarThickness: 18
+                    })) : [{ label:'Sem registros', data: days.map(()=>0), backgroundColor:'#e5e7eb', borderRadius:6 }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9, family: 'Quicksand' } } }, tooltip: { mode:'index', intersect:false } },
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { autoSkip: true, maxTicksLimit: 12, font: { family:'Quicksand', size: 9 } } },
+                        y: { stacked: true, beginAtZero: true, ticks: { stepSize: 1, font: { family:'Quicksand' } } }
+                    }
+                }
+            });
+        }
+    };
+
+    window.renderListTracker = function(){
+        let lists = lsGet('listTracker', []);
+        let c = document.getElementById('list-tracker-container');
+        if(!c) return;
+        c.innerHTML = '';
+        if(!lists.length){ c.innerHTML = '<p class="text-xs text-purple-400 font-bold z-20 relative">Nenhum resumo registrado ainda ✍️</p>'; return; }
+        lists.forEach(i => {
+            if(i.done !== undefined){ i.status = i.done ? 'concluido' : 'nao_comecei'; delete i.done; }
+            let selColor = i.status==='concluido'?'bg-emerald-100 text-emerald-700':i.status==='em_andamento'?'bg-amber-100 text-amber-700':'bg-slate-100 text-slate-500';
+            c.innerHTML += `<div class="flex items-center justify-between p-2 bg-white border border-purple-100 rounded-xl shadow-sm z-20 relative"><div class="flex flex-col flex-1 overflow-hidden pr-2"><span class="text-xs font-extrabold truncate text-purple-900 ${i.status==='concluido'?'line-through opacity-60':''}">${i.title}</span><span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded w-max mt-0.5 ${i.status==='concluido'?'bg-slate-100 text-slate-400':'bg-purple-100 text-purple-700'}">${i.subject||'Geral'}</span></div><div class="flex items-center gap-2"><select onchange="changeListTrackerStatus(${i.id}, this.value)" class="text-[9px] font-black outline-none rounded p-1 ${selColor}"><option value="nao_comecei" ${i.status==='nao_comecei'?'selected':''}>💡 Ideia</option><option value="em_andamento" ${i.status==='em_andamento'?'selected':''}>✍️ Escrevendo</option><option value="concluido" ${i.status==='concluido'?'selected':''}>✅ Finalizado</option></select><div class="flex gap-1 ml-1"><button onclick="deleteListTracker(${i.id})" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button></div></div></div>`;
+        });
+        if(typeof lucide !== 'undefined') lucide.createIcons({root:c});
+    };
+
+    window.addListTracker = function(){
+        let t = document.getElementById('new-list-title').value.trim(), s = document.getElementById('new-list-subject').value.trim();
+        if(t){
+            let r = lsGet('listTracker', []);
+            r.push({ id: Date.now(), title: t, subject: s, status: 'nao_comecei', date: new Date().toISOString(), kind: 'resumo' });
+            lsSet('listTracker', r);
+            document.getElementById('new-list-title').value = '';
+            document.getElementById('new-list-subject').value = '';
+            renderListTracker();
+            if(typeof renderStudyChart === 'function') renderStudyChart();
+        }
+    };
+
+    const oldRenderAll = window.renderAllApp;
+    window.renderAllApp = function(){
+        resetDailyTasksIfNeeded();
+        if(typeof oldRenderAll === 'function') oldRenderAll();
+        renderMasterCalendar();
+        renderRoutineChart();
+        renderListTracker();
+    };
+
+    document.addEventListener('DOMContentLoaded', function(){
+        resetDailyTasksIfNeeded();
+        const style = document.createElement('style');
+        style.id = 'calendar-priority-visual-style';
+        style.textContent = `
+            .calendar-priority-stack{ position:absolute; top:-8px; left:50%; transform:translateX(-50%); display:flex; gap:2px; z-index:20; pointer-events:none; }
+            .calendar-priority-chip{ font-size:7px; line-height:1; font-weight:1000; border-radius:999px; padding:2px 4px; color:#fff; border:1px solid rgba(255,255,255,.88); box-shadow:0 4px 10px rgba(60,35,80,.12); }
+            .calendar-priority-chip.mestrado{ background:#6366f1; }
+            .calendar-priority-chip.estudo{ background:#ef4444; }
+            @media(max-width:767px){ .calendar-priority-stack{ top:-6px; } .calendar-priority-chip{ font-size:6px; padding:1px 3px; } }
+        `;
+        document.head.appendChild(style);
+        setTimeout(() => { renderTasks(); renderMasterCalendar(); renderRoutineChart(); renderListTracker(); }, 150);
+    });
+})();
+</script>
+
 </body>
 </html>
-
 
